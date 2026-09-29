@@ -8,7 +8,20 @@
 declare(strict_types=1);
 
 define('ABSPATH', sys_get_temp_dir() . '/kodety-publication-sync-wp/');
-define('KODETY_DIR', dirname(__DIR__) . '/kodety/');
+// This harness verifies publication file reconciliation, not the JavaScript
+// bundle. Give it an isolated plugin fixture so it runs before the Vite build
+// in a clean checkout and never writes generated assets into the source tree.
+$test_root = sys_get_temp_dir() . '/kodety-publication-sync-' . bin2hex(random_bytes(5));
+define('KODETY_DIR', $test_root . '/plugin/');
+mkdir(KODETY_DIR . 'theme-runtime', 0777, true);
+mkdir(KODETY_DIR . 'assets', 0777, true);
+foreach (glob(dirname(__DIR__) . '/kodety/theme-runtime/*.php') as $runtime_source) {
+    copy($runtime_source, KODETY_DIR . 'theme-runtime/' . basename($runtime_source));
+}
+file_put_contents(
+    KODETY_DIR . 'assets/code-component-react-runtime.mjs',
+    "// Isolated publication fixture; browser runtime is covered by the build tests.\nexport const publicationFixture = true;\n"
+);
 define('KODETY_VERSION', 'test-runtime-transaction');
 define('DISABLE_WP_CRON', true);
 define('MINUTE_IN_SECONDS', 60);
@@ -88,7 +101,6 @@ final class Kodety_Publication_Test_Theme {
     }
 }
 
-$test_root = sys_get_temp_dir() . '/kodety-publication-sync-' . bin2hex(random_bytes(5));
 $theme_root = $test_root . '/theme';
 $site_root = $theme_root . '/site';
 $upload_root = $test_root . '/uploads';

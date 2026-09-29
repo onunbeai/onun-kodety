@@ -10,7 +10,6 @@ import JSZip from 'jszip';
 
 const root = path.resolve(import.meta.dirname, '..');
 const assets = path.join(root, 'Wordpress/kodety/assets');
-const localizationAssets = path.join(root, 'Wordpress/extensions/kodety-localization/assets');
 const projectId = 'kodety-local-onboarding-preview';
 const digest = 'a'.repeat(64);
 const sourceFiles = {
@@ -33,7 +32,7 @@ const mime = { '.js': 'text/javascript', '.css': 'text/css', '.json': 'applicati
 const json = (response, payload, status = 200) => response.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }).end(JSON.stringify(payload));
 const readBody = async request => { const parts = []; for await (const part of request) parts.push(part); return Buffer.concat(parts); };
 
-function configFor(url, localizationManifest) {
+function configFor(url) {
   const origin = url.origin;
   const appView = url.pathname.split('/').filter(Boolean)[1] || 'editor';
   const endpoint = name => `${origin}/__preview/${name}`;
@@ -41,10 +40,6 @@ function configFor(url, localizationManifest) {
     appView, nonce: 'local-preview-only', siteUrl: origin, projectId, projectName: 'Projeto vazio', initialHtmlPath: 'index.html',
     editorUrl: `${origin}/kodety/editor/`, cmsUrl: `${origin}/kodety/cms/`, settingsUrl: `${origin}/kodety/settings/`,
     analyticsUrl: `${origin}/kodety/analytics/`,
-    localizationUrl: `${origin}/kodety/localization/`, localizationFileUrl: endpoint('localization-file'),
-    localizationEntryUrl: `${endpoint('localization-file')}?file=localization.js`,
-    localizationStyleUrl: `${endpoint('localization-file')}?file=${encodeURIComponent(Object.values(localizationManifest).find(chunk => chunk.file?.endsWith('.css'))?.file || 'assets/style.css')}`,
-    localizationFlagAssetUrl: endpoint('localization-flag'), localizationSaveUrl: endpoint('localization-save'),
     dashboardUrl: `${origin}/kodety/editor/`, projectUrl: endpoint('project'), projectDownloadUrl: endpoint('project.zip'), projectSurfaceUrl: endpoint('project-surface'),
     publishUrl: endpoint('publish'), cmsSchemaUrl: endpoint('cms/schema'), cmsItemsUrl: endpoint('cms/items'),
     cmsCollectionsUrl: endpoint('cms/collections'), cmsFieldsUrl: endpoint('cms/fields'), canManageCmsSchema: true,
@@ -52,7 +47,7 @@ function configFor(url, localizationManifest) {
     analyticsOverviewUrl: endpoint('analytics/overview'), analyticsFunnelsUrl: endpoint('analytics/funnels'),
     analyticsPageInsightsUrl: endpoint('analytics/page-insights'), analyticsExperimentsUrl: endpoint('analytics/experiments'),
     canViewAnalytics: true, analyticsDemoMode: false, adobeFontsLicensed: true,
-    product: { edition: 'pro', licensed: true, licenseStatus: 'active', features: { analytics: true, analyticsAdvanced: true, analyticsAbTests: true, localization: true, cms: true, customCode: true, imageCompression: true, imageConversion: true }, limits: {}, upgradeUrl: endpoint('unavailable'), licenseUrl: endpoint('unavailable') },
+    product: { edition: 'pro', licensed: true, licenseStatus: 'active', features: { analytics: true, analyticsAdvanced: true, analyticsAbTests: true, localization: false, cms: true, customCode: true, imageCompression: true, imageConversion: true }, limits: {}, upgradeUrl: endpoint('unavailable'), licenseUrl: endpoint('unavailable') },
     updates: { currentVersion: 'preview', latestVersion: 'preview', updateAvailable: false, checkedAt: '', pageUrl: endpoint('updates'), statusUrl: endpoint('updates'), checkUrl: endpoint('updates') },
     onboarding: { userId: 17, preference: preferences.get(17) || 'unseen', preferenceUrl: endpoint('onboarding') },
   };
@@ -66,26 +61,6 @@ const server = createServer(async (request, response) => {
       if (!['GET', 'HEAD'].includes(request.method) && !['project', 'onboarding'].includes(route)) {
         return json(response, { success: false, message: 'Esta prévia não grava alterações nem executa ações externas.' }, 403);
       }
-      if (route === 'localization-file' || route === 'localization-flag') {
-        const relative = route === 'localization-flag' ? `flags/${url.searchParams.get('region')}.svg` : url.searchParams.get('file') || '';
-        const file = path.resolve(localizationAssets, relative);
-        if (!file.startsWith(`${localizationAssets}${path.sep}`) || !(await stat(file)).isFile()) { response.writeHead(404).end(); return; }
-        let content = await readFile(file);
-        if (file.endsWith('.js')) content = Buffer.from(content.toString().replace(/\b(from|import)\s*(["'])(\.{1,2}\/[^"']+\.js)\2/g, (_match, keyword, quote, specifier) => {
-          const normalized = path.posix.normalize(path.posix.join(path.posix.dirname(relative), specifier));
-          return `${keyword}${quote}${url.origin}/__preview/localization-file?file=${encodeURIComponent(normalized)}${quote}`;
-        }));
-        response.writeHead(200, { 'Content-Type': mime[path.extname(file)] || 'application/octet-stream', 'Cache-Control': 'no-store' });
-        response.end(content); return;
-      }
-      if (route === 'project.zip') {
-        response.writeHead(200, { 'Content-Type': 'application/zip', 'Cache-Control': 'no-store',
-          'X-Kodety-Original-Name': 'projeto-vazio.zip', 'X-Kodety-Project-Name': 'Projeto%20vazio',
-          'X-Kodety-Workspace-Revision': '1', 'X-Kodety-Template-Digest': digest, 'X-Kodety-CSS-Digest': digest,
-          'X-Kodety-Received-Project-Id': projectId, 'X-Kodety-Received-Project-Digest': digest });
-        response.end(archive); return;
-      }
-      if (route === 'project-surface') return json(response, { success: true, project, workspaceRevision: 1, workspaceDigest: digest, templateDigest: digest });
       if (route === 'onboarding') {
         if (request.method === 'POST') {
           const body = JSON.parse((await readBody(request)).toString() || '{}');
@@ -139,8 +114,7 @@ const server = createServer(async (request, response) => {
       for (const dependency of chunk?.imports || []) collect(dependency);
     }
     collect('Wordpress/editor/main.tsx');
-    const localizationManifest = JSON.parse(await readFile(path.join(localizationAssets, 'manifest.json'), 'utf8'));
-    const config = JSON.stringify(configFor(url, localizationManifest)).replaceAll('<', '\\u003c');
+    const config = JSON.stringify(configFor(url)).replaceAll('<', '\\u003c');
     response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
     response.end(`<!doctype html><html lang="pt-BR" class="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kodety — prévia local do Builder</title>${[...styles].map(css => `<link rel="stylesheet" href="/${css}">`).join('')}</head><body class="kodety-wordpress-editor"><div id="kodety-root"></div><script>window.kodetyWordPress=${config};window.kodetyOnboardingLocalPreview=true;</script><script type="module" src="/${entry.file}"></script></body></html>`);
   } catch (error) {

@@ -35,9 +35,7 @@ const [
   wordpressEditorCss,
   wordpressViteSource,
   pluginPackagingSource,
-  extensionPackagingSource,
   distributionPackagingSource,
-  localizationViteSource,
   sourceTestRunnerSource,
   helpTestSource,
   wordpressBootstrapSource,
@@ -53,9 +51,7 @@ const [
   readFile(new URL("../Wordpress/editor/wordpress-editor.css", import.meta.url), "utf8"),
   readFile(new URL("../Wordpress/vite.config.ts", import.meta.url), "utf8"),
   readFile(new URL("./package-wordpress-plugin.mjs", import.meta.url), "utf8"),
-  readFile(new URL("./package-kodety-extensions.mjs", import.meta.url), "utf8"),
   readFile(new URL("./package-wordpress-distributions.mjs", import.meta.url), "utf8"),
-  readFile(new URL("../Wordpress/vite.localization.config.ts", import.meta.url), "utf8"),
   readFile(new URL("./run-source-test-suite.mjs", import.meta.url), "utf8"),
   readFile(new URL("./test-kodety-help.mjs", import.meta.url), "utf8"),
   readFile(new URL("../Wordpress/kodety/kodety.php", import.meta.url), "utf8"),
@@ -65,13 +61,7 @@ const [
   readFile(new URL("../Wordpress/kodety/theme-runtime/index.php", import.meta.url), "utf8"),
 ]);
 const currentWordPressVersion = assertWordPressReleaseVersion(currentPackage, currentPackageLock);
-const [compiledEditorRuntime, compiledLocalizationRuntime] = await Promise.all([
-  readJavaScriptTree(new URL("../Wordpress/kodety/assets/", import.meta.url)),
-  readFile(
-    new URL("../Wordpress/extensions/kodety-localization/assets/localization.js", import.meta.url),
-    "utf8",
-  ),
-]);
+const compiledEditorRuntime = await readJavaScriptTree(new URL("../Wordpress/kodety/assets/", import.meta.url));
 assert.match(
   compiledEditorRuntime,
   /const [\w$]+="__kodety_figma__",[\w$]+=4,[\w$]+=5;/,
@@ -102,7 +92,7 @@ for (const obsoleteRuntimeContract of [
   "Conectando turno",
 ]) {
   assert.doesNotMatch(
-    `${compiledEditorRuntime}\n${compiledLocalizationRuntime}`,
+    compiledEditorRuntime,
     new RegExp(obsoleteRuntimeContract),
     `Artefato compilado ainda contém o contrato multi-editor obsoleto: ${obsoleteRuntimeContract}.`,
   );
@@ -160,7 +150,7 @@ assert.match(
 );
 assert.match(
   wordpressPluginSource,
-  /HTTP_CF_IPCOUNTRY[\s\S]*?wp_safe_redirect\(\$redirect_url, 302, 'Kodety Localization'\)/,
+  /HTTP_CF_IPCOUNTRY[\s\S]*?wp_safe_redirect\(\$redirect_url, 302, 'Onun Kodety Localization'\)/,
   "O redirect deve ler diretamente o país do edge e emitir somente um 302 seguro.",
 );
 assert.match(
@@ -271,24 +261,8 @@ assert.match(
   /Kodety_Observability::register\(\);/,
   "O bootstrap precisa registrar a observabilidade fail-closed.",
 );
-assert.match(
-  localizationViteSource,
-  /KODETY_WORDPRESS_LOCALIZATION_CHUNK_MANIFEST[\s\S]*?writeFile/,
-  "O build Localization precisa emitir o sidecar de módulos usado pelos budgets.",
-);
-assert.match(
-  extensionPackagingSource,
-  /if \(verifyDeterminism\)[\s\S]*?buildLocalization\(\);[\s\S]*?assertBuildRecordsEqual/,
-  "O empacotamento precisa comparar duas compilações Localization byte a byte.",
-);
-assert.match(
-  extensionPackagingSource,
-  /firstLocalizationChunkManifest\.equals\(secondLocalizationChunkManifest\)/,
-  "O determinismo de Localization precisa incluir o sidecar de módulos.",
-);
 for (const sidecarEnvironment of [
   "KODETY_WORDPRESS_CHUNK_MANIFEST",
-  "KODETY_WORDPRESS_LOCALIZATION_CHUNK_MANIFEST",
 ]) {
   assert.match(
     distributionPackagingSource,
@@ -344,17 +318,14 @@ assert.match(
 );
 const distributionSteps = [
   "package-wordpress-plugin.mjs",
-  "package-kodety-extensions.mjs",
-  "package-kodety-file-system.mjs",
   "test-wordpress-browser-runtime-boundary.mjs",
   "report-wordpress-performance.mjs",
-  "prepare-kodety-update.mjs",
 ].map(step => distributionPackagingSource.indexOf(step));
 assert.ok(
   distributionSteps.every((offset, index) => (
     offset >= 0 && (index === 0 || offset > distributionSteps[index - 1])
   )),
-  "A distribuição precisa compilar todos os pacotes antes do relatório e só então preparar o update.",
+  "A distribuição precisa compilar o plugin principal antes de validar o runtime e emitir o relatório.",
 );
 for (const nativeAnalyticsFile of [
   "includes/class-kodety-analytics.php",
@@ -393,21 +364,6 @@ for (const nativeAnalyticsClass of ["Kodety_Analytics", "Kodety_Meta_CAPI", "Kod
     `${nativeAnalyticsClass} deve iniciar com o plugin principal.`,
   );
 }
-assert.doesNotMatch(
-  extensionPackagingSource,
-  /slug:\s*["']kodety-analytics["']/,
-  "Analytics nativo não pode continuar sendo distribuído como extensão separada.",
-);
-assert.match(
-  extensionPackagingSource,
-  /rm\(path\.join\(output, ["']kodety-analytics\.zip["']\), \{ force: true \}\)/,
-  "O build precisa remover um ZIP Analytics obsoleto deixado por versões anteriores.",
-);
-assert.match(
-  extensionPackagingSource,
-  /rm\(path\.join\(output, ["']kodety-analytics["']\), \{ recursive: true, force: true \}\)/,
-  "O build precisa remover também o diretório Analytics obsoleto deixado por versões anteriores.",
-);
 for (const [surface, css] of [["Builder", builderCss], ["WordPress", wordpressEditorCss]]) {
   assert.match(
     css,

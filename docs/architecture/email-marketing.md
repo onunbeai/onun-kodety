@@ -100,7 +100,7 @@ email num formulário não deve virar usuário WordPress. Conectores de entrada
 ## 3. Construtor de email
 
 **Não clonar `HtmlProjectEditor.tsx` (13.347 linhas).** Clonar cria uma segunda
-implementação divergente — exatamente o que `INSTRUCOES-PARA-IA.md` proíbe.
+implementação divergente. Preserve uma única implementação compartilhada para esse contrato.
 
 O caminho é **reusar as primitivas** de `lib/html-editor/` num shell novo e enxuto:
 

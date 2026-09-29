@@ -25,8 +25,7 @@ export const BROTLI_QUALITY = 6;
  * JavaScript limits leave roughly 10–16% headroom from the 2026-08-29
  * baseline, while chunk-count limits allow a few intentional split points.
  * That is enough room for ordinary UI work without silently accepting a new
- * framework-sized dependency. File System stays at one chunk because its IIFE
- * contract intentionally forbids runtime chunk discovery.
+ * framework-sized dependency.
  */
 export const WORDPRESS_ROUTE_BUDGETS = Object.freeze({
   shell: {
@@ -133,36 +132,6 @@ export const WORDPRESS_ROUTE_BUDGETS = Object.freeze({
     rationale:
       "Independent application; rounded limits leave about 12–14% for editor-specific growth.",
   },
-  localization: {
-    label: "Localization",
-    maxChunks: 9,
-    maxLargestChunkRawBytes: 1_450_000,
-    javascript: {
-      rawBytes: 2_150_000,
-      gzipBytes: 655_000,
-      brotliBytes: 610_000,
-    },
-    maxStyleFiles: 4,
-    styles: { rawBytes: 540_000, gzipBytes: 70_000, brotliBytes: 65_000 },
-    incremental: {
-      maxChunks: 3,
-      rawBytes: 1_700_000,
-      gzipBytes: 505_000,
-      brotliBytes: 465_000,
-    },
-    rationale:
-      "Core shell plus private extension; limits keep roughly 13–15% room while the full-project path is profiled separately.",
-  },
-  fileSystem: {
-    label: "File System",
-    maxChunks: 1,
-    maxLargestChunkRawBytes: 490_000,
-    javascript: { rawBytes: 490_000, gzipBytes: 145_000, brotliBytes: 135_000 },
-    maxStyleFiles: 1,
-    styles: { rawBytes: 50_000, gzipBytes: 10_000, brotliBytes: 9_000 },
-    rationale:
-      "Single deferred IIFE is an architectural invariant; byte ceilings leave about 15% headroom.",
-  },
   componentCompiler: {
     label: "Component compiler",
     maxChunks: 49,
@@ -201,26 +170,7 @@ export const WORDPRESS_OUTPUT_BUDGETS = Object.freeze({
     rationale:
       "Covers the complete Vite output, including optional compiler/AVIF/formatter payloads.",
   },
-  localization: {
-    label: "Localization extension assets",
-    maxFiles: 38,
-    maxTotalBytes: 2_100_000,
-    maxLargeFiles: 4,
-    maxLargeFileBytes: 1_450_000,
-    maxLargeFilesTotalBytes: 1_900_000,
-    rationale:
-      "Allows the private workspace plus one deliberate large split after optimized flags are rebuilt.",
-  },
-  fileSystem: {
-    label: "File System assets",
-    maxFiles: 4,
-    maxTotalBytes: 590_000,
-    maxLargeFiles: 2,
-    maxLargeFileBytes: 490_000,
-    maxLargeFilesTotalBytes: 500_000,
-    rationale:
-      "Allows the single application bundle and one future deliberately large emitted file.",
-  },
+
 });
 
 /**
@@ -256,16 +206,7 @@ const OUTPUT_DEFINITIONS = Object.freeze([
     label: "Main WordPress assets",
     directory: "Wordpress/kodety/assets",
   },
-  {
-    id: "localization",
-    label: "Localization extension assets",
-    directory: "Wordpress/extensions/kodety-localization/assets",
-  },
-  {
-    id: "fileSystem",
-    label: "File System assets",
-    directory: "Wordpress/kodety-file-system/assets",
-  },
+
 ]);
 
 const toPosix = (value) => value.replaceAll(path.sep, "/");
@@ -288,12 +229,7 @@ const CHUNK_MODULE_SIDECAR_DEFINITIONS = Object.freeze([
     environmentVariable: "KODETY_WORDPRESS_CHUNK_MANIFEST",
     defaultPath: "artifacts/kodety-hardening/front-06/wordpress-main-chunk-modules.json",
   }),
-  Object.freeze({
-    id: "localization",
-    label: "Localization bundle",
-    environmentVariable: "KODETY_WORDPRESS_LOCALIZATION_CHUNK_MANIFEST",
-    defaultPath: "artifacts/kodety-hardening/front-06/wordpress-localization-chunk-modules.json",
-  }),
+
 ]);
 
 const MODULE_BUNDLE_ORDER = new Map(
@@ -890,22 +826,6 @@ async function collectManifestSegment(root, bundle, seedLabels, metricCache) {
   };
 }
 
-async function collectStandaloneSegment(root, metricCache) {
-  const directory = path.resolve(root, "Wordpress/kodety-file-system/assets");
-  const record = (relative) =>
-    fileRecord(root, safeOutputPath(directory, relative), metricCache);
-  return {
-    id: "fileSystem:app.js",
-    bundle: "fileSystem",
-    manifestPath: null,
-    seeds: ["app.js"],
-    manifestEntries: 0,
-    javascriptFiles: [await record("app.js")],
-    styleFiles: [await record("app.css")],
-    referencedAssetFiles: [await record("inter-latin-variable.woff2")],
-  };
-}
-
 function uniqueRecords(segments, field) {
   const byPath = new Map();
   for (const segment of segments) {
@@ -1258,22 +1178,16 @@ export async function collectWordPressPerformance({
 } = {}) {
   const resolvedRoot = path.resolve(root);
   const metricCache = new Map();
-  const [packageJson, mainBundle, localizationBundle] = await Promise.all([
+  const [packageJson, mainBundle] = await Promise.all([
     readJson(path.join(resolvedRoot, "package.json")),
     manifestBundle(
       resolvedRoot,
       "main",
       "Wordpress/kodety/assets/manifest.json",
     ),
-    manifestBundle(
-      resolvedRoot,
-      "localization",
-      "Wordpress/extensions/kodety-localization/assets/manifest.json",
-    ),
   ]);
   const manifestBundles = new Map([
     [mainBundle.id, mainBundle],
-    [localizationBundle.id, localizationBundle],
   ]);
   const chunkModuleSidecars = await Promise.all(
     CHUNK_MODULE_SIDECAR_DEFINITIONS.map((definition) =>
@@ -1346,18 +1260,6 @@ export async function collectWordPressPerformance({
     ],
     metricCache,
   );
-  const localization = await collectManifestSegment(
-    resolvedRoot,
-    localizationBundle,
-    [
-      "Wordpress/editor/localization-main.tsx",
-      "WordPressLocalizationWorkspace",
-      "style.css",
-    ],
-    metricCache,
-  );
-  const fileSystem = await collectStandaloneSegment(resolvedRoot, metricCache);
-
   const routes = [
     routeSummary({
       id: "shell",
@@ -1397,19 +1299,6 @@ export async function collectWordPressPerformance({
       id: "email",
       label: "Email Editor",
       segments: [email],
-      incrementalFrom: "standalone",
-    }),
-    routeSummary({
-      id: "localization",
-      label: "Localization",
-      segments: [shell, localization],
-      baselineSegments: [shell],
-      incrementalFrom: "Editor shell",
-    }),
-    routeSummary({
-      id: "fileSystem",
-      label: "File System",
-      segments: [fileSystem],
       incrementalFrom: "standalone",
     }),
     routeSummary({
@@ -1453,8 +1342,8 @@ export async function collectWordPressPerformance({
       "This report measures the compiled output tree currently present on disk. " +
       "It does not prove that those generated files are up to date with the current source tree. " +
       "Source-asset budgets use the current sources, so stale compiled files may fail until the authorized final rebuild. " +
-      "Chunk-module sidecars must exactly match the JavaScript chunks in both compiled manifests.",
-    compiledManifests: [mainBundle.identity, localizationBundle.identity],
+      "Chunk-module sidecars must exactly match the JavaScript chunks in the main compiled manifest.",
+    compiledManifests: [mainBundle.identity],
     compiledChunkModuleManifests: chunkModuleSidecars.map(
       (sidecar) => sidecar.identity,
     ),
@@ -1752,9 +1641,13 @@ export async function runModuleDuplicationSelfTest() {
     const mainDefinition = CHUNK_MODULE_SIDECAR_DEFINITIONS.find(
       (definition) => definition.id === "main",
     );
-    const localizationDefinition = CHUNK_MODULE_SIDECAR_DEFINITIONS.find(
-      (definition) => definition.id === "localization",
-    );
+    // A second synthetic bundle keeps cross-bundle duplication coverage
+    // without requiring any separately distributed extension.
+    const localizationDefinition = {
+      id: "localization",
+      label: "Secondary fixture bundle",
+      environmentVariable: "KODETY_TEST_SECONDARY_CHUNK_MANIFEST",
+    };
     const sidecars = await Promise.all([
       loadChunkModuleSidecar({
         root: fixtureRoot,
@@ -2055,20 +1948,20 @@ export function runBudgetEvaluatorSelfTest() {
 
   const outputOverflow = structuredClone(passing);
   const overflowingOutput = outputOverflow.outputs.find(
-    (output) => output.id === "localization",
+    (output) => output.id === "main",
   );
-  overflowingOutput.files = WORDPRESS_OUTPUT_BUDGETS.localization.maxFiles + 1;
+  overflowingOutput.files = WORDPRESS_OUTPUT_BUDGETS.main.maxFiles + 1;
   overflowingOutput.totalBytes =
-    WORDPRESS_OUTPUT_BUDGETS.localization.maxTotalBytes + 1;
+    WORDPRESS_OUTPUT_BUDGETS.main.maxTotalBytes + 1;
   overflowingOutput.largeFiles =
-    WORDPRESS_OUTPUT_BUDGETS.localization.maxLargeFiles + 1;
+    WORDPRESS_OUTPUT_BUDGETS.main.maxLargeFiles + 1;
   const outputOverflowResult = evaluateWordPressPerformance(outputOverflow);
   if (
     outputOverflowResult.passed ||
     !["files", "totalBytes", "largeFiles"].every((metric) =>
       outputOverflowResult.failures.some(
         (failure) =>
-          failure.scope === "output:localization" && failure.metric === metric,
+          failure.scope === "output:main" && failure.metric === metric,
       ),
     )
   ) {

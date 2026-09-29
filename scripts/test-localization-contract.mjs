@@ -1182,20 +1182,8 @@ try {
     path.join(root, 'app/(builder)/kodety/html-editor/components/HtmlLocalizationManager.tsx'),
     'utf8',
   );
-  const localizationEntrySource = await readFile(
-    path.join(root, 'Wordpress/editor/localization-main.tsx'),
-    'utf8',
-  );
-  const localizationWorkspaceSource = await readFile(
-    path.join(root, 'Wordpress/editor/WordPressLocalizationWorkspace.tsx'),
-    'utf8',
-  );
   const htmlProjectEditorSource = await readFile(
     path.join(root, 'app/(builder)/kodety/html-editor/components/HtmlProjectEditor.tsx'),
-    'utf8',
-  );
-  const localizationExtensionSource = await readFile(
-    path.join(root, 'Wordpress/extensions/kodety-localization/extension.php'),
     'utf8',
   );
   const wordpressEntryConfigSource = await readFile(
@@ -1363,41 +1351,6 @@ try {
   const settingsDialogStart = localizationManagerSource.indexOf('<DialogContent', settingsDialogRoot);
   const settingsDialogEnd = localizationManagerSource.indexOf('</DialogContent>', settingsDialogStart);
   const settingsDialogSource = localizationManagerSource.slice(settingsDialogStart, settingsDialogEnd);
-  assert.doesNotMatch(
-    localizationEntrySource,
-    /import '\.\.\/\.\.\/app\/globals\.css';|import '\.\/wordpress-editor\.css';/,
-    'the extension must reuse the shell design-system CSS instead of downloading and parsing it a second time',
-  );
-  assert.match(
-    localizationEntrySource,
-    /kodetyImportLocalizationChunk[\s\S]*?import\('\.\/WordPressLocalizationWorkspace'\)[\s\S]*?React\.lazy[\s\S]*?<Suspense/,
-    'the private workspace must start in parallel while the lightweight entry can paint its loading state',
-  );
-  assert.match(
-    localizationEntrySource,
-    /const separator = source\.includes\('\?'\) \? '&' : '\?';[\s\S]*?file=\$\{encodeURIComponent\(normalized\)\}[\s\S]*?import\(\/\* @vite-ignore \*\/ url\)/,
-    'the dynamic chunk loader must preserve the base query bytes and append file last',
-  );
-  assert.doesNotMatch(
-    localizationEntrySource,
-    /searchParams\.set\('file'/,
-    'URLSearchParams must not re-encode a private module URL into a second ESM identity',
-  );
-  assert.match(
-    localizationExtensionSource,
-    /\$kodety_localization_private_asset_url[\s\S]*?foreach \(\['kodety_share_token', 'ver'\][\s\S]*?if \(\$relative !== ''\) \$url = add_query_arg\('file'/,
-    'PHP must use one canonical action/share/version/file URL order for private chunks',
-  );
-  assert.match(
-    localizationExtensionSource,
-    /\$kodety_localization_rewrite_static_imports[\s\S]*?\$kodety_localization_private_asset_url\([\s\S]*?'kodety_localization_file'[\s\S]*?\$target_relative/,
-    'static imports must use the same private URL helper as preload and config',
-  );
-  assert.match(
-    localizationExtensionSource,
-    /hash_file\('sha256', \$entry\)[\s\S]*?hash_file\('sha256', __FILE__\)[\s\S]*?substr\(hash\('sha256'/,
-    'immutable localization URLs must change for emitted code or delivery-rewrite changes',
-  );
   assert.match(
     wordpressEntryConfigSource,
     /aiSettingsPageUrl\?: string;/,
@@ -1407,11 +1360,6 @@ try {
     editorShellSource,
     /'aiSettingsPageUrl'[\s\S]*?add_query_arg\('section', 'mcp', \$surface_url\('settings'\)\) \. '#integrations-ai'/,
     'the configuration CTA must open the AI provider section in Settings',
-  );
-  assert.match(
-    localizationWorkspaceSource,
-    /aiSettingsPageUrl=\{config\?\.aiSettingsPageUrl\}/,
-    'the standalone Languages workspace must pass the Settings destination to its manager',
   );
   assert.match(
     htmlProjectEditorSource,
@@ -1437,11 +1385,6 @@ try {
     localizationManagerSource,
     /error instanceof AiTranslationConfigurationError[\s\S]*?showAiConfigurationRequired\(error\.message\)[\s\S]*?else \{[\s\S]*?toast\.error/,
     'ordinary provider and network failures must remain separate from the Settings CTA',
-  );
-  assert.match(
-    localizationEntrySource,
-    /export function mountLocalization\(\)[\s\S]*?kodetyMountLocalization = mountLocalization[\s\S]*?kodetyLocalizationManualMount[\s\S]*?mountLocalization\(\)/,
-    'the extension must support CSS-gated manual mount while retaining compatibility with older cores',
   );
   assert.match(
     settingsDialogSource,

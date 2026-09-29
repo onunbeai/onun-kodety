@@ -10,8 +10,6 @@ outputs/
 backups/
 .kodety-backups/
 Wordpress/kodety/assets/
-Wordpress/kodety-file-system/assets/
-Wordpress/extensions/*/assets/
 *.tsbuildinfo
 *.log
 *.zip

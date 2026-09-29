@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-labelledby="title">
-  <title id="title">Produto de exemplo</title>
-  <rect width="800" height="1000" fill="#ded8ca"/>
-  <circle cx="400" cy="420" r="245" fill="#fffef8"/>
-  <path d="M230 780 400 220 570 780Z" fill="#171713"/>
-  <circle cx="400" cy="440" r="85" fill="#c9ff3d"/>
-</svg>

@@ -16,6 +16,13 @@ async function exists(relativePath) {
 }
 
 for (const removedPath of [
+  'WebApp',
+  'ChromeExtension',
+  'FigmaPlugin',
+  'extensions',
+  'Wordpress/extensions',
+  'Wordpress/kodety-file-system',
+  'Wordpress/file-system',
   'lib/apps/airtable/index.ts',
   'lib/apps/airtable/types.ts',
   'lib/apps/airtable/sync-service.ts',
@@ -27,7 +34,7 @@ for (const removedPath of [
   assert.equal(
     await exists(removedPath),
     false,
-    `${removedPath} belongs to a non-WordPress legacy backend and must stay removed.`,
+    `${removedPath} is outside the WordPress plugin and shared core scope and must stay removed.`,
   );
 }
 
@@ -40,10 +47,6 @@ const activeSourceRoots = [
   'Wordpress/editor',
   'Wordpress/runtime-assets',
   'Wordpress/kodety/includes',
-  'Wordpress/extensions',
-  'extensions',
-  'ChromeExtension',
-  'FigmaPlugin',
 ];
 const skippedDirectories = new Set(['assets', 'dist', 'node_modules', '.next']);
 const sourceExtension = /\.(?:cjs|js|json|mjs|php|ts|tsx)$/i;
@@ -96,4 +99,4 @@ assert.equal(
   'html-to-image was only used by the removed component thumbnail capture.',
 );
 
-console.log('WordPress-only integration boundary passed: legacy Airtable and component thumbnail backends are absent.');
+console.log('WordPress-only integration boundary passed: standalone apps, browser/Figma plugins, legacy Airtable and thumbnail backends are absent.');

@@ -20,13 +20,8 @@ const mainChunkManifestPath = path.join(
   performanceArtifactDirectory,
   "wordpress-main-chunk-modules.json",
 );
-const localizationChunkManifestPath = path.join(
-  performanceArtifactDirectory,
-  "wordpress-localization-chunk-modules.json",
-);
 for (const generatedArtifactPath of [
   mainChunkManifestPath,
-  localizationChunkManifestPath,
   path.join(performanceArtifactDirectory, "wordpress-performance.json"),
   path.join(performanceArtifactDirectory, "wordpress-performance.md"),
 ]) {
@@ -35,7 +30,6 @@ for (const generatedArtifactPath of [
 const buildEnvironment = {
   ...process.env,
   KODETY_WORDPRESS_CHUNK_MANIFEST: mainChunkManifestPath,
-  KODETY_WORDPRESS_LOCALIZATION_CHUNK_MANIFEST: localizationChunkManifestPath,
 };
 
 function run(script, args = []) {
@@ -47,7 +41,5 @@ function run(script, args = []) {
 }
 
 run("package-wordpress-plugin.mjs", deterministicArgument);
-run("package-kodety-extensions.mjs", deterministicArgument);
-run("package-kodety-file-system.mjs", deterministicArgument);
 run("test-wordpress-browser-runtime-boundary.mjs");
 run("report-wordpress-performance.mjs");

@@ -387,57 +387,7 @@ try {
   assert.equal(localizationWrites[1].authored, finalTyping);
   assert.deepEqual(metadata(localizationWrites[1].candidate).settings, { title: 'Third queued keystroke', description: 'Remote', remove: true }, 'a localization timer already fired before ACK rebases its captured draft, including the third write');
 
-  const localizationSource = await readFile(path.join(root, 'Wordpress/editor/WordPressLocalizationWorkspace.tsx'), 'utf8');
-  const callback = (name, next, env) => {
-    const start = localizationSource.indexOf(`  const ${name} = useCallback`);
-    const end = localizationSource.indexOf(`\n\n  const ${next}`, start);
-    assert.ok(start >= 0 && end > start);
-    const compiled = ts.transpileModule(`${localizationSource.slice(start, end)}\nreturn ${name};`, { compilerOptions: { target: ts.ScriptTarget.ES2022 } }).outputText;
-    return new Function(...Object.keys(env), compiled)(...Object.values(env));
-  };
-  const classStart = localizationSource.indexOf('class WorkspaceRevisionConflictError');
-  const classEnd = localizationSource.indexOf('function shouldRetryLocalizationSave', classStart);
-  const classes = ts.transpileModule(`${localizationSource.slice(classStart, classEnd)}\nreturn { WorkspaceRevisionConflictError, LocalizationSaveRequestError };`, { compilerOptions: { target: ts.ScriptTarget.ES2022 } }).outputText;
-  const errorTypes = new Function(classes)();
-  for (const conflict of [false, true]) {
-    const b = project({ localization: { sourceLocale: 'pt', translations: { greeting: 'Oi', bye: 'Tchau' } } });
-    const l = project({ localization: { sourceLocale: 'pt', translations: { greeting: 'Olá', bye: 'Tchau' } } });
-    const r = project({ localization: { sourceLocale: 'pt', translations: { greeting: conflict ? 'Outro' : 'Oi', bye: conflict ? 'Tchau' : 'Até logo' } } });
-    const requests = [];
-    const env = {
-      ...errorTypes, useCallback: value => value,
-      config: { projectUrl: '/project', localizationSaveUrl: '/localization', nonce: 'localization' },
-      wordpressEntryReadOnly: () => false, projectHasOnlyLocalizationMetadataChange: () => true, readEditorMetadata: metadata,
-      workspaceRevisionRef: ref(7), acknowledgedProjectRef: ref(b), projectRef: ref(l), pendingSaveRef: ref(l),
-      retryCountRef: ref(0), requestedRetryDelayRef: ref(0), setProject: value => { env.rendered = value; },
-      mergeWorkspaceConflictStrict: merge, fetchProject: async () => ({ project: r, workspaceRevision: 8 }),
-      fetch: async (_url, options) => {
-        requests.push({ revision: options.headers['X-Kodety-Expected-Revision'], body: JSON.parse(options.body) });
-        return requests.length === 1
-          ? Response.json({ code: 'kodety_workspace_conflict', data: { currentRevision: 8 } }, { status: 409 })
-          : Response.json({ success: true, workspaceRevision: 9 });
-      },
-    };
-    const persist = callback('persistProject', 'queueWrite', env);
-    if (conflict) {
-      await assert.rejects(persist(l), error => error.name === 'WorkspaceContentConflictError');
-      assert.equal(requests.length, 1);
-      assert.equal(env.projectRef.current, l, '409 keeps the localization draft');
-      assert.equal(env.acknowledgedProjectRef.current, b, '409 cannot change authority');
-      assert.equal(env.workspaceRevisionRef.current, 7, 'a later stale snapshot cannot borrow the server revision');
-      const preserve = callback('preserveRejectedSnapshot', 'load', { useCallback: value => value, projectRef: env.projectRef, pendingSaveRef: env.pendingSaveRef });
-      preserve(l);
-      assert.equal(env.projectRef.current, l);
-      assert.equal(env.pendingSaveRef.current, l, 'a failed save remains visible and pending');
-    } else {
-      await persist(l);
-      assert.deepEqual(requests.map(request => request.revision), ['7', '8']);
-      assert.deepEqual(requests[1].body.localization.translations, { greeting: 'Olá', bye: 'Até logo' });
-      assert.deepEqual(metadata(env.projectRef.current).localization.translations, { greeting: 'Olá', bye: 'Até logo' });
-      assert.equal(env.workspaceRevisionRef.current, 9);
-    }
-  }
-  console.log('PASS WordPress concurrent saves: disjoint files/JSON, conflicting fields/arrays/deletes, queued typing, safe CAS retry, post-ACK debounce, localization draft preservation');
+  console.log('PASS WordPress concurrent saves: disjoint files/JSON, conflicting fields/arrays/deletes, queued typing, safe CAS retry, post-ACK debounce, shared localization queue rebasing');
 } finally {
   await server.close();
   globalThis.fetch = originalFetch;

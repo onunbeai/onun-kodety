@@ -189,15 +189,9 @@ test('browser Agent access requires a licensed AI feature, an Agent endpoint and
   ]) assert.equal(wordpressBrowserAgentLicensed(candidate), false);
 });
 
-test('both the core and separately loaded Languages entry mount the shared WordPress Agent provider', async () => {
-  const [core, localization] = await Promise.all([
-    readFile(path.join(root, 'Wordpress/editor/main.tsx'), 'utf8'),
-    readFile(path.join(root, 'Wordpress/editor/localization-main.tsx'), 'utf8'),
-  ]);
-  for (const source of [core, localization]) {
-    assert.match(source, /import\s+\{\s*WordPressAgentProvider\s*\}\s+from\s+['"]\.\/WordPressAgentProvider['"]/);
-    assert.match(source, /<WordPressAgentProvider>[\s\S]*?<\/WordPressAgentProvider>/);
-  }
+test('the core entry mounts the shared WordPress Agent provider', async () => {
+  const core = await readFile(path.join(root, 'Wordpress/editor/main.tsx'), 'utf8');
+  assert.match(core, /import\s+\{\s*WordPressAgentProvider\s*\}\s+from\s+['"]\.\/WordPressAgentProvider['"]/);
+  assert.match(core, /<WordPressAgentProvider>[\s\S]*?<\/WordPressAgentProvider>/);
   assert.match(core, /<WordPressAgentProvider>\s*\{workspace\}/);
-  assert.match(localization, /<WordPressAgentProvider>\s*<WordPressLocalizationWorkspace\s*\/>/);
 });

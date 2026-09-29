@@ -17,7 +17,6 @@ const [
   settingsStoreSource,
   editorSource,
   editorTopbarSource,
-  localizationSource,
   cmsManagerSource,
   cmsWorkspaceSource,
 ] = await Promise.all([
@@ -28,7 +27,6 @@ const [
   read('stores/useHtmlProjectSettingsStore.ts'),
   read('app/(builder)/kodety/html-editor/components/HtmlProjectEditor.tsx'),
   read('app/(builder)/kodety/html-editor/components/HtmlEditorTopbar.tsx'),
-  read('Wordpress/editor/WordPressLocalizationWorkspace.tsx'),
   read('app/(builder)/kodety/html-editor/components/HtmlCmsManager.tsx'),
   read('Wordpress/editor/WordPressCmsWorkspace.tsx'),
 ]);
@@ -186,21 +184,6 @@ assert.match(
   editorSource,
   /publishAvailable=\{Boolean\([\s\S]*?topbarWp\?\.canPublish[\s\S]*?&& wordpressPublishReady[\s\S]*?&& !isShopifyThemeProject\(project\)/,
   'the publish overlay must remain unavailable behind the same WordPress readiness gate',
-);
-assert.match(
-  localizationSource,
-  /const flushLatestProject[\s\S]*?await flushPendingSave\(\);[\s\S]*?await activeAgentMutation;[\s\S]*?await flushPendingSave\(\);[\s\S]*?latest === acknowledgedProjectRef\.current[\s\S]*?agentMutationChainRef\.current === activeAgentMutation/,
-  'Localization exit must wait for agent mutations and the latest acknowledged metadata revision',
-);
-assert.match(
-  localizationSource,
-  /const prepareNavigation[\s\S]*?await flushLatestProject\(\)[\s\S]*?catch \(error\)[\s\S]*?return false;[\s\S]*?registerWorkspaceNavigationGuard\(prepareNavigation\)/,
-  'Localization must veto every workspace exit when its pending metadata save cannot be acknowledged',
-);
-assert.match(
-  localizationSource,
-  /const navigateAfterSave[\s\S]*?if \(!\(await prepareNavigation\(\)\)\) return;[\s\S]*?navigateWithEditorLockHandoff\(href\)/,
-  'Localization back must reuse the same save barrier and preserve the editor-lock handoff',
 );
 assert.match(
   cmsManagerSource,

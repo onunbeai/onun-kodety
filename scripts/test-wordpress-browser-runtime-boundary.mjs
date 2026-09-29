@@ -32,38 +32,7 @@ export const WORDPRESS_BROWSER_DISTRIBUTIONS = Object.freeze([
       "Wordpress/kodety/assets/code-component-react-runtime.mjs",
     ]),
   }),
-  Object.freeze({
-    id: "membership",
-    label: "Membership extension",
-    roots: Object.freeze(["Wordpress/extensions/kodety-membership"]),
-    singleFiles: Object.freeze([
-      "Wordpress/kodety/assets/membership-runtime.js",
-    ]),
-    excludedFiles: Object.freeze([]),
-    requiredFiles: Object.freeze([
-      "Wordpress/kodety/assets/membership-runtime.js",
-    ]),
-  }),
-  Object.freeze({
-    id: "localization",
-    label: "Localization extension",
-    roots: Object.freeze(["Wordpress/extensions/kodety-localization"]),
-    singleFiles: Object.freeze([]),
-    excludedFiles: Object.freeze([]),
-    requiredFiles: Object.freeze([
-      "Wordpress/extensions/kodety-localization/assets/localization.js",
-    ]),
-  }),
-  Object.freeze({
-    id: "file-system",
-    label: "File System plugin",
-    roots: Object.freeze(["Wordpress/kodety-file-system"]),
-    singleFiles: Object.freeze([]),
-    excludedFiles: Object.freeze([]),
-    requiredFiles: Object.freeze([
-      "Wordpress/kodety-file-system/assets/app.js",
-    ]),
-  }),
+
 ]);
 
 /**
@@ -311,9 +280,6 @@ async function runSelfTest() {
   const fixtureRoot = await mkdtemp(path.join(tmpdir(), "kodety-browser-runtime-boundary-"));
   const fixtureTargets = [
     "Wordpress/kodety/admin/runtime-boundary-fixture.js",
-    "Wordpress/extensions/kodety-membership/runtime-boundary-fixture.js",
-    "Wordpress/extensions/kodety-localization/assets/runtime-boundary-fixture.js",
-    "Wordpress/kodety-file-system/assets/runtime-boundary-fixture.js",
   ];
 
   try {

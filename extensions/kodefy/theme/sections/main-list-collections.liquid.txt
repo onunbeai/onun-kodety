@@ -1,8 +1,0 @@
-<header class="page-header"><div class="page-width"><span class="eyebrow">{{ 'collections.general.explore' | t }}</span><h1>{{ section.settings.heading | escape }}</h1></div></header>
-<section class="section"><div class="product-grid page-width">{% for collection in collections %}<article class="product-card"><a class="product-card__media" href="{{ collection.url }}">{% if collection.featured_image %}{{ collection.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', alt: collection.featured_image.alt | default: collection.title }}{% else %}{{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}{% endif %}</a><div class="product-card__body"><a class="product-card__title" href="{{ collection.url }}">{{ collection.title | escape }}</a><span>{{ 'collections.general.products_count' | t: count: collection.products_count }}</span></div></article>{% endfor %}</div></section>
-{% schema %}
-{
-  "name": "t:sections.main_list_collections.name",
-  "settings": [ { "type": "text", "id": "heading", "label": "t:sections.main_list_collections.settings.heading.label", "default": "t:sections.main_list_collections.settings.heading.default" } ]
-}
-{% endschema %}

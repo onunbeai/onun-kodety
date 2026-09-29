@@ -6,7 +6,6 @@ import { createServer } from 'vite';
 
 const root = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const entrySource = await readFile(path.join(root, 'Wordpress/editor/wordpress-entry-config.ts'), 'utf8');
-const workspaceSource = await readFile(path.join(root, 'Wordpress/editor/WordPressLocalizationWorkspace.tsx'), 'utf8');
 
 assert.match(
   entrySource,
@@ -17,16 +16,6 @@ assert.match(
   entrySource,
   /signal: controller\.signal[\s\S]*?\.then\(bufferLocalizationPrefetchResponse\)/,
   'the prefetch deadline must cover buffering the archive body, not only response headers',
-);
-assert.match(
-  workspaceSource,
-  /takeLocalizationProjectPrefetch\(config, signal\)/,
-  'workspace cancellation must propagate into a consumed prefetch',
-);
-assert.match(
-  workspaceSource,
-  /withRequestTimeout\([\s\S]*?LOCALIZATION_PROJECT_LOAD_TIMEOUT_MS/,
-  'the complete localization startup path must have an actionable deadline',
 );
 
 const server = await createServer({

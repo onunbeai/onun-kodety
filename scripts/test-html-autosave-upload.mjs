@@ -11,7 +11,6 @@ const [
   admin,
   projectStorage,
   wordpressHelpers,
-  localizationWorkspace,
   wordpressEntryConfig,
   wordpressMain,
   draftDelta,
@@ -29,7 +28,6 @@ const [
   readFile(new URL('../Wordpress/kodety/admin/kodety-page.js', import.meta.url), 'utf8'),
   readFile(new URL('../lib/html-editor/project-storage.ts', import.meta.url), 'utf8'),
   readFile(new URL('../lib/html-editor/editor-wordpress-helpers.ts', import.meta.url), 'utf8'),
-  readFile(new URL('../Wordpress/editor/WordPressLocalizationWorkspace.tsx', import.meta.url), 'utf8'),
   readFile(new URL('../Wordpress/editor/wordpress-entry-config.ts', import.meta.url), 'utf8'),
   readFile(new URL('../Wordpress/editor/main.tsx', import.meta.url), 'utf8'),
   readFile(new URL('../lib/html-editor/wordpress-draft-delta.ts', import.meta.url), 'utf8'),
@@ -411,19 +409,9 @@ assert.match(
   'large Builder drafts must be sliced before they cross the request boundary',
 );
 assert.match(
-  localizationWorkspace,
-  /uploadWordPressDraftArchive\(\{[\s\S]*?projectChunkUrl: config\.projectChunkUrl[\s\S]*?WORDPRESS_DRAFT_UPLOAD_CHUNK_THRESHOLD_BYTES/,
-  'the dedicated localization workspace must use the same bounded large-ZIP transport as the Builder',
-);
-assert.match(
   wordpressHelpers,
   /projectHasOnlyLocalizationMetadataChange[\s\S]*?path === '\.incode\/project\.json'[\s\S]*?left\.data === right\.data/,
   'metadata-only localization saves must prove that every authored file and binary is unchanged',
-);
-assert.match(
-  localizationWorkspace,
-  /config\.localizationSaveUrl[\s\S]*?projectHasOnlyLocalizationMetadataChange[\s\S]*?JSON\.stringify\(\{ localization \}\)/,
-  'the standalone localization app must send small metadata updates after the initial ID migration',
 );
 assert.match(
   editor,
@@ -434,21 +422,6 @@ assert.match(
   editor,
   /const retryable = \(error as \{ retryable\?: boolean \}[\s\S]*?if \(!retryable\)[\s\S]*?throw error/,
   'permanent WordPress validation errors must not enter the autosave retry loop',
-);
-assert.match(
-  localizationWorkspace,
-  /const binaryDownload = Boolean\(config\.projectDownloadUrl\)[\s\S]*?response\.blob\(\)[\s\S]*?X-Kodety-Workspace-Revision/,
-  'localization must open large projects as a binary ZIP instead of inflating a base64 JSON response',
-);
-assert.doesNotMatch(
-  localizationWorkspace,
-  /body:\s*await projectToZipBlob/,
-  'localization must never send the complete project through its legacy one-shot POST path',
-);
-assert.match(
-  localizationWorkspace,
-  /response\.status === 408[\s\S]*?response\.status === 425[\s\S]*?response\.status === 429[\s\S]*?response\.status >= 500 && !responseCode/,
-  'localization retries must be limited to transport failures instead of looping on permanent application errors',
 );
 assert.match(
   wordpressHelpers,

@@ -8837,7 +8837,7 @@ export default function HtmlProjectEditor({ runtime = 'standalone', workspace }:
       const payload = parseKodetyFigmaClipboard(text, html);
       if (!payload) {
         toast.error('Este pacote do Figma não é compatível', {
-          description: 'Atualize o plugin Kodety no Figma e copie a seleção novamente.',
+          description: 'Copie novamente um pacote compatível do Figma ou importe o conteúdo como HTML/SVG.',
         });
         return;
       }

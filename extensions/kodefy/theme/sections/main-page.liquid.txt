@@ -1,4 +1,0 @@
-<section class="section"><article class="page-width rte"><header class="page-header"><span class="eyebrow">{{ shop.name | escape }}</span><h1>{{ page.title | escape }}</h1></header>{{ page.content }}</article></section>
-{% schema %}
-{ "name": "t:sections.main_page.name", "settings": [] }
-{% endschema %}

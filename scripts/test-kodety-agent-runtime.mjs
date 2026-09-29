@@ -68,8 +68,6 @@ const widgetsSkillUrl = new URL('../Wordpress/kodety/agent-skills/kodety-widgets
 const widgetsSkillSource = await readFile(widgetsSkillUrl, 'utf8');
 const languagesSkillUrl = new URL('../Wordpress/kodety/agent-skills/kodety-languages/SKILL.md', import.meta.url);
 const languagesSkillSource = await readFile(languagesSkillUrl, 'utf8');
-const localizationWorkspaceUrl = new URL('../Wordpress/editor/WordPressLocalizationWorkspace.tsx', import.meta.url);
-const localizationWorkspaceSource = await readFile(localizationWorkspaceUrl, 'utf8');
 const wordpressManifestUrl = new URL('../Wordpress/kodety/assets/manifest.json', import.meta.url);
 const wordpressManifest = JSON.parse(await readFile(wordpressManifestUrl, 'utf8'));
 
@@ -432,18 +430,7 @@ for (const marker of [
 ]) {
   assert.ok(languagesSkillSource.includes(marker), `The packaged Kodety Languages skill is incomplete; missing ${marker}.`);
 }
-for (const marker of [
-  'HtmlWorkspaceAgentDock',
-  'preferredSkill="kodety-languages"',
-  "tool === 'kodety_localization_snapshot'",
-  "tool === 'kodety_apply_localization_settings'",
-  "tool !== 'kodety_apply_localization_translations'",
-  'applyAgentLocalizationSettings',
-  'applyAgentLocalizationChanges',
-  'workspaceRevisionRef.current',
-]) {
-  assert.ok(localizationWorkspaceSource.includes(marker), `The Languages Agent bridge is incomplete; missing ${marker}.`);
-}
+
 assert.match(
   publishPanelSource,
   /skill: 'kodety-performance'[\s\S]*?autoSubmit: true/,

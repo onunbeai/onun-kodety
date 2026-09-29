@@ -1,19 +1,16 @@
-# Componentes de terceiros
+# Third-party notices
 
-A GPL-3.0-only do Onun Kodety aplica-se ao código próprio deste repositório. Bibliotecas, fontes, ícones e outros ativos de terceiros conservam suas licenças e atribuições originais.
+Onun Kodety's GPL-3.0-only license applies to its original code. Third-party libraries, fonts, icons, and other assets retain their original licenses and attribution.
 
-- **Ycode**: partes do projeto foram desenvolvidas com base no [repositório open source](https://github.com/ycode/ycode), principalmente quanto à arquitetura do editor. Copyright (c) 2026 Ycode; licença MIT integral em [licenses/YCODE-LICENSE.md](licenses/YCODE-LICENSE.md).
-- **WordPress Playground**: GPL-2.0-or-later (`@wp-playground/client`).
-- **Solar Icons**: CC-BY-4.0; wrapper React MIT. Atribuição em `Wordpress/kodety/THIRD_PARTY_NOTICES.txt` e `FigmaPlugin/THIRD_PARTY_NOTICES.md`.
-- **Keyline Icons**: MIT; texto em `components/ui/KEYLINE-ICONS-LICENSE.txt`.
-- **vanilla-cookieconsent**: MIT; texto em `lib/html-editor/vendor/vanilla-cookieconsent/LICENSE`.
-- **Kodety Rocket e dependências PHP**: licenças preservadas em `Ecossistema do Codet/kodety-rocket/`.
-- Demais dependências npm: consulte os respectivos arquivos `LICENSE` e `package.json` instalados com `npm ci`.
+- **Ycode**: parts of the project were developed from the [open-source repository](https://github.com/ycode/ycode), particularly the editor architecture. Copyright (c) 2026 Ycode. The complete MIT license is preserved in [licenses/YCODE-LICENSE.md](licenses/YCODE-LICENSE.md).
+- **Motion**: the editor's animation engine uses the MIT-licensed `motion` core. The complete notice is preserved in [licenses/MOTION-LICENSE.md](licenses/MOTION-LICENSE.md). This edition does not include paid Motion+ features.
+- **Solar Icons**: CC-BY-4.0; the React wrapper is MIT-licensed. Attribution is preserved in [Wordpress/kodety/THIRD_PARTY_NOTICES.txt](Wordpress/kodety/THIRD_PARTY_NOTICES.txt).
+- **Keyline Icons**: MIT; see [components/ui/KEYLINE-ICONS-LICENSE.txt](components/ui/KEYLINE-ICONS-LICENSE.txt).
+- **vanilla-cookieconsent**: MIT; see [lib/html-editor/vendor/vanilla-cookieconsent/LICENSE](lib/html-editor/vendor/vanilla-cookieconsent/LICENSE).
+- **Other npm dependencies**: consult each package's `LICENSE` and `package.json` installed by `npm ci`.
 
-Serviços externos configurados pelo usuário possuem termos próprios. A licença do código do cliente não concede acesso a um serviço hospedado por terceiros.
+## Optional services
 
-## Motion e serviços opcionais
+The optional browser Agent used by the WordPress editor depends on **WebContainers**. The `@webcontainer/api` client package is MIT-licensed; the hosted runtime has separate terms. Review the [WebContainers terms for your deployment](https://webcontainers.io/enterprise). Visual editing and WordPress publishing do not require enabling the browser Agent.
 
-**Motion** substitui GSAP, CustomEase e ScrollTrigger como motor do editor. O núcleo `motion` é MIT; o texto integral está em `licenses/MOTION-LICENSE.md`. A edição não usa recursos pagos de Motion+.
-
-**WebContainers**: o pacote cliente `@webcontainer/api` informa MIT, mas o runtime hospedado tem termos separados e exige licença para determinados usos comerciais em produção. Consulte https://webcontainers.io/enterprise. O Agent no navegador é opcional; o editor visual e a exportação HTML não dependem de ativar esse serviço.
+External services configured by users have their own terms. A client library's license does not grant access to a third-party hosted service.

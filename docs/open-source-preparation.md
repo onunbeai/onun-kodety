@@ -1,35 +1,37 @@
-# Preparação do Onun Kodety
+# Onun Kodety open-source preparation
 
-## Escopo
+## Current scope
 
-Cópia independente do código atual do Kodety para um projeto de editor visual HTML e WordPress da Onun. O repositório original foi mantido intacto. A nova cópia começa com um histórico Git próprio, sem remoto pessoal nem envio ao GitHub.
+This repository contains the **WordPress plugin and shared editor core** maintained by [Onun](https://github.com/onunbeai). Standalone applications, browser and Figma plugins, and separately distributed add-ons are outside this repository's current scope. The standalone HTML version is available through Kodety Studio at [kodety.com/en](https://kodety.com/en).
 
-## Limpeza
+The original private repository was left intact. The public project has an independent Git history at [onunbeai/onun-kodety](https://github.com/onunbeai/onun-kodety).
 
-- Backups, arquivos ZIP, builds duplicados, artefatos locais e dependências instaladas não fazem parte do Git.
-- Painel comercial privado, Agent Gateway privado, integração de contas/projetos na nuvem Kodety e documentos operacionais antigos foram retirados.
-- Conteúdo e ferramentas de entrega de clientes (Deckdocs/Rubrika) foram retirados.
-- Ativação por serial, avaliação temporária, planos pagos, upsell e atualizações pelo servidor comercial foram removidos dos fluxos do produto.
-- Autenticação WordPress, permissões, nonces, controle de revisão e autenticação dos provedores configurados pelo usuário foram preservados.
-- Cursores extraídos do macOS foram substituídos por cursores nativos.
-- Nome público: **Onun Kodety**. Identificadores de API/armazenamento e versões do código de origem foram preservados para compatibilidade.
+## Cleanup
 
-## Animações
+- Generated builds, backup archives, local artifacts, installed dependencies, and customer delivery files are excluded from version control.
+- The private commercial dashboard, Agent Gateway, and Kodety cloud account/project integrations were removed.
+- Commercial serial activation, trials, paid-plan gates, upsells, and updates from the commercial server were removed from product flows.
+- WordPress authentication, capabilities, nonces, revision checks, and authentication for user-configured providers were preserved.
+- Cursors extracted from macOS were replaced with native CSS cursors.
+- The root AI instruction guides were removed. Component and integration documentation remains with the shared core.
+- The public name is **Onun Kodety**. Internal API, storage, package, and route identifiers remain compatible with existing projects.
 
-O GSAP e seus plugins foram substituídos pelo núcleo MIT do **Motion 13.4.5**. O formato de documento de interações V2 foi preservado; o motor do projeto usa Motion para reprodução, mistura de valores e easing, com adaptação para timeline, scroll, texto, preview e exportação.
+## Animations
 
-Transições de página usam `Motion.animateView` com a View Transition API e `Motion.animate` como fallback. O preview usa Motion sobre os dois documentos em buffer. Existem 14 presets, incluindo blur com zoom, revelação circular e cortina. Nenhum recurso Motion+ foi incorporado.
+The bundled GSAP engine and its plugins were replaced with the MIT-licensed **Motion** core. The Interactions V2 document format remains compatible; the project runtime adapts Motion for timelines, scroll, text, preview, and publication.
 
-Código JavaScript autoral que usa APIs específicas do GSAP fora do contrato de interações pode exigir migração manual; o editor não inclui mais a biblioteca. Scripts que pertencem aos sites importados não são reescritos indiscriminadamente.
+Page transitions use `Motion.animateView` with the View Transition API and `Motion.animate` as a fallback. Preview transitions operate across buffered documents. No paid Motion+ features are included.
 
-## Licenças e serviços
+Custom JavaScript that uses GSAP-specific APIs outside the interaction contract may require manual migration. The editor no longer bundles GSAP. Scripts belonging to imported websites are not indiscriminately rewritten.
 
-Código próprio: GPL-3.0-only. O Ycode é creditado pela base de partes do projeto, principalmente na arquitetura; sua licença MIT e autoria estão preservadas em `licenses/YCODE-LICENSE.md`. Licenças de terceiros ficam preservadas; veja `THIRD_PARTY_NOTICES.md`. WebContainers e provedores externos são integrações opcionais com termos próprios. Eles não são necessários para abrir o editor HTML ou exportar um projeto.
+## Licenses and integrations
 
-## Publicação no GitHub
+Original project code is GPL-3.0-only. Ycode is credited for the foundation of parts of the project, particularly its architecture; its MIT license and copyright notice are preserved in [licenses/YCODE-LICENSE.md](../licenses/YCODE-LICENSE.md).
 
-Destino da publicação: [onunbeai/onun-kodety](https://github.com/onunbeai/onun-kodety), na organização **Onun be AI**. A publicação foi solicitada pelo mantenedor após a preparação local.
+Third-party licenses remain in place; see [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md). The WordPress browser Agent may use WebContainers, an optional service with separate hosted-runtime terms. External AI and integration providers use the user's credentials and infrastructure.
 
-## Validação
+## Development and validation
 
-O registro final das verificações desta preparação está em `docs/validation.md`. Testes PHP isolados não substituem uma instalação real do plugin em WordPress. Recursos de serviços externos exigem credenciais próprias para uma validação integrada.
+`npm run dev` watches WordPress editor assets. `npm run build` creates the installable plugin ZIP. `npm run verify` runs the WordPress validation and build gate.
+
+See [validation.md](validation.md) for dated results and their limits. Historical checks from the earlier multi-product preparation do not establish that the current WordPress-only gate has passed. Isolated PHP runtimes do not replace testing the plugin in a real WordPress installation.

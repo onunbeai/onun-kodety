@@ -1,29 +1,40 @@
-# Verificação da preparação — 2026-09-29
+# Validation record
 
-## Verificações executadas
+## Current WordPress-only scope
 
-`npm run verify` concluído com sucesso em 2026-09-29, incluindo os dois builds finais.
+The repository now targets the WordPress plugin and shared editor core. Its reproducible gate is `npm run verify`; the CI workflow runs the same command. `npm run build` produces the installable WordPress plugin ZIP.
 
-- TypeScript do repositório e sintaxe PHP dos 62 arquivos do plugin.
-- 73 testes Node de acesso open source, preservação da exportação, biblioteca de projetos, Agent e segurança de diretórios.
-- Runtimes PHP isolados: licença offline, atualizações locais, permissões, salvamento incremental e publicação transacional com falhas/retries simulados.
-- Motion em Chromium real: reprodução, reversão, keyframes, seek, callbacks, repetição/yoyo, stagger, easing, scroll, hover, ponteiro, texto, preview e preservação de globais do site.
-- 14 transições Motion em HTML exportado, incluindo histórico, movimento reduzido e fallback sem View Transitions.
-- Preview com documentos em buffer: promoção somente após prontidão visual, interpolação real, cancelamento de navegação anterior, mensagens antigas ignoradas e limpeza ao desmontar.
-- Splitter de texto nativo com graphemes, palavras/linhas e restauração de DOM/listeners.
-- Smoke do editor HTML sem conta: criar projeto local, abrir Builder e recarregar, sem chamadas aos serviços privados nem erros JavaScript.
-- Regressões adicionais de editor HTML, publicação de animações, primeira pintura, interações, Agent, analytics e mídia.
-- Estabilidade validada por segmentos, incluindo 70 casos de CSS e 84 combinações de viewport em Chromium, além de WebKit.
-- Consistência de `package-lock.json` com `npm ci --dry-run --ignore-scripts --offline`.
+The WordPress-only `npm run verify` gate passed on **2026-09-29**: TypeScript and PHP syntax checks, 155 shared Node tests, isolated WordPress capability/permission/publication tests, the Motion browser suite (including all 14 page transitions), and the installable plugin build.
 
-## Limites da validação
+After removing the separate add-ons, TypeScript and the 94 performance-tool self-checks also passed. The publication test now creates its own runtime fixture, so it works in a clean checkout before compiled assets exist.
 
-A suíte ampliada `npm test` foi investigada e os grupos relevantes foram executados; não houve uma execução única completa dessa cadeia após todas as adaptações. Alguns testes herdados verificam detalhes textuais de implementação e exigem manutenção separada quando a interface muda.
+The entries below describe the earlier preparation and are retained as historical context. The standalone application, browser/Figma plugins, and separate add-ons are outside the current repository scope.
 
-Não foi instalada esta edição em um WordPress/MySQL real. Os runtimes PHP usam ambientes isolados de teste. Integrações com provedores externos, hospedagens, contas de IA e serviços de terceiros não foram exercitadas com credenciais reais.
+## Historical preparation checks — 2026-09-29
 
-Um teste herdado de CMS encontrou limitações do próprio harness no fluxo de redirecionamento de autolocalização (`get_theme_root`/campos de settings ausentes). Esse teste não integra o gate `verify`; a validação desse fluxo em WordPress real permanece pendente.
+Before the repository was reduced to its current scope, `npm run verify` completed successfully, including the WordPress plugin and the then-present standalone application builds.
 
-## Gate reproduzível
+The preparation recorded:
 
-`npm run verify` executa tipos/PHP, os testes open source, a suíte Motion e builds do plugin WordPress e da aplicação HTML. O workflow `.github/workflows/ci.yml` executa esse mesmo comando.
+- TypeScript checks and syntax checks for the plugin's 62 PHP files.
+- 73 Node tests covering open-source access, export preservation, project storage, Agent behavior, and directory security. Some belonged to the application that has since been removed.
+- Isolated PHP runtime tests for offline capability access, local updates, permissions, incremental saving, and transactional publication with simulated failures and retries.
+- Motion tests in Chromium covering playback, reverse, keyframes, seek, callbacks, repeat/yoyo, stagger, easing, scroll, hover, pointer, text, preview, and preservation of authored globals.
+- 14 Motion page transitions in exported HTML, including history navigation, reduced motion, and fallback without View Transitions.
+- Buffered preview readiness, interpolation, cancellation, stale-message handling, and cleanup.
+- Native text splitting by grapheme, word, and line, with DOM/listener restoration.
+- Additional editor, animation publication, initial-paint, interaction, Agent, analytics, and media regressions.
+- Segmented stability checks, including 70 CSS cases and 84 viewport combinations in Chromium, plus WebKit checks.
+- Lockfile consistency using `npm ci --dry-run --ignore-scripts --offline`.
+
+A standalone HTML application smoke test also passed during that preparation. That application and its smoke test are outside the current repository scope.
+
+## Validation limits
+
+The broader `npm test` chain was investigated and relevant groups were run, but there was no single complete execution of that chain after all adaptations. Some inherited tests assert textual implementation details and require maintenance as the source changes.
+
+This edition was not installed in a real WordPress/MySQL environment during the recorded preparation. PHP runtimes used isolated test environments. External hosting, AI accounts, and other services were not exercised with real credentials.
+
+An inherited CMS test encountered harness limitations in the autolocalization redirect path (`get_theme_root` and missing settings fields). It was outside the recorded `verify` gate; that flow still requires validation in a real WordPress environment.
+
+See the [installed WordPress testing guide](guides/wordpress-installed-e2e.md) to run integration checks with a disposable installation and temporary credentials.

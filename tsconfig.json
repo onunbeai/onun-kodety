@@ -67,8 +67,6 @@
   "exclude": [
     "node_modules",
     "Wordpress/kodety/assets",
-    "Wordpress/dist",
-    "WebApp/agent-gateway/base44",
-    "WebApp/kodety-studio/backend"
+    "Wordpress/dist"
   ]
 }
