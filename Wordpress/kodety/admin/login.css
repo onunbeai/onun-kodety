@@ -1,0 +1,1544 @@
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/inter-latin-variable.woff2") format("woff2");
+}
+
+:root {
+  --kodety-chrome: #111111;
+  --kodety-panel: #111111;
+  --kodety-workspace: #222222;
+  --kodety-panel-raised: #1c1c1c;
+  --kodety-panel-hover: #1f1f1f;
+  --kodety-control: #2b2b2b;
+  --kodety-control-hover: #333333;
+  --kodety-control-active: #555555;
+  --kodety-divider: #252525;
+  --kodety-divider-strong: #333333;
+  --kodety-text: #ffffff;
+  --kodety-text-secondary: #cccccc;
+  --kodety-text-tertiary: #999999;
+  --kodety-info-copy: rgb(244 244 245 / 60%);
+  --kodety-text-disabled: #666666;
+  --kodety-accent: #9393ff;
+  --kodety-accent-hover: #afafff;
+  --kodety-accent-foreground: #ffffff;
+  --kodety-accent-muted: rgb(147 147 255 / 14%);
+  --kodety-accent-border: rgb(147 147 255 / 28%);
+  --kodety-focus: #9393ff;
+  --kodety-focus-ring: rgb(147 147 255 / 32%);
+  --kodety-danger: #ff5c70;
+  --kodety-success: #3ac58a;
+  --kodety-warning: #f5b942;
+  --kodety-control-height: 30px;
+  --kodety-control-height-compact: 26px;
+  --kodety-icon-target: 28px;
+  --kodety-section-height: 44px;
+  --kodety-panel-padding: 13px;
+  --kodety-row-gap: 8px;
+  --kodety-radius-control: 7px;
+  --kodety-radius-segment: 6px;
+  --kodety-ease-ui: cubic-bezier(0.2, 0, 0, 1);
+  --kodety-shadow-popover:
+    0 18px 48px rgb(0 0 0 / 42%),
+    0 2px 10px rgb(0 0 0 / 32%),
+    0 0 0 1px rgb(255 255 255 / 2.5%);
+  --kodety-login-control-height: 48px;
+  --kodety-login-control-radius: 9px;
+  --kodety-login-panel-width: clamp(460px, 38vw, 560px);
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+  background: var(--kodety-panel);
+}
+
+body.login.kodety-login,
+body.login.kodety-login * {
+  box-sizing: border-box;
+}
+
+body.login.kodety-login {
+  min-width: 320px;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: var(--kodety-panel);
+  color: var(--kodety-text);
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.login.kodety-login:not(.kodety-login--ready) {
+  display: grid;
+  place-items: center;
+  padding:
+    max(32px, env(safe-area-inset-top))
+    max(24px, env(safe-area-inset-right))
+    max(32px, env(safe-area-inset-bottom))
+    max(24px, env(safe-area-inset-left));
+}
+
+.kodety-login:not(.kodety-login--ready) #login {
+  width: min(100%, 392px);
+}
+
+.kodety-login-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--kodety-login-panel-width);
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  isolation: isolate;
+}
+
+.kodety-login-stage {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-inline-end: 1px solid var(--kodety-divider);
+  background: var(--kodety-panel);
+}
+
+.kodety-login-stage__image {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 0% 0%;
+}
+
+.kodety-login-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding:
+    max(42px, env(safe-area-inset-top))
+    max(44px, env(safe-area-inset-right))
+    max(30px, env(safe-area-inset-bottom))
+    max(44px, env(safe-area-inset-left));
+  overflow: auto;
+  background: var(--kodety-panel);
+}
+
+.kodety-login #login {
+  position: relative;
+  width: min(100%, 392px);
+  margin: 0;
+  padding: 0;
+}
+
+.kodety-login #login h1.wp-login-logo {
+  margin: 0 0 32px;
+  padding: 0;
+  text-align: left;
+}
+
+.kodety-login #login h1.wp-login-logo a {
+  display: inline-flex;
+  width: auto;
+  height: 30px;
+  min-height: 30px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  background: none !important;
+  background-image: none !important;
+  color: var(--kodety-text);
+  box-shadow: none;
+  text-indent: 0;
+}
+
+.kodety-login #login h1.wp-login-logo a:hover {
+  color: var(--kodety-text);
+}
+
+.kodety-login-brand__logo {
+  display: block;
+  width: 146px;
+  max-width: 100%;
+  height: 30px;
+}
+
+.kodety-login-intro {
+  margin-bottom: 30px;
+}
+
+.kodety-login-intro__title {
+  margin: 0;
+  color: var(--kodety-text);
+  font-size: clamp(30px, 3.1vw, 38px);
+  font-weight: 610;
+  letter-spacing: -0.048em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.kodety-login.login-action-login:not(.interim-login) .kodety-login-intro__title {
+  font-size: clamp(22px, 2.2vw, 27px);
+}
+
+.kodety-login-intro__description {
+  max-width: 360px;
+  margin: 12px 0 0;
+  color: var(--kodety-info-copy);
+  font-size: 13px;
+  line-height: 1.55;
+  text-wrap: balance;
+}
+
+.kodety-login #login form {
+  display: grid;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.kodety-login #login form > p,
+.kodety-login #login form > div,
+.kodety-login #login form .user-pass1-wrap > p,
+.kodety-login #login form .admin-email__details {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Functional dark fallback while the progressive-enhancement script is absent
+   or still loading. The native fields, names, nonces and actions stay intact. */
+.kodety-login:not(.kodety-login--ready) #login form .input {
+  width: 100%;
+  min-width: 0;
+  min-height: var(--kodety-login-control-height);
+  margin: 0 !important;
+  padding: 0 13px;
+  border: 1px solid transparent;
+  border-radius: var(--kodety-login-control-radius);
+  outline: 0;
+  background: rgb(255 255 255 / 5.5%);
+  color: var(--kodety-text);
+  box-shadow: none;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.kodety-login:not(.kodety-login--ready) #login form .input:focus {
+  border-color: var(--kodety-focus);
+  background: rgb(255 255 255 / 7.5%);
+  outline: 0;
+  box-shadow: none;
+}
+
+.kodety-login:not(.kodety-login--ready) #login .wp-pwd {
+  position: relative;
+  display: block;
+  min-height: var(--kodety-login-control-height);
+}
+
+.kodety-login:not(.kodety-login--ready) #login .wp-pwd .input {
+  padding-inline-end: 50px;
+}
+
+.kodety-login:not(.kodety-login--ready) #login .wp-pwd .wp-hide-pw {
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: 46px;
+  height: var(--kodety-login-control-height);
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: var(--kodety-text-tertiary);
+  box-shadow: none;
+}
+
+.kodety-login-field {
+  min-width: 0;
+  margin: 0;
+}
+
+.kodety-login-field__label,
+.kodety-login #login form label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--kodety-text-secondary);
+  font-size: 11px;
+  font-weight: 550;
+  line-height: 1.45;
+}
+
+.kodety-login-field__surface {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  height: var(--kodety-login-control-height);
+  align-items: stretch;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: var(--kodety-login-control-radius);
+  background: rgb(255 255 255 / 5.5%);
+  box-shadow: none;
+  transition:
+    border-color 100ms var(--kodety-ease-ui),
+    background-color 100ms var(--kodety-ease-ui);
+}
+
+.kodety-login-field__surface:hover {
+  background: rgb(255 255 255 / 7%);
+}
+
+.kodety-login-field__surface:focus-within {
+  border-color: color-mix(in srgb, var(--kodety-focus) 72%, transparent);
+  background: rgb(255 255 255 / 7.5%);
+  outline: 0;
+  box-shadow: none;
+}
+
+.kodety-login-field__surface[data-invalid="true"],
+.kodety-login-field__surface:has(.kodety-login-field__input:user-invalid) {
+  border-color: var(--kodety-danger);
+  outline: 0;
+  box-shadow: none;
+}
+
+.kodety-login-field__icon {
+  display: grid;
+  width: 46px;
+  flex: 0 0 46px;
+  place-items: center;
+  border-inline-end: 1px solid rgb(255 255 255 / 4.5%);
+  background: rgb(0 0 0 / 7%);
+  color: rgb(255 255 255 / 34%);
+  transition: color 100ms var(--kodety-ease-ui);
+}
+
+.kodety-login-field__icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.kodety-login-field__surface:hover .kodety-login-field__icon {
+  color: rgb(255 255 255 / 62%);
+}
+
+.kodety-login-field__surface:focus-within .kodety-login-field__icon {
+  color: var(--kodety-accent-hover);
+}
+
+.kodety-login form .kodety-login-field__input,
+.kodety-login form input[type="text"].kodety-login-field__input,
+.kodety-login form input[type="email"].kodety-login-field__input,
+.kodety-login form input[type="password"].kodety-login-field__input {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+  margin: 0 !important;
+  padding: 0 13px;
+  border: 0 !important;
+  border-radius: 0;
+  outline: 0 !important;
+  background: transparent !important;
+  color: var(--kodety-text) !important;
+  box-shadow: none !important;
+  font-size: 14px;
+  font-weight: 430;
+  line-height: 1;
+}
+
+.kodety-login form .kodety-login-field__input:focus,
+.kodety-login form .kodety-login-field__input:focus-visible {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+.kodety-login-field__surface:has(.kodety-login-field__input:disabled) {
+  border-color: transparent;
+  background: rgb(255 255 255 / 3%);
+}
+
+.kodety-login-field__surface:has(.kodety-login-field__input:disabled) .kodety-login-field__icon,
+.kodety-login form .kodety-login-field__input:disabled {
+  color: var(--kodety-text-disabled) !important;
+  cursor: not-allowed;
+}
+
+.kodety-login form .kodety-login-field__input::placeholder {
+  color: var(--kodety-text-tertiary);
+  opacity: 1;
+}
+
+.kodety-login input:-webkit-autofill,
+.kodety-login input:-webkit-autofill:hover,
+.kodety-login input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--kodety-text) !important;
+  -webkit-box-shadow: 0 0 0 1000px var(--kodety-panel-raised) inset !important;
+  box-shadow: 0 0 0 1000px var(--kodety-panel-raised) inset !important;
+  caret-color: var(--kodety-text);
+  transition: background-color 9999s ease-out 0s;
+}
+
+.kodety-login .wp-pwd {
+  display: flex;
+}
+
+.kodety-login .wp-pwd .wp-hide-pw.kodety-login-field__action {
+  position: relative;
+  inset: auto;
+  display: grid !important;
+  width: 46px;
+  min-width: 46px;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-inline-start: 1px solid rgb(255 255 255 / 4.5%);
+  border-radius: 0;
+  outline: 0;
+  background: rgb(0 0 0 / 7%);
+  color: rgb(255 255 255 / 38%);
+  box-shadow: none;
+  transition:
+    color 100ms var(--kodety-ease-ui),
+    background-color 100ms var(--kodety-ease-ui);
+}
+
+.kodety-login .wp-pwd .wp-hide-pw.kodety-login-field__action:hover,
+.kodety-login .wp-pwd .wp-hide-pw.kodety-login-field__action:focus-visible {
+  background: rgb(255 255 255 / 4%);
+  color: var(--kodety-accent-hover);
+}
+
+.kodety-login .wp-pwd .wp-hide-pw.kodety-login-field__action:disabled {
+  background: transparent;
+  color: var(--kodety-text-disabled);
+  cursor: not-allowed;
+}
+
+.kodety-login .wp-pwd .wp-hide-pw .dashicons {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  border: 0;
+  white-space: nowrap;
+}
+
+.kodety-login-password-icon {
+  display: grid;
+  width: 16px;
+  height: 16px;
+  place-items: center;
+}
+
+.kodety-login-password-icon svg {
+  grid-area: 1 / 1;
+  width: 16px;
+  height: 16px;
+}
+
+.kodety-login-password-icon__hide,
+.kodety-login-field__action[aria-pressed="true"] .kodety-login-password-icon__show {
+  display: none;
+}
+
+.kodety-login-field__action[aria-pressed="true"] .kodety-login-password-icon__hide {
+  display: block;
+}
+
+.kodety-login .forgetmenot,
+.kodety-login .pw-weak {
+  display: flex;
+  min-height: 28px;
+  gap: 9px;
+  align-items: center;
+  margin: -2px 0 0 !important;
+}
+
+.kodety-login-account-row {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  min-height: 28px;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kodety-login-account-row .forgetmenot {
+  flex: 0 1 auto;
+  margin: 0 !important;
+}
+
+.kodety-login-account-row__recovery {
+  flex: 0 0 auto;
+  color: var(--kodety-text-tertiary);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color 100ms var(--kodety-ease-ui);
+}
+
+.kodety-login-account-row__recovery:hover {
+  color: var(--kodety-text);
+}
+
+.kodety-login-account-row__recovery:focus-visible {
+  border-radius: 3px;
+  outline: 2px solid var(--kodety-focus);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
+.kodety-login .forgetmenot label,
+.kodety-login .pw-weak label {
+  margin: 0 !important;
+  color: var(--kodety-info-copy) !important;
+  font-size: 11px !important;
+  font-weight: 450 !important;
+}
+
+.kodety-login input[type="checkbox"] {
+  display: grid;
+  width: 18px;
+  min-width: 18px;
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  place-content: center;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 5px;
+  outline: 0;
+  background: rgb(255 255 255 / 5%);
+  box-shadow: none;
+  color: var(--kodety-chrome);
+  cursor: pointer;
+  transition:
+    border-color 100ms var(--kodety-ease-ui),
+    background-color 100ms var(--kodety-ease-ui);
+}
+
+.kodety-login input[type="checkbox"]::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  margin: 0;
+  clip-path: polygon(14% 44%, 0 59%, 39% 100%, 100% 19%, 84% 4%, 37% 67%);
+  background: currentColor;
+  box-shadow: none;
+  transform: scale(0);
+  transform-origin: center;
+  transition: transform 100ms var(--kodety-ease-ui);
+}
+
+.kodety-login input[type="checkbox"]:checked {
+  border-color: var(--kodety-accent);
+  background: var(--kodety-accent);
+}
+
+.kodety-login input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+.kodety-login input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--kodety-focus);
+  outline-offset: 2px;
+}
+
+.kodety-login input[type="checkbox"]:disabled {
+  border-color: transparent;
+  background: rgb(255 255 255 / 3%);
+  color: var(--kodety-text-disabled);
+  cursor: not-allowed;
+}
+
+.kodety-login .forgetmenot .wp-tooltip__toggle {
+  display: grid;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  margin-inline-start: auto;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--kodety-text-tertiary);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.kodety-login .forgetmenot .wp-tooltip__toggle:hover {
+  background: rgb(255 255 255 / 5.5%);
+  color: var(--kodety-text);
+}
+
+.kodety-login .forgetmenot .wp-tooltip__toggle:focus-visible {
+  outline: 2px solid var(--kodety-focus);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.kodety-login .forgetmenot .kodety-login-help-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.kodety-login .forgetmenot .wp-tooltip__bubble {
+  max-width: min(280px, calc(100vw - 32px));
+  border: 1px solid var(--kodety-divider);
+  border-radius: 7px;
+  background: var(--kodety-panel-raised);
+  color: var(--kodety-text-secondary);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 28%);
+  font-family: inherit;
+}
+
+.kodety-login .forgetmenot .wp-tooltip__close {
+  color: var(--kodety-text-tertiary);
+}
+
+.kodety-login .forgetmenot .wp-tooltip__close:hover,
+.kodety-login .forgetmenot .wp-tooltip__close:focus-visible {
+  color: var(--kodety-text);
+}
+
+.kodety-login #login form .submit {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  gap: 8px;
+  align-items: stretch;
+  margin: 2px 0 0;
+  padding: 0;
+}
+
+.kodety-login-submit {
+  position: relative;
+  display: block;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.kodety-login #login .button-primary,
+.kodety-login #login .kodety-login-submit .button-primary {
+  width: 100%;
+  min-height: 46px;
+  float: none;
+  margin: 0;
+  padding: 0 16px;
+  border: 0;
+  border-radius: var(--kodety-login-control-radius);
+  outline: 0;
+  background: var(--kodety-accent);
+  color: var(--kodety-text);
+  box-shadow: none;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 46px;
+  text-align: center;
+  text-shadow: none;
+  cursor: pointer;
+  transition:
+    background-color 120ms var(--kodety-ease-ui),
+    transform 120ms var(--kodety-ease-ui);
+}
+
+.kodety-login #login .button-primary:hover {
+  background: var(--kodety-accent-hover);
+  color: var(--kodety-text);
+}
+
+.kodety-login #login .button-primary:active {
+  background: color-mix(in srgb, var(--kodety-accent) 88%, var(--kodety-chrome));
+  transform: translateY(1px);
+}
+
+.kodety-login #login .button-primary:focus-visible {
+  outline: 2px solid var(--kodety-focus);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
+.kodety-login #login .button-primary:disabled,
+.kodety-login #login .button-primary.disabled {
+  background: rgb(255 255 255 / 7%);
+  color: var(--kodety-text-disabled);
+  cursor: not-allowed;
+  opacity: 1;
+  transform: none;
+}
+
+.kodety-login #login form:not([data-kodety-submitting="true"]) .button-primary[aria-disabled="true"] {
+  background: rgb(255 255 255 / 7%);
+  color: var(--kodety-text-disabled);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.kodety-login #login .kodety-login-submit .button-primary,
+.kodety-login #login .kodety-login-submit .button-primary:hover,
+.kodety-login #login .kodety-login-submit .button-primary:active,
+.kodety-login #login .kodety-login-submit .button-primary:focus-visible {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.kodety-login-submit__content {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  color: var(--kodety-text);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.kodety-login-submit__label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kodety-login-submit__icon {
+  display: grid;
+  width: 15px;
+  flex: 0 0 15px;
+  place-items: center;
+  color: inherit;
+  pointer-events: none;
+}
+
+.kodety-login-submit__icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.kodety-login form[data-kodety-submitting="true"] .kodety-login-submit__icon svg {
+  display: none;
+}
+
+.kodety-login form[data-kodety-submitting="true"] .kodety-login-submit__icon::before {
+  content: "";
+  width: 13px;
+  height: 13px;
+  border: 2px solid rgb(255 255 255 / 32%);
+  border-top-color: var(--kodety-text);
+  border-radius: 50%;
+  animation: kodety-login-spin 650ms linear infinite;
+}
+
+.kodety-login form[data-kodety-submitting="true"] .button-primary {
+  background: var(--kodety-accent);
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  cursor: progress;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.kodety-login #login .button-primary:disabled ~ .kodety-login-submit__content,
+.kodety-login #login .button-primary.disabled ~ .kodety-login-submit__content,
+.kodety-login #login form:not([data-kodety-submitting="true"]) .button-primary[aria-disabled="true"] ~ .kodety-login-submit__content {
+  color: var(--kodety-text-disabled);
+}
+
+@keyframes kodety-login-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.kodety-login #login .button:not(.button-primary):not(.wp-hide-pw) {
+  min-height: 42px;
+  float: none;
+  margin: 0;
+  padding: 0 14px;
+  border: 1px solid rgb(255 255 255 / 7%);
+  border-radius: var(--kodety-login-control-radius);
+  background: rgb(255 255 255 / 5%);
+  color: var(--kodety-text-secondary);
+  box-shadow: none;
+  font-size: 11px;
+  font-weight: 550;
+  line-height: 40px;
+  text-shadow: none;
+}
+
+.kodety-login #login .button:not(.button-primary):not(.wp-hide-pw):hover {
+  border-color: rgb(255 255 255 / 9%);
+  background: rgb(255 255 255 / 7%);
+  color: var(--kodety-text);
+}
+
+.kodety-login #login .button:not(.button-primary):not(.wp-hide-pw):focus-visible {
+  border-color: var(--kodety-focus);
+  outline: 2px solid var(--kodety-focus);
+  outline-offset: 2px;
+  box-shadow: none;
+  color: var(--kodety-text);
+}
+
+.kodety-login #login .button:not(.button-primary):not(.wp-hide-pw):disabled,
+.kodety-login #login .button:not(.button-primary):not(.wp-hide-pw)[aria-disabled="true"] {
+  border-color: transparent;
+  background: rgb(255 255 255 / 3%);
+  color: var(--kodety-text-disabled);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.kodety-login .reset-pass-submit,
+.kodety-login .admin-email__actions-primary {
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 8px;
+}
+
+.kodety-login .admin-email__actions {
+  display: grid;
+  gap: 14px;
+}
+
+.kodety-login .admin-email__actions > div {
+  padding-top: 0;
+}
+
+.kodety-login .admin-email__heading {
+  display: none;
+}
+
+.kodety-login .admin-email__details {
+  color: var(--kodety-info-copy);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.kodety-login .admin-email__details strong {
+  color: var(--kodety-text-secondary);
+  font-weight: 600;
+}
+
+.kodety-login .admin-email__actions-secondary {
+  text-align: center;
+}
+
+.kodety-login .kodety-login-notice,
+.kodety-login #login_error,
+.kodety-login #login-message,
+.kodety-login #login > .message {
+  position: relative;
+  margin: 0 0 18px;
+  padding: 13px 14px 13px 42px;
+  overflow-wrap: anywhere;
+  border: 1px solid var(--kodety-accent-border);
+  border-inline-start-width: 1px;
+  border-radius: 9px;
+  background: var(--kodety-accent-muted);
+  color: var(--kodety-text-secondary);
+  box-shadow: none;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.kodety-login .kodety-login-notice::before,
+.kodety-login #login_error::before,
+.kodety-login #login-message::before,
+.kodety-login #login > .message::before {
+  content: "i";
+  position: absolute;
+  inset-block-start: 13px;
+  inset-inline-start: 15px;
+  display: grid;
+  width: 16px;
+  height: 16px;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  color: var(--kodety-accent-hover);
+  font-size: 9px;
+  font-weight: 750;
+  line-height: 1;
+}
+
+.kodety-login #login_error,
+.kodety-login .notice-error {
+  border-color: color-mix(in srgb, var(--kodety-danger) 38%, transparent);
+  background: color-mix(in srgb, var(--kodety-danger) 9%, transparent);
+}
+
+.kodety-login #login_error::before,
+.kodety-login .notice-error::before {
+  content: "!";
+  color: var(--kodety-danger);
+}
+
+.kodety-login .notice-success {
+  border-color: color-mix(in srgb, var(--kodety-success) 38%, transparent);
+  background: color-mix(in srgb, var(--kodety-success) 9%, transparent);
+}
+
+.kodety-login .notice-success::before {
+  content: "✓";
+  color: var(--kodety-success);
+}
+
+.kodety-login .notice-warning {
+  border-color: color-mix(in srgb, var(--kodety-warning) 38%, transparent);
+  background: color-mix(in srgb, var(--kodety-warning) 9%, transparent);
+}
+
+.kodety-login .notice-warning::before {
+  content: "!";
+  color: var(--kodety-warning);
+}
+
+.kodety-login .kodety-login-notice p,
+.kodety-login #login_error p,
+.kodety-login #login-message p,
+.kodety-login #login > .message p {
+  margin: 0;
+}
+
+.kodety-login .kodety-login-notice a,
+.kodety-login #login_error a,
+.kodety-login #login-message a,
+.kodety-login #login > .message a {
+  color: var(--kodety-accent-hover);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.kodety-login .kodety-login-notice a:hover,
+.kodety-login #login_error a:hover,
+.kodety-login #login-message a:hover,
+.kodety-login #login > .message a:hover {
+  color: var(--kodety-text);
+}
+
+.kodety-login .kodety-login-notice a:focus-visible,
+.kodety-login #login_error a:focus-visible,
+.kodety-login #login-message a:focus-visible,
+.kodety-login #login > .message a:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid var(--kodety-focus);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.kodety-login .login-error-list {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding-inline-start: 14px;
+}
+
+.kodety-login #nav,
+.kodety-login #backtoblog,
+.kodety-login .privacy-policy-page-link {
+  margin: 18px 0 0;
+  padding: 0;
+  color: var(--kodety-text-tertiary);
+  font-size: 0;
+  text-align: center;
+}
+
+.kodety-login #backtoblog {
+  display: none;
+}
+
+.kodety-login .privacy-policy-page-link {
+  margin-top: 10px;
+}
+
+.kodety-login #nav a,
+.kodety-login #backtoblog a,
+.kodety-login .privacy-policy-page-link a,
+.kodety-login .admin-email__details a,
+.kodety-login .admin-email__actions-secondary a {
+  display: inline-block;
+  margin-inline: 6px;
+  color: var(--kodety-text-tertiary);
+  font-size: 11px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 100ms var(--kodety-ease-ui);
+}
+
+.kodety-login #login a:focus {
+  box-shadow: none;
+}
+
+.kodety-login #login a:focus-visible {
+  border-radius: 3px;
+  outline: 2px solid var(--kodety-focus);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
+.kodety-login #nav a:hover,
+.kodety-login #backtoblog a:hover,
+.kodety-login .privacy-policy-page-link a:hover,
+.kodety-login .admin-email__details a:hover,
+.kodety-login .admin-email__actions-secondary a:hover {
+  color: var(--kodety-text);
+}
+
+.kodety-login #nav a:focus-visible,
+.kodety-login #backtoblog a:focus-visible,
+.kodety-login .privacy-policy-page-link a:focus-visible,
+.kodety-login .admin-email__details a:focus-visible,
+.kodety-login .admin-email__actions-secondary a:focus-visible,
+.kodety-login #login h1.wp-login-logo a:focus-visible {
+  border-radius: 3px;
+  outline: 2px solid var(--kodety-focus);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
+.kodety-login #reg_passmail,
+.kodety-login .description,
+.kodety-login .indicator-hint {
+  margin: -3px 0 0 !important;
+  color: var(--kodety-info-copy) !important;
+  font-size: 11px !important;
+  line-height: 1.55 !important;
+}
+
+.kodety-login #pass-strength-result {
+  width: 100%;
+  margin: 8px 0 0;
+  padding: 7px 10px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: rgb(255 255 255 / 5%);
+  color: var(--kodety-text-tertiary);
+  box-shadow: none;
+  font-size: 10px;
+  font-weight: 550;
+  text-align: start;
+}
+
+.kodety-login #pass-strength-result.short,
+.kodety-login #pass-strength-result.bad {
+  border-color: color-mix(in srgb, var(--kodety-danger) 32%, transparent);
+  color: var(--kodety-danger);
+}
+
+.kodety-login #pass-strength-result.good {
+  border-color: color-mix(in srgb, var(--kodety-warning) 32%, transparent);
+  color: var(--kodety-warning);
+}
+
+.kodety-login #pass-strength-result.strong {
+  border-color: color-mix(in srgb, var(--kodety-success) 32%, transparent);
+  color: var(--kodety-success);
+}
+
+.kodety-login .caps-warning {
+  display: none;
+  margin: 8px 0 0;
+  color: var(--kodety-warning);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.kodety-login .caps-warning .caps-icon {
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  align-items: center;
+  justify-content: center;
+  margin-inline-end: 6px;
+  vertical-align: middle;
+}
+
+.kodety-login .caps-warning svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+.kodety-login .caps-warning-text {
+  vertical-align: middle;
+}
+
+.kodety-login-panel > .language-switcher {
+  display: block;
+  width: min(100%, 392px);
+  margin: 22px 0 0;
+  padding: 20px 0 0;
+  border: 0;
+  border-top: 1px solid var(--kodety-divider);
+}
+
+.kodety-login .kodety-login-language__form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+}
+
+.kodety-login .kodety-login-language__label {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  margin: 0 0 2px;
+  color: var(--kodety-text-secondary);
+  font-size: 11px;
+  font-weight: 550;
+  line-height: 1.4;
+}
+
+.kodety-login .kodety-login-language__label .dashicons {
+  display: none;
+}
+
+.kodety-login .kodety-login-language__label .screen-reader-text {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  clip-path: none !important;
+  white-space: normal !important;
+}
+
+.kodety-login-language__surface {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  height: 44px;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: rgb(255 255 255 / 5%);
+  transition:
+    background-color 140ms var(--kodety-ease-ui),
+    border-color 140ms var(--kodety-ease-ui);
+}
+
+.kodety-login-language__surface:hover {
+  background: rgb(255 255 255 / 7%);
+}
+
+.kodety-login-language__surface:focus-within {
+  border-color: color-mix(in srgb, var(--kodety-focus) 72%, transparent);
+  outline: 0;
+  background: rgb(255 255 255 / 7.5%);
+  box-shadow: none;
+}
+
+.kodety-login-language__icon,
+.kodety-login-language__chevron {
+  position: absolute;
+  inset-block: 0;
+  z-index: 2;
+  display: grid;
+  height: 100%;
+  flex: 0 0 auto;
+  place-items: center;
+  color: var(--kodety-text-tertiary);
+  pointer-events: none;
+}
+
+.kodety-login-language__icon {
+  inset-inline-start: 0;
+  width: 42px;
+  border-inline-end: 1px solid var(--kodety-divider);
+}
+
+.kodety-login-language__chevron {
+  inset-inline-end: 0;
+  width: 36px;
+}
+
+.kodety-login-language__icon svg,
+.kodety-login-language__chevron svg {
+  width: 16px;
+  height: 16px;
+}
+
+.kodety-login .language-switcher .kodety-login-language__surface select,
+.kodety-login .kodety-login-language__surface select,
+.kodety-login #language-switcher .kodety-login-language__surface select {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  margin: 0 !important;
+  padding: 0;
+  padding-inline: 54px 44px;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent !important;
+  color: var(--kodety-text-secondary);
+  box-shadow: none !important;
+  font-family: inherit;
+  font-size: 11px;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.kodety-login .kodety-login-language__surface select:focus-visible {
+  outline: 0;
+  box-shadow: none;
+}
+
+.kodety-login-language__surface:hover .kodety-login-language__icon,
+.kodety-login-language__surface:hover .kodety-login-language__chevron,
+.kodety-login-language__surface:focus-within .kodety-login-language__icon,
+.kodety-login-language__surface:focus-within .kodety-login-language__chevron {
+  color: var(--kodety-text-secondary);
+}
+
+.kodety-login .kodety-login-language__surface select:disabled {
+  color: var(--kodety-text-disabled);
+  cursor: not-allowed;
+}
+
+.kodety-login .kodety-login-language__submit {
+  height: 44px;
+  margin: 0;
+  padding: 0 14px;
+  border: 1px solid rgb(255 255 255 / 7%);
+  border-radius: 9px;
+  background: rgb(255 255 255 / 5%);
+  color: var(--kodety-text-secondary);
+  box-shadow: none;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 42px;
+}
+
+.kodety-login .kodety-login-language__submit:hover {
+  border-color: rgb(255 255 255 / 10%);
+  background: rgb(255 255 255 / 7%);
+  color: var(--kodety-text);
+}
+
+.kodety-login .kodety-login-language__submit:focus-visible {
+  outline: 2px solid var(--kodety-focus);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.kodety-login .kodety-login-language__submit:disabled {
+  border-color: transparent;
+  background: rgb(255 255 255 / 3%);
+  color: var(--kodety-text-disabled);
+  cursor: not-allowed;
+  opacity: 1;
+}
+.kodety-login-assurance {
+  display: flex;
+  width: min(100%, 392px);
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  margin: 18px 0 0;
+  color: var(--kodety-text-tertiary);
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.kodety-login-assurance svg {
+  width: 13px;
+  height: 13px;
+  color: var(--kodety-text-tertiary);
+}
+
+body.login.kodety-login.interim-login {
+  min-height: 0;
+  background: transparent;
+}
+
+.kodety-login.interim-login .kodety-login-shell {
+  display: block;
+  min-height: 0;
+}
+
+.kodety-login.interim-login .kodety-login-stage,
+.kodety-login.interim-login .kodety-login-assurance {
+  display: none;
+}
+
+.kodety-login.interim-login .kodety-login-panel {
+  min-height: 0;
+  padding: 28px;
+  border: 0;
+  background: var(--kodety-panel);
+}
+
+.kodety-login.interim-login #login {
+  width: min(100%, 380px);
+}
+
+.kodety-login.interim-login #login h1.wp-login-logo {
+  margin-bottom: 22px;
+}
+
+.kodety-login.interim-login .kodety-login-intro {
+  margin-bottom: 22px;
+}
+
+.kodety-login.interim-login .kodety-login-intro__title {
+  font-size: 28px;
+}
+
+@media (max-width: 1180px) {
+  :root {
+    --kodety-login-panel-width: clamp(430px, 43vw, 510px);
+  }
+}
+
+@media (max-width: 860px) {
+  .kodety-login-shell {
+    display: block;
+  }
+
+  .kodety-login-stage {
+    display: none;
+  }
+
+  .kodety-login-panel {
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-inline:
+      max(clamp(28px, 8vw, 64px), env(safe-area-inset-right))
+      max(clamp(28px, 8vw, 64px), env(safe-area-inset-left));
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --kodety-login-control-height: 48px;
+  }
+
+  .kodety-login-panel {
+    justify-content: flex-start;
+    padding:
+      max(32px, env(safe-area-inset-top))
+      max(22px, env(safe-area-inset-right))
+      max(24px, env(safe-area-inset-bottom))
+      max(22px, env(safe-area-inset-left));
+  }
+
+  .kodety-login #login h1.wp-login-logo {
+    margin-bottom: 42px;
+  }
+
+  .kodety-login-intro {
+    margin-bottom: 28px;
+  }
+
+  .kodety-login-intro__title {
+    font-size: 31px;
+  }
+
+  .kodety-login form .kodety-login-field__input,
+  .kodety-login form input[type="text"].kodety-login-field__input,
+  .kodety-login form input[type="email"].kodety-login-field__input,
+  .kodety-login form input[type="password"].kodety-login-field__input {
+    font-size: 16px;
+  }
+
+  .kodety-login .language-switcher form {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .kodety-login .language-switcher label {
+    grid-column: 1 / -1;
+  }
+
+  .kodety-login .kodety-login-language__surface select {
+    font-size: 16px;
+  }
+
+  .kodety-login .reset-pass-submit,
+  .kodety-login .admin-email__actions-primary {
+    grid-template-columns: 1fr;
+  }
+
+  .kodety-login-assurance {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 360px) {
+  .kodety-login-panel {
+    padding-inline:
+      max(8px, env(safe-area-inset-right))
+      max(8px, env(safe-area-inset-left));
+  }
+}
+
+@media (max-height: 760px) and (min-width: 861px) {
+  .kodety-login-panel {
+    justify-content: flex-start;
+    padding-block: 30px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .kodety-login--ready #login,
+  .kodety-login--ready .language-switcher,
+  .kodety-login--ready .kodety-login-assurance {
+    animation: kodety-login-enter 460ms var(--kodety-ease-ui) both;
+  }
+
+  .kodety-login--ready #login {
+    animation-delay: 70ms;
+  }
+
+  .kodety-login--ready .language-switcher,
+  .kodety-login--ready .kodety-login-assurance {
+    animation-delay: 110ms;
+  }
+}
+
+@keyframes kodety-login-enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kodety-login *,
+  .kodety-login *::before,
+  .kodety-login *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .kodety-login-stage {
+    display: none;
+  }
+
+  .kodety-login-shell {
+    display: block;
+  }
+
+  .kodety-login-panel {
+    min-height: 100vh;
+    min-height: 100svh;
+    border: 0;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .kodety-login-field__surface,
+  .kodety-login-language__surface,
+  .kodety-login .kodety-login-language__submit,
+  .kodety-login #login .button:not(.wp-hide-pw) {
+    border: 1px solid ButtonText;
+    forced-color-adjust: auto;
+  }
+
+  .kodety-login-field__surface:focus-within,
+  .kodety-login-language__surface:focus-within,
+  .kodety-login input[type="checkbox"]:focus-visible,
+  .kodety-login #login .button:focus-visible,
+  .kodety-login a:focus-visible {
+    outline-color: Highlight !important;
+  }
+
+  .kodety-login-field__surface:focus-within {
+    border-color: Highlight !important;
+  }
+
+  .kodety-login-language__surface:focus-within {
+    border-color: Highlight !important;
+  }
+
+  .kodety-login .kodety-login-language__surface select {
+    appearance: auto;
+    -webkit-appearance: menulist;
+    color: CanvasText;
+    forced-color-adjust: auto;
+  }
+
+  .kodety-login-language__chevron {
+    display: none;
+  }
+
+  .kodety-login-language__icon {
+    border-color: ButtonText;
+    color: CanvasText;
+  }
+
+  .kodety-login input[type="checkbox"] {
+    appearance: auto;
+    border-color: ButtonText;
+    background: Canvas;
+    color: HighlightText;
+    forced-color-adjust: auto;
+  }
+
+  .kodety-login input[type="checkbox"]::before {
+    content: none;
+  }
+}

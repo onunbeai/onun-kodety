@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agency Shadow DOM regression</title>
+    <style>
+      /* Simula regras agressivas do wp-admin que não podem atravessar o host. */
+      body {
+        margin: 0;
+        background: #101112;
+      }
+
+      button,
+      input,
+      select {
+        min-height: 72px !important;
+        padding: 18px 28px !important;
+        border: 4px double #ff4d9d !important;
+        border-radius: 22px !important;
+        background: #49253a !important;
+        color: #fff !important;
+        font: 800 28px/1 serif !important;
+        box-shadow: 0 0 0 8px #19d3ff !important;
+      }
+
+      svg {
+        width: 60px !important;
+        height: 9px !important;
+        margin: 24px !important;
+        transform: translateY(18px) !important;
+      }
+    </style>
+  </head>
+  <body class="kodety-agency-page index-php">
+    <div
+      class="kodety-agency-host"
+      data-kodety-agency-host
+      data-kodety-agency-style="../../Wordpress/kodety/admin/agency.css"
+    >
+      <main class="kodety-agency" data-kodety-agency>
+        <header class="kodety-agency__header">
+          <h1>Projetos</h1>
+          <div class="kodety-agency__header-actions">
+            <button type="button" data-kodety-open-folder><span class="kodety-dashboard-icon" data-kodety-icon="folder"></span>Nova pasta</button>
+            <button type="button" class="is-primary" data-kodety-open-project><span class="kodety-dashboard-icon" data-kodety-icon="plus"></span>Novo projeto</button>
+          </div>
+        </header>
+
+        <div class="kodety-agency__toolbar">
+          <label class="kodety-agency__search">
+            <span class="kodety-dashboard-icon" data-kodety-icon="search"></span>
+            <input type="search" placeholder="Buscar projetos e pastas" data-kodety-agency-search>
+          </label>
+          <div class="kodety-agency__filter" data-kodety-folder-filter>
+            <button type="button" aria-haspopup="listbox" aria-expanded="false" data-kodety-folder-filter-trigger>
+              <span data-kodety-folder-filter-label>Todos</span>
+              <span class="kodety-dashboard-icon" data-kodety-icon="chevron-down"></span>
+            </button>
+            <div class="kodety-agency__filter-menu" role="listbox" hidden>
+              <button type="button" role="option" aria-selected="true" data-kodety-folder-option data-value="" data-label="Todos">Todos<span class="kodety-dashboard-icon" data-kodety-icon="check"></span></button>
+              <button type="button" role="option" aria-selected="false" data-kodety-folder-option data-value="studios" data-label="Estúdios">Estúdios<span class="kodety-dashboard-icon" data-kodety-icon="check"></span></button>
+            </div>
+          </div>
+        </div>
+
+        <section class="kodety-agency__folders">
+          <div class="kodety-agency__section-title"><h2>Pastas</h2></div>
+          <div class="kodety-agency__folder-grid">
+            <article class="kodety-agency__folder" data-agency-item data-folder-id="studios" data-search="estúdios">
+              <button type="button" class="kodety-agency__folder-open" data-kodety-folder-filter-value="studios">
+                <span class="kodety-dashboard-icon" data-kodety-icon="folder"></span>
+                <span><strong>Estúdios</strong><small>1 projeto</small></span>
+              </button>
+              <div class="kodety-agency__folder-menu-wrap">
+                <button type="button" class="kodety-agency__more" aria-label="Opções da pasta" aria-expanded="false"><span class="kodety-dashboard-icon" data-kodety-icon="more-horizontal"></span></button>
+                <div class="kodety-agency__menu" hidden>
+                  <button type="button"><span class="kodety-dashboard-icon" data-kodety-icon="pencil"></span>Renomear</button>
+                  <button type="button" class="is-danger"><span class="kodety-dashboard-icon" data-kodety-icon="trash"></span>Excluir pasta</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="kodety-agency__projects">
+          <div class="kodety-agency__section-title"><h2>Todos</h2></div>
+          <div class="kodety-agency__project-grid">
+            <article class="kodety-agency__project is-active" data-agency-item data-folder-id="studios" data-search="studio kodety" data-project-updated="2">
+              <div class="kodety-agency__preview" data-kodety-live-cover-url="./agency-live-site.html">
+                <iframe src="./agency-live-site.html?release=regression" title="" loading="eager" scrolling="no" tabindex="-1" aria-hidden="true" data-kodety-live-cover></iframe>
+              </div>
+              <div class="kodety-agency__project-body">
+                <div class="kodety-agency__project-title">
+                  <strong><i></i>Studio Kodety</strong>
+                  <button type="button" class="kodety-agency__more" aria-label="Mais ações" aria-expanded="false"><span class="kodety-dashboard-icon" data-kodety-icon="more-horizontal"></span></button>
+                  <div class="kodety-agency__menu" hidden>
+                    <button type="button"><span class="kodety-dashboard-icon" data-kodety-icon="monitor"></span>Abrir no Builder</button>
+                    <button type="button"><span class="kodety-dashboard-icon" data-kodety-icon="link"></span>Endereço público</button>
+                    <button type="button"><span class="kodety-dashboard-icon" data-kodety-icon="download"></span>Exportar ZIP</button>
+                  </div>
+                </div>
+                <p>Publicado agora</p>
+              </div>
+            </article>
+          </div>
+        </section>
+        <dialog class="kodety-agency__dialog is-small" data-regression-slug-dialog>
+          <form>
+            <label>
+              <span>Slug do projeto</span>
+              <span class="kodety-agency__slug-field"><i>/</i><input type="text" value="projeto"></span>
+            </label>
+          </form>
+        </dialog>
+      </main>
+    </div>
+    <script src="../../Wordpress/kodety/admin/components/kodety-icons.bundle.js"></script>
+    <script src="../../Wordpress/kodety/admin/agency.js"></script>
+  </body>
+</html>

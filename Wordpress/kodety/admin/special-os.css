@@ -1,0 +1,1051 @@
+/*
+ * Kodety OS — native screen adapters
+ * High-specificity compatibility for media and theme workflows.
+ */
+
+body.kodety-admin-skin {
+  --k-os-sidebar-width: 244px;
+  --k-os-toolbar-height: 48px;
+}
+
+body.folded.kodety-admin-skin {
+  --k-os-sidebar-width: 56px;
+}
+
+/* Media frame, library navigation and toolbars. */
+.kodety-admin-skin
+  :where(
+    .media-frame-menu,
+    .media-menu,
+    .media-frame-content,
+    .media-frame-router,
+    .media-frame-toolbar,
+    .attachments-browser,
+    .media-sidebar
+  ) {
+  border-color: var(--k-os-border) !important;
+  background-color: var(--k-os-background) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin .media-menu {
+  padding: 50px 6px 10px;
+  border-right: 1px solid var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+}
+
+.kodety-admin-skin .media-menu .media-menu-item {
+  width: calc(100% - 4px);
+  min-height: var(--k-os-control);
+  margin: 2px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  border: 0;
+  border-radius: var(--k-os-radius) !important;
+  background: transparent !important;
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 12px;
+  line-height: var(--k-os-control);
+}
+
+.kodety-admin-skin .media-menu .media-menu-item:hover,
+.kodety-admin-skin .media-menu .media-menu-item:active {
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-foreground) !important;
+}
+
+.kodety-admin-skin .media-menu .media-menu-item.active,
+.kodety-admin-skin .media-menu .active:hover {
+  background: var(--k-os-accent) !important;
+  color: var(--k-os-foreground) !important;
+  font-weight: 500;
+}
+
+.kodety-admin-skin .media-menu .media-menu-item:focus-visible {
+  outline: 0 !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-ring) !important;
+}
+
+.kodety-admin-skin .media-menu .separator {
+  margin: 8px 10px;
+  border-color: var(--k-os-border) !important;
+}
+
+.kodety-admin-skin .media-frame-menu-heading,
+.kodety-admin-skin .media-attachments-filter-heading,
+.kodety-admin-skin .media-frame-actions-heading {
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin .media-router {
+  padding: 3px 6px;
+  border: 0 !important;
+  background: var(--k-os-card) !important;
+}
+
+.kodety-admin-skin .media-router .media-menu-item {
+  height: var(--k-os-control) !important;
+  margin: 0 2px !important;
+  padding: 0 10px !important;
+  border: 0 !important;
+  border-radius: var(--k-os-radius) !important;
+  background: transparent !important;
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 12px;
+  line-height: var(--k-os-control) !important;
+}
+
+.kodety-admin-skin .media-router .media-menu-item:hover,
+.kodety-admin-skin .media-router .media-menu-item:active {
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-foreground) !important;
+}
+
+.kodety-admin-skin .media-router .media-menu-item.active,
+.kodety-admin-skin .media-router .active:hover {
+  background: var(--k-os-accent) !important;
+  color: var(--k-os-foreground) !important;
+}
+
+.kodety-admin-skin .media-router .media-menu-item:focus-visible {
+  outline: 0 !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-ring) !important;
+}
+
+.kodety-admin-skin .media-toolbar,
+.kodety-admin-skin .attachments-browser .media-toolbar,
+.kodety-admin-skin .media-frame-toolbar .media-toolbar {
+  min-height: 48px;
+  padding: 8px 12px;
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+}
+
+.kodety-admin-skin :where(.media-toolbar-primary, .media-toolbar-secondary) {
+  align-items: center;
+  gap: 6px;
+}
+
+.kodety-admin-skin .media-toolbar .spinner {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.kodety-admin-skin .media-sidebar {
+  padding-inline: 16px;
+  border-left: 1px solid var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+}
+
+.kodety-admin-skin .media-sidebar :where(h2, h3),
+.kodety-admin-skin .attachment-details :where(h2, h3) {
+  color: var(--k-os-foreground) !important;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.kodety-admin-skin
+  :where(.media-sidebar, .attachment-details)
+  :where(.setting, .field) {
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin
+  :where(.media-sidebar, .attachment-details)
+  :where(.setting, .field)
+  :where(.name, .value, label, span) {
+  color: inherit;
+}
+
+.kodety-admin-skin
+  :where(.media-sidebar, .attachment-details)
+  .copy-to-clipboard-container
+  .success {
+  color: var(--k-os-success) !important;
+}
+
+/* Media tiles, labels and selection states. */
+.kodety-admin-skin .wp-core-ui .attachment {
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin .wp-core-ui .attachment:focus,
+.kodety-admin-skin .wp-core-ui .selected.attachment,
+.kodety-admin-skin .wp-core-ui .selected.attachment:focus,
+.kodety-admin-skin .wp-core-ui .attachment.details,
+.kodety-admin-skin .wp-core-ui .attachment.details:focus,
+.kodety-admin-skin .media-frame.mode-grid .attachment:focus,
+.kodety-admin-skin .media-frame.mode-grid .selected.attachment,
+.kodety-admin-skin .media-frame.mode-grid .selected.attachment:focus,
+.kodety-admin-skin .media-frame.mode-grid .attachment.details,
+.kodety-admin-skin .media-frame.mode-grid .attachment.details:focus {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+.kodety-admin-skin .wp-core-ui .attachment-preview {
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-input) !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-border) !important;
+  overflow: hidden;
+}
+
+.kodety-admin-skin .wp-core-ui .attachment:hover .attachment-preview {
+  box-shadow: inset 0 0 0 1px var(--k-os-border-strong) !important;
+}
+
+.kodety-admin-skin
+  .wp-core-ui
+  :where(.attachment.selected, .attachment.details)
+  .attachment-preview {
+  box-shadow: inset 0 0 0 2px var(--k-os-primary) !important;
+}
+
+.kodety-admin-skin .wp-core-ui .attachment .thumbnail::after {
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px var(--k-os-border) !important;
+}
+
+.kodety-admin-skin .wp-core-ui .attachment:not(:has(.filename))::after,
+.kodety-admin-skin .wp-core-ui .attachment .filename {
+  border: 0 !important;
+  background: color-mix(
+    in oklch,
+    var(--k-os-popover) 88%,
+    transparent
+  ) !important;
+  color: var(--k-os-foreground) !important;
+  font-size: 11px;
+  font-weight: 500;
+  box-shadow: inset 0 0 0 1px var(--k-os-border) !important;
+  backdrop-filter: blur(8px);
+}
+
+.kodety-admin-skin .wp-core-ui .attachment:not(:has(.filename))::after {
+  border-radius: 0 0 var(--k-os-radius) var(--k-os-radius);
+}
+
+.kodety-admin-skin .wp-core-ui .attachment .filename {
+  border-radius: 0 0 var(--k-os-radius) var(--k-os-radius);
+}
+
+.kodety-admin-skin .wp-core-ui .attachment-close,
+.kodety-admin-skin .wp-core-ui .attachment .check {
+  width: 22px !important;
+  height: 22px !important;
+  border: 0 !important;
+  border-radius: var(--k-os-radius-sm) !important;
+  background-color: var(--k-os-popover) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-border-strong) !important;
+}
+
+.kodety-admin-skin .wp-core-ui .attachment-close:hover,
+.kodety-admin-skin .wp-core-ui .attachment .check:hover {
+  background-color: var(--k-os-accent) !important;
+  color: var(--k-os-foreground) !important;
+}
+
+.kodety-admin-skin .wp-core-ui .attachment.details .check,
+.kodety-admin-skin .wp-core-ui .attachment.selected .check,
+.kodety-admin-skin .wp-core-ui .attachment.selected .check:focus,
+.kodety-admin-skin
+  .wp-core-ui
+  .media-frame.mode-grid
+  .attachment.selected
+  .check {
+  background-color: var(--k-os-primary) !important;
+  color: var(--k-os-primary-foreground) !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-primary) !important;
+}
+
+.kodety-admin-skin .more-loaded .attachment:not(.found-media),
+.kodety-admin-skin .attachment.new-media {
+  background: var(--k-os-input) !important;
+  outline-color: var(--k-os-border-strong) !important;
+}
+
+/* Media modal and attachment detail editor. */
+.kodety-admin-skin .media-modal-backdrop,
+.kodety-admin-skin #TB_overlay,
+.kodety-admin-skin .ui-find-overlay {
+  background: color-mix(
+    in oklch,
+    var(--k-os-background) 72%,
+    transparent
+  ) !important;
+  opacity: 1;
+  backdrop-filter: blur(4px);
+}
+
+.kodety-admin-skin .media-modal-content,
+.kodety-admin-skin #TB_window,
+.kodety-admin-skin .find-box {
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-background) !important;
+  color: var(--k-os-foreground) !important;
+  box-shadow: 0 24px 72px
+    color-mix(in oklch, var(--k-os-background) 78%, transparent) !important;
+  overflow: hidden;
+}
+
+.kodety-admin-skin .media-frame-title h1 {
+  color: var(--k-os-foreground) !important;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.kodety-admin-skin .media-modal-close,
+.kodety-admin-skin .edit-attachment-frame .edit-media-header .left,
+.kodety-admin-skin .edit-attachment-frame .edit-media-header .right {
+  width: 48px !important;
+  height: 48px !important;
+  border-color: var(--k-os-border) !important;
+  background: transparent !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin .media-modal-close:hover,
+.kodety-admin-skin .media-modal-close:focus-visible,
+.kodety-admin-skin .edit-attachment-frame .edit-media-header .left:hover,
+.kodety-admin-skin .edit-attachment-frame .edit-media-header .right:hover,
+.kodety-admin-skin
+  .edit-attachment-frame
+  .edit-media-header
+  :where(.left, .right):focus-visible {
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-foreground) !important;
+  outline: 0 !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-ring) !important;
+}
+
+.kodety-admin-skin .edit-attachment-frame .media-frame-content {
+  top: 48px;
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-background) !important;
+}
+
+.kodety-admin-skin .edit-attachment-frame .attachment-details {
+  background: var(--k-os-background) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: none !important;
+}
+
+.kodety-admin-skin .edit-attachment-frame .attachment-media-view {
+  background: var(--k-os-background) !important;
+}
+
+.kodety-admin-skin .edit-attachment-frame .attachment-info {
+  border-left: 1px solid var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: none !important;
+}
+
+.kodety-admin-skin
+  .edit-attachment-frame
+  .attachment-info
+  :where(.details, .settings) {
+  border-color: var(--k-os-border) !important;
+}
+
+.kodety-admin-skin .edit-attachment-frame .attachment-info .filename {
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin .edit-attachment-frame .attachment-media-view .details-image {
+  border-radius: var(--k-os-radius);
+  background-color: var(--k-os-background);
+  background-image:
+    linear-gradient(
+      45deg,
+      var(--k-os-border-strong) 25%,
+      var(--k-os-background) 25%,
+      var(--k-os-background) 75%,
+      var(--k-os-border-strong) 75%,
+      var(--k-os-border-strong)
+    ),
+    linear-gradient(
+      45deg,
+      var(--k-os-border-strong) 25%,
+      var(--k-os-background) 25%,
+      var(--k-os-background) 75%,
+      var(--k-os-border-strong) 75%,
+      var(--k-os-border-strong)
+    );
+}
+
+.kodety-admin-skin .find-box-head,
+.kodety-admin-skin .find-box-inside,
+.kodety-admin-skin .find-box-buttons {
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-foreground) !important;
+}
+
+.kodety-admin-skin .imgedit-wait {
+  background: var(--k-os-background) !important;
+}
+
+.kodety-admin-skin .imgedit-popup-menu {
+  border: 1px solid var(--k-os-border);
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-popover) !important;
+  color: var(--k-os-muted-foreground);
+  box-shadow: 0 16px 46px
+    color-mix(in oklch, var(--k-os-background) 72%, transparent) !important;
+}
+
+/* Upload states, legacy uploader and drop zones. */
+.kodety-admin-skin .uploader-inline {
+  border: 1px dashed var(--k-os-border-strong) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-input) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin .uploader-inline .close {
+  border-radius: var(--k-os-radius) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin .uploader-inline .close:hover,
+.kodety-admin-skin .uploader-inline .close:focus-visible {
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-foreground) !important;
+  outline: 0 !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-ring) !important;
+}
+
+.kodety-admin-skin .media-progress-bar,
+.kodety-admin-skin .media-item .progress {
+  background: var(--k-os-input) !important;
+}
+
+.kodety-admin-skin .media-progress-bar div,
+.kodety-admin-skin .media-item .bar {
+  background: var(--k-os-primary) !important;
+}
+
+.kodety-admin-skin .media-upload-form .media-item,
+.kodety-admin-skin .media-item .error,
+.kodety-admin-skin .upload-errors .upload-error {
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: none !important;
+}
+
+.kodety-admin-skin .upload-errors .upload-error,
+.kodety-admin-skin .uploader-inline .upload-errors .upload-error {
+  border-left-color: var(--k-os-destructive) !important;
+  background: color-mix(
+    in oklch,
+    var(--k-os-destructive) 8%,
+    var(--k-os-card)
+  ) !important;
+}
+
+.kodety-admin-skin
+  .media-uploader-status
+  :where(.upload-details, .upload-count) {
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin .uploader-window,
+.kodety-admin-skin .wp-editor-wrap .uploader-editor.droppable {
+  background: color-mix(
+    in oklch,
+    var(--k-os-primary) 76%,
+    var(--k-os-background)
+  ) !important;
+}
+
+.kodety-admin-skin .uploader-window-content,
+.kodety-admin-skin .wp-editor-wrap .uploader-editor-content {
+  border-color: var(--k-os-primary-foreground) !important;
+  border-radius: var(--k-os-radius);
+}
+
+/* Standalone media uploader. */
+.kodety-admin-skin.media-new-php #drag-drop-area {
+  min-height: 208px !important;
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--k-os-border-strong) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: color-mix(in oklch, var(--k-os-card) 84%, transparent) !important;
+  color: var(--k-os-foreground) !important;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease;
+}
+
+.kodety-admin-skin.media-new-php .drag-over #drag-drop-area {
+  border-color: var(--k-os-primary) !important;
+  background: color-mix(
+    in oklch,
+    var(--k-os-primary) 7%,
+    var(--k-os-card)
+  ) !important;
+}
+
+.kodety-admin-skin.media-new-php .drag-drop-inside {
+  margin: 0 !important;
+  color: var(--k-os-muted-foreground) !important;
+  text-align: center;
+}
+
+.kodety-admin-skin.media-new-php .drag-drop-info {
+  color: var(--k-os-foreground) !important;
+  font-size: 17px !important;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.kodety-admin-skin.media-new-php :where(.upload-flash-bypass, .max-upload-size) {
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 11px !important;
+}
+
+.kodety-admin-skin
+  :where(.uploader-window, .wp-editor-wrap .uploader-editor)
+  .uploader-editor-title {
+  color: var(--k-os-primary-foreground) !important;
+}
+
+/* Theme gallery cards and native actions. */
+.kodety-admin-skin.kodety-profile-gallery .wp-filter,
+.kodety-admin-skin.themes-php .wp-filter,
+.kodety-admin-skin.theme-install-php .wp-filter,
+.kodety-admin-skin.upload-php .wp-filter {
+  min-height: 48px;
+  margin-bottom: 16px;
+  padding: 8px 10px !important;
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: none !important;
+}
+
+.kodety-admin-skin.upload-php .wp-filter .view-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: calc(var(--k-os-radius) - 1px);
+  background: var(--k-os-input);
+}
+
+.kodety-admin-skin.upload-php .wp-filter .view-switch > a {
+  min-width: 28px;
+  min-height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+}
+
+.kodety-admin-skin.upload-php .wp-filter .view-switch > a:hover,
+.kodety-admin-skin.upload-php .wp-filter .view-switch > a:focus-visible,
+.kodety-admin-skin.upload-php .wp-filter .view-switch > a.current {
+  background: var(--k-os-secondary);
+  outline: 0;
+}
+
+.kodety-admin-skin .theme-browser .theme {
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+
+.kodety-admin-skin .theme-browser .theme:hover {
+  border-color: var(--k-os-border-strong) !important;
+  box-shadow: none !important;
+}
+
+.kodety-admin-skin .theme-browser .theme.focus,
+.kodety-admin-skin .theme-browser .theme:focus-within {
+  border-color: var(--k-os-ring) !important;
+  outline: 0 !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-ring) !important;
+}
+
+.kodety-admin-skin .theme-browser .theme.active {
+  border-color: var(--k-os-primary) !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-primary) !important;
+}
+
+.kodety-admin-skin .theme-browser .theme .theme-screenshot,
+.kodety-admin-skin .theme-browser .theme:hover .theme-screenshot,
+.kodety-admin-skin .theme-browser .theme.focus .theme-screenshot {
+  border: 0 !important;
+  background-color: var(--k-os-input) !important;
+}
+
+.kodety-admin-skin .theme-browser .theme .theme-name {
+  min-height: 42px;
+  margin: 0 !important;
+  padding: 0 12px !important;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-foreground) !important;
+  font-size: 12px !important;
+  font-weight: 600;
+  line-height: 1.3 !important;
+  box-shadow: none !important;
+}
+
+.kodety-admin-skin .theme-browser .theme.active .theme-name > span {
+  display: inline !important;
+  flex: none;
+  margin-right: 4px !important;
+}
+
+.kodety-admin-skin .theme-browser .theme .theme-actions {
+  min-height: 42px;
+  padding: 5px !important;
+  border: 0 !important;
+  border-top: 1px solid var(--k-os-border) !important;
+  background: color-mix(
+    in oklch,
+    var(--k-os-popover) 88%,
+    transparent
+  ) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(8px);
+}
+
+.kodety-admin-skin .theme-browser .theme .theme-author {
+  background: color-mix(
+    in oklch,
+    var(--k-os-popover) 90%,
+    transparent
+  ) !important;
+  color: var(--k-os-foreground) !important;
+  backdrop-filter: blur(8px);
+}
+
+.kodety-admin-skin .theme-browser .theme .more-details {
+  min-height: var(--k-os-control);
+  padding: 0 10px;
+  border: 1px solid var(--k-os-border-strong);
+  border-radius: var(--k-os-radius) !important;
+  background: color-mix(
+    in oklch,
+    var(--k-os-popover) 92%,
+    transparent
+  ) !important;
+  color: var(--k-os-foreground) !important;
+  font-size: 12px;
+  line-height: 30px;
+  box-shadow: none !important;
+  backdrop-filter: blur(8px);
+}
+
+.kodety-admin-skin .theme-browser .theme .more-details:hover,
+.kodety-admin-skin .theme-browser .theme .more-details:focus-visible {
+  border-color: var(--k-os-ring) !important;
+  background: var(--k-os-accent) !important;
+  color: var(--k-os-foreground) !important;
+  outline: 0 !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-ring) !important;
+}
+
+.kodety-admin-skin .theme-browser .theme .theme-installed,
+.kodety-admin-skin .theme-overlay .current-label {
+  border: 1px solid color-mix(in srgb, var(--k-os-primary) 30%, transparent) !important;
+  border-radius: var(--k-os-radius-sm) !important;
+  background: color-mix(in srgb, var(--k-os-primary) 12%, transparent) !important;
+  color: var(--k-os-primary-hover) !important;
+}
+
+.kodety-admin-skin
+  .theme-browser
+  .theme
+  :where(.notice, .notice.is-dismissible) {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin .theme-browser .theme.add-new-theme {
+  border-style: dashed !important;
+  background: transparent !important;
+}
+
+.kodety-admin-skin .theme-browser .themes.kodety-ui-theme-grid {
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 360px)) !important;
+  align-items: start !important;
+  justify-content: start !important;
+  gap: 16px !important;
+}
+
+.kodety-admin-skin .theme-browser .themes.kodety-ui-theme-grid > .theme {
+  position: relative !important;
+  float: none !important;
+  width: 100% !important;
+  max-width: 360px !important;
+  margin: 0 !important;
+}
+
+.kodety-admin-skin .theme-browser .themes.single-theme {
+  min-height: 0 !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(260px, 360px));
+  align-items: start;
+  justify-content: start;
+  gap: 16px;
+}
+
+.kodety-admin-skin
+  .theme-browser
+  .themes.single-theme
+  > .theme-overlay:not(.active) {
+  display: none !important;
+}
+
+.kodety-admin-skin .theme-browser .themes.single-theme > .theme {
+  position: relative !important;
+  float: none !important;
+  width: auto !important;
+  display: block !important;
+  margin: 0 !important;
+}
+
+.kodety-admin-skin .theme-browser .themes.single-theme > .theme.add-new-theme {
+  min-height: 0;
+}
+
+.kodety-admin-skin
+  .theme-browser
+  .themes.single-theme
+  > .theme.add-new-theme
+  .theme-screenshot {
+  position: relative !important;
+  min-height: 220px;
+}
+
+.kodety-admin-skin
+  .theme-browser
+  .themes.kodety-ui-theme-grid
+  > .theme.add-new-theme
+  .theme-screenshot {
+  position: relative !important;
+  height: 220px !important;
+  min-height: 220px !important;
+  overflow: hidden;
+}
+
+.kodety-admin-skin
+  .theme-browser
+  .themes.kodety-ui-theme-grid
+  > .theme.add-new-theme
+  .theme-screenshot::after {
+  display: none !important;
+  content: none !important;
+}
+
+.kodety-admin-skin .theme-browser .theme.add-new-theme:hover,
+.kodety-admin-skin .theme-browser .theme.add-new-theme:focus-within {
+  border-color: var(--k-os-primary) !important;
+  background: color-mix(
+    in oklch,
+    var(--k-os-primary) 6%,
+    transparent
+  ) !important;
+}
+
+.kodety-admin-skin .theme-browser .theme.add-new-theme span::after {
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin .theme-browser .theme.add-new-theme a:hover span::after,
+.kodety-admin-skin .theme-browser .theme.add-new-theme a:focus span::after {
+  background: var(--k-os-accent) !important;
+  color: var(--k-os-foreground) !important;
+}
+
+@media (max-width: 782px) {
+  .kodety-admin-skin .theme-browser .themes.single-theme {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Theme details overlay. */
+.kodety-admin-skin .theme-overlay .theme-backdrop {
+  position: fixed;
+  inset: 0 !important;
+  min-height: 100vh;
+  background: color-mix(
+    in oklch,
+    var(--k-os-background) 72%,
+    transparent
+  ) !important;
+  backdrop-filter: blur(4px);
+}
+
+.kodety-admin-skin .theme-overlay .theme-wrap {
+  top: calc(var(--k-os-toolbar-height) + var(--k-os-page-gap));
+  right: var(--k-os-page-gap);
+  bottom: var(--k-os-page-gap);
+  left: calc(var(--k-os-sidebar-width) + var(--k-os-page-gap));
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-background) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: 0 24px 72px
+    color-mix(in oklch, var(--k-os-background) 78%, transparent) !important;
+  overflow: hidden;
+}
+
+.kodety-admin-skin .theme-overlay .theme-header {
+  height: 48px;
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+}
+
+.kodety-admin-skin .theme-overlay .theme-header :where(.close, .left, .right) {
+  width: 48px;
+  height: 48px;
+  border-color: var(--k-os-border) !important;
+  background: transparent !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin
+  .theme-overlay
+  .theme-header
+  :where(.close, .left, .right):hover,
+.kodety-admin-skin
+  .theme-overlay
+  .theme-header
+  :where(.close, .left, .right):focus-visible {
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-foreground) !important;
+  outline: 0 !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-ring) !important;
+}
+
+.kodety-admin-skin
+  .theme-overlay
+  .theme-header
+  :where(.close, .left, .right)::before {
+  color: currentColor !important;
+}
+
+.kodety-admin-skin .theme-overlay .theme-about {
+  top: 49px;
+  bottom: 53px;
+  background: var(--k-os-background) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin .theme-overlay .theme-actions {
+  min-height: 52px;
+  padding: 10px 16px !important;
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+}
+
+.kodety-admin-skin .theme-overlay :where(.theme-name, .theme-tags span) {
+  color: var(--k-os-foreground) !important;
+}
+
+.kodety-admin-skin .theme-overlay .theme-name {
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.kodety-admin-skin .theme-overlay .theme-version {
+  font-size: 11px;
+}
+
+.kodety-admin-skin .theme-overlay .theme-author {
+  margin-block: 10px 18px;
+  font-size: 12px;
+}
+
+.kodety-admin-skin .theme-overlay .theme-description {
+  margin-top: 20px;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.kodety-admin-skin
+  .theme-overlay
+  :where(
+    .theme-version,
+    .theme-author,
+    .theme-description,
+    .theme-tags,
+    .parent-theme
+  ) {
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin .theme-overlay .theme-tags {
+  border-color: var(--k-os-border) !important;
+}
+
+.kodety-admin-skin .theme-overlay .parent-theme {
+  border: 1px solid var(--k-os-border) !important;
+  border-left-color: var(--k-os-primary) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-card) !important;
+}
+
+.kodety-admin-skin .theme-overlay .theme-screenshots .screenshot {
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-input) !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-border) !important;
+  overflow: hidden;
+}
+
+.kodety-admin-skin .theme-overlay .screenshot.thumb {
+  background: var(--k-os-input) !important;
+}
+
+.kodety-admin-skin .theme-overlay .screenshot.selected {
+  border-color: var(--k-os-primary) !important;
+  background: transparent !important;
+}
+
+.kodety-admin-skin
+  :where(
+    .theme-browser .theme .theme-screenshot.blank,
+    .theme-overlay .screenshot.blank
+  ) {
+  background-color: var(--k-os-input) !important;
+}
+
+.kodety-admin-skin .theme-overlay .theme-actions .delete-theme:hover,
+.kodety-admin-skin .theme-overlay .theme-actions .delete-theme:focus-visible {
+  border-color: var(--k-os-destructive) !important;
+  background: var(--k-os-destructive) !important;
+  color: var(--k-os-primary-foreground) !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Theme installer, ZIP upload and update comparison. */
+.kodety-admin-skin .upload-theme,
+.kodety-admin-skin .upload-plugin {
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin .upload-theme .wp-upload-form,
+.kodety-admin-skin .upload-plugin .wp-upload-form {
+  gap: 12px;
+  margin: 24px;
+  padding: 12px;
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin
+  :where(.upload-theme, .upload-plugin)
+  .wp-upload-form
+  input[type="file"] {
+  min-height: var(--k-os-control);
+  padding: 0 !important;
+  background: transparent !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin input[type="file"]::file-selector-button {
+  min-height: var(--k-os-control);
+  margin-right: 10px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-secondary);
+  color: var(--k-os-muted-foreground);
+  font: inherit;
+  cursor: pointer;
+}
+
+.kodety-admin-skin input[type="file"]::file-selector-button:hover {
+  background: var(--k-os-accent);
+  color: var(--k-os-foreground);
+}
+
+.kodety-admin-skin
+  :where(.upload-theme, .upload-plugin)
+  :where(.install-help, .upload-view-toggle) {
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 12px;
+}
+
+.kodety-admin-skin .update-from-upload-comparison {
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-card) !important;
+  overflow: hidden;
+}
+
+.kodety-admin-skin .update-from-upload-comparison :where(th, td) {
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin .update-from-upload-comparison td.warning {
+  background: color-mix(
+    in oklch,
+    var(--k-os-warning) 8%,
+    var(--k-os-card)
+  ) !important;
+  color: var(--k-os-foreground) !important;
+}
+
+@media (max-width: 960px) {
+  body.kodety-admin-skin {
+    --k-os-sidebar-width: 56px;
+  }
+}
+
+@media (max-width: 782px) {
+  body.kodety-admin-skin {
+    --k-os-sidebar-width: 0px;
+    --k-os-toolbar-height: 46px;
+  }
+
+  .kodety-admin-skin .theme-overlay .theme-wrap {
+    inset: var(--k-os-toolbar-height) 0 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .kodety-admin-skin .theme-overlay .theme-about {
+    padding: 16px;
+  }
+
+  .kodety-admin-skin .upload-theme .wp-upload-form,
+  .kodety-admin-skin .upload-plugin .wp-upload-form {
+    margin-inline: 0;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

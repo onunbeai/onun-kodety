@@ -1,0 +1,1289 @@
+html:has(body.kodety-wordpress-editor),
+body.kodety-wordpress-editor,
+body.kodety-wordpress-editor #kodety-root {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+body.kodety-wordpress-editor {
+  color-scheme: dark;
+  background: var(--kodety-chrome, #111111);
+  color: var(--kodety-text, #ffffff);
+  font-family:
+    var(--font-inter),
+    Inter,
+    ui-sans-serif,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-size: 12px;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  font-kerning: normal;
+  letter-spacing: -0.006em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.kodety-wordpress-editor .kodety-boot-loader {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #050505;
+  color: #fff;
+}
+
+body.kodety-wordpress-editor .kodety-boot-loader__content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  transform: translateY(-8px);
+}
+
+body.kodety-wordpress-editor .kodety-boot-loader__mark {
+  width: 32px;
+  height: 34px;
+}
+
+body.kodety-wordpress-editor .kodety-boot-loader__track {
+  width: min(220px, 46vw);
+  height: 1px;
+  margin-top: 28px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 0.25);
+}
+
+body.kodety-wordpress-editor .kodety-boot-loader__fill {
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: #fff;
+  animation: kodety-loading-bar-scan 1.25s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  will-change: transform;
+}
+
+body.kodety-wordpress-editor .kodety-boot-loader__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+body.kodety-wordpress-editor *,
+body.kodety-wordpress-editor *::before,
+body.kodety-wordpress-editor *::after {
+  box-sizing: border-box;
+}
+
+body.kodety-wordpress-editor :is(button, input, select, textarea) {
+  font: inherit;
+}
+
+/*
+ * Shared view links are full product demos, not flattened screenshots. Keep
+ * navigation, tabs, search and inspection visually normal, but make every
+ * field that can mutate the project unmistakably read-only.
+ */
+body.kodety-wordpress-editor[data-kodety-share-mode="view"]
+  [data-kodety-read-only="true"]
+  :is(input, textarea, select, [contenteditable="true"], [role="slider"], [role="switch"], [role="combobox"], [role="tab"]),
+body.kodety-wordpress-editor[data-kodety-share-mode="view"]
+  :is(input[readonly], textarea[readonly], input:disabled, textarea:disabled, select:disabled) {
+  cursor: not-allowed !important;
+}
+
+body.kodety-wordpress-editor[data-kodety-share-mode="view"]
+  [data-kodety-read-only-allow="true"]
+  [role="tab"] {
+  cursor: pointer !important;
+}
+
+body.kodety-wordpress-editor[data-kodety-share-mode="view"]
+  :is(button:disabled, [aria-disabled="true"], [data-disabled]) {
+  cursor: not-allowed !important;
+}
+
+body.kodety-wordpress-editor[data-kodety-share-mode="view"]
+  [data-kodety-read-only="true"]
+  :is(input, textarea, select, [role="combobox"]):hover,
+body.kodety-wordpress-editor[data-kodety-share-mode="view"]
+  :is(input[readonly], textarea[readonly], input:disabled, textarea:disabled, select:disabled):hover {
+  border-color: rgb(168 85 247 / 0.6) !important;
+}
+
+body.kodety-wordpress-editor[data-kodety-share-mode="view"]
+  [data-kodety-read-only="true"]
+  :is(input, textarea, select, [role="combobox"]):focus,
+body.kodety-wordpress-editor[data-kodety-share-mode="view"]
+  :is(input[readonly], textarea[readonly], input:disabled, textarea:disabled, select:disabled):focus {
+  outline: 1px solid rgb(168 85 247 / 0.6);
+  outline-offset: -1px;
+}
+
+body.kodety-wordpress-editor :is(button, [role="button"], [role="tab"]) {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+body.kodety-wordpress-editor ::selection {
+  background: rgb(147 147 255 / 0.32);
+  color: white;
+}
+
+body.kodety-wordpress-editor #kodety-root > main {
+  min-width: 0;
+  min-height: 0;
+  background: var(--kodety-panel, #111111);
+}
+
+body.kodety-wordpress-editor #kodety-root > main > header {
+  height: 50px;
+  min-height: 50px;
+  border-color: var(--kodety-divider);
+  background: var(--kodety-chrome, #111111);
+  box-shadow: none;
+}
+
+/*
+ * The labeled editor tools are content-sized controls, not icon buttons.
+ * Keeping this explicit prevents the generic icon-size rule from forcing every
+ * tool to 30px wide and letting its label paint over the next control.
+ */
+body.kodety-wordpress-editor .kodety-editor-topbar {
+  min-width: 0;
+  position: relative;
+  z-index: 10000;
+}
+
+/*
+ * Topbar surfaces are portalled to <body>, so they do not inherit the
+ * topbar's stacking context. Keep their reserved layer above every editor
+ * sidebar/canvas overlay while still allowing native top-layer dialogs.
+ */
+body.kodety-wordpress-editor .kodety-editor-topbar-overlay {
+  z-index: 10010;
+}
+
+body.kodety-wordpress-editor .kodety-editor-sidebar-overlay {
+  z-index: 9000;
+}
+
+body.kodety-wordpress-editor .kodety-editor-topbar-tools {
+  min-width: 0;
+  scroll-behavior: smooth;
+  scrollbar-gutter: auto;
+  scrollbar-width: thin;
+}
+
+body.kodety-wordpress-editor
+  .kodety-editor-topbar-tools
+  [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *).kodety-editor-topbar-tool {
+  width: auto;
+  min-width: var(--kodety-control-height, 30px);
+  flex: 0 0 auto;
+  padding-inline: 8px;
+}
+
+@media (max-width: 1439px) {
+  body.kodety-wordpress-editor
+    .kodety-editor-topbar-tools
+    [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *).kodety-editor-topbar-tool {
+    width: var(--kodety-control-height, 30px);
+    padding-inline: 0;
+    gap: 0;
+  }
+}
+
+body.kodety-wordpress-editor .kodety-editor-main {
+  min-width: 0;
+  min-height: 0;
+  background: var(--kodety-panel, #111111);
+}
+
+body.kodety-wordpress-editor :is(
+  .kodety-editor-left-sidebar,
+  .kodety-editor-design-sidebar
+) {
+  min-width: 0;
+  min-height: 0;
+  background: var(--kodety-panel, #111111);
+}
+
+body.kodety-wordpress-editor .kodety-editor-left-sidebar {
+  border-right-color: var(--kodety-divider);
+  box-shadow: inset -1px 0 var(--kodety-divider);
+}
+
+body.kodety-wordpress-editor .kodety-editor-design-sidebar {
+  border-color: var(--kodety-divider);
+  box-shadow: inset 1px 0 var(--kodety-divider);
+}
+
+body.kodety-wordpress-editor .kodety-editor-workspace {
+  min-width: 0;
+  min-height: 0;
+  background: var(--kodety-workspace, #222222);
+}
+
+/* The transplanted inspector owns the same semantic tokens as Ycode.
+ * The surrounding Kodety chrome keeps its existing background and dimensions. */
+[data-ycode-native-ui] {
+  --background: oklch(0.2046 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.269 0 0);
+  --popover-foreground: oklch(0.708 0 0);
+  --primary: #9393FF;
+  --primary-foreground: #ffffff;
+  --secondary: oklch(1 0 0 / 10%);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.32 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 5%);
+  --input: oklch(1 0 0 / 5%);
+  --ring: oklch(0.556 0 0);
+}
+
+body.kodety-wordpress-editor .kodety-editor-canvas-scroll {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  max-height: 100%;
+  contain: strict;
+  isolation: isolate;
+  overscroll-behavior: contain;
+  scrollbar-color: rgb(255 255 255 / 0.2) transparent;
+  scrollbar-width: thin;
+}
+
+/*
+ * Controls use one quiet surface and communicate hierarchy with typography
+ * and spacing. Icon actions keep their full hit-area while remaining visually
+ * unboxed until hover/focus/active.
+ */
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  border-radius: var(--kodety-radius-control, 7px);
+  box-shadow: none;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.004em;
+  transition:
+    background-color 100ms var(--kodety-ease-ui, ease),
+    border-color 100ms var(--kodety-ease-ui, ease),
+    color 100ms var(--kodety-ease-ui, ease),
+    opacity 100ms var(--kodety-ease-ui, ease),
+    box-shadow 100ms var(--kodety-ease-ui, ease),
+    transform 100ms var(--kodety-ease-ui, ease);
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-size="xs"] {
+  height: var(--kodety-control-height-compact);
+  min-height: var(--kodety-control-height-compact);
+  border-radius: var(--kodety-radius-segment, 6px);
+  padding-inline: 8px;
+  font-size: 10px;
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-size="sm"] {
+  height: var(--kodety-control-height);
+  min-height: var(--kodety-control-height);
+  padding-inline: 10px;
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-size="icon-xs"] {
+  width: var(--kodety-icon-target, 28px);
+  height: var(--kodety-icon-target, 28px);
+  min-width: var(--kodety-icon-target, 28px);
+  min-height: var(--kodety-icon-target, 28px);
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-size="icon-sm"],
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-size="icon"] {
+  width: var(--kodety-control-height, 30px);
+  height: var(--kodety-control-height, 30px);
+  min-width: var(--kodety-control-height, 30px);
+  min-height: var(--kodety-control-height, 30px);
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-size="icon-lg"] {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-size^="icon"] {
+  border-color: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-variant="ghost"] {
+  border-color: transparent;
+  background: transparent;
+  color: var(--kodety-text-secondary);
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-variant="ghost"]:hover {
+  background: rgb(255 255 255 / 0.055);
+  color: var(--kodety-text);
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-variant="ghost"]:is(
+  [aria-pressed="true"],
+  [aria-expanded="true"],
+  [data-state="on"],
+  [data-state="open"]
+) {
+  border-color: var(--kodety-accent-border, rgb(147 147 255 / 0.28));
+  background: var(--kodety-accent-muted, rgb(147 147 255 / 0.14));
+  color: var(--kodety-accent-hover, #AFAFFF);
+  box-shadow: inset 0 0 0 1px var(--kodety-accent-border, rgb(147 147 255 / 0.28));
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-variant="secondary"],
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-variant="input"] {
+  border-color: transparent;
+  background: var(--kodety-control);
+  color: var(--kodety-text-secondary);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.02);
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-variant="secondary"]:hover,
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-variant="input"]:hover {
+  background: var(--kodety-control-hover);
+  color: var(--kodety-text);
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-variant="outline"] {
+  border-color: var(--kodety-divider-strong);
+  background: transparent;
+  color: var(--kodety-text-secondary);
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-variant="outline"]:hover {
+  border-color: rgb(255 255 255 / 0.17);
+  background: rgb(255 255 255 / 0.045);
+  color: var(--kodety-text);
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-variant="default"] {
+  border-color: transparent;
+  background: var(--kodety-accent, #9393FF);
+  color: #ffffff;
+  box-shadow: inset 0 1px rgb(255 255 255 / 0.14);
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-variant="default"] svg {
+  color: currentColor;
+  opacity: 1;
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-variant="default"]:hover {
+  background: var(--kodety-accent-hover, #AFAFFF);
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-variant="destructive"] {
+  background: color-mix(in srgb, var(--kodety-danger) 84%, #111111);
+  color: white;
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-variant="destructive"]:hover {
+  background: var(--kodety-danger);
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *):active:not(:disabled) {
+  transform: translateY(0.5px);
+}
+
+body.kodety-wordpress-editor [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *):is(
+  :disabled,
+  [aria-disabled="true"],
+  [data-disabled="true"]
+) {
+  color: var(--kodety-text-disabled);
+  opacity: 0.56;
+  transform: none;
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="input"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="textarea"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="input-group"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+) {
+  border-color: transparent;
+  background: var(--kodety-control);
+  color: var(--kodety-text);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.02);
+  font-size: 11px;
+  line-height: 1.25;
+  transition:
+    background-color 100ms var(--kodety-ease-ui, ease),
+    border-color 100ms var(--kodety-ease-ui, ease),
+    box-shadow 100ms var(--kodety-ease-ui, ease);
+}
+
+body.kodety-wordpress-editor [data-slot="input"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-size="xs"],
+body.kodety-wordpress-editor [data-slot="select-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-size="xs"] {
+  height: var(--kodety-control-height-compact);
+  min-height: var(--kodety-control-height-compact);
+}
+
+body.kodety-wordpress-editor [data-slot="input"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-size="sm"],
+body.kodety-wordpress-editor [data-slot="select-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-size="sm"],
+body.kodety-wordpress-editor [data-slot="select-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-size="default"] {
+  height: var(--kodety-control-height);
+  min-height: var(--kodety-control-height);
+}
+
+body.kodety-wordpress-editor [data-slot="textarea"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  min-height: 64px;
+  padding: 8px 9px;
+  resize: vertical;
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="input"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="textarea"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="input-group"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+):hover:not(:disabled) {
+  background: var(--kodety-control-hover);
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="input"]:not([data-ycode-native-ui], [data-ycode-native-ui] *):not([data-slot="input-group-control"]),
+  [data-slot="textarea"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+):focus-visible,
+body.kodety-wordpress-editor [data-slot="input-group"]:not([data-ycode-native-ui], [data-ycode-native-ui] *):focus-within {
+  border-color: var(--kodety-focus);
+  background: var(--kodety-control-hover);
+  outline: none;
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--kodety-focus) 24%, transparent),
+    inset 0 0 0 1px rgb(255 255 255 / 0.035);
+}
+
+body.kodety-wordpress-editor [data-slot="input-group"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+  [data-slot="input-group-control"]:not([data-ycode-native-ui], [data-ycode-native-ui] *):focus-visible {
+  border-color: transparent;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* The layer search keeps its existing one-pixel stroke on focus. Only its
+   color changes; an external ring would be clipped by the narrow sidebar. */
+body.kodety-wordpress-editor [data-layer-search][data-slot="input"]:focus-visible {
+  border-color: var(--kodety-focus) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="input"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="textarea"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+):is(:disabled, [aria-disabled="true"], [data-disabled]) {
+  background: color-mix(in srgb, var(--kodety-control) 65%, var(--kodety-panel));
+  color: var(--kodety-text-disabled);
+  opacity: 1;
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="input"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="textarea"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+)[aria-invalid="true"] {
+  border-color: var(--kodety-danger);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--kodety-danger) 24%, transparent);
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="input"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="textarea"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+)::placeholder {
+  color: var(--kodety-text-tertiary);
+  opacity: 1;
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="input"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="textarea"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+):-webkit-autofill {
+  -webkit-text-fill-color: var(--kodety-text);
+  box-shadow: 0 0 0 1000px var(--kodety-control) inset;
+  caret-color: var(--kodety-text);
+}
+
+/* CMS grid cells are edited in place. Keep the semantic status affordance, but
+   do not make it look like a detached form field inside the spreadsheet. */
+body.kodety-wordpress-editor [data-cms-inline-status],
+body.kodety-wordpress-editor [data-cms-inline-status]:hover:not(:disabled),
+body.kodety-wordpress-editor [data-cms-inline-status]:focus-visible {
+  min-height: 24px;
+  border-color: transparent;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body.kodety-wordpress-editor [data-kodety-cms-search] [data-slot="input"],
+body.kodety-wordpress-editor [data-kodety-cms-search] [data-slot="input"]:hover:not(:disabled),
+body.kodety-wordpress-editor [data-kodety-cms-search] [data-slot="input"]:focus-visible {
+  height: 100%;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+}
+
+body.kodety-wordpress-editor input[type="search"]::-webkit-search-cancel-button {
+  filter: invert(0.7);
+}
+
+body.kodety-wordpress-editor [data-slot="label"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  color: var(--kodety-text-secondary);
+  font-weight: 500;
+  letter-spacing: -0.004em;
+}
+
+body.kodety-wordpress-editor [data-slot="separator"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  background: var(--kodety-divider);
+}
+
+/*
+ * Tabs are segmented controls, not separate cards. Their active state is
+ * intentionally shallow so dense sidebars retain a single visual plane.
+ */
+body.kodety-wordpress-editor [data-slot="tabs-list"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  min-height: 30px;
+  padding: 2px;
+  border-radius: var(--kodety-radius-control, 7px);
+  background: var(--kodety-control);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.02);
+}
+
+body.kodety-wordpress-editor [data-slot="tabs-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  min-width: 0;
+  min-height: 26px;
+  border-radius: var(--kodety-radius-segment, 6px);
+  box-shadow: none;
+  color: var(--kodety-text-tertiary);
+  font-size: 11px;
+  font-weight: 500;
+  transition:
+    background-color 100ms var(--kodety-ease-ui, ease),
+    color 100ms var(--kodety-ease-ui, ease),
+    box-shadow 100ms var(--kodety-ease-ui, ease);
+}
+
+body.kodety-wordpress-editor [data-slot="tabs-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *):hover:not(:disabled) {
+  color: var(--kodety-text-secondary);
+}
+
+body.kodety-wordpress-editor [data-slot="tabs-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-state="active"] {
+  background: var(--kodety-accent-muted, rgb(147 147 255 / 0.14));
+  color: var(--kodety-accent-hover, #AFAFFF);
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.28),
+    inset 0 0 0 1px var(--kodety-accent-border, rgb(147 147 255 / 0.28));
+}
+
+/*
+ * Figma node 2009:752 is the canonical primary navigator: a single compact
+ * track with a neutral active segment. Keep the whole control on one visual
+ * plane; it may scroll when translated labels do not fit.
+ */
+body.kodety-wordpress-editor
+  [data-slot="tabs-list"]:not([data-ycode-native-ui], [data-ycode-native-ui] *).kodety-editor-primary-tabs {
+  justify-content: stretch;
+  gap: 0;
+  height: 30px;
+  min-height: 30px;
+  padding: 2px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 0;
+  border-radius: var(--kodety-radius-control, 7px);
+  background: var(--kodety-control);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.02);
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+body.kodety-wordpress-editor
+  [data-slot="tabs-list"]:not([data-ycode-native-ui], [data-ycode-native-ui] *).kodety-editor-primary-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+body.kodety-wordpress-editor
+  [data-slot="tabs-list"]:not([data-ycode-native-ui], [data-ycode-native-ui] *).kodety-editor-primary-tabs
+  > [data-slot="tabs-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  flex: 1 0 max-content;
+  height: 26px;
+  min-width: 54px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: var(--kodety-radius-segment, 6px);
+  background: transparent;
+  box-shadow: none;
+  color: var(--kodety-text-tertiary);
+  font-size: 11px;
+  scroll-snap-align: start;
+}
+
+body.kodety-wordpress-editor
+  [data-slot="tabs-list"]:not([data-ycode-native-ui], [data-ycode-native-ui] *).kodety-editor-primary-tabs
+  > [data-slot="tabs-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *):hover {
+  background: rgb(255 255 255 / 0.035);
+  color: var(--kodety-text-secondary);
+}
+
+body.kodety-wordpress-editor
+  [data-slot="tabs-list"]:not([data-ycode-native-ui], [data-ycode-native-ui] *).kodety-editor-primary-tabs
+  > [data-slot="tabs-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-state="active"] {
+  background: var(--kodety-accent-muted, rgb(147 147 255 / 0.14));
+  color: var(--kodety-accent-hover, #AFAFFF);
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.28),
+    inset 0 0 0 1px var(--kodety-accent-border, rgb(147 147 255 / 0.28));
+}
+
+body.kodety-wordpress-editor
+  [data-slot="tabs-list"]:not([data-ycode-native-ui], [data-ycode-native-ui] *).kodety-editor-inspector-tabs {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  height: 42px;
+  min-height: 42px;
+  padding: 5px 12px;
+  overflow: visible;
+  border: 0;
+  border-bottom: 0;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+body.kodety-wordpress-editor
+  [data-slot="tabs-list"]:not([data-ycode-native-ui], [data-ycode-native-ui] *).kodety-editor-inspector-tabs
+  > [data-slot="tabs-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 0;
+  height: 32px;
+  min-height: 32px;
+  padding: 0 13px;
+  border: 0;
+  border-bottom: 0;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--kodety-text-tertiary);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+body.kodety-wordpress-editor
+  [data-slot="tabs-list"]:not([data-ycode-native-ui], [data-ycode-native-ui] *).kodety-editor-inspector-tabs
+  > [data-slot="tabs-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *):hover:not(:disabled) {
+  background: rgb(255 255 255 / 4%);
+  color: var(--kodety-text-secondary);
+}
+
+body.kodety-wordpress-editor
+  [data-slot="tabs-list"]:not([data-ycode-native-ui], [data-ycode-native-ui] *).kodety-editor-inspector-tabs
+  > [data-slot="tabs-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-state="active"] {
+  border-bottom-color: transparent;
+  background: rgb(255 255 255 / 8%) !important;
+  box-shadow: none;
+  color: var(--kodety-text);
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="dropdown-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="dropdown-menu-sub-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-sub-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="popover-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+) {
+  border-color: var(--kodety-divider-strong);
+  border-radius: 8px;
+  background: var(--kodety-panel-raised);
+  color: var(--kodety-text);
+  box-shadow: var(--kodety-shadow-popover);
+  backdrop-filter: none;
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="dropdown-menu-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="dropdown-menu-checkbox-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="dropdown-menu-radio-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="dropdown-menu-sub-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-checkbox-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-radio-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-sub-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+) {
+  min-height: 28px;
+  border-radius: var(--kodety-radius-segment, 6px);
+  color: var(--kodety-text-secondary);
+  font-size: 11px;
+  line-height: 1.25;
+  transition:
+    background-color 80ms var(--kodety-ease-ui, ease),
+    color 80ms var(--kodety-ease-ui, ease);
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="dropdown-menu-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="dropdown-menu-checkbox-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="dropdown-menu-radio-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="dropdown-menu-sub-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-checkbox-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-radio-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-sub-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+):is(:focus, [data-highlighted]) {
+  background: var(--kodety-control);
+  color: var(--kodety-text);
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="dropdown-menu-label"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-label"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-label"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+) {
+  color: var(--kodety-text-tertiary);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="dropdown-menu-separator"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-separator"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-separator"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+) {
+  background: var(--kodety-divider);
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="dropdown-menu-shortcut"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-shortcut"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+) {
+  color: var(--kodety-text-disabled);
+  font-size: 10px;
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="dropdown-menu-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+):is([data-disabled], [aria-disabled="true"]) {
+  color: var(--kodety-text-disabled);
+  opacity: 0.7;
+}
+
+body.kodety-wordpress-editor [data-slot="dialog-overlay"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  background: rgb(0 0 0 / 0.58);
+  backdrop-filter: none;
+}
+
+body.kodety-wordpress-editor [data-slot="dialog-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  max-height: calc(100dvh - 24px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-color: var(--kodety-divider-strong);
+  border-radius: 9px;
+  background: var(--kodety-panel-raised);
+  box-shadow:
+    0 28px 80px rgb(0 0 0 / 0.5),
+    0 3px 12px rgb(0 0 0 / 0.3);
+  overscroll-behavior: contain;
+}
+
+body.kodety-wordpress-editor [data-slot="dialog-title"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  color: var(--kodety-text);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+body.kodety-wordpress-editor [data-slot="dialog-description"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  color: var(--kodety-text-secondary);
+  line-height: 1.5;
+}
+
+body.kodety-wordpress-editor [data-slot="switch"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  border-color: transparent;
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 0.24);
+}
+
+body.kodety-wordpress-editor [data-slot="switch"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-state="checked"] {
+  background: var(--kodety-accent);
+}
+
+body.kodety-wordpress-editor [data-slot="switch"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-state="unchecked"] {
+  background: var(--kodety-control);
+}
+
+body.kodety-wordpress-editor [data-slot="switch-thumb"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  background: white;
+  box-shadow:
+    0 1px 3px rgb(0 0 0 / 0.38),
+    0 0 0 0.5px rgb(0 0 0 / 0.22);
+}
+
+body.kodety-wordpress-editor [data-slot="slider-track"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  background: var(--kodety-control);
+}
+
+body.kodety-wordpress-editor [data-slot="slider-range"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  background: var(--kodety-accent);
+}
+
+body.kodety-wordpress-editor [data-slot="slider-thumb"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  border-color: var(--kodety-accent);
+  background: white;
+  box-shadow:
+    0 1px 3px rgb(0 0 0 / 0.42),
+    0 0 0 1px rgb(147 147 255 / 0.35);
+}
+
+body.kodety-wordpress-editor [data-slot="tooltip-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  --tooltip-surface: var(--kodety-control);
+  border: 1px solid var(--kodety-divider-strong);
+  border-radius: 6px;
+  background: var(--tooltip-surface);
+  color: var(--kodety-text);
+  box-shadow:
+    0 8px 24px rgb(0 0 0 / 0.36),
+    0 1px 4px rgb(0 0 0 / 0.26);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+body.kodety-wordpress-editor [data-slot="tooltip-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) > svg {
+  background: var(--tooltip-surface);
+  fill: var(--tooltip-surface);
+  color: var(--tooltip-surface);
+}
+
+/*
+ * Shared panel grammar. Feature panels can opt into these classes without
+ * reimplementing another card system.
+ */
+body.kodety-wordpress-editor .kodety-panel-section {
+  border-bottom: 1px solid var(--kodety-divider);
+  padding-block: 10px;
+}
+
+body.kodety-wordpress-editor .kodety-panel-section:last-child {
+  border-bottom: 0;
+}
+
+body.kodety-wordpress-editor .kodety-panel-heading {
+  display: flex;
+  min-height: var(--kodety-section-height, 44px);
+  align-items: center;
+  gap: 8px;
+  color: var(--kodety-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+body.kodety-wordpress-editor .kodety-property-row {
+  display: grid;
+  grid-template-columns: minmax(76px, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: 8px;
+  min-height: var(--kodety-control-height, 30px);
+}
+
+body.kodety-wordpress-editor .kodety-property-label {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--kodety-text-secondary);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.kodety-wordpress-editor .kodety-icon-action {
+  display: inline-flex;
+  width: var(--kodety-icon-target, 28px);
+  height: var(--kodety-icon-target, 28px);
+  min-width: var(--kodety-icon-target, 28px);
+  min-height: var(--kodety-icon-target, 28px);
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--kodety-radius-segment, 6px);
+  background: transparent;
+  color: var(--kodety-text-tertiary);
+  transition:
+    background-color 100ms var(--kodety-ease-ui, ease),
+    color 100ms var(--kodety-ease-ui, ease);
+}
+
+body.kodety-wordpress-editor .kodety-icon-action:hover {
+  background: rgb(255 255 255 / 0.055);
+  color: var(--kodety-text);
+}
+
+body.kodety-wordpress-editor .kodety-icon-action:is(
+  [aria-pressed="true"],
+  [aria-expanded="true"],
+  [data-state="open"]
+) {
+  background: var(--kodety-control);
+  color: var(--kodety-text);
+}
+
+body.kodety-wordpress-editor .kodety-icon-action:is(
+  :disabled,
+  [aria-disabled="true"]
+) {
+  color: var(--kodety-text-disabled);
+  opacity: 0.6;
+}
+
+body.kodety-wordpress-editor .kodety-toolbar {
+  display: flex;
+  min-width: 0;
+  min-height: var(--kodety-section-height, 44px);
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1px solid var(--kodety-divider);
+  padding-inline: var(--kodety-panel-padding, 13px);
+}
+
+body.kodety-wordpress-editor .kodety-segmented-control {
+  display: inline-flex;
+  min-width: 0;
+  min-height: var(--kodety-control-height, 30px);
+  align-items: center;
+  gap: 0;
+  padding: 2px;
+  border-radius: var(--kodety-radius-control, 7px);
+  background: var(--kodety-control);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.02);
+}
+
+body.kodety-wordpress-editor .kodety-empty-state {
+  display: grid;
+  min-width: 0;
+  min-height: 120px;
+  place-items: center;
+  align-content: center;
+  gap: 6px;
+  padding: 20px;
+  color: var(--kodety-text-tertiary);
+  text-align: center;
+}
+
+body.kodety-wordpress-editor [data-slot="tabs-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  min-width: 0;
+  min-height: 0;
+}
+
+body.kodety-wordpress-editor .kodety-editor-main :is(
+  a[href],
+  button:not([data-slot="button"]),
+  input:not([data-slot="input"]),
+  select,
+  textarea:not([data-slot="textarea"]),
+  summary,
+  [tabindex]:not([tabindex="-1"])
+):focus-visible {
+  outline: 1px solid var(--kodety-focus);
+  outline-offset: 2px;
+}
+
+body.kodety-wordpress-editor :is(
+  [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="input"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="textarea"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="tabs-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="switch"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  .kodety-icon-action
+):focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 1px var(--kodety-focus),
+    0 0 0 3px var(--kodety-focus-ring);
+}
+
+body.kodety-wordpress-editor :is(
+  .kodety-editor-main,
+  .kodety-editor-left-sidebar,
+  .kodety-editor-design-sidebar,
+  .kodety-editor-canvas-scroll,
+  .kodety-panel-scroll,
+  [class~="overflow-auto"],
+  [class~="overflow-x-auto"],
+  [class~="overflow-y-auto"],
+  [data-slot="dropdown-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="popover-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="dialog-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+) {
+  scrollbar-color: rgb(255 255 255 / 0.18) transparent;
+  scrollbar-width: thin;
+}
+
+body.kodety-wordpress-editor :is(
+  .kodety-editor-main,
+  .kodety-editor-left-sidebar,
+  .kodety-editor-design-sidebar,
+  .kodety-editor-canvas-scroll,
+  .kodety-panel-scroll,
+  [class~="overflow-auto"],
+  [class~="overflow-x-auto"],
+  [class~="overflow-y-auto"],
+  [data-slot="dropdown-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="popover-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="dialog-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+)::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+body.kodety-wordpress-editor :is(
+  .kodety-editor-main,
+  .kodety-editor-left-sidebar,
+  .kodety-editor-design-sidebar,
+  .kodety-editor-canvas-scroll,
+  .kodety-panel-scroll,
+  [class~="overflow-auto"],
+  [class~="overflow-x-auto"],
+  [class~="overflow-y-auto"],
+  [data-slot="dropdown-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="popover-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="dialog-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+)::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.18);
+  background-clip: padding-box;
+}
+
+body.kodety-wordpress-editor :is(
+  .kodety-editor-main,
+  .kodety-editor-left-sidebar,
+  .kodety-editor-design-sidebar,
+  .kodety-editor-canvas-scroll,
+  .kodety-panel-scroll,
+  [class~="overflow-auto"],
+  [class~="overflow-x-auto"],
+  [class~="overflow-y-auto"],
+  [data-slot="dropdown-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="popover-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="dialog-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+)::-webkit-scrollbar-thumb:hover {
+  background: rgb(255 255 255 / 0.28);
+  background-clip: padding-box;
+}
+
+body.kodety-wordpress-editor :is(
+  .kodety-editor-main,
+  .kodety-editor-left-sidebar,
+  .kodety-editor-design-sidebar,
+  .kodety-editor-canvas-scroll,
+  .kodety-panel-scroll,
+  [class~="overflow-auto"],
+  [class~="overflow-x-auto"],
+  [class~="overflow-y-auto"],
+  [data-slot="dropdown-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="popover-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="dialog-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+)::-webkit-scrollbar-track,
+body.kodety-wordpress-editor :is(
+  .kodety-editor-main,
+  .kodety-editor-left-sidebar,
+  .kodety-editor-design-sidebar,
+  .kodety-editor-canvas-scroll,
+  .kodety-panel-scroll,
+  [class~="overflow-auto"],
+  [class~="overflow-x-auto"],
+  [class~="overflow-y-auto"],
+  [data-slot="dropdown-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="context-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="select-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="popover-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+  [data-slot="dialog-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+)::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+body.kodety-wordpress-editor.kodety-is-resizing-viewport,
+body.kodety-wordpress-editor.kodety-is-resizing-viewport * {
+  user-select: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.kodety-wordpress-editor .kodety-boot-loader__fill {
+    animation: none;
+    transform: translateX(75%);
+  }
+}
+
+@media (pointer: coarse) {
+  body.kodety-wordpress-editor {
+    --kodety-control-height: 2rem;
+    --kodety-control-height-compact: 1.875rem;
+    --kodety-icon-target: 2rem;
+  }
+
+  body.kodety-wordpress-editor :is(
+    [data-slot="dropdown-menu-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="dropdown-menu-checkbox-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="dropdown-menu-radio-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="context-menu-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="context-menu-checkbox-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="context-menu-radio-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="select-item"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+  ) {
+    min-height: 32px;
+  }
+}
+
+@media (max-width: 720px) {
+  body.kodety-wordpress-editor {
+    --kodety-panel-padding: 0.625rem;
+  }
+
+  body.kodety-wordpress-editor .kodety-property-row {
+    grid-template-columns: minmax(68px, 0.7fr) minmax(0, 1.3fr);
+    gap: 6px;
+  }
+
+  body.kodety-wordpress-editor [data-slot="dialog-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+    max-height: calc(100dvh - 16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.kodety-wordpress-editor *,
+  body.kodety-wordpress-editor *::before,
+  body.kodety-wordpress-editor *::after {
+    scroll-behavior: auto !important;
+  }
+
+  body.kodety-wordpress-editor :is(
+    [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="input"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="textarea"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="select-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="tabs-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="switch"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="slider-thumb"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="dropdown-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="context-menu-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="select-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="popover-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="dialog-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="dialog-overlay"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="tooltip-content"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    .kodety-icon-action
+  ) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  body.kodety-wordpress-editor {
+    --kodety-divider: #3b3b3b;
+    --kodety-divider-strong: #555555;
+    --kodety-text-secondary: #e0e0e0;
+    --kodety-text-tertiary: #b5b5b5;
+  }
+}
+
+@media (forced-colors: active) {
+  body.kodety-wordpress-editor {
+    --kodety-divider: CanvasText;
+    --kodety-divider-strong: CanvasText;
+    --kodety-focus: Highlight;
+    --kodety-focus-ring: transparent;
+  }
+
+  body.kodety-wordpress-editor :is(
+    [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="input"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="textarea"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="select-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="tabs-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="switch"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)
+  ) {
+    border: 1px solid ButtonText;
+    forced-color-adjust: auto;
+  }
+
+  body.kodety-wordpress-editor
+    [data-slot="tabs-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *)[data-state="active"] {
+    border-color: Highlight;
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  body.kodety-wordpress-editor :is(
+    [data-slot="button"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="input"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="textarea"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="select-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="tabs-trigger"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="switch"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    [data-slot="slider-thumb"]:not([data-ycode-native-ui], [data-ycode-native-ui] *),
+    .kodety-icon-action
+  ):focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1400" role="img" aria-labelledby="title description">
+  <title id="title">Composição abstrata de produtos</title>
+  <desc id="description">Formas editoriais em tons de areia, preto e verde.</desc>
+  <rect width="1200" height="1400" fill="#ded8ca"/>
+  <circle cx="760" cy="430" r="330" fill="#171713"/>
+  <path d="M70 1250 570 120 1030 1250Z" fill="#c9ff3d" opacity=".92"/>
+  <rect x="230" y="690" width="720" height="470" rx="235" fill="#fffef8" transform="rotate(-12 590 925)"/>
+  <circle cx="310" cy="250" r="95" fill="#fffef8"/>
+</svg>

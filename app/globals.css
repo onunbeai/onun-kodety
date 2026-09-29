@@ -1,0 +1,2541 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "../lib/html-editor/toast.css";
+
+@custom-variant dark (&:is(.dark *));
+@custom-variant current (&[aria-current]);
+@custom-variant disabled (&:is(:disabled, [aria-disabled]));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /* `--font-inter` is only defined inside the builder layout. On public
+     published pages the variable is undefined and these fall back to the
+     system font stacks — keeps marketing sites from downloading Inter just
+     because something used the generic `font-sans` class. */
+  --font-sans: var(
+    --font-inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif
+  );
+  --font-mono: var(
+    --font-inter,
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    "Liberation Mono",
+    "Courier New",
+    monospace
+  );
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --animate-shimmer: shimmer 2s ease-in-out infinite;
+  --animate-indeterminate: indeterminate 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+@keyframes kodety-community-invite {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg) scale(1);
+  }
+  18% {
+    transform: translateX(-1px) rotate(-11deg) scale(1.06);
+  }
+  36% {
+    transform: translateX(1px) rotate(9deg) scale(1.08);
+  }
+  54% {
+    transform: translateX(-0.75px) rotate(-7deg) scale(1.06);
+  }
+  72% {
+    transform: translateX(0.5px) rotate(5deg) scale(1.04);
+  }
+  88% {
+    transform: translateX(-0.25px) rotate(-2deg) scale(1.01);
+  }
+}
+
+[data-kodety-community-link]:is(:hover, :focus-visible) > svg {
+  transform-origin: 50% 50%;
+  animation: kodety-community-invite 560ms cubic-bezier(0.22, 0.8, 0.24, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-kodety-community-link]:is(:hover, :focus-visible) > svg {
+    animation: none;
+  }
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #9393ff;
+  --primary-foreground: #ffffff;
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(14.5% 0 0 / 5%);
+  --input: oklch(14.5% 0 0 / 5%);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.158 0.004 286);
+  --foreground: oklch(0.94 0.003 286);
+  --card: oklch(0.178 0.004 286);
+  --card-foreground: oklch(0.94 0.003 286);
+  --popover: oklch(0.205 0.004 286);
+  --popover-foreground: oklch(0.94 0.003 286);
+  --primary: #9393ff;
+  --primary-foreground: #ffffff;
+  --secondary: oklch(1 0 0 / 7%);
+  --secondary-foreground: oklch(0.91 0.003 286);
+  --muted: oklch(0.225 0.004 286);
+  --muted-foreground: oklch(0.65 0.005 286);
+  --accent: oklch(0.255 0.004 286);
+  --accent-foreground: oklch(0.96 0.003 286);
+  --destructive: oklch(0.65 0.205 24);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 7%);
+  --ring: #9393ff;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.146 0.004 286);
+  --sidebar-foreground: oklch(0.94 0.003 286);
+  --sidebar-primary: #9393ff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: oklch(0.225 0.004 286);
+  --sidebar-accent-foreground: oklch(0.94 0.003 286);
+  --sidebar-border: oklch(1 0 0 / 8%);
+  --sidebar-ring: #9393ff;
+}
+
+/*
+ * Product-editor tokens
+ *
+ * These are intentionally semantic instead of feature-specific. CMS,
+ * localization, settings and the canvas inspector can share the same visual
+ * grammar without each panel inventing another card/background hierarchy.
+ */
+:where(
+  .dark:has(> .kodety-editor-main),
+  body:has(.kodety-editor-main),
+  body.kodety-wordpress-editor
+) {
+  color-scheme: dark;
+  --radius: 0.5rem;
+  --background: #111111;
+  --foreground: #ffffff;
+  --card: #111111;
+  --card-foreground: #ffffff;
+  --popover: #1c1c1c;
+  --popover-foreground: #ffffff;
+  --primary: #9393ff;
+  --primary-foreground: #ffffff;
+  --secondary: #2b2b2b;
+  --secondary-foreground: #cccccc;
+  --muted: #1a1a1a;
+  --muted-foreground: #999999;
+  --accent: #2b2b2b;
+  --accent-foreground: #ffffff;
+  --border: #252525;
+  --input: #2b2b2b;
+  --ring: #9393ff;
+  --sidebar: #111111;
+  --sidebar-foreground: #cccccc;
+  --sidebar-primary: #9393ff;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #2b2b2b;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #252525;
+  --sidebar-ring: #9393ff;
+  --kodety-chrome: #111111;
+  --kodety-panel: #111111;
+  --kodety-workspace: #222222;
+  --kodety-panel-raised: #1c1c1c;
+  --kodety-panel-hover: #1f1f1f;
+  --kodety-control: #2b2b2b;
+  --kodety-control-hover: #333333;
+  --kodety-control-active: #555555;
+  --kodety-divider: #252525;
+  --kodety-divider-strong: #333333;
+  --kodety-text: #ffffff;
+  --kodety-text-secondary: #cccccc;
+  --kodety-text-tertiary: #999999;
+  --kodety-info-copy: rgb(244 244 245 / 60%);
+  --kodety-text-disabled: #666666;
+  --kodety-accent: #9393ff;
+  --kodety-accent-hover: #afafff;
+  --kodety-accent-foreground: #ffffff;
+  --kodety-accent-muted: rgb(147 147 255 / 0.14);
+  --kodety-accent-border: rgb(147 147 255 / 0.28);
+  --kodety-focus: #9393ff;
+  --kodety-focus-ring: rgb(147 147 255 / 0.32);
+  /* Tailwind color utilities used by the product chrome inherit the Kodety
+     palette here. Content rendered inside the site canvas keeps Tailwind's
+     canonical colors. */
+  --color-blue-50: #afafff;
+  --color-blue-100: #afafff;
+  --color-blue-200: #afafff;
+  --color-blue-300: #afafff;
+  --color-blue-400: #afafff;
+  --color-blue-500: #9393ff;
+  --color-blue-600: #9393ff;
+  --color-blue-700: #9393ff;
+  --color-blue-800: #9393ff;
+  --color-blue-900: #9393ff;
+  --color-blue-950: #9393ff;
+  --color-sky-50: #afafff;
+  --color-sky-100: #afafff;
+  --color-sky-200: #afafff;
+  --color-sky-300: #afafff;
+  --color-sky-400: #afafff;
+  --color-sky-500: #9393ff;
+  --color-sky-600: #9393ff;
+  --color-sky-700: #9393ff;
+  --color-sky-800: #9393ff;
+  --color-sky-900: #9393ff;
+  --color-sky-950: #9393ff;
+  --kodety-danger: #ff5c70;
+  --kodety-success: #3ac58a;
+  --kodety-warning: #f5b942;
+  --kodety-control-height: 1.875rem;
+  --kodety-control-height-compact: 1.625rem;
+  --kodety-icon-target: 1.75rem;
+  --kodety-section-height: 2.75rem;
+  --kodety-panel-padding: 0.8125rem;
+  --kodety-row-gap: 0.5rem;
+  --kodety-radius-control: 0.4375rem;
+  --kodety-radius-segment: 0.375rem;
+  --kodety-ease-ui: cubic-bezier(0.2, 0, 0, 1);
+  --kodety-shadow-popover:
+    0 18px 48px rgb(0 0 0 / 0.42), 0 2px 10px rgb(0 0 0 / 0.32),
+    0 0 0 1px rgb(255 255 255 / 0.025);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply h-full;
+  }
+
+  body {
+    @apply bg-background text-foreground h-full;
+  }
+
+  /* Remove focus outline from iframes */
+  iframe:focus {
+    outline: none;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .kodety-info-copy {
+    color: var(--kodety-info-copy) !important;
+  }
+
+  .kodety-compact-scrollbar {
+    scrollbar-color: color-mix(
+        in oklab,
+        var(--muted-foreground) 45%,
+        transparent
+      )
+      transparent;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+  }
+
+  .kodety-compact-scrollbar::-webkit-scrollbar {
+    width: 7px;
+  }
+  .kodety-compact-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .kodety-compact-scrollbar::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--muted-foreground) 38%, transparent);
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background-clip: padding-box;
+  }
+  .kodety-compact-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in oklab, var(--muted-foreground) 65%, transparent);
+    background-clip: padding-box;
+  }
+
+  .bg-checkerboard {
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        #ccc 25%,
+        transparent 25%,
+        transparent 75%,
+        #ccc 75%,
+        #ccc
+      ),
+      repeating-linear-gradient(
+        45deg,
+        #ccc 25%,
+        transparent 25%,
+        transparent 75%,
+        #ccc 75%,
+        #ccc
+      );
+    background-position:
+      0 0,
+      4px 4px;
+    background-size: 8px 8px;
+  }
+
+  .kodety-color-swatch-checker,
+  .kodety-transparency-swatch {
+    background-color: #393939;
+    background-image:
+      linear-gradient(90deg, #4a4a4a 50%, #393939 50%),
+      linear-gradient(90deg, #393939 50%, #4a4a4a 50%);
+    background-position: top, bottom;
+    background-repeat: no-repeat;
+    background-size: 100% 50%;
+  }
+
+  .kodety-transparency-preview {
+    position: relative;
+    width: 1.25rem;
+    height: 1.25rem;
+    flex: 0 0 1.25rem;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.055);
+  }
+}
+
+/*
+ * Builder slider contract. Native ranges and the shared Radix Slider use the
+ * same neutral track and solid-white thumb. The selected portion never takes
+ * the product accent color.
+ */
+.kodety-builder-range {
+  height: 1rem;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.kodety-builder-range::-webkit-slider-runnable-track {
+  height: 3px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 25%);
+}
+
+.kodety-builder-range::-webkit-slider-thumb {
+  width: 12px;
+  height: 12px;
+  margin-top: -4.5px;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.kodety-builder-range::-moz-range-track,
+.kodety-builder-range::-moz-range-progress {
+  height: 3px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 25%);
+}
+
+.kodety-builder-range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.kodety-builder-range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 35%);
+}
+
+.kodety-builder-range:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 2px rgb(255 255 255 / 35%);
+}
+
+.kodety-builder-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Icon SVG styling — exclude `.hidden` so Tailwind's `display: none` always
+   wins for hidden icons (this author rule is unlayered and would otherwise
+   beat any layered `.hidden` utility). */
+[data-icon]:not(.hidden) {
+  display: inline-block;
+}
+
+[data-icon] svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Force inline SVG fill/stroke attributes (even on nested nodes) to inherit
+   the icon layer's text color — matches the legacy `<i>` wrapper behavior so
+   migrated icons with hard-coded colors still tint with `text-*` utilities.
+   Note: must not blanket-apply `fill: currentColor` to the root <svg>, since
+   that would override `fill="none"` and solid-fill stroke-only icons. */
+[data-icon] [fill]:not([fill="none"]) {
+  fill: currentColor;
+}
+
+[data-icon] [stroke]:not([stroke="none"]),
+[data-icon] [stroke-width] {
+  stroke: currentColor;
+}
+
+/* RichTextEditor Styles */
+.rich-text-editor.ProseMirror {
+  @apply outline-none w-full min-h-full;
+}
+
+.rich-text-editor.ProseMirror p {
+  @apply block m-0 p-0;
+}
+
+.rich-text-editor.ProseMirror p.is-editor-empty:first-child {
+  @apply relative;
+}
+
+.rich-text-editor.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  @apply absolute left-0 top-1/2 -translate-y-1/2 text-current/25 pointer-events-none text-xs leading-[1.375rem] whitespace-nowrap overflow-hidden text-ellipsis max-w-full;
+}
+
+.rich-text-editor.ProseMirror ul {
+  @apply my-0 ml-[8px] pl-[16px] list-disc;
+}
+
+.rich-text-editor.ProseMirror ol {
+  @apply my-0 ml-[8px] pl-[20px] list-decimal;
+}
+
+.rich-text-editor.ProseMirror li {
+  @apply my-0 min-h-[1.375rem];
+}
+
+.rich-text-editor.ProseMirror li p {
+  @apply inline;
+}
+
+.rich-text-editor.ProseMirror strong {
+  @apply font-bold;
+}
+
+.rich-text-editor.ProseMirror em {
+  @apply italic;
+}
+
+.rich-text-editor.ProseMirror u {
+  @apply underline;
+}
+
+.rich-text-editor.ProseMirror s {
+  @apply line-through;
+}
+
+/* Full variant styles - matching DEFAULT_TEXT_STYLES */
+.rich-text-editor-full.ProseMirror h1 {
+  @apply text-[30px] font-semibold my-0;
+}
+
+.rich-text-editor-full.ProseMirror h2 {
+  @apply text-[24px] font-semibold my-0;
+}
+
+.rich-text-editor-full.ProseMirror h3 {
+  @apply text-[20px] font-semibold my-0;
+}
+
+.rich-text-editor-full.ProseMirror h4 {
+  @apply text-[18px] font-semibold my-0;
+}
+
+.rich-text-editor-full.ProseMirror h5 {
+  @apply text-[16px] font-semibold my-0;
+}
+
+.rich-text-editor-full.ProseMirror h6 {
+  @apply text-[14px] font-semibold my-0;
+}
+
+.rich-text-editor-full.ProseMirror blockquote {
+  @apply border-l-2 border-border pl-4 py-0.5 my-0 italic text-muted-foreground;
+}
+
+.rich-text-editor-full.ProseMirror code {
+  @apply bg-input px-1.5 py-0.5 rounded-md font-mono;
+}
+
+.rich-text-editor-full.ProseMirror hr {
+  @apply border-t border-border my-4;
+}
+
+.rich-text-editor-full.ProseMirror .tableWrapper {
+  @apply overflow-x-auto max-w-full min-w-0 my-2;
+  width: 100%;
+}
+
+.rich-text-editor-full.ProseMirror table {
+  @apply w-full border-separate border-spacing-0 border border-border rounded-lg overflow-hidden;
+}
+
+.rich-text-editor-full.ProseMirror th,
+.rich-text-editor-full.ProseMirror td {
+  @apply px-2 py-1.5 text-left align-top min-w-[80px];
+}
+
+.rich-text-editor-full.ProseMirror tr + tr td,
+.rich-text-editor-full.ProseMirror tr + tr th {
+  @apply border-t border-border;
+}
+
+.rich-text-editor-full.ProseMirror td + td,
+.rich-text-editor-full.ProseMirror td + th,
+.rich-text-editor-full.ProseMirror th + td,
+.rich-text-editor-full.ProseMirror th + th {
+  @apply border-l border-border;
+}
+
+.rich-text-editor-full.ProseMirror th {
+  @apply bg-muted font-semibold;
+}
+
+.rich-text-editor-full.ProseMirror th p,
+.rich-text-editor-full.ProseMirror td p {
+  @apply m-0;
+}
+
+.rich-text-editor-full.ProseMirror .selectedCell {
+  @apply bg-accent/50;
+}
+
+/* Custom dropdown chevron for select elements (native arrow removed by form reset) */
+#ybody select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23737373' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 16px;
+}
+
+@keyframes kodety-loading-bar-scan {
+  0% {
+    transform: translateX(-110%);
+  }
+
+  55%,
+  100% {
+    transform: translateX(260%);
+  }
+}
+
+.kodety-loading-bar-indeterminate {
+  animation: kodety-loading-bar-scan 1.25s cubic-bezier(0.65, 0, 0.35, 1)
+    infinite;
+  will-change: transform;
+}
+
+@keyframes kodety-automation-shine {
+  0%,
+  16% {
+    opacity: 0;
+    transform: translate3d(-135%, 0, 0) skewX(-20deg);
+  }
+
+  28% {
+    opacity: 0.9;
+  }
+
+  72% {
+    opacity: 0.9;
+  }
+
+  84%,
+  100% {
+    opacity: 0;
+    transform: translate3d(360%, 0, 0) skewX(-20deg);
+  }
+}
+
+@keyframes kodety-automation-mark-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(147, 147, 255, 0.05);
+  }
+
+  50% {
+    box-shadow: 0 0 0 3px rgba(147, 147, 255, 0.1);
+  }
+}
+
+@keyframes kodety-agent-frame-dot-wave {
+  0%,
+  100% {
+    opacity: 0.22;
+    transform: translateY(1px) scale(0.72);
+  }
+
+  38% {
+    opacity: 1;
+    transform: translateY(-1.5px) scale(1);
+  }
+
+  68% {
+    opacity: 0.46;
+    transform: translateY(0.5px) scale(0.84);
+  }
+}
+
+.kodety-agent-frame-dots {
+  display: grid;
+  grid-template-columns: repeat(5, 3px);
+  grid-template-rows: repeat(2, 3px);
+  gap: 2px;
+}
+
+.kodety-agent-frame-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 999px;
+  background: #b9b4ff;
+  box-shadow: 0 0 4px rgba(167, 139, 250, 0.58);
+  animation: kodety-agent-frame-dot-wave 1.12s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+.kodety-automation-activity {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.kodety-automation-activity > * {
+  position: relative;
+  z-index: 1;
+}
+
+.kodety-automation-activity::after {
+  position: absolute;
+  z-index: 0;
+  top: -35%;
+  bottom: -35%;
+  left: 0;
+  width: 28%;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(177, 173, 255, 0.06) 25%,
+    rgba(255, 255, 255, 0.2) 52%,
+    rgba(177, 173, 255, 0.06) 75%,
+    transparent
+  );
+  filter: blur(0.2px);
+  animation: kodety-automation-shine 1.85s cubic-bezier(0.55, 0, 0.35, 1)
+    infinite;
+  will-change: opacity, transform;
+}
+
+.kodety-automation-activity [data-automation-activity-mark] {
+  animation: kodety-automation-mark-pulse 1.85s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kodety-automation-activity::after,
+  .kodety-automation-activity [data-automation-activity-mark] {
+    animation: none;
+  }
+
+  .kodety-automation-activity::after {
+    opacity: 0.22;
+    transform: translate3d(150%, 0, 0) skewX(-20deg);
+  }
+
+  .kodety-agent-frame-dot {
+    animation: none;
+    opacity: 0.72;
+    transform: none;
+  }
+
+  .kodety-agent-frame-dot:nth-child(3n + 1) {
+    opacity: 0.34;
+  }
+}
+
+/* The transplanted inspector owns the same semantic tokens as Ycode.
+ * The surrounding Kodety chrome keeps its existing background and dimensions. */
+[data-ycode-native-ui] {
+  --background: oklch(0.2046 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.269 0 0);
+  --popover-foreground: oklch(0.708 0 0);
+  --primary: #9393ff;
+  --primary-foreground: #ffffff;
+  --secondary: oklch(1 0 0 / 10%);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.32 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 5%);
+  --input: oklch(1 0 0 / 5%);
+  --ring: #9393ff;
+}
+
+/*
+ * Configuration fields must visually belong to their panel instead of looking
+ * like filled cards. This global guard also wins over legacy local `bg-input`
+ * utilities in Settings, Languages, Analytics, Membership, CMS and Builder.
+ */
+:is(
+  [data-slot="input"]:not(
+      [data-ycode-native-ui],
+      [data-ycode-native-ui] *,
+      [data-kodety-settings-control-inner],
+      [data-kodety-localization-translation-input]
+    )[data-variant="default"],
+  [data-slot="input-group"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *,
+    [data-kodety-settings-control-inner],
+    [data-kodety-localization-translation-input]
+  ),
+  [data-slot="select-trigger"]:not(
+      [data-ycode-native-ui],
+      [data-ycode-native-ui] *,
+      [data-kodety-settings-control-inner],
+      [data-kodety-localization-translation-input]
+    )[data-variant="default"],
+  [data-slot="textarea"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *,
+    [data-kodety-settings-control-inner],
+    [data-kodety-localization-translation-input]
+  ),
+  [data-slot="button"]:not(
+      [data-ycode-native-ui],
+      [data-ycode-native-ui] *,
+      [data-kodety-settings-control-inner],
+      [data-kodety-localization-translation-input]
+    )[data-variant="input"],
+  .code-editor-root
+) {
+  background-color: transparent !important;
+  border-color: color-mix(in srgb, var(--border) 72%, transparent) !important;
+  box-shadow: none;
+}
+
+/*
+ * Project Settings uses the same authored-control grammar as the Builder
+ * Inspector, with the slightly more comfortable 36px Settings metric. The
+ * root attribute keeps these surfaces local to Settings while also giving
+ * portalled menus an explicit context through body:has(...).
+ */
+[data-kodety-project-settings] {
+  --kodety-settings-control-fill: rgb(255 255 255 / 0.055);
+  --kodety-settings-control-hover: rgb(255 255 255 / 0.07);
+  background: var(--kodety-panel);
+}
+
+[data-kodety-project-settings]
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="textarea"]:not([data-kodety-settings-control-inner]),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner]
+      )
+  ) {
+  min-width: 0;
+  border: 1px solid transparent !important;
+  border-radius: 9px !important;
+  background: var(--kodety-settings-control-fill) !important;
+  color: var(--kodety-text) !important;
+  box-shadow: none !important;
+  font-size: 11px;
+  transition:
+    background-color 100ms var(--kodety-ease-ui),
+    border-color 100ms var(--kodety-ease-ui) !important;
+}
+
+[data-kodety-project-settings]
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner]
+      )
+  ) {
+  height: 36px !important;
+  min-height: 36px !important;
+}
+
+[data-kodety-project-settings]
+  [data-slot="textarea"]:not([data-kodety-settings-control-inner]) {
+  min-height: 96px !important;
+}
+
+[data-kodety-project-settings] [data-slot="slider-control"] {
+  height: 36px;
+  border-radius: 9px;
+  border-color: transparent;
+  background: var(--kodety-settings-control-fill);
+  transition:
+    background-color 100ms var(--kodety-ease-ui),
+    border-color 100ms var(--kodety-ease-ui);
+}
+
+[data-kodety-project-settings] [data-slot="slider-control"]:hover {
+  background: var(--kodety-settings-control-hover);
+}
+
+[data-kodety-project-settings] [data-slot="slider-control"]:focus-within {
+  border-color: color-mix(in srgb, var(--kodety-focus) 72%, transparent);
+  background: var(--kodety-settings-control-hover);
+  box-shadow: none;
+}
+
+[data-kodety-project-settings] [data-kodety-settings-card],
+[data-kodety-project-settings] [data-kodety-settings-preview] {
+  border: 1px solid rgb(255 255 255 / 0.065);
+  border-radius: 9px;
+  background: rgb(255 255 255 / 0.025);
+  box-shadow: none;
+}
+
+[data-kodety-project-settings] :is(p, [data-kodety-settings-description]),
+[data-kodety-settings-description] {
+  text-wrap: balance;
+}
+
+[data-kodety-project-settings] [data-kodety-settings-card] {
+  transition:
+    background-color 100ms var(--kodety-ease-ui),
+    border-color 100ms var(--kodety-ease-ui);
+}
+
+[data-kodety-project-settings] [data-kodety-settings-card]:hover {
+  border-color: rgb(255 255 255 / 0.085);
+  background: rgb(255 255 255 / 0.035);
+}
+
+[data-kodety-project-settings]
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="textarea"]:not([data-kodety-settings-control-inner]),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner]
+      )
+  ):hover:not(:disabled) {
+  background: var(--kodety-settings-control-hover) !important;
+}
+
+[data-kodety-project-settings]
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="textarea"]:not([data-kodety-settings-control-inner]),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner]
+      )
+  ):focus-visible,
+[data-kodety-project-settings]
+  [data-slot="select-trigger"][data-state="open"]:not(
+    [data-kodety-settings-control-inner]
+  ) {
+  border-color: color-mix(
+    in srgb,
+    var(--kodety-focus) 72%,
+    transparent
+  ) !important;
+  background: var(--kodety-settings-control-hover) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+[data-kodety-project-settings]
+  :is(
+    [data-slot="input"],
+    [data-slot="textarea"],
+    [data-slot="select-trigger"],
+    [data-slot="button"][data-variant="input"]
+  )[aria-invalid="true"] {
+  border-color: var(--kodety-danger) !important;
+}
+
+[data-kodety-project-settings]
+  [data-kodety-settings-control]:has([aria-invalid="true"]) {
+  border-color: var(--kodety-danger) !important;
+}
+
+[data-kodety-project-settings]
+  [data-kodety-settings-control]:is(:disabled, :has(:disabled)) {
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+[data-kodety-project-settings]
+  :is(
+    [data-slot="input"][data-variant="default"],
+    [data-slot="textarea"],
+    [data-slot="select-trigger"][data-variant="default"],
+    [data-slot="button"][data-variant="input"]
+  ):disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+[data-kodety-project-settings]
+  :is(
+    [data-slot="input"][data-variant="default"],
+    [data-slot="textarea"]
+  ):read-only {
+  cursor: default;
+  color: var(--kodety-text-secondary) !important;
+}
+
+[data-kodety-project-settings]
+  [data-kodety-settings-control]
+  [data-kodety-settings-control-inner] {
+  min-height: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+[data-kodety-project-settings]
+  [data-kodety-settings-control]
+  [data-slot="input"][data-kodety-settings-control-inner] {
+  height: 100% !important;
+}
+
+[data-kodety-project-settings]
+  [data-kodety-settings-control]
+  [data-slot="button"]:focus-visible {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+[data-kodety-project-settings] .code-editor-root {
+  border-color: transparent !important;
+  background-color: var(--kodety-settings-control-fill) !important;
+}
+
+[data-kodety-project-settings] .code-editor-root:hover {
+  background-color: var(--kodety-settings-control-hover) !important;
+}
+
+[data-kodety-project-settings] .code-editor-root:focus-within {
+  border-color: color-mix(
+    in srgb,
+    var(--kodety-focus) 72%,
+    transparent
+  ) !important;
+  background-color: var(--kodety-settings-control-hover) !important;
+}
+
+[data-kodety-project-settings]
+  [data-kodety-code-editor-control]
+  .code-editor-root,
+[data-kodety-project-settings]
+  [data-kodety-code-editor-control]
+  .code-editor-root:hover,
+[data-kodety-project-settings]
+  [data-kodety-code-editor-control]
+  .code-editor-root:focus-within {
+  border-color: transparent !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+body:has([data-kodety-project-settings])
+  :is(
+    [data-slot="select-content"],
+    [data-slot="dropdown-menu-content"],
+    [data-slot="popover-content"]
+  ) {
+  border-color: rgb(255 255 255 / 0.08) !important;
+  border-radius: 10px !important;
+  background: var(--kodety-panel) !important;
+  box-shadow: var(--kodety-shadow-popover) !important;
+}
+
+body:has([data-kodety-project-settings]) [data-slot="select-item"] {
+  min-height: 32px;
+  border-radius: 6px;
+}
+
+body:has([data-kodety-project-settings])
+  [data-slot="select-item"][data-state="checked"]
+  svg {
+  color: var(--kodety-accent-hover);
+  opacity: 1;
+}
+
+/*
+ * Languages shares the comfortable Settings control metric across its main
+ * workspace and portalled dialogs. Translation cells and compound-control
+ * internals remain transparent so the surrounding surface owns the stroke.
+ */
+:is([data-kodety-localization], [data-kodety-localization-surface]) {
+  --kodety-localization-control-fill: rgb(255 255 255 / 0.055);
+  --kodety-localization-control-hover: rgb(255 255 255 / 0.07);
+  background: var(--kodety-panel);
+}
+
+/* Keep sticky translation headers inside the workspace stacking context so
+ * they cannot overpaint dialogs portalled to the document body. */
+[data-kodety-localization] {
+  isolation: isolate;
+}
+
+/*
+ * Localization dialogs are one authored surface. Header, navigation, body
+ * and footer may be separated by a divider, never by a second background.
+ * The explicit regions also keep the extension correct when it is loaded on
+ * top of an older Builder bundle whose generated utility set predates this UI.
+ */
+[data-kodety-localization-surface][data-kodety-localization-dialog] {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden !important;
+  border-color: rgb(255 255 255 / 0.08) !important;
+  border-radius: 14px !important;
+  background: var(--kodety-panel) !important;
+  box-shadow: var(--kodety-shadow-popover) !important;
+}
+
+[data-kodety-localization-surface][data-kodety-localization-dialog]
+  :is(
+    [data-kodety-localization-dialog-region],
+    [data-kodety-localization-locale-rail],
+    [data-kodety-localization-locale-details]
+  ) {
+  background: var(--kodety-panel) !important;
+}
+
+[data-kodety-localization-dialog="settings"]
+  [data-kodety-localization-dialog-region="body"] {
+  flex: 0 1 auto;
+}
+
+[data-kodety-localization-add-layout] {
+  display: grid;
+  min-height: 0;
+  min-width: 0;
+  flex: 1 1 0%;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, clamp(120px, 32dvh, 190px)) minmax(0, 1fr);
+}
+
+@media (min-width: 768px) {
+  [data-kodety-localization-add-layout] {
+    grid-template-columns: 208px minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
+}
+
+[data-kodety-localization-custom-code] {
+  background: var(--kodety-localization-control-fill) !important;
+}
+
+[data-kodety-localization-custom-code]
+  :is([data-kodety-settings-control-inner], [data-slot="input"], button) {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+[data-kodety-localization-custom-code] button:hover:not(:disabled) {
+  background: rgb(255 255 255 / 0.045) !important;
+}
+
+:is([data-kodety-localization], [data-kodety-localization-surface])
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      ),
+    [data-slot="textarea"]:not(
+      [data-kodety-settings-control-inner],
+      [data-kodety-localization-translation-input]
+    ),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      )
+  ) {
+  min-width: 0;
+  border: 1px solid transparent !important;
+  border-radius: 9px !important;
+  background: var(--kodety-localization-control-fill) !important;
+  color: var(--kodety-text) !important;
+  box-shadow: none !important;
+  font-size: 11px;
+  transition:
+    background-color 100ms var(--kodety-ease-ui),
+    border-color 100ms var(--kodety-ease-ui) !important;
+}
+
+:is([data-kodety-localization], [data-kodety-localization-surface])
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      ),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      )
+  ) {
+  height: 36px !important;
+  min-height: 36px !important;
+}
+
+:is([data-kodety-localization], [data-kodety-localization-surface])
+  [data-slot="textarea"]:not(
+    [data-kodety-settings-control-inner],
+    [data-kodety-localization-translation-input]
+  ) {
+  min-height: 96px !important;
+}
+
+:is([data-kodety-localization], [data-kodety-localization-surface])
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      ),
+    [data-slot="textarea"]:not(
+      [data-kodety-settings-control-inner],
+      [data-kodety-localization-translation-input]
+    ),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      )
+  ):hover:not(:disabled) {
+  background: var(--kodety-localization-control-hover) !important;
+}
+
+:is([data-kodety-localization], [data-kodety-localization-surface])
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      ),
+    [data-slot="textarea"]:not(
+      [data-kodety-settings-control-inner],
+      [data-kodety-localization-translation-input]
+    ),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      )
+  ):focus-visible,
+:is([data-kodety-localization], [data-kodety-localization-surface])
+  [data-slot="select-trigger"][data-state="open"]:not(
+    [data-kodety-settings-control-inner],
+    [data-kodety-localization-translation-input]
+  ) {
+  border-color: color-mix(
+    in srgb,
+    var(--kodety-focus) 72%,
+    transparent
+  ) !important;
+  background: var(--kodety-localization-control-hover) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+:is([data-kodety-localization], [data-kodety-localization-surface])
+  :is(
+    [data-kodety-settings-control],
+    [data-html-settings-control]
+  ):focus-within {
+  border-color: color-mix(
+    in srgb,
+    var(--kodety-focus) 72%,
+    transparent
+  ) !important;
+  background: var(--kodety-localization-control-hover) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+:is([data-kodety-localization], [data-kodety-localization-surface])
+  :is([data-kodety-settings-control], [data-html-settings-control])
+  :is(
+    [data-kodety-settings-control-inner],
+    [data-slot="input"],
+    [data-slot="textarea"]
+  ) {
+  min-height: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+:is([data-kodety-localization], [data-kodety-localization-surface])
+  :is([data-kodety-settings-control], [data-html-settings-control])
+  [data-slot="input"] {
+  height: 100% !important;
+}
+
+[data-kodety-localization] [data-kodety-localization-translation-editor] {
+  width: 100%;
+  border-bottom: 1px solid transparent !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+[data-kodety-localization]
+  [data-kodety-localization-translation-editor]:focus-within {
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--kodety-focus) 72%, transparent) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+[data-kodety-localization] [data-kodety-localization-translation-input] {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+[data-kodety-localization] [data-kodety-localization-group-header] {
+  position: sticky;
+  z-index: 80;
+  isolation: isolate;
+  background: var(--kodety-panel) !important;
+}
+
+[data-kodety-localization] [data-kodety-localization-group-title] {
+  position: relative;
+  z-index: 2;
+}
+
+:is([data-kodety-localization], [data-kodety-localization-surface])
+  :is(
+    [data-slot="input"]:not(
+      [data-kodety-settings-control-inner],
+      [data-kodety-localization-translation-input]
+    ),
+    [data-slot="textarea"]:not(
+      [data-kodety-settings-control-inner],
+      [data-kodety-localization-translation-input]
+    ),
+    [data-slot="select-trigger"]:not(
+      [data-kodety-settings-control-inner],
+      [data-kodety-localization-translation-input]
+    ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      )
+  )[aria-invalid="true"],
+:is([data-kodety-localization], [data-kodety-localization-surface])
+  :is([data-kodety-settings-control], [data-html-settings-control]):has(
+    [aria-invalid="true"]
+  ) {
+  border-color: var(--kodety-danger) !important;
+}
+
+:is([data-kodety-localization], [data-kodety-localization-surface])
+  :is([data-kodety-settings-control], [data-html-settings-control]):is(
+    :disabled,
+    :has(:disabled)
+  ) {
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+:is([data-kodety-localization], [data-kodety-localization-surface])
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      ),
+    [data-slot="textarea"]:not(
+      [data-kodety-settings-control-inner],
+      [data-kodety-localization-translation-input]
+    ),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner],
+        [data-kodety-localization-translation-input]
+      )
+  ):disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+:is([data-kodety-localization], [data-kodety-localization-surface])
+  :is(
+    p,
+    [data-kodety-localization-description],
+    [data-kodety-settings-description]
+  ) {
+  text-wrap: balance;
+}
+
+body:has([data-kodety-localization])
+  :is(
+    [data-slot="select-content"],
+    [data-slot="dropdown-menu-content"],
+    [data-slot="popover-content"]
+  ),
+body:has([data-kodety-localization-surface])
+  :is(
+    [data-slot="select-content"],
+    [data-slot="dropdown-menu-content"],
+    [data-slot="popover-content"]
+  ) {
+  z-index: 700;
+  border-color: rgb(255 255 255 / 0.08) !important;
+  border-radius: 10px !important;
+  background: var(--kodety-panel) !important;
+  box-shadow: var(--kodety-shadow-popover) !important;
+}
+
+body:has([data-kodety-localization]) [data-slot="select-item"],
+body:has([data-kodety-localization-surface]) [data-slot="select-item"] {
+  min-height: 32px;
+  border-radius: 6px;
+}
+
+body:has([data-kodety-localization])
+  [data-slot="select-item"][data-state="checked"]
+  svg,
+body:has([data-kodety-localization-surface])
+  [data-slot="select-item"][data-state="checked"]
+  svg {
+  color: var(--kodety-accent-hover);
+  opacity: 1;
+}
+
+/*
+ * Analytics is an authored-data workspace, so it follows the same mature
+ * control grammar as Project Settings while keeping its charts and reports
+ * visually quieter than form-heavy panels. The root attribute deliberately
+ * scopes every rule to Analytics and also gives portalled menus a stable
+ * context through body:has(...).
+ */
+[data-kodety-analytics] {
+  --kodety-analytics-control-fill: rgb(255 255 255 / 0.05);
+  --kodety-analytics-control-hover: rgb(255 255 255 / 0.067);
+  --kodety-analytics-card: rgb(255 255 255 / 0.018);
+  --kodety-analytics-card-hover: rgb(255 255 255 / 0.03);
+  background: var(--kodety-panel);
+}
+
+[data-kodety-analytics]
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="textarea"]:not([data-kodety-settings-control-inner]),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner]
+      )
+  ) {
+  min-width: 0;
+  border: 1px solid transparent !important;
+  border-radius: 9px !important;
+  background: var(--kodety-analytics-control-fill) !important;
+  color: var(--kodety-text) !important;
+  box-shadow: none !important;
+  font-size: 11px;
+  transition:
+    background-color 100ms var(--kodety-ease-ui),
+    border-color 100ms var(--kodety-ease-ui) !important;
+}
+
+[data-kodety-analytics]
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner]
+      )
+  ) {
+  height: 36px !important;
+  min-height: 36px !important;
+}
+
+[data-kodety-analytics]
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="textarea"]:not([data-kodety-settings-control-inner]),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner]
+      )
+  ):hover:not(:disabled) {
+  background: var(--kodety-analytics-control-hover) !important;
+}
+
+[data-kodety-analytics]
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="textarea"]:not([data-kodety-settings-control-inner]),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner]
+      )
+  ):focus-visible,
+[data-kodety-analytics]
+  [data-slot="select-trigger"][data-state="open"]:not(
+    [data-kodety-settings-control-inner]
+  ) {
+  border-color: color-mix(
+    in srgb,
+    var(--kodety-focus) 72%,
+    transparent
+  ) !important;
+  background: var(--kodety-analytics-control-hover) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+[data-kodety-analytics]
+  [data-kodety-settings-control]
+  [data-kodety-settings-control-inner] {
+  min-height: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+[data-kodety-analytics]
+  [data-kodety-settings-control]
+  [data-slot="input"][data-kodety-settings-control-inner] {
+  height: 100% !important;
+}
+
+[data-kodety-analytics] [data-kodety-analytics-card] {
+  border: 1px solid rgb(255 255 255 / 0.055);
+  border-radius: 9px;
+  background: var(--kodety-analytics-card);
+  box-shadow: none;
+  transition:
+    background-color 100ms var(--kodety-ease-ui),
+    border-color 100ms var(--kodety-ease-ui);
+}
+
+[data-kodety-analytics] [data-kodety-analytics-card="interactive"]:hover {
+  border-color: rgb(255 255 255 / 0.08);
+  background: var(--kodety-analytics-card-hover);
+}
+
+[data-kodety-analytics] [data-kodety-analytics-metric] {
+  background: var(--kodety-panel);
+  transition: background-color 100ms var(--kodety-ease-ui);
+}
+
+[data-kodety-analytics] [data-kodety-analytics-metric]:hover {
+  background: rgb(255 255 255 / 0.018);
+}
+
+[data-kodety-analytics]
+  [data-kodety-analytics-page-header]
+  [data-kodety-settings-control] {
+  min-width: 0;
+}
+
+[data-kodety-analytics]
+  [data-kodety-analytics-fill-fields]
+  [data-slot="select-trigger"] {
+  width: 100%;
+  max-width: 100%;
+}
+
+[data-kodety-analytics]
+  [data-kodety-analytics-period]
+  > [data-kodety-settings-control] {
+  min-width: 0;
+  flex: 1 1 128px;
+}
+
+@media (min-width: 640px) {
+  [data-kodety-analytics]
+    [data-kodety-analytics-period]
+    > [data-kodety-settings-control] {
+    flex: 0 0 auto;
+  }
+}
+
+[data-kodety-analytics] :is(p, [data-kodety-analytics-description]) {
+  text-wrap: balance;
+}
+
+body:has([data-kodety-analytics])
+  :is(
+    [data-slot="select-content"],
+    [data-slot="dropdown-menu-content"],
+    [data-slot="popover-content"]
+  ) {
+  z-index: 100;
+  border-color: rgb(255 255 255 / 0.08) !important;
+  border-radius: 10px !important;
+  background: var(--kodety-panel) !important;
+  box-shadow: var(--kodety-shadow-popover) !important;
+}
+
+body:has([data-kodety-analytics]) [data-slot="select-item"] {
+  min-height: 32px;
+  border-radius: 6px;
+}
+
+body:has([data-kodety-analytics])
+  [data-slot="select-item"][data-state="checked"]
+  svg {
+  color: var(--kodety-accent-hover);
+  opacity: 1;
+}
+
+/*
+ * CMS follows the authored-data grammar from Project Settings: quiet filled
+ * controls, one continuous focus stroke, consistent 36px metrics and neutral
+ * cards. The surface attribute also carries the system into portalled dialogs.
+ */
+:is([data-kodety-cms-manager], [data-kodety-cms-surface]) {
+  --kodety-cms-control-fill: rgb(255 255 255 / 0.055);
+  --kodety-cms-control-hover: rgb(255 255 255 / 0.07);
+  background: var(--kodety-panel);
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="textarea"]:not([data-kodety-settings-control-inner]),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner],
+        [data-cms-inline-status]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner]
+      )
+  ) {
+  min-width: 0;
+  border: 1px solid transparent !important;
+  border-radius: 9px !important;
+  background: var(--kodety-cms-control-fill) !important;
+  color: var(--kodety-text) !important;
+  box-shadow: none !important;
+  font-size: 11px;
+  transition:
+    background-color 100ms var(--kodety-ease-ui),
+    border-color 100ms var(--kodety-ease-ui) !important;
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner],
+        [data-cms-inline-status]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner]
+      )
+  ) {
+  height: 36px !important;
+  min-height: 36px !important;
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  [data-slot="textarea"]:not([data-kodety-settings-control-inner]) {
+  min-height: 96px !important;
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="textarea"]:not([data-kodety-settings-control-inner]),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner],
+        [data-cms-inline-status]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner]
+      )
+  ):hover:not(:disabled) {
+  background: var(--kodety-cms-control-hover) !important;
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  :is(
+    [data-slot="input"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner]
+      ),
+    [data-slot="textarea"]:not([data-kodety-settings-control-inner]),
+    [data-slot="select-trigger"][data-variant="default"]:not(
+        [data-kodety-settings-control-inner],
+        [data-cms-inline-status]
+      ),
+    [data-slot="button"][data-variant="input"]:not(
+        [data-kodety-settings-control-inner]
+      )
+  ):focus-visible,
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  [data-slot="select-trigger"][data-state="open"]:not(
+    [data-kodety-settings-control-inner],
+    [data-cms-inline-status]
+  ) {
+  border-color: color-mix(
+    in srgb,
+    var(--kodety-focus) 72%,
+    transparent
+  ) !important;
+  background: var(--kodety-cms-control-hover) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  [data-kodety-settings-control]
+  [data-kodety-settings-control-inner] {
+  min-height: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: 0 !important;
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  [data-kodety-settings-control]
+  [data-slot="input"][data-kodety-settings-control-inner] {
+  height: 100% !important;
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  [data-kodety-cms-search]
+  [data-slot="input"] {
+  height: 100% !important;
+  min-height: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  [data-kodety-cms-color-control]
+  [data-slot="color-picker-trigger"] {
+  height: 36px !important;
+  border-color: transparent !important;
+  border-radius: 9px !important;
+  background: var(--kodety-cms-control-fill) !important;
+  box-shadow: none !important;
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  [data-kodety-cms-color-control]
+  [data-slot="color-picker-trigger"]:hover {
+  background: var(--kodety-cms-control-hover) !important;
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  [data-kodety-cms-color-control]
+  [data-slot="color-picker-trigger"]:focus-visible {
+  border-color: color-mix(
+    in srgb,
+    var(--kodety-focus) 72%,
+    transparent
+  ) !important;
+  background: var(--kodety-cms-control-hover) !important;
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  [data-kodety-settings-control]:has([aria-invalid="true"]) {
+  border-color: var(--kodety-danger) !important;
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  [data-kodety-settings-control]:is(:disabled, :has(:disabled)) {
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  :is(p, [data-kodety-cms-description]) {
+  text-wrap: balance;
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  [data-kodety-cms-card] {
+  transition:
+    background-color 100ms var(--kodety-ease-ui),
+    border-color 100ms var(--kodety-ease-ui);
+}
+
+:is([data-kodety-cms-manager], [data-kodety-cms-surface])
+  [data-kodety-cms-card]:hover {
+  border-color: rgb(255 255 255 / 0.085);
+}
+
+body:has([data-kodety-cms-manager])
+  :is(
+    [data-slot="select-content"],
+    [data-slot="dropdown-menu-content"],
+    [data-slot="popover-content"]
+  ) {
+  z-index: 100;
+  border-color: rgb(255 255 255 / 0.08) !important;
+  border-radius: 10px !important;
+  background: var(--kodety-panel) !important;
+  box-shadow: var(--kodety-shadow-popover) !important;
+}
+
+body:has([data-kodety-cms-manager]) [data-slot="select-item"] {
+  min-height: 32px;
+  border-radius: 6px;
+}
+
+body:has([data-kodety-cms-manager])
+  [data-slot="select-item"][data-state="checked"]
+  svg {
+  color: var(--kodety-accent-hover);
+  opacity: 1;
+}
+
+/*
+ * Sidebar controls expose one continuous focus surface. Compound fields own
+ * the focus stroke on their rounded container, never on the inner input where
+ * it would cut through a prefix, unit, icon or stepper.
+ */
+.kodety-editor-design-sidebar
+  :is(
+    [data-slot="input"]:not(
+        [data-ycode-native-ui],
+        [data-ycode-native-ui] *
+      ):not([data-slot="input-group-control"]),
+    [data-slot="textarea"]:not(
+      [data-ycode-native-ui],
+      [data-ycode-native-ui] *
+    ),
+    [data-slot="select-trigger"]:not(
+      [data-ycode-native-ui],
+      [data-ycode-native-ui] *
+    )
+  ):focus-visible,
+.kodety-editor-design-sidebar
+  [data-slot="input-group"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  ):focus-within {
+  border-color: var(--kodety-focus);
+  outline: none;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--kodety-focus) 52%, transparent),
+    inset 0 0 0 2px rgb(255 255 255 / 0.025);
+}
+
+.kodety-editor-design-sidebar
+  [data-slot="input-group"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  )
+  [data-slot="input-group-control"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  ):focus-visible {
+  border-color: transparent;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Layer search uses only its existing one-pixel border as focus feedback. */
+[data-layer-search][data-slot="input"]:focus-visible {
+  border-color: var(--kodety-focus) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/*
+ * Native Inspector controls already express focus through their rounded
+ * border. Chromium can additionally paint a square focus outline on a nested
+ * trigger/field (especially beside the variables connector), which looks like
+ * a second blue selection box. Suppress only that outline; border, shadow and
+ * the violet variable affordance keep their existing behavior.
+ */
+.kodety-editor-design-sidebar
+  :is(
+    [data-design-token-property],
+    [data-slot="input"],
+    [data-slot="input-group"],
+    [data-slot="input-group-control"],
+    [data-slot="select-trigger"],
+    input,
+    textarea,
+    select,
+    button
+  ):is(:focus, :focus-visible, :focus-within) {
+  outline: 0 !important;
+  outline-width: 0 !important;
+  outline-offset: 0 !important;
+}
+
+/*
+ * A field bound to a project variable keeps a persistent violet stroke. The
+ * 60% alpha distinguishes a live binding without competing with validation.
+ */
+.kodety-editor-design-sidebar
+  [data-design-token-connected="true"]:not([aria-invalid="true"]):not(
+    :has([aria-invalid="true"])
+  ) {
+  border-color: rgb(139 92 246 / 60%) !important;
+}
+
+.kodety-editor-design-sidebar [data-design-token-locked="true"],
+.kodety-editor-design-sidebar
+  [data-design-token-locked="true"]
+  :is(input, textarea, button) {
+  cursor: pointer;
+}
+
+.kodety-radius-control__field,
+.kodety-radius-control__corners {
+  background-color: transparent !important;
+}
+
+.kodety-radius-control__corner[data-design-token-connected="true"] {
+  box-shadow: inset 0 0 0 1px rgb(139 92 246 / 60%);
+}
+
+/* Visual Style fields can represent a whole compound control instead of a
+ * single native input. Keep their token stroke inside the existing surface. */
+.kodety-editor-design-sidebar
+  .kodety-visual-style-control[data-design-token-connected="true"] {
+  box-shadow: inset 0 0 0 1px rgb(139 92 246 / 60%);
+}
+
+.kodety-visual-dimension__surface {
+  container-type: inline-size;
+}
+
+@container (max-width: 160px) {
+  [data-visual-dimension-constraint="true"] > button:first-of-type {
+    width: 20px;
+  }
+
+  [data-visual-dimension-constraint="true"] > [data-visual-preset] {
+    display: none;
+  }
+
+  [data-visual-dimension-constraint="true"] > input {
+    padding-inline: 0;
+    font-size: 10px;
+  }
+}
+
+/* Informational accent surfaces stay translucent. Solid accent is reserved
+ * for primary actions and direct-manipulation handles. */
+:where(
+    .dark:has(> .kodety-editor-main),
+    body:has(.kodety-editor-main),
+    body.kodety-wordpress-editor
+  )
+  [data-slot="badge"]:is(
+    [class~="bg-primary"],
+    [class~="bg-blue-500"],
+    [class~="bg-sky-500"]
+  ) {
+  border-color: var(--kodety-accent-border);
+  background-color: var(--kodety-accent-muted);
+  color: var(--kodety-accent-hover);
+}
+
+:where(
+    .dark:has(> .kodety-editor-main),
+    body:has(.kodety-editor-main),
+    body.kodety-wordpress-editor
+  )
+  [data-slot="badge"]:is(
+    [class~="bg-primary"],
+    [class~="bg-blue-500"],
+    [class~="bg-sky-500"]
+  ):is(a, button):hover {
+  background-color: color-mix(in srgb, var(--kodety-accent) 16%, transparent);
+}
+
+:where(
+    .dark:has(> .kodety-editor-main),
+    body:has(.kodety-editor-main),
+    body.kodety-wordpress-editor
+  )
+  [data-slot="button"][data-variant="ghost"]:is(
+    [aria-pressed="true"],
+    [aria-expanded="true"],
+    [data-state="on"],
+    [data-state="open"]
+  ) {
+  border-color: var(--kodety-accent-border);
+  background-color: var(--kodety-accent-muted);
+  color: var(--kodety-accent-hover);
+  box-shadow: inset 0 0 0 1px var(--kodety-accent-border);
+}
+
+/* Segmented controls follow the quiet Canvas/Agent grammar. Brand accent is
+ * reserved for keyboard focus, status, and primary actions. */
+[data-slot="tabs-list"]:not([data-ycode-native-ui], [data-ycode-native-ui] *) {
+  background-color: color-mix(
+    in srgb,
+    var(--foreground) 5%,
+    transparent
+  ) !important;
+}
+
+[data-slot="tabs-trigger"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  )[data-state="active"] {
+  border-color: transparent !important;
+  background-color: color-mix(
+    in srgb,
+    var(--foreground) 13%,
+    transparent
+  ) !important;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 22%) !important;
+  color: var(--kodety-text, rgb(244 244 245)) !important;
+}
+
+/* Inspector navigation uses the compact Ycode pill grammar without a rail or
+ * underline. Agent remains in the independent outer mode switch. */
+[data-slot="tabs-list"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  ).kodety-editor-inspector-tabs {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  height: 42px;
+  min-height: 42px;
+  padding: 5px 12px;
+  overflow: visible;
+  border: 0;
+  border-bottom: 0;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+[data-slot="tabs-list"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  ).kodety-editor-inspector-tabs
+  > [data-slot="tabs-trigger"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  ) {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 0;
+  height: 32px;
+  min-height: 32px;
+  padding: 0 13px;
+  border: 0;
+  border-bottom: 0;
+  border-radius: 10px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--kodety-text-tertiary, rgb(161 161 170));
+  font-size: 11px;
+  font-weight: 500;
+}
+
+[data-slot="tabs-list"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  ).kodety-editor-inspector-tabs
+  > [data-slot="tabs-trigger"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  ):hover:not(:disabled) {
+  background: color-mix(in srgb, var(--foreground) 4%, transparent);
+  color: var(--kodety-text-secondary, rgb(212 212 216));
+}
+
+[data-slot="tabs-list"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  ).kodety-editor-inspector-tabs
+  > [data-slot="tabs-trigger"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  )[data-state="active"] {
+  border-bottom-color: transparent;
+  background: color-mix(in srgb, var(--foreground) 8%, transparent) !important;
+  box-shadow: none;
+  color: var(--kodety-text, rgb(244 244 245));
+}
+
+/* Page-transition navigation follows the same quiet segmented-control
+ * treatment used by the Canvas/Agent switch. Accent color is reserved for
+ * focus, status, and primary actions. */
+[data-slot="tabs-list"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  ).kodety-page-transition-tabs {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  width: 100% !important;
+  min-width: 0;
+  padding: 3px !important;
+  background: color-mix(
+    in srgb,
+    var(--foreground) 6.5%,
+    transparent
+  ) !important;
+  border: 0;
+}
+
+[data-slot="tabs-list"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  ).kodety-page-transition-tabs
+  > [data-slot="tabs-trigger"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  ) {
+  width: 100%;
+  min-width: 0;
+}
+
+[data-slot="tabs-list"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  ).kodety-page-transition-tabs
+  > [data-slot="tabs-trigger"]:not(
+    [data-ycode-native-ui],
+    [data-ycode-native-ui] *
+  )[data-state="active"] {
+  background: color-mix(in srgb, var(--foreground) 13%, transparent) !important;
+  color: var(--kodety-text, rgb(244 244 245)) !important;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 28%) !important;
+}
+
+/* Interactions owns its responsive rhythm because the resizable Inspector can
+ * reach 224px even on a wide viewport. Viewport media queries cannot describe
+ * that state; container queries keep labels and actions inside the panel. */
+[data-interaction-trigger-chooser],
+[data-interaction-detail] {
+  container-type: inline-size;
+}
+
+@container (min-width: 360px) {
+  [data-interaction-trigger-grid] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container (max-width: 235px) {
+  [data-interaction-breakpoint-label] {
+    display: none;
+  }
+}
+
+/* UTM mappings are one compound control, not a stack of unrelated inputs.
+ * The outer surface owns focus and validation; persistent step labels and
+ * one-pixel internal dividers make the data flow readable at a glance. */
+[data-kodety-utm-mapping] {
+  container-type: inline-size;
+}
+
+[data-kodety-form-utm-settings] {
+  container-type: inline-size;
+}
+
+[data-kodety-utm-mapping-grid] {
+  display: grid;
+  min-width: 0;
+  grid-template-areas: "index target source transform conflict remove";
+  grid-template-columns:
+    34px minmax(125px, 0.72fr) minmax(235px, 1.45fr)
+    minmax(145px, 0.9fr) minmax(150px, 0.95fr) 34px;
+  align-items: stretch;
+}
+
+[data-kodety-utm-mapping-index] {
+  grid-area: index;
+  border-right: 1px solid rgb(255 255 255 / 5.5%);
+}
+
+[data-kodety-utm-mapping-step="target"] {
+  grid-area: target;
+}
+
+[data-kodety-utm-mapping-step="source"] {
+  grid-area: source;
+}
+
+[data-kodety-utm-mapping-step="transform"] {
+  grid-area: transform;
+}
+
+[data-kodety-utm-mapping-step="conflict"] {
+  grid-area: conflict;
+}
+
+[data-kodety-utm-mapping-step]:not([data-kodety-utm-mapping-step="target"]),
+[data-kodety-utm-mapping-remove] {
+  border-left: 1px solid rgb(255 255 255 / 5.5%);
+}
+
+[data-kodety-utm-mapping-remove] {
+  grid-area: remove;
+}
+
+[data-kodety-utm-mapping-message] {
+  min-width: 0;
+}
+
+@container (max-width: 760px) {
+  [data-kodety-utm-mapping-grid] {
+    grid-template-areas:
+      "index target target remove"
+      "source source transform transform"
+      "conflict conflict conflict conflict";
+    grid-template-columns: 34px minmax(0, 1fr) minmax(0, 1fr) 34px;
+  }
+
+  [data-kodety-utm-mapping-step="source"],
+  [data-kodety-utm-mapping-step="transform"],
+  [data-kodety-utm-mapping-step="conflict"] {
+    border-top: 1px solid rgb(255 255 255 / 5.5%);
+  }
+
+  [data-kodety-utm-mapping-step="source"],
+  [data-kodety-utm-mapping-step="conflict"] {
+    border-left: 0;
+  }
+}
+
+@container (max-width: 420px) {
+  [data-kodety-utm-mapping-grid] {
+    grid-template-areas:
+      "index target remove"
+      "source source source"
+      "transform transform transform"
+      "conflict conflict conflict";
+    grid-template-columns: 32px minmax(0, 1fr) 32px;
+  }
+
+  [data-kodety-utm-mapping-step="source"],
+  [data-kodety-utm-mapping-step="transform"],
+  [data-kodety-utm-mapping-step="conflict"] {
+    border-left: 0;
+  }
+
+  [data-kodety-utm-step-arrow] {
+    transform: rotate(90deg);
+  }
+}
+
+@container (max-width: 235px) {
+  [data-kodety-utm-mapping-step] {
+    padding-inline: 8px;
+  }
+
+  [data-kodety-utm-source-composite] {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  [data-kodety-utm-source-kind] {
+    flex-basis: auto;
+    width: 100%;
+    padding-right: 0;
+    padding-bottom: 2px;
+    border-right: 0;
+    border-bottom: 1px solid rgb(255 255 255 / 5.5%);
+  }
+
+  [data-kodety-utm-source-value] {
+    width: 100%;
+    padding-top: 2px;
+    padding-left: 0;
+  }
+
+  [data-kodety-utm-mapping-heading] {
+    display: block;
+  }
+
+  [data-kodety-utm-mapping-toolbar] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    margin-top: 6px;
+    margin-left: 0;
+  }
+
+  [data-kodety-utm-mapping-toolbar] button {
+    min-width: 0;
+    justify-content: center;
+    overflow: hidden;
+    padding-inline: 4px;
+    white-space: nowrap;
+  }
+}
+
+/* Portalled utilities opened from the left rail sit above the editor panels,
+ * but below the topbar's reserved 10000+ layer. */
+.kodety-editor-topbar-overlay[data-kodety-logo-menu] {
+  border-color: rgb(255 255 255 / 8%);
+  border-radius: 10px;
+  background: var(--kodety-panel);
+  color: var(--kodety-text-secondary);
+  box-shadow: var(--kodety-shadow-popover);
+}
+
+[data-kodety-logo-menu]
+  :is(
+    [data-slot="dropdown-menu-item"],
+    [data-slot="dropdown-menu-sub-trigger"]
+  ) {
+  min-height: 32px;
+  border-radius: 6px;
+  padding-inline: 8px;
+  color: var(--kodety-text-secondary);
+  transition:
+    background-color 100ms var(--kodety-ease-ui),
+    color 100ms var(--kodety-ease-ui);
+}
+
+[data-kodety-logo-menu]
+  :is([data-slot="dropdown-menu-item"], [data-slot="dropdown-menu-sub-trigger"])
+  svg {
+  width: 14px;
+  height: 14px;
+  color: var(--kodety-text-tertiary);
+}
+
+[data-kodety-logo-menu]
+  :is(
+    [data-slot="dropdown-menu-item"],
+    [data-slot="dropdown-menu-sub-trigger"]
+  ):is(:focus, [data-state="open"]) {
+  background: rgb(255 255 255 / 6.5%);
+  color: var(--kodety-text);
+}
+
+[data-kodety-logo-menu]
+  :is(
+    [data-slot="dropdown-menu-item"],
+    [data-slot="dropdown-menu-sub-trigger"]
+  ):is(:focus, [data-state="open"])
+  svg {
+  color: var(--kodety-text-secondary);
+}
+
+[data-kodety-logo-menu] [data-slot="dropdown-menu-label"] {
+  color: var(--kodety-text-tertiary);
+}
+
+[data-kodety-logo-menu] [data-slot="dropdown-menu-separator"] {
+  margin-block: 4px;
+  background: var(--kodety-divider);
+}
+
+/* The compound share field owns the only focus outline. The native Input
+ * component stays visually flat so browser autofill/focus cannot add a
+ * second border inside the control. */
+[data-kodety-share-invite-control] [data-kodety-share-control-inner] {
+  display: block !important;
+  align-self: stretch;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding-block: 0 !important;
+  border-radius: 0 !important;
+}
+
+[data-kodety-share-invite-control]
+  [data-kodety-share-control-inner]:is(:focus, :focus-visible) {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+@keyframes kodety-effect-card-ticker {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(calc(-50% - 4px), 0, 0);
+  }
+}
+
+.kodety-effect-card-ticker-track {
+  animation: kodety-effect-card-ticker 5s linear infinite paused;
+  will-change: transform;
+}
+
+.kodety-effect-card-ticker-track--reverse {
+  animation-direction: reverse;
+}
+
+[data-library-effect-card]:is(:hover, :focus-visible)
+  .kodety-effect-card-ticker-track {
+  animation-play-state: running;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kodety-effect-card-ticker-track {
+    animation: none;
+  }
+}
+
+.kodety-editor-sidebar-overlay {
+  z-index: 9000;
+}
+
+/* Fullscreen tools mounted inside a workspace share the viewport with the
+ * Agent dock. Reserve the dock's real width so inspector fields and actions
+ * can never sit underneath the collapsed rail or an open desktop panel. */
+[data-workspace-with-agent]:has(
+    > [data-workspace-agent-dock][data-open="false"]
+  )
+  [data-kodety-fullscreen-surface] {
+  right: 2.75rem !important;
+  width: auto !important;
+}
+
+@media (min-width: 769px) {
+  [data-workspace-with-agent]:has(
+      > [data-workspace-agent-dock][data-open="true"]
+    )
+    [data-kodety-fullscreen-surface] {
+    right: max(340px, min(420px, 42vw)) !important;
+    width: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kodety-loading-bar-indeterminate {
+    animation: none;
+    transform: translateX(75%);
+  }
+}
+
+/* On compact host windows keep every editor pane reachable instead of letting
+   the fixed sidebars squeeze the canvas to zero width. */
+@media (max-width: 960px) {
+  .kodety-editor-main {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+  }
+
+  .kodety-editor-left-sidebar {
+    min-width: 220px;
+  }
+
+  .kodety-editor-workspace {
+    min-width: 420px;
+  }
+
+  .kodety-editor-main[data-previewing="true"] {
+    overflow: hidden !important;
+  }
+
+  .kodety-editor-main[data-previewing="true"] .kodety-editor-workspace {
+    min-width: 0 !important;
+  }
+
+  .kodety-editor-design-sidebar {
+    min-width: 240px;
+  }
+}

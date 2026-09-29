@@ -1,0 +1,25 @@
+{% comment %}Reusable product card. Required: card_product.{% endcomment %}
+<article class="product-card">
+  <a class="product-card__media" href="{{ card_product.url }}">
+    {% if card_product.featured_image %}
+      {{ card_product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 990px) 25vw, 50vw', alt: card_product.featured_image.alt | default: card_product.title }}
+    {% else %}
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {% endif %}
+    {% unless card_product.available %}<span class="product-card__badge">{{ 'products.product.sold_out' | t }}</span>{% endunless %}
+  </a>
+  <div class="product-card__body">
+    <span class="product-card__vendor">{{ card_product.vendor | escape }}</span>
+    <a class="product-card__title" href="{{ card_product.url }}">{{ card_product.title | escape }}</a>
+    <span class="product-card__price">{{ card_product.price | money_with_currency }}</span>
+    {% if card_product.has_only_default_variant and card_product.available %}
+      {% form 'product', card_product, class: 'product-card__form', data-product-form: '' %}
+        <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}">
+        <input type="hidden" name="quantity" value="1">
+        <button class="button button--small" type="submit" name="add">{{ 'products.product.add_to_cart' | t }}</button>
+      {% endform %}
+    {% else %}
+      <a class="button button--small" href="{{ card_product.url }}">{{ 'products.product.choose_options' | t }}</a>
+    {% endif %}
+  </div>
+</article>

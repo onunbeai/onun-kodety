@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="Kodety">
+    <rect width="256" height="256" rx="64" ry="64" fill="#000000" />
+    <g transform="translate(72.35 68) scale(0.9836)" fill="#ffffff">
+        <path d="M51.1932 122L0 61L113.183 94.8289V122H51.1932Z" />
+        <path d="M51.1932 0L0 61L113.183 27.1711V0H51.1932Z" />
+    </g>
+</svg>

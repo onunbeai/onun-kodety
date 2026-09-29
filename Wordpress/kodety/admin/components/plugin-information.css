@@ -1,0 +1,42 @@
+/* Native plugin details iframe only. WordPress owns all links and install actions. */
+body#plugin-information.kodety-os { display: flex; flex-direction: column; color: var(--kds-mist); background: var(--kds-canvas); }
+body#plugin-information.kodety-os * { box-sizing: border-box; }
+body#plugin-information.kodety-os #plugin-information-scrollable { flex: 1; min-height: 0; height: auto; }
+body#plugin-information.kodety-os #plugin-information-title { height: auto; min-height: 62px; padding: 18px 62px 18px 24px; background-color: var(--kds-carbon); }
+body#plugin-information.kodety-os #plugin-information-title h2 { color: var(--kds-paper); font: 400 20px/1.35 var(--kds-font); letter-spacing: -.025em; }
+body#plugin-information.kodety-os #plugin-information-title.with-banner { height: 192px; display: flex; align-items: flex-end; }
+body#plugin-information.kodety-os #plugin-information-title.with-banner h2 { margin: 0; padding: 8px 12px; border-radius: 6px; background: rgb(25 25 25 / 92%); box-shadow: none; text-shadow: none; }
+body#plugin-information.kodety-os #plugin-information-title.with-banner .vignette { height: 100%; box-shadow: none; }
+body#plugin-information.kodety-os #plugin-information-tabs { display: flex; gap: 20px; min-height: 43px; overflow-x: auto; padding: 0 24px; border-color: var(--kds-graphite); background: var(--kds-carbon); scrollbar-width: thin; }
+body#plugin-information.kodety-os #plugin-information-tabs a { flex: 0 0 auto; height: auto; margin: 0; padding: 13px 0; border: 0; color: var(--kds-fog); background: transparent; font-size: 12px; }
+body#plugin-information.kodety-os #plugin-information-tabs a.current { color: var(--kds-paper); box-shadow: inset 0 -1px var(--kds-accent); }
+body#plugin-information.kodety-os #plugin-information-content { display: grid; grid-template-columns: minmax(0, 1fr) 230px; min-height: 0; background: var(--kds-canvas); }
+body#plugin-information.kodety-os #section-holder { grid-column: 1; grid-row: 1; min-width: 0; inset: auto; margin: 0; padding: 22px 24px; }
+body#plugin-information.kodety-os .fyi { grid-column: 2; grid-row: 1; float: none; width: auto; margin: 0; padding: 22px 18px; border-color: var(--kds-graphite); color: var(--kds-fog); background: var(--kds-carbon); }
+body#plugin-information.kodety-os :is(.section, .section p, .fyi li) { color: var(--kds-mist); font-size: 12px; line-height: 1.75; overflow-wrap: anywhere; }
+body#plugin-information.kodety-os :is(h3, h4, .fyi strong) { color: var(--kds-paper); font-weight: 500; }
+body#plugin-information.kodety-os :is(.section h3, .fyi h3) { font-size: 12px; text-transform: none; }
+body#plugin-information.kodety-os a { color: var(--kds-accent-hover); text-decoration: none; }
+body#plugin-information.kodety-os :is(pre, blockquote, .review) { border-color: var(--kds-graphite); }
+body#plugin-information.kodety-os :is(pre, code) { color: var(--kds-mist); background: var(--kds-input); }
+body#plugin-information.kodety-os .fyi ul { margin:0; }
+body#plugin-information.kodety-os .fyi li { margin:0;padding:8px 0;border-bottom:var(--kds-hairline);font-size:11px; }
+body#plugin-information.kodety-os .fyi li strong { display:block;margin-bottom:3px;color:var(--kds-fog);font-size:10px;font-weight:400; }
+body#plugin-information.kodety-os .fyi h3 { margin:20px 0 8px; }
+body#plugin-information.kodety-os .star-rating .star { width:15px;height:15px;font-size:15px;line-height:15px;color:var(--kds-warning); }
+body#plugin-information.kodety-os a:focus:not(:focus-visible) { outline:none;box-shadow:none; }
+body#plugin-information.kodety-os a:focus-visible { outline:2px solid var(--kds-accent);outline-offset:3px;box-shadow:none; }
+body#plugin-information.kodety-os .counter-back { background: var(--kds-obsidian); }
+body#plugin-information.kodety-os .counter-bar { background: var(--kds-warning); }
+body#plugin-information.kodety-os .notice { padding: 10px 12px; color: var(--kds-mist); background: var(--kds-carbon); border-color: var(--kds-graphite); border-left-color: var(--kds-warning); box-shadow: none; }
+body#plugin-information.kodety-os .notice-error { border-left-color: var(--kds-danger); }
+body#plugin-information.kodety-os #plugin-information-footer { position: static; flex: 0 0 auto; min-height: 62px; height: auto; padding: 13px 18px; border-color: var(--kds-graphite); background: var(--kds-carbon); }
+body#plugin-information.kodety-os #plugin-information-footer .button { min-height: 34px; height: auto; padding: 6px 12px; color: var(--kds-mist); background: var(--kds-obsidian); border-color: var(--kds-smoke); border-radius: 6px; box-shadow: none; text-shadow: none; font: 400 12px/20px var(--kds-font); }
+body#plugin-information.kodety-os #plugin-information-footer .button-primary { color: var(--kds-accent-foreground); background: var(--kds-accent); border-color: var(--kds-accent); }
+body#plugin-information.kodety-os #plugin-information-footer .button-primary:hover { color: var(--kds-accent-foreground); background: var(--kds-accent-hover); border-color: var(--kds-accent-hover); }
+body#plugin-information.kodety-os #plugin-information-footer .button:is(:disabled, .button-disabled, [aria-disabled="true"]) { color: var(--kds-ash) !important; background: var(--kds-obsidian) !important; border-color: var(--kds-graphite) !important; cursor: not-allowed; }
+@media (max-width: 782px) {
+  body#plugin-information.kodety-os #plugin-information-title.with-banner { height: 144px; }
+  body#plugin-information.kodety-os #plugin-information-content { grid-template-columns: 1fr; }
+  body#plugin-information.kodety-os .fyi { grid-column: 1; grid-row: 2; border: 0; border-top: var(--kds-hairline); }
+  body#plugin-information.kodety-os #section-holder { grid-column: 1; grid-row: 1; padding: 20px; } }

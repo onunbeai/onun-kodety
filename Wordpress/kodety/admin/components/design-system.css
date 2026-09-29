@@ -1,0 +1,76 @@
+/* Kodety native workspace tokens and shared icon geometry. */
+body.kodety-os:not(.block-editor-page) {
+  --kds-canvas: #111111;
+  --kds-void: var(--kds-canvas);
+  --kds-sidebar: #111111;
+  --kds-carbon: #181818;
+  --kds-obsidian: #242424;
+  --kds-graphite: #303030;
+  --kds-smoke: #383838;
+  --kds-border-subtle: #262626;
+  --kds-hover-border: #484848;
+  --kds-control-border: transparent;
+  --kds-slate: var(--kds-smoke);
+  --kds-ash: #969696;
+  --kds-fog: #969696;
+  --kds-mist: #b8b8b8;
+  --kds-paper: #f0f0f0;
+  --kds-accent: var(--kodety-admin-accent, #9393FF);
+  --kds-accent-soft: var(--kodety-admin-accent-soft, rgba(147, 147, 255, .1));
+  --kds-accent-hover: var(--kodety-admin-accent-hover, #AFAFFF);
+  --kds-accent-foreground: var(--kodety-admin-accent-foreground, #000);
+  --kds-success: #81c5a8;
+  --kds-danger: #ec878b;
+  --kds-warning: #d8b67b;
+  --kds-hover: #282828;
+  --kds-selected: var(--kodety-admin-accent-soft, rgba(147, 147, 255, .1));
+  --kds-input: #242424;
+  --kds-hairline: 1px solid var(--kds-graphite);
+  --kds-divider: 1px solid var(--kds-border-subtle);
+  --kds-shadow-popover: 0 8px 28px rgb(0 0 0 / 32%);
+  --kds-transition: 120ms ease;
+  --kds-focus: 0 0 0 2px var(--kds-accent);
+  --kds-page-width: 1400px;
+  --kds-radius-card: 10px;
+  --kds-radius-control: 8px;
+  --kds-font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --k-os-background: var(--kds-canvas);
+  --k-os-card: var(--kds-carbon);
+  --k-os-popover: var(--kds-obsidian);
+  --k-os-foreground: var(--kds-paper);
+  --k-os-muted-foreground: var(--kds-fog);
+  --k-os-primary: var(--kds-accent);
+  --k-os-primary-hover: var(--kds-accent-hover);
+  --k-os-primary-foreground: var(--kds-accent-foreground);
+  --k-os-secondary: var(--kds-obsidian);
+  --k-os-border: var(--kds-graphite);
+  --k-os-border-strong: var(--kds-smoke);
+  --k-os-input: var(--kds-input);
+  --k-os-destructive: var(--kds-danger);
+  --k-os-radius: var(--kds-radius-card);
+  --k-os-radius-md: var(--kds-radius-control);
+  color-scheme: dark;
+}
+
+/* Keep token values usable on the browser targets without color-mix(). */
+@supports (color: color-mix(in srgb, black, white)) {
+  body.kodety-os:not(.block-editor-page) {
+    --kds-accent-soft: color-mix(in srgb, var(--kds-accent) 10%, transparent);
+    --kds-selected: color-mix(in srgb, var(--kds-accent) 8%, var(--kds-carbon));
+  }
+}
+
+/* An icon holder must use its glyph's box, never a text baseline/descender box.
+ * Components retain control of glyph size, color and decorative containers. */
+body.kodety-os:not(.block-editor-page) :where([data-kodety-icon]:not(svg), .kodety-dashboard-icon, .kodety-ui-icon, .kdw-icon) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 0;
+  vertical-align: middle;
+}
+body.kodety-os:not(.block-editor-page) :where([data-kodety-icon], .kodety-dashboard-icon, .kodety-ui-icon, .kdw-icon) > svg {
+  display: block;
+  flex: none;
+}

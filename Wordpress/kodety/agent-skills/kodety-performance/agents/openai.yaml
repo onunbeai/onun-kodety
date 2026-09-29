@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kodety Performance"
+  short_description: "Otimize velocidade e carregamento no Builder"
+  default_prompt: "Use $kodety-performance para analisar este site ou relatório PageSpeed e aplicar melhorias seguras de desempenho."

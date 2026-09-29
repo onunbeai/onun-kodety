@@ -1,0 +1,68 @@
+{
+  "accessibility": {
+    "announcement": "Announcement",
+    "close": "Close",
+    "next_slide": "Next",
+    "pagination": "Pagination",
+    "previous_slide": "Previous",
+    "primary_navigation": "Primary navigation",
+    "skip_to_text": "Skip to content"
+  },
+  "collections": {
+    "general": {
+      "empty": "This collection doesn't have any products yet.",
+      "eyebrow": "Collection",
+      "explore": "Explore",
+      "products_count": {
+        "one": "{{ count }} product",
+        "other": "{{ count }} products"
+      }
+    }
+  },
+  "general": {
+    "account": "Account",
+    "cart": "Cart",
+    "catalog": "Catalog",
+    "continue_shopping": "Continue shopping",
+    "pagination": {
+      "page": "Page {{ number }}"
+    },
+    "search": {
+      "no_results": "No results for “{{ terms }}”.",
+      "placeholder": "Search products",
+      "search": "Search"
+    },
+    "view_all": "View all →"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "add_error": "The product couldn't be added.",
+      "added_to_cart": "Product added to cart.",
+      "choose_options": "Choose options",
+      "example": "Example product",
+      "in_stock": "In stock",
+      "quantity": "Quantity",
+      "sold_out": "Sold out",
+      "variant": "Variant"
+    }
+  },
+  "sections": {
+    "cart": {
+      "checkout": "Checkout",
+      "empty": "Your cart is empty.",
+      "estimated_total": "Estimated total",
+      "eyebrow": "Your selection",
+      "note": "Order note",
+      "product": "Product",
+      "quantity": "Quantity",
+      "remove": "Remove",
+      "summary": "Summary",
+      "title": "Your cart",
+      "total": "Total"
+    },
+    "main_404": {
+      "eyebrow": "Error 404"
+    }
+  }
+}

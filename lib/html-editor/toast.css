@@ -1,0 +1,85 @@
+/* One toast design for the Builder and Studio, independent of Tailwind/rem scale. */
+.kodety-editor-toaster { --width: min(360px, calc(100vw - 32px)) !important; }
+.kodety-toast {
+  min-height: 40px !important;
+  border: 1px solid rgba(255,255,255,.1) !important;
+  border-radius: 12px !important;
+  background: rgba(27,27,27,.95) !important;
+  padding: 8px 8px 8px 14px !important;
+  color: white !important;
+  box-shadow: 0 14px 40px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.05) inset !important;
+  backdrop-filter: blur(40px) !important;
+}
+.kodety-toast-content { gap: 0 !important; }
+.kodety-toast-title { font-size: 12px !important; font-weight: 500 !important; letter-spacing: -.01em !important; color: white !important; }
+.kodety-toast-description { display: none !important; }
+.kodety-toast-icon { width: 16px !important; height: 16px !important; color: #AFAFFF !important; }
+.kodety-toast-action, .kodety-toast-cancel { height: 28px !important; border-radius: 8px !important; background: rgba(255,255,255,.08) !important; padding: 0 12px !important; font-size: 11px !important; font-weight: 500 !important; color: white !important; }
+.kodety-toast-action:hover { background: rgba(255,255,255,.12) !important; }
+.kodety-toast-cancel { background: rgba(255,255,255,.06) !important; color: rgba(255,255,255,.7) !important; }
+.kodety-toast-success, .kodety-toast-info { border-color: rgba(147,147,255,.25) !important; background: rgba(24,24,27,.98) !important; color: #AFAFFF !important; }
+:is(.kodety-toast-success,.kodety-toast-info) :is([data-title],[data-icon]) { color: #AFAFFF !important; }
+.kodety-toast-error { border-color: rgba(239,68,68,.2) !important; }
+.kodety-toast-error [data-icon] { color: #ef4444 !important; }
+.kodety-toast-warning { border-color: rgba(245,158,11,.2) !important; }
+.kodety-toast-warning [data-icon] { color: #f59e0b !important; }
+
+/* Override Sonner toast content gap */
+[data-sonner-toast][data-styled="true"] [data-content] {
+  gap: 0;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+/* Keep toast actions in the card flow: content at left, discard at right. */
+[data-sonner-toast][data-styled="true"] {
+  overflow: hidden;
+}
+
+[data-sonner-toast][data-styled="true"] [data-close-button] {
+  position: relative !important;
+  inset: auto !important;
+  order: 20 !important;
+  width: auto !important;
+  min-width: max-content !important;
+  height: 32px !important;
+  margin: 0 0 0 12px !important;
+  padding: 0 12px !important;
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: rgba(255, 255, 255, 0.66) !important;
+  box-shadow: none !important;
+  transform: none !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  letter-spacing: -0.01em !important;
+}
+
+[data-sonner-toast][data-styled="true"] [data-close-button] svg {
+  display: none !important;
+}
+
+[data-sonner-toast][data-styled="true"] [data-close-button]::after {
+  content: "Descartar";
+}
+
+html[data-kodety-ui-locale="en"]
+  [data-sonner-toast][data-styled="true"]
+  [data-close-button]::after {
+  content: "Dismiss";
+}
+
+html:lang(en):not([data-kodety-ui-locale]) [data-sonner-toast][data-styled="true"] [data-close-button]::after {
+  content: "Dismiss";
+}
+
+[data-sonner-toast][data-styled="true"] [data-close-button]:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+}

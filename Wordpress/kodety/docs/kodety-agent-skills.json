@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "source": "kodety-remote-mcp",
+  "version": "1.1.40",
+  "distributionScope": "external-mcp-clients",
+  "nativeAgent": {
+    "managedBy": "kodety-builder",
+    "installRequired": false,
+    "updateCheckRequired": false
+  },
+  "packages": [
+    {
+      "name": "kodety-site-code",
+      "title": "Kodety Site Code",
+      "description": "Cria, revisa e sincroniza sites editáveis com o Kodety Builder.",
+      "digest": "sha256:9fc241fa0a7be3950c212f7f4672621a5915edc9b2881130fdd5c2a843f771d2",
+      "manifestFile": "kodety.manifest.json",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "0583653d271d8bc86dd06f782cb082513a13b2f6ea0b01d7576677ab3512a472",
+          "size": 11121
+        },
+        {
+          "path": "references/component-system.md",
+          "sha256": "40ac8340b69e83bbd9fc09f7fd06bc2a89e11b6e9ffd077b81cac12b3eca9d8f",
+          "size": 14115
+        },
+        {
+          "path": "references/mcp-operations.md",
+          "sha256": "e0906d4caef2d3bed2099039dc38b4090abde3b6d1a3e6e308ee0ca4236482ab",
+          "size": 12123
+        },
+        {
+          "path": "references/kodety-code-contract.md",
+          "sha256": "519b51348fe6d3bb0ca79713870625a228b11a2d8fca5c6c68ff7b04d37e7a4e",
+          "size": 49486
+        },
+        {
+          "path": "references/native-panels.md",
+          "sha256": "df2a880080cf37865d11619418f24836ca802a62f37f911b1b8889d06c086e3e",
+          "size": 2554
+        },
+        {
+          "path": "scripts/validate-kodety-site.mjs",
+          "sha256": "5e623c81ae9bc67892468a5509641ee463d3838428cc1f5790da424dbca99e1c",
+          "size": 47292
+        },
+        {
+          "path": "agents/openai.yaml",
+          "sha256": "67d4f252cb14054a75ac02602cd9de854634dd21fde8f43eaceda12a322a32ea",
+          "size": 369
+        }
+      ]
+    },
+    {
+      "name": "kodety-motion",
+      "title": "Kodety Motion",
+      "description": "Cria e ajusta animações nativas no Interactions v2.",
+      "digest": "sha256:003a04a036e3a7f5eede46179f4407038e822ec7ce841167c0debb6b34f99c94",
+      "manifestFile": "kodety.manifest.json",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "c76914dd50212877e948e15d7d7fa55ee54c7b0b48841853458acf420b1833db",
+          "size": 5607
+        },
+        {
+          "path": "SKILL.json",
+          "sha256": "a704256228fe807dd1524ead87ade48f2a8d9dfeb3be3e79ef5b1e0e993d402b",
+          "size": 136
+        },
+        {
+          "path": "agents/openai.yaml",
+          "sha256": "948bbbf3aa09b01771ac617b7eb422f30bc44b5237784964f9353ec85b2d2bf9",
+          "size": 233
+        },
+        {
+          "path": "references/motion-engine.md",
+          "sha256": "7a6f55ce79ac0c3f6d6cb5790261c7887b00ae811fc116c13974e669fd1f1f19",
+          "size": 7230
+        }
+      ]
+    },
+    {
+      "name": "kodety-widgets",
+      "title": "Kodety Widgets",
+      "description": "Cria, compila e configura Code Components React no Builder.",
+      "digest": "sha256:626b971a3f1f3e7e4fb711accce3618ed72f3fdd72084fcaa7555933dc22854d",
+      "manifestFile": "kodety.manifest.json",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "7990cad486b882a31f3744af17bec89fe44f779636d707bd18acc719a3e317e8",
+          "size": 7159
+        },
+        {
+          "path": "SKILL.json",
+          "sha256": "46a833e0082502b774d56e7dd566579801a2842a8a5c46ec1075035019421527",
+          "size": 141
+        },
+        {
+          "path": "agents/openai.yaml",
+          "sha256": "ba6a3f87c5c3087c2997b1b0981ac3058853ab6165220bdbbe6a1ce04f3bd9c0",
+          "size": 231
+        },
+        {
+          "path": "references/agent-operations.md",
+          "sha256": "8f0cceab8f1c85b644a9e5fba2239e30c83a5abcaec30868a0daf3cf90557a22",
+          "size": 3826
+        },
+        {
+          "path": "references/code-component-contract.md",
+          "sha256": "dfbbf2a0a8d30076b88fa50af246ddf1eb62697742ac840c933a59086d08083d",
+          "size": 5299
+        },
+        {
+          "path": "references/control-catalog.md",
+          "sha256": "b128eb92588b4ee365fb71ba28df04e716dd2f4db84449a112a90eddc4e9905c",
+          "size": 4280
+        }
+      ]
+    },
+    {
+      "name": "kodety-performance",
+      "title": "Kodety Performance",
+      "description": "Audita e aplica melhorias seguras de desempenho e carregamento.",
+      "digest": "sha256:0de5ab312109c04ad3ad50de7922ff311f43cea3066007e106222ee92563a6ab",
+      "manifestFile": "kodety.manifest.json",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "2db0d2ed629caf54f87e85d72212a3ac87ae6c4c25c9f627ddf4521aa4bfabae",
+          "size": 5423
+        },
+        {
+          "path": "SKILL.json",
+          "sha256": "4f4092b3785bf965a045746068b0457d1df2541a51482e4df1ea04b220c31f11",
+          "size": 142
+        },
+        {
+          "path": "agents/openai.yaml",
+          "sha256": "5d2fce789c10b19e3ff25d63a8894540ca62c3885b185e05dd4900aff535bd7a",
+          "size": 251
+        },
+        {
+          "path": "references/performance-playbook.md",
+          "sha256": "ceccd10561544977d27c3c3f379276d7f6a635c9ac5047ed59fd9f2b6954c501",
+          "size": 6235
+        }
+      ]
+    }
+  ]
+}

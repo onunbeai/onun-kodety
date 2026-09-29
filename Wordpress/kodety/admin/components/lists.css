@@ -1,0 +1,1434 @@
+/* Kodety classic list components. Loaded after the legacy admin layers. */
+
+:root {
+  --kodety-ui-list-bg: var(--k-os-background, #111214);
+  --kodety-ui-list-surface: var(--k-os-card, #191a1d);
+  --kodety-ui-list-surface-raised: var(--k-os-popover, #1e1f23);
+  --kodety-ui-list-hover: var(--k-os-surface-hover, rgba(255, 255, 255, 0.045));
+  --kodety-ui-list-border: var(--k-os-border, rgba(255, 255, 255, 0.1));
+  --kodety-ui-list-divider: var(--k-os-divider, rgba(255, 255, 255, 0.075));
+  --kodety-ui-list-text: var(--k-os-foreground, #f5f5f6);
+  --kodety-ui-list-muted: var(--k-os-muted-foreground, #989aa2);
+  --kodety-ui-list-blue: var(--k-os-primary, #9393FF);
+  --kodety-ui-list-radius: var(--k-os-radius, 10px);
+  --kodety-ui-list-radius-sm: var(--k-os-radius-md, 7px);
+}
+
+.kodety-ui-sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Hide only the native fragments replaced by this module. The list remains
+   usable if JavaScript is unavailable; this state is applied by the runtime. */
+body.kodety-ui-lists-ready .kodety-ui-native-tabs,
+body.kodety-ui-lists-ready .kodety-ui-toolbar--duplicate {
+  display: none !important;
+}
+
+/* WordPress marks these controls as JavaScript-only hidden. The legacy button
+   skin must never make them visible again. */
+.js body.kodety-admin-skin .hide-if-js {
+  display: none !important;
+}
+
+.js body.kodety-admin-skin.plugins-php .search-form.search-plugins,
+.kodety-ui-search-source {
+  display: none !important;
+}
+
+/* The original tabs remain in the form for third-party scripts, but never render. */
+.kodety-ui-native-tabs {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.kodety-ui-tabs {
+  box-sizing: border-box;
+  min-height: 40px;
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  margin: 0 0 16px;
+  padding: 0;
+  border-bottom: 1px solid var(--kodety-ui-list-divider);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.kodety-ui-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.kodety-ui-tab {
+  position: relative;
+  min-height: 40px;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 5px;
+  padding: 0 1px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--kodety-ui-list-muted) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 40px !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  outline-offset: -3px;
+  transition: color 140ms ease;
+}
+
+.kodety-ui-tab:hover,
+.kodety-ui-tab:focus-visible {
+  color: var(--kodety-ui-list-text) !important;
+}
+
+.kodety-ui-tab:focus-visible {
+  border-radius: 4px !important;
+  outline: 2px solid color-mix(in oklch, var(--kodety-ui-list-blue) 72%, white) !important;
+  outline-offset: -3px !important;
+}
+
+.kodety-ui-tab--active {
+  color: var(--kodety-ui-list-text) !important;
+  font-weight: 600 !important;
+}
+
+.kodety-ui-tab--active::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  border-radius: 2px 2px 0 0;
+  background: var(--kodety-ui-list-blue);
+  content: "";
+}
+
+.kodety-ui-tab__count {
+  color: inherit !important;
+  font-size: 10px !important;
+  font-weight: 500;
+  opacity: 0.58;
+}
+
+/* Toolbar: native controls, recomposed into a predictable two-sided layout. */
+.kodety-admin-skin .kodety-ui-toolbar,
+.kodety-os .kodety-ui-toolbar {
+  box-sizing: border-box !important;
+  width: 100%;
+  min-height: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin: 0 !important;
+  padding: 8px 10px !important;
+  border: 1px solid var(--kodety-ui-list-border) !important;
+  border-bottom-color: var(--kodety-ui-list-divider) !important;
+  border-radius: var(--kodety-ui-list-radius) var(--kodety-ui-list-radius) 0 0 !important;
+  background: var(--kodety-ui-list-surface) !important;
+  color: var(--kodety-ui-list-muted) !important;
+  box-shadow: none !important;
+  float: none !important;
+  clear: both !important;
+}
+
+.kodety-ui-toolbar__primary,
+.kodety-ui-toolbar__trailing,
+.kodety-ui-toolbar__actions {
+  min-width: 0;
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  float: none !important;
+}
+
+.kodety-ui-toolbar__primary {
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+}
+
+.kodety-ui-toolbar__trailing {
+  flex: 0 1 auto;
+  justify-content: flex-end;
+}
+
+.kodety-ui-toolbar__actions--empty {
+  display: none !important;
+}
+
+.kodety-ui-toolbar--actions-empty {
+  justify-content: flex-end !important;
+}
+
+.kodety-ui-toolbar :where(select, input, .button, button) {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.kodety-ui-toolbar select,
+.kodety-ui-toolbar .button,
+.kodety-ui-toolbar button,
+.kodety-ui-search__input,
+.kodety-ui-search__button {
+  height: 32px !important;
+  min-height: 32px !important;
+  line-height: 30px !important;
+}
+
+.kodety-ui-toolbar select {
+  max-width: 190px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  font-size: 11px !important;
+  color-scheme: dark;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  .kodety-ui-toolbar
+  select:not(.select2-hidden-accessible):not(.components-select-control__input)
+  :is(option, optgroup) {
+  background-color: var(--kodety-ui-list-surface-raised) !important;
+  color: var(--kodety-ui-list-text) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  .kodety-ui-toolbar
+  select:not(.select2-hidden-accessible):not(.components-select-control__input)
+  :is(option:disabled, optgroup:disabled) {
+  color: var(--kodety-ui-list-muted) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  .kodety-ui-toolbar
+  select:not(.select2-hidden-accessible):not(
+    .components-select-control__input
+  ):disabled {
+  color: var(--kodety-ui-list-muted) !important;
+  text-shadow: none !important;
+  cursor: not-allowed;
+}
+
+.kodety-ui-toolbar .button,
+.kodety-ui-toolbar button,
+.kodety-ui-search__button {
+  padding: 0 10px !important;
+  border-radius: var(--kodety-ui-list-radius-sm) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+.kodety-admin-skin .kodety-ui-search,
+.kodety-os .kodety-ui-search {
+  position: relative;
+  width: clamp(180px, 20vw, 240px) !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin: 0 !important;
+  float: none !important;
+}
+
+.kodety-ui-search label {
+  margin: 0 !important;
+}
+
+.kodety-ui-search__input {
+  width: 100% !important;
+  min-width: 0 !important;
+  padding: 0 10px 0 32px !important;
+  border-radius: var(--kodety-ui-list-radius-sm) !important;
+  font-size: 11px !important;
+}
+
+.kodety-ui-toolbar :where(select, input, button, .button):focus-visible,
+.kodety-ui-search__input:focus {
+  border-color: color-mix(
+    in oklch,
+    var(--kodety-ui-list-blue) 72%,
+    white
+  ) !important;
+  outline: 2px solid
+    color-mix(in oklch, var(--kodety-ui-list-blue) 28%, transparent) !important;
+  outline-offset: 1px !important;
+  box-shadow: none !important;
+}
+
+.kodety-ui-search__icon {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 10px;
+  width: 14px;
+  height: 14px;
+  display: grid;
+  place-items: center;
+  color: var(--kodety-ui-list-muted);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.kodety-ui-search__icon svg,
+.kodety-ui-search__button-icon svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.kodety-ui-search__native-submit {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.kodety-ui-search__icon-button {
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  background: transparent !important;
+  color: var(--kodety-ui-list-muted) !important;
+  line-height: 1 !important;
+  pointer-events: auto;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+.kodety-ui-search__icon-button:hover,
+.kodety-ui-search__icon-button:focus-visible {
+  color: var(--kodety-ui-list-text) !important;
+}
+
+/* Accessible select proxy. The native field remains in its WordPress form and
+   continues to own the submitted value. */
+.kodety-ui-select {
+  position: relative;
+  width: min(190px, 32vw);
+  min-width: 150px;
+  flex: 0 1 190px;
+}
+
+.kodety-ui-select__native {
+  position: absolute !important;
+  width: 1px !important;
+  min-width: 1px !important;
+  max-width: 1px !important;
+  height: 1px !important;
+  min-height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  opacity: 0 !important;
+}
+
+.kodety-ui-toolbar .kodety-ui-select__trigger {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  padding: 0 9px 0 10px !important;
+  border: 1px solid var(--kodety-ui-list-border) !important;
+  border-radius: var(--kodety-ui-list-radius-sm) !important;
+  background: color-mix(
+    in oklch,
+    var(--kodety-ui-list-surface-raised) 78%,
+    transparent
+  ) !important;
+  color: var(--kodety-ui-list-text) !important;
+  font-size: 11px !important;
+  font-weight: 550 !important;
+  line-height: 1 !important;
+  text-align: left !important;
+  box-shadow: none !important;
+}
+
+.kodety-ui-toolbar .kodety-ui-select__trigger:hover {
+  border-color: color-mix(
+    in oklch,
+    var(--kodety-ui-list-text) 22%,
+    transparent
+  ) !important;
+  background: var(--kodety-ui-list-hover) !important;
+}
+
+.kodety-ui-select--open .kodety-ui-select__trigger {
+  border-color: var(--kodety-ui-list-blue) !important;
+  outline: 2px solid
+    color-mix(in oklch, var(--kodety-ui-list-blue) 24%, transparent) !important;
+  outline-offset: 1px !important;
+}
+
+.kodety-ui-select__value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kodety-ui-select__chevron {
+  width: 13px;
+  height: 13px;
+  display: grid;
+  flex: none;
+  place-items: center;
+  color: var(--kodety-ui-list-muted);
+  transition: transform 140ms ease;
+}
+
+.kodety-ui-select__chevron svg {
+  width: 13px;
+  height: 13px;
+}
+
+.kodety-ui-select--open .kodety-ui-select__chevron {
+  transform: rotate(180deg);
+}
+
+.kodety-ui-select__list {
+  position: absolute;
+  z-index: 100000;
+  top: calc(100% + 6px);
+  left: 0;
+  box-sizing: border-box;
+  width: max(100%, 220px);
+  max-width: min(320px, calc(100vw - 40px));
+  max-height: min(300px, 50vh);
+  padding: 4px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid var(--kodety-ui-list-border);
+  border-radius: 9px;
+  background: var(--kodety-ui-list-surface-raised);
+  color: var(--kodety-ui-list-text);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.34),
+    0 3px 12px rgba(0, 0, 0, 0.22);
+}
+
+.kodety-ui-select__list[hidden] {
+  display: none !important;
+}
+
+.kodety-ui-select__group + .kodety-ui-select__group {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid var(--kodety-ui-list-divider);
+}
+
+.kodety-ui-select__group-label {
+  min-height: 26px;
+  display: flex;
+  align-items: center;
+  padding: 0 9px;
+  color: var(--kodety-ui-list-muted);
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.kodety-ui-toolbar .kodety-ui-select__option {
+  position: relative;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-height: 32px !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 7px 30px 7px 9px !important;
+  border: 0 !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  color: var(--kodety-ui-list-text) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+  text-align: left !important;
+  white-space: normal !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+
+.kodety-ui-toolbar .kodety-ui-select__option:hover,
+.kodety-ui-toolbar .kodety-ui-select__option:focus-visible {
+  outline: 0 !important;
+  background: var(--kodety-ui-list-hover) !important;
+  color: var(--kodety-ui-list-text) !important;
+}
+
+.kodety-ui-toolbar .kodety-ui-select__option[aria-selected="true"] {
+  background: color-mix(
+    in oklch,
+    var(--kodety-ui-list-blue) 15%,
+    transparent
+  ) !important;
+  color: color-mix(in oklch, var(--kodety-ui-list-blue) 38%, white) !important;
+}
+
+.kodety-ui-select__option[aria-selected="true"]::after {
+  position: absolute;
+  right: 11px;
+  width: 8px;
+  height: 4px;
+  border-bottom: 1.5px solid currentColor;
+  border-left: 1.5px solid currentColor;
+  content: "";
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+.kodety-ui-toolbar .kodety-ui-select__option[aria-disabled="true"] {
+  color: var(--kodety-ui-list-muted) !important;
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.kodety-ui-select--disabled {
+  opacity: 0.52;
+}
+
+.kodety-ui-search__button {
+  box-sizing: border-box !important;
+  width: 32px !important;
+  min-width: 32px !important;
+  display: grid !important;
+  place-items: center;
+  padding: 0 !important;
+  border: 1px solid var(--kodety-ui-list-border) !important;
+  background: var(--k-os-secondary, rgba(255, 255, 255, 0.035)) !important;
+  color: var(--kodety-ui-list-muted) !important;
+}
+
+.kodety-ui-search__button:hover,
+.kodety-ui-search__button:focus-visible {
+  border-color: var(--k-os-border-strong) !important;
+  background: var(--kodety-ui-list-hover) !important;
+  color: var(--kodety-ui-list-text) !important;
+}
+
+/* Pagination is kept native, with Kodety dimensions and icon hooks. */
+.kodety-admin-skin .kodety-ui-pagination,
+.kodety-os .kodety-ui-pagination {
+  min-height: 32px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--kodety-ui-list-muted) !important;
+  font-size: 10px !important;
+  line-height: 1 !important;
+  float: none !important;
+}
+
+.kodety-ui-pagination__amount {
+  flex: none;
+  color: var(--kodety-ui-list-muted) !important;
+  font-size: 10px !important;
+  white-space: nowrap;
+}
+
+.kodety-ui-pagination__controls {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.kodety-ui-pagination__controls[hidden],
+.kodety-ui-pagination__status[hidden] {
+  display: none !important;
+}
+
+.kodety-ui-pagination .kodety-ui-icon-button {
+  position: relative;
+  box-sizing: border-box !important;
+  width: 30px !important;
+  min-width: 30px !important;
+  height: 30px !important;
+  min-height: 30px !important;
+  display: inline-grid !important;
+  place-items: center;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid var(--kodety-ui-list-border) !important;
+  border-radius: var(--kodety-ui-list-radius-sm) !important;
+  background: transparent !important;
+  color: var(--kodety-ui-list-muted) !important;
+  font-size: 0 !important;
+  line-height: 1 !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+}
+
+.kodety-ui-pagination a.kodety-ui-icon-button:hover,
+.kodety-ui-pagination a.kodety-ui-icon-button:focus-visible {
+  border-color: color-mix(
+    in oklch,
+    var(--kodety-ui-list-border) 75%,
+    white
+  ) !important;
+  background: var(--kodety-ui-list-hover) !important;
+  color: var(--kodety-ui-list-text) !important;
+}
+
+.kodety-ui-pagination .tablenav-pages-navspan.kodety-ui-icon-button {
+  display: none !important;
+}
+
+.kodety-ui-pagination [data-kodety-icon] > svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+  pointer-events: none;
+}
+
+.kodety-ui-pagination__input {
+  box-sizing: border-box !important;
+  width: 38px !important;
+  min-width: 38px !important;
+  height: 30px !important;
+  min-height: 30px !important;
+  margin: 0 2px !important;
+  padding: 0 4px !important;
+  border-radius: var(--kodety-ui-list-radius-sm) !important;
+  text-align: center;
+  font-size: 11px !important;
+}
+
+.kodety-ui-pagination__status {
+  color: var(--kodety-ui-list-muted) !important;
+  font-size: 10px !important;
+  white-space: nowrap;
+}
+
+.kodety-ui-pagination--single {
+  min-height: auto !important;
+}
+
+/* One framed surface; the table itself no longer creates a second border. */
+.kodety-ui-data-grid {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid var(--kodety-ui-list-border);
+  border-top: 0;
+  border-radius: 0 0 var(--kodety-ui-list-radius) var(--kodety-ui-list-radius);
+  background: var(--kodety-ui-list-surface);
+  overflow: auto;
+  outline: none;
+  box-shadow: none;
+}
+
+.kodety-ui-data-grid:focus-visible {
+  box-shadow: inset 0 0 0 2px
+    color-mix(in oklch, var(--kodety-ui-list-blue) 72%, transparent);
+}
+
+.kodety-admin-skin .kodety-ui-table,
+.kodety-os .kodety-ui-table {
+  width: 100% !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+.kodety-ui-table > tfoot,
+.kodety-ui-table__duplicate-footer,
+.kodety-ui-toolbar--duplicate {
+  display: none !important;
+}
+
+.kodety-admin-skin .kodety-ui-table > thead > tr,
+.kodety-os .kodety-ui-table > thead > tr {
+  background: color-mix(
+    in oklch,
+    var(--kodety-ui-list-surface) 92%,
+    black
+  ) !important;
+}
+
+.kodety-admin-skin .kodety-ui-table > thead > tr > :where(th, td),
+.kodety-os .kodety-ui-table > thead > tr > :where(th, td) {
+  box-sizing: border-box !important;
+  height: 38px !important;
+  padding: 0 12px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--kodety-ui-list-divider) !important;
+  background: transparent !important;
+  color: var(--kodety-ui-list-muted) !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  line-height: 38px !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  vertical-align: middle !important;
+}
+
+.kodety-admin-skin .kodety-ui-table > tbody > tr,
+.kodety-os .kodety-ui-table > tbody > tr {
+  background: transparent !important;
+}
+
+.kodety-admin-skin .kodety-ui-table > tbody > tr:hover,
+.kodety-os .kodety-ui-table > tbody > tr:hover {
+  background: var(--kodety-ui-list-hover) !important;
+}
+
+.kodety-admin-skin .kodety-ui-table > tbody > tr:focus-within,
+.kodety-os .kodety-ui-table > tbody > tr:focus-within {
+  background: color-mix(
+    in oklch,
+    var(--kodety-ui-list-hover) 72%,
+    var(--kodety-ui-list-blue) 8%
+  ) !important;
+}
+
+.kodety-admin-skin .kodety-ui-table > tbody > tr > :where(th, td),
+.kodety-os .kodety-ui-table > tbody > tr > :where(th, td) {
+  box-sizing: border-box !important;
+  min-height: 50px !important;
+  padding: 10px 12px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--kodety-ui-list-divider) !important;
+  background: transparent !important;
+  color: color-mix(
+    in oklch,
+    var(--kodety-ui-list-text) 76%,
+    transparent
+  ) !important;
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+  vertical-align: middle !important;
+}
+
+.kodety-admin-skin .kodety-ui-table > tbody > tr:last-child > :where(th, td),
+.kodety-os .kodety-ui-table > tbody > tr:last-child > :where(th, td) {
+  border-bottom: 0 !important;
+}
+
+.kodety-ui-table
+  :where(.row-title, .column-primary strong, .plugin-title strong) {
+  color: var(--kodety-ui-list-text) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.01em;
+}
+
+.kodety-ui-table :where(a:not(.button, .row-title), .row-actions a) {
+  text-underline-offset: 2px;
+}
+
+.kodety-ui-table :where(a, button, input, select):focus-visible {
+  outline: 2px solid color-mix(in oklch, var(--kodety-ui-list-blue) 72%, white) !important;
+  outline-offset: 2px !important;
+  box-shadow: none !important;
+}
+
+.kodety-ui-table
+  :where(
+    .description,
+    .plugin-description,
+    .column-description,
+    .user-description
+  ),
+.kodety-ui-table
+  :where(
+    .description,
+    .plugin-description,
+    .column-description,
+    .user-description
+  )
+  p {
+  color: var(--kodety-ui-list-muted) !important;
+  font-size: 10px !important;
+  line-height: 1.5 !important;
+}
+
+.kodety-ui-table .manage-column > a,
+.kodety-ui-table .manage-column.sorted > a,
+.kodety-ui-table .manage-column.sortable > a {
+  min-height: 38px;
+  display: inline-flex !important;
+  align-items: center;
+  color: inherit !important;
+  line-height: 1 !important;
+  text-decoration: none !important;
+}
+
+.kodety-ui-table .manage-column > a:hover,
+.kodety-ui-table .manage-column > a:focus-visible {
+  color: var(--kodety-ui-list-text) !important;
+}
+
+.kodety-ui-row-actions {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 5px 0 0 !important;
+  padding: 0 !important;
+  color: transparent !important;
+  font-size: 10px !important;
+  line-height: 1.4 !important;
+}
+
+.kodety-ui-row-actions > span {
+  color: transparent !important;
+  font-size: 0 !important;
+}
+
+.kodety-ui-row-actions a {
+  color: var(--kodety-ui-list-muted) !important;
+  font-size: 10px !important;
+  font-weight: 500;
+  text-decoration: none !important;
+}
+
+.kodety-ui-row-actions a:hover,
+.kodety-ui-row-actions a:focus-visible {
+  color: var(--kodety-ui-list-text) !important;
+}
+
+.kodety-ui-row-actions :where(.trash, .delete, .spam) a {
+  color: var(--k-os-destructive, #ff6b66) !important;
+}
+
+/* Kodety-managed pages expose their primary editor action without relying on hover. */
+.kodety-ui-table--pages tbody tr:has(.row-actions .kodety_edit) .row-actions {
+  position: static !important;
+  left: auto !important;
+  visibility: visible !important;
+  display: flex !important;
+  padding-top: 7px !important;
+}
+
+.kodety-ui-table--pages .kodety-ui-row-actions .kodety_edit {
+  order: -1;
+}
+
+.kodety-ui-table--pages .kodety-ui-row-actions .kodety_edit a {
+  box-sizing: border-box;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 9px;
+  border: 1px solid var(--kds-accent, var(--kodety-admin-accent, #9393FF));
+  border-radius: 7px;
+  background: var(--kds-accent, var(--kodety-admin-accent, #9393FF));
+  color: var(--kodety-admin-accent-foreground, #fff) !important;
+  font-size: 10px !important;
+  font-weight: 650 !important;
+  line-height: 26px !important;
+  box-shadow: none !important;
+}
+
+.kodety-ui-table--pages .kodety-ui-row-actions .kodety_edit a:hover,
+.kodety-ui-table--pages .kodety-ui-row-actions .kodety_edit a:focus-visible {
+  border-color: var(--kds-paper, #ffffff) !important;
+  background: var(--kds-paper, #ffffff) !important;
+  color: var(--kds-void, #08090a) !important;
+}
+
+.kodety-ui-table--pages .kodety-ui-row-actions .kodety_edit .kodety-dashboard-icon {
+  width: 12px;
+  height: 12px;
+  display: inline-grid;
+  place-items: center;
+}
+
+.kodety-ui-table--pages
+  .kodety-ui-row-actions
+  .kodety_edit
+  .kodety-dashboard-icon
+  svg {
+  width: 100%;
+  height: 100%;
+}
+
+.kodety-ui-table .check-column {
+  width: 40px !important;
+  padding-right: 8px !important;
+  padding-left: 12px !important;
+}
+
+.kodety-ui-table input[type="checkbox"] {
+  margin: 0 !important;
+  vertical-align: middle !important;
+}
+
+.kodety-ui-table input[type="checkbox"]:focus-visible {
+  outline-offset: 3px !important;
+}
+
+.kodety-ui-table .sorting-indicators {
+  margin-left: 4px;
+  vertical-align: middle;
+  opacity: 0.58;
+}
+
+/* Empty collections are intentionally compact and remain inside the grid. */
+.kodety-ui-table__row--empty > td,
+.kodety-ui-table .no-items > td {
+  height: 112px !important;
+  padding: 28px !important;
+  color: var(--kodety-ui-list-muted) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+/* Posts and pages: status is metadata, not a second competing title. */
+.kodety-ui-table--posts .column-title,
+.kodety-ui-table--pages .column-title {
+  min-width: 280px;
+}
+
+.kodety-ui-table :where(.post-state, .post-com-count-wrapper .post-com-count) {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 0 5px !important;
+  padding: 2px 6px !important;
+  border: 1px solid var(--kodety-ui-list-border) !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.025) !important;
+  color: var(--kodety-ui-list-muted) !important;
+  font-size: 8px !important;
+  font-weight: 650 !important;
+  line-height: 1.4 !important;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+  box-shadow: none !important;
+}
+
+.kodety-ui-table .post-com-count-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Plugins: active state and updates belong to one visual row group. */
+.kodety-admin-skin .kodety-ui-table--plugins > tbody > tr.active,
+.kodety-os .kodety-ui-table--plugins > tbody > tr.active,
+.kodety-admin-skin
+  .kodety-ui-table--plugins
+  > tbody
+  > tr.kodety-ui-table__row--active,
+.kodety-os .kodety-ui-table--plugins > tbody > tr.kodety-ui-table__row--active {
+  border-left: 0 !important;
+  background: rgba(255, 255, 255, 0.018) !important;
+  box-shadow: none !important;
+}
+
+.kodety-admin-skin .kodety-ui-table--plugins > tbody > tr.active > :where(th, td),
+.kodety-os .kodety-ui-table--plugins > tbody > tr.active > :where(th, td),
+.kodety-admin-skin
+  .kodety-ui-table--plugins
+  > tbody
+  > tr.kodety-ui-table__row--active
+  > :where(th, td),
+.kodety-os
+  .kodety-ui-table--plugins
+  > tbody
+  > tr.kodety-ui-table__row--active
+  > :where(th, td) {
+  border-left: 0 !important;
+  background: rgba(255, 255, 255, 0.018) !important;
+  box-shadow: none !important;
+}
+
+.kodety-ui-table--plugins .plugin-title {
+  width: 260px;
+  min-width: 260px;
+}
+
+.kodety-ui-table--plugins .plugin-title strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.kodety-ui-table--plugins .plugin-version-author-uri,
+.kodety-ui-table--plugins .plugin-version-author-uri a {
+  color: var(--kodety-ui-list-muted) !important;
+  font-size: 9px !important;
+  line-height: 1.4 !important;
+}
+
+@media (min-width: 783px) {
+  .kodety-ui-table--plugins {
+    table-layout: fixed !important;
+  }
+
+  .kodety-ui-table--plugins :where(.column-name, .plugin-title) {
+    width: 260px !important;
+  }
+
+  .kodety-ui-table--plugins .column-auto-updates {
+    width: 180px !important;
+  }
+
+  .kodety-ui-table--plugins
+    .column-description
+    :where(p, .plugin-version-author-uri) {
+    max-width: 78ch;
+  }
+}
+
+.kodety-ui-table--plugins tr.plugin-update-tr > td,
+.kodety-ui-table--plugins tr.plugin-update-tr .plugin-update,
+.kodety-ui-table--plugins tr.plugin-update-tr .update-message {
+  border: 0 !important;
+  background: color-mix(
+    in oklch,
+    #d9a441 7%,
+    var(--kodety-ui-list-surface)
+  ) !important;
+  color: color-mix(in oklch, #f2cb7a 78%, white) !important;
+  box-shadow: none !important;
+}
+
+.kodety-ui-table--plugins tr.plugin-update-tr > td {
+  padding: 0 12px 10px 42px !important;
+  border-bottom: 1px solid var(--kodety-ui-list-divider) !important;
+}
+
+.kodety-ui-table--plugins tr.plugin-update-tr .update-message {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  margin: 0 !important;
+  padding: 7px 10px !important;
+  border: 1px solid color-mix(in oklch, #d9a441 22%, transparent) !important;
+  border-radius: var(--kodety-ui-list-radius-sm) !important;
+  font-size: 10px !important;
+  line-height: 1.45 !important;
+}
+
+.kodety-ui-table--plugins tr.plugin-update-tr .update-message::before {
+  margin: 0 7px 0 0 !important;
+  color: #e6b552 !important;
+}
+
+/* Users keep identity readable without oversized WordPress avatars. */
+.kodety-ui-table--users .column-username img,
+.kodety-ui-table--users .avatar {
+  width: 28px !important;
+  height: 28px !important;
+  margin: 0 8px 0 0 !important;
+  border: 1px solid var(--kodety-ui-list-border);
+  border-radius: 8px !important;
+  vertical-align: middle;
+}
+
+.kodety-ui-table--users .column-username strong {
+  display: inline-flex;
+  align-items: center;
+}
+
+.kodety-ui-table--users :where(.column-email, .column-role, .column-posts) {
+  color: color-mix(
+    in oklch,
+    var(--kodety-ui-list-text) 68%,
+    transparent
+  ) !important;
+}
+
+/* Taxonomies can carry long descriptions; keep names dominant and text calm. */
+.kodety-ui-table--taxonomies .column-name {
+  width: 26%;
+  min-width: 190px;
+}
+
+.kodety-ui-table--taxonomies .column-description {
+  max-width: 520px;
+}
+
+.kodety-ui-table--taxonomies .column-slug,
+.kodety-ui-table--taxonomies .column-posts {
+  color: var(--kodety-ui-list-muted) !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9px !important;
+}
+
+/* Quick/bulk edit is still native, but now reads as an expanded row. */
+.kodety-ui-table__row--inline-edit > td,
+.kodety-ui-table :where(.inline-edit-row, .quick-edit-row, .bulk-edit-row) > td {
+  padding: 16px !important;
+  border-bottom: 1px solid var(--kodety-ui-list-border) !important;
+  background: var(--kodety-ui-list-surface-raised) !important;
+}
+
+.kodety-ui-table
+  :where(.inline-edit-row, .quick-edit-row, .bulk-edit-row)
+  fieldset {
+  margin: 0 12px 12px 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+.kodety-ui-table
+  :where(.inline-edit-row, .quick-edit-row, .bulk-edit-row)
+  .inline-edit-legend {
+  margin: 0 0 12px !important;
+  color: var(--kodety-ui-list-text) !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+  line-height: 1.3 !important;
+}
+
+.kodety-ui-table
+  :where(.inline-edit-row, .quick-edit-row, .bulk-edit-row)
+  label {
+  color: var(--kodety-ui-list-muted) !important;
+  font-size: 10px !important;
+}
+
+.kodety-ui-table
+  :where(.inline-edit-row, .quick-edit-row, .bulk-edit-row)
+  .inline-edit-save {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 7px;
+  margin: 12px -16px -16px !important;
+  padding: 10px 16px !important;
+  border-top: 1px solid var(--kodety-ui-list-divider) !important;
+  background: color-mix(
+    in oklch,
+    var(--kodety-ui-list-surface-raised) 92%,
+    black
+  ) !important;
+}
+
+/* Comments are dense review rows, not giant WordPress cards. */
+.kodety-ui-data-grid--comments .kodety-ui-table {
+  table-layout: fixed;
+}
+
+.kodety-ui-table--comments .column-author {
+  width: 17%;
+}
+
+.kodety-ui-table--comments .column-comment {
+  width: 43%;
+}
+
+.kodety-ui-table--comments .column-response {
+  width: 22%;
+}
+
+.kodety-ui-table--comments .column-date {
+  width: 18%;
+}
+
+.kodety-ui-table--comments .comment-author {
+  color: var(--kodety-ui-list-text) !important;
+  font-weight: 600;
+}
+
+.kodety-ui-table--comments .comment-author img {
+  width: 28px !important;
+  height: 28px !important;
+  margin: 0 8px 0 0 !important;
+  border-radius: 7px !important;
+  vertical-align: middle;
+}
+
+.kodety-ui-table--comments .comment-content,
+.kodety-ui-table--comments .comment-content p,
+.kodety-ui-table--comments tbody .column-comment > p {
+  margin-top: 0 !important;
+  margin-bottom: 4px !important;
+  color: color-mix(
+    in oklch,
+    var(--kodety-ui-list-text) 74%,
+    transparent
+  ) !important;
+  font-size: 11px !important;
+  line-height: 1.45 !important;
+}
+
+.kodety-ui-table--comments .column-response a,
+.kodety-ui-table--comments .column-date a {
+  font-size: 11px !important;
+}
+
+.kodety-ui-table--comments .comment-count-approved {
+  min-width: 20px !important;
+  height: 20px !important;
+  padding: 0 6px !important;
+  border-radius: 10px !important;
+  font-size: 9px !important;
+  line-height: 20px !important;
+}
+
+.kodety-admin-skin .kodety-ui-table--comments > tbody > tr.unapproved,
+.kodety-os .kodety-ui-table--comments > tbody > tr.unapproved,
+.kodety-admin-skin
+  .kodety-ui-table--comments
+  > tbody
+  > tr.kodety-ui-table__row--pending,
+.kodety-os .kodety-ui-table--comments > tbody > tr.kodety-ui-table__row--pending {
+  background: color-mix(
+    in oklch,
+    #d9a441 5%,
+    var(--kodety-ui-list-surface)
+  ) !important;
+  box-shadow: inset 2px 0 0 #d9a441;
+}
+
+.kodety-ui-table--comments .column-author :where(a, strong),
+.kodety-ui-table--comments .column-response strong {
+  color: var(--kodety-ui-list-text) !important;
+}
+
+.kodety-ui-table--comments .column-author :where(br, .comment-author-email) + a {
+  color: var(--kodety-ui-list-muted) !important;
+}
+
+.kodety-ui-table--comments .column-comment .submitted-on,
+.kodety-ui-table--comments .column-comment .submitted-on a {
+  color: var(--kodety-ui-list-muted) !important;
+  font-size: 9px !important;
+}
+
+/* Active menu rows stay at the same rhythm as their siblings; zero is not a badge. */
+.kodety-ui-badge--empty,
+#adminmenu .awaiting-mod[hidden],
+#adminmenu .update-plugins[hidden],
+#adminmenu .plugin-count[hidden] {
+  display: none !important;
+}
+
+body.kodety-ui-lists-ready:not(.block-editor-page) #adminmenu > li.menu-top,
+body.kodety-ui-lists-ready:not(.block-editor-page)
+  #adminmenu
+  > li.menu-top
+  > a.menu-top {
+  box-sizing: border-box !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
+  border-radius: 8px !important;
+}
+
+body.kodety-ui-lists-ready:not(.block-editor-page)
+  #adminmenu
+  > li.menu-top
+  > a.menu-top {
+  display: grid !important;
+  grid-template-columns: 32px minmax(0, 1fr) auto;
+  align-items: center !important;
+  gap: 8px;
+  padding: 0 10px 0 4px !important;
+  line-height: 1 !important;
+}
+
+body.kodety-ui-lists-ready:not(.block-editor-page)
+  #adminmenu
+  > li.menu-top
+  > a.menu-top
+  .wp-menu-image {
+  width: 32px !important;
+  height: 40px !important;
+  display: grid !important;
+  place-items: center;
+  margin: 0 !important;
+}
+
+body.kodety-ui-lists-ready:not(.block-editor-page)
+  #adminmenu
+  > li.menu-top
+  > a.menu-top
+  .wp-menu-name {
+  min-width: 0;
+  padding: 0 !important;
+  line-height: 1.25 !important;
+}
+
+body.kodety-ui-lists-ready:not(.block-editor-page)
+  #adminmenu
+  > li:is(.current, .wp-has-current-submenu)
+  > a.menu-top {
+  background: color-mix(
+    in oklch,
+    var(--kodety-ui-list-text) 7%,
+    transparent
+  ) !important;
+  box-shadow: inset 2px 0 0 var(--kodety-ui-list-blue) !important;
+}
+
+body.kodety-ui-lists-ready:not(.block-editor-page)
+  #adminmenu
+  > li:is(.current, .wp-has-current-submenu)
+  > a.menu-top::before {
+  display: none !important;
+  content: none !important;
+}
+
+@media (max-width: 1120px) {
+  .kodety-ui-toolbar {
+    align-items: stretch !important;
+    flex-direction: column;
+  }
+
+  .kodety-ui-toolbar__trailing {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .kodety-ui-search {
+    flex: 1 1 auto;
+  }
+
+  .kodety-ui-search__input {
+    width: min(100%, 280px) !important;
+  }
+}
+
+@media (max-width: 782px) {
+  .kodety-ui-tabs {
+    gap: 18px;
+    margin-bottom: 12px;
+  }
+
+  .kodety-ui-toolbar__primary,
+  .kodety-ui-toolbar__trailing {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .kodety-ui-search {
+    order: 1;
+    width: 100%;
+  }
+
+  .kodety-ui-search__input {
+    flex: 1 1 auto;
+    width: auto !important;
+  }
+
+  .kodety-ui-pagination {
+    margin-left: auto !important;
+  }
+
+  .kodety-ui-data-grid {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .kodety-ui-table {
+    min-width: 0 !important;
+  }
+
+  .kodety-ui-table .kodety-ui-table__toggle {
+    position: absolute !important;
+    top: 9px !important;
+    right: 9px !important;
+    width: 30px !important;
+    height: 30px !important;
+    display: inline-grid !important;
+    place-items: center;
+    padding: 0 !important;
+    border: 1px solid var(--kodety-ui-list-border) !important;
+    border-radius: var(--kodety-ui-list-radius-sm) !important;
+    background: rgba(255, 255, 255, 0.025) !important;
+    color: var(--kodety-ui-list-muted) !important;
+    text-indent: 0 !important;
+  }
+
+  .kodety-ui-table .kodety-ui-table__toggle::before {
+    display: none !important;
+    content: none !important;
+  }
+
+  .kodety-ui-table .kodety-ui-table__toggle svg {
+    width: 14px;
+    height: 14px;
+    display: block;
+    transition: transform 140ms ease;
+  }
+
+  .kodety-ui-table tr.is-expanded .kodety-ui-table__toggle svg {
+    transform: rotate(180deg);
+  }
+
+  .kodety-ui-table .column-primary {
+    position: relative;
+    padding-right: 52px !important;
+  }
+
+  .kodety-ui-table .column-primary::before {
+    color: var(--kodety-ui-list-muted) !important;
+    font-size: 9px !important;
+  }
+
+  .kodety-ui-table--comments,
+  .kodety-ui-data-grid--comments .kodety-ui-table {
+    table-layout: auto;
+  }
+
+  .kodety-ui-table--comments
+    :where(.column-author, .column-comment, .column-response, .column-date),
+  .kodety-ui-table--taxonomies :where(.column-name, .column-description) {
+    width: auto;
+    min-width: 0;
+  }
+
+  .kodety-ui-row-actions {
+    position: static !important;
+    left: auto !important;
+    visibility: visible !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kodety-ui-tab,
+  .kodety-ui-pagination a.kodety-ui-icon-button,
+  .kodety-ui-table .kodety-ui-table__toggle svg {
+    transition: none !important;
+  }
+}

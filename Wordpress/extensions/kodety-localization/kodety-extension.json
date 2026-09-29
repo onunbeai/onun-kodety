@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "type": "extension",
+  "slug": "kodety-localization",
+  "name": "Onun Kodety Multi-language",
+  "description": "Idiomas, traduções, rotas localizadas e seleção automática de locale.",
+  "version": "1.36.100",
+  "entry": "extension.php",
+  "icon": "globe",
+  "requires": { "php": "8.0", "kodety": "1.36.100" },
+  "dependencies": []
+}

@@ -1,0 +1,27 @@
+Solar Icons
+
+The Kodety interface includes icons from the Solar Icons Set by 480 Design:
+https://www.figma.com/community/file/1166831539721848736/Solar-Icons-Set
+
+Solar Icons are licensed under the Creative Commons Attribution 4.0
+International License (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+
+The @solar-icons/react wrapper is distributed under the MIT License.
+Project: https://solar-icons.vercel.app/
+
+vanilla-cookieconsent
+
+Kodety includes a vendored snapshot of vanilla-cookieconsent by Orest Bida.
+Project: https://github.com/orestbida/cookieconsent
+Snapshot: 8596c7990200920cbc9cdc7b64c3caebe570b650
+
+vanilla-cookieconsent is distributed under the MIT License. The complete
+license notice is preserved beside the vendored source and in published
+Cookie Consent runtime assets.
+
+Ycode
+Parts of the editor were developed based on the open-source Ycode repository, particularly its architecture.
+Source: https://github.com/ycode/ycode
+Copyright (c) 2026 Ycode
+License: MIT; see assets/licenses/ycode-license.txt in the packaged plugin.

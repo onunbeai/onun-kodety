@@ -1,0 +1,10 @@
+{
+  "name": "@coday-example/basic-card",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/ProductCard.tsx"
+  },
+  "license": "GPL-3.0-only"
+}

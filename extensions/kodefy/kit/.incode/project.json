@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "name": "Kodefy Commerce Starter",
+  "mainHtmlPath": "index.html",
+  "homeHtmlPath": "index.html",
+  "rootPath": "",
+  "primaryBreakpoint": {
+    "id": "base",
+    "label": "Primary",
+    "mode": "max-width",
+    "width": 1920
+  },
+  "breakpoints": [
+    { "id": "wide", "label": "Wide", "mode": "min-width", "width": 2560 },
+    { "id": "notebook", "label": "Notebook", "mode": "max-width", "width": 1200 },
+    { "id": "tablet", "label": "Tablet", "mode": "max-width", "width": 810 },
+    { "id": "mobile", "label": "Mobile", "mode": "max-width", "width": 410 }
+  ]
+}

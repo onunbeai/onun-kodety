@@ -1,0 +1,3 @@
+/* Reuse the Studio stylesheet in Tailwind's base layer. Its global button and
+ * input resets must never outrank the shared Builder's utility classes. */
+@import "../../../ChromeExtension/kodety-studio/src/styles.css" layer(base);

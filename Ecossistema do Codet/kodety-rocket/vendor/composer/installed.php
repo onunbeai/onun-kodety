@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => 'code-ecosystem/kodety-rocket',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '6970fa4f9ddc02cbe97fb8ea1b9b0604974c968f',
+        'type' => 'wordpress-plugin',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => false,
+    ),
+    'versions' => array(
+        'code-ecosystem/kodety-rocket' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '6970fa4f9ddc02cbe97fb8ea1b9b0604974c968f',
+            'type' => 'wordpress-plugin',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'matthiasmullie/minify' => array(
+            'pretty_version' => '1.3.75',
+            'version' => '1.3.75.0',
+            'reference' => '76ba4a5f555fd7bf4aa408af608e991569076671',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../matthiasmullie/minify',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'matthiasmullie/path-converter' => array(
+            'pretty_version' => '1.1.3',
+            'version' => '1.1.3.0',
+            'reference' => 'e7d13b2c7e2f2268e1424aaed02085518afa02d9',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../matthiasmullie/path-converter',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);

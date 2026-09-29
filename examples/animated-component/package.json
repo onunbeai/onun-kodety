@@ -1,0 +1,10 @@
+{
+  "name": "@coday-example/animated-component",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/AnimatedComponent.tsx"
+  },
+  "license": "GPL-3.0-only"
+}

@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "node": {
+    "version": "24.14.0",
+    "maxDownloadBytes": 104857600,
+    "targets": {
+      "linux-x64": {
+        "url": "https://nodejs.org/dist/v24.14.0/node-v24.14.0-linux-x64.tar.gz",
+        "sha256": "dbf5b8665dec15e59e6359a517fefb47b23fdb9152d8def975b9bca3dfc6d355",
+        "archivePath": "node-v24.14.0-linux-x64/bin/node"
+      },
+      "linux-arm64": {
+        "url": "https://nodejs.org/dist/v24.14.0/node-v24.14.0-linux-arm64.tar.gz",
+        "sha256": "f44740cd218de8127f1c44c41510a3a740fa5c9c8d1cdce1c3bedada79f3cde7",
+        "archivePath": "node-v24.14.0-linux-arm64/bin/node"
+      },
+      "darwin-x64": {
+        "url": "https://nodejs.org/dist/v24.14.0/node-v24.14.0-darwin-x64.tar.gz",
+        "sha256": "f2879eb810e25993a0578e5d878930266fd2eafcffe9f2839b3d8db354d4879e",
+        "archivePath": "node-v24.14.0-darwin-x64/bin/node"
+      },
+      "darwin-arm64": {
+        "url": "https://nodejs.org/dist/v24.14.0/node-v24.14.0-darwin-arm64.tar.gz",
+        "sha256": "a1a54f46a750d2523d628d924aab61758a51c9dad3e0238beb14141be9615dd3",
+        "archivePath": "node-v24.14.0-darwin-arm64/bin/node"
+      }
+    }
+  },
+  "codex": {
+    "version": "0.147.0-alpha.6.5",
+    "maxDownloadBytes": 188743680,
+    "targets": {
+      "linux-x64": {
+        "url": "https://registry.npmjs.org/@openai/codex/-/codex-0.147.0-alpha.6.5-linux-x64.tgz",
+        "sha512": "fS3+3v45vzOm+eXxwCwu0NqMQCIufATsB9ZckqrC7qveCKEuGUpJAlc4CARoDKIl5OnJVKxlYYMYQkfwExTnYg==",
+        "vendorPath": "package/vendor/x86_64-unknown-linux-musl"
+      },
+      "linux-arm64": {
+        "url": "https://registry.npmjs.org/@openai/codex/-/codex-0.147.0-alpha.6.5-linux-arm64.tgz",
+        "sha512": "wIE/35fTLWwIhZ3cY+ir5f5FV3crGiD57XZgNJyGwH4ju2IYfRfT+0c2eda0aGV1Bp0TjW46OG1zKbsx1sGJIw==",
+        "vendorPath": "package/vendor/aarch64-unknown-linux-musl"
+      },
+      "darwin-x64": {
+        "url": "https://registry.npmjs.org/@openai/codex/-/codex-0.147.0-alpha.6.5-darwin-x64.tgz",
+        "sha512": "TStD3JY8U5mjFBY+lA7p7YikU144t5QrZjQ8zlex95oQ42kScewNRLnxJ5reJQWKWlUtfMc2RSZHCz7ftINkvQ==",
+        "vendorPath": "package/vendor/x86_64-apple-darwin"
+      },
+      "darwin-arm64": {
+        "url": "https://registry.npmjs.org/@openai/codex/-/codex-0.147.0-alpha.6.5-darwin-arm64.tgz",
+        "sha512": "2m63fsfbHiDLH7suE3g8jZ4WoYeZzL1bCnqOIR7fy8ixEkjoQfSo4RXxKFHhlD/x6SsRJTsDYYlOi/Zil4ZSGg==",
+        "vendorPath": "package/vendor/aarch64-apple-darwin"
+      }
+    }
+  }
+}

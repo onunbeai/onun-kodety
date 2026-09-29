@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="132" height="35" viewBox="0 0 132 35" role="img" aria-labelledby="kodety-logo-title">
+    <title id="kodety-logo-title">Kodety</title>
+    <g fill="#000000">
+        <g transform="translate(2 2.5) scale(0.245)">
+            <path d="M51.1932 122L0 61L113.183 94.8289V122H51.1932Z" />
+            <path d="M51.1932 0L0 61L113.183 27.1711V0H51.1932Z" />
+        </g>
+        <text x="40" y="25" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="-0.7">Kodety</text>
+    </g>
+</svg>

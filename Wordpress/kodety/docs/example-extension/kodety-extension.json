@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "type": "extension",
+  "slug": "acme-example",
+  "name": "ACME Example",
+  "version": "1.0.0",
+  "description": "Exemplo mínimo e seguro de uma extensão Onun Kodety.",
+  "author": {
+    "name": "ACME",
+    "url": "https://example.com"
+  },
+  "homepage": "https://example.com/acme-example",
+  "entry": "extension.php",
+  "requires": {
+    "php": ">=8.0",
+    "kodety": ">=1.0.17",
+    "extensionApi": ">=1.0.0"
+  },
+  "dependencies": [],
+  "icon": "plugins",
+  "permissions": [
+    "storage.read",
+    "storage.write",
+    "frontend.register"
+  ],
+  "capabilities": []
+}

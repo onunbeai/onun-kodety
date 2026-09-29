@@ -1,0 +1,39 @@
+# Dependencies and generated artifacts
+node_modules/
+dist/
+.next/
+.turbo/
+coverage/
+artifacts/
+deliverables/
+outputs/
+backups/
+.kodety-backups/
+Wordpress/kodety/assets/
+Wordpress/kodety-file-system/assets/
+Wordpress/extensions/*/assets/
+*.tsbuildinfo
+*.log
+*.zip
+.DS_Store
+Thumbs.db
+# Local credentials and databases
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite
+*.sqlite3
+# Editor settings and local test output
+.idea/
+.vscode/
+playwright-report/
+test-results/
+
+# Generated WordPress admin bundles
+Wordpress/kodety/admin/components/*.bundle.js
+Wordpress/kodety/admin/components/*.bundle.css

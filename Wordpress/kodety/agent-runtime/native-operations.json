@@ -1,0 +1,1811 @@
+{
+  "schemaVersion": 1,
+  "operations": [
+    {
+      "name": "cms_schema",
+      "description": "Read collections, fields, templates, permissions and current schema revision before CMS mutations.",
+      "method": "GET",
+      "route": "/kodety/v1/cms/schema",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_list_collections",
+      "description": "List native CMS collections scoped to the current project.",
+      "method": "GET",
+      "route": "/kodety/v1/cms/collections",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_list_types",
+      "description": "List accessible native WordPress and project content types.",
+      "method": "GET",
+      "route": "/kodety/v1/cms/types",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_list_items",
+      "description": "List and search scoped CMS items with pagination and the current schema revision.",
+      "method": "GET",
+      "route": "/kodety/v1/cms/items/{post_type}",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "post_type": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,20}$",
+            "description": "Native post type slug returned by cms_schema, such as post or kodety_articles."
+          },
+          "per_page": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "page": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "search": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "publish",
+              "draft",
+              "pending",
+              "private",
+              "future",
+              "trash"
+            ]
+          },
+          "orderby": {
+            "type": "string",
+            "enum": [
+              "date",
+              "modified",
+              "title",
+              "menu_order",
+              "rand"
+            ]
+          },
+          "order": {
+            "type": "string",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "post_type"
+        ]
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_get_item",
+      "description": "Read one item and its exact item revision; sibling project items remain inaccessible.",
+      "method": "GET",
+      "route": "/kodety/v1/cms/items/{post_type}/{post_id}",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "post_type": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,20}$",
+            "description": "Native post type slug returned by cms_schema, such as post or kodety_articles."
+          },
+          "post_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "post_type",
+          "post_id"
+        ]
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_create_item",
+      "description": "Create an article/item through native CMS persistence. Defaults to draft. Do not retry an uncertain response: read items to reconcile first.",
+      "method": "POST",
+      "route": "/kodety/v1/cms/items/{post_type}",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "post_type": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,20}$",
+            "description": "Native post type slug returned by cms_schema, such as post or kodety_articles."
+          },
+          "expectedRevision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160,
+            "description": "Exact revision returned by the latest native schema or item read. Schema mutations/create/import use schema revision; item update/delete use item revision."
+          },
+          "values": {
+            "type": "object",
+            "description": "Native field-value map: title, excerpt, content, status (draft/pending/publish), slug, permalink, featured_image, featured_image_alt and registered field:<name> keys. The native CMS validates keys, types, required fields and publishing permissions. date and author are read-only.",
+            "additionalProperties": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "pending",
+              "publish"
+            ],
+            "default": "draft"
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "post_type",
+          "expectedRevision",
+          "values"
+        ]
+      },
+      "readOnly": false,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_update_item",
+      "description": "Update selected fields through native CMS with the item revision. Read the item before editing.",
+      "method": "POST",
+      "route": "/kodety/v1/cms/items/{post_type}/{post_id}",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "post_type": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,20}$",
+            "description": "Native post type slug returned by cms_schema, such as post or kodety_articles."
+          },
+          "post_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expectedRevision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160,
+            "description": "Exact revision returned by the latest native schema or item read. Schema mutations/create/import use schema revision; item update/delete use item revision."
+          },
+          "values": {
+            "type": "object",
+            "description": "Native field-value map: title, excerpt, content, status (draft/pending/publish), slug, permalink, featured_image, featured_image_alt and registered field:<name> keys. The native CMS validates keys, types, required fields and publishing permissions. date and author are read-only.",
+            "additionalProperties": true
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "post_type",
+          "post_id",
+          "expectedRevision",
+          "values"
+        ]
+      },
+      "readOnly": false,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_delete_item",
+      "description": "Move the scoped CMS item to trash with its current item revision; preserves native capability and ACK checks.",
+      "method": "DELETE",
+      "route": "/kodety/v1/cms/items/{post_type}/{post_id}",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "post_type": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,20}$",
+            "description": "Native post type slug returned by cms_schema, such as post or kodety_articles."
+          },
+          "post_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expectedRevision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160,
+            "description": "Exact revision returned by the latest native schema or item read. Schema mutations/create/import use schema revision; item update/delete use item revision."
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "post_type",
+          "post_id",
+          "expectedRevision"
+        ]
+      },
+      "readOnly": false,
+      "destructive": true,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_import_items",
+      "description": "Import up to 1000 native CMS rows, draft by default. Native batch rolls back earlier rows on failure; rollback failures include actual surviving postIds. Never report complete success for a native error or repeat an uncertain write.",
+      "method": "POST",
+      "route": "/kodety/v1/cms/items/{post_type}/import",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "post_type": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,20}$",
+            "description": "Native post type slug returned by cms_schema, such as post or kodety_articles."
+          },
+          "expectedRevision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160,
+            "description": "Exact revision returned by the latest native schema or item read. Schema mutations/create/import use schema revision; item update/delete use item revision."
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "values": {
+                  "type": "object",
+                  "description": "Native field-value map: title, excerpt, content, status (draft/pending/publish), slug, permalink, featured_image, featured_image_alt and registered field:<name> keys. The native CMS validates keys, types, required fields and publishing permissions. date and author are read-only.",
+                  "additionalProperties": true
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "values"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 1000
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "post_type",
+          "expectedRevision",
+          "items"
+        ]
+      },
+      "readOnly": false,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_create_collection",
+      "description": "Create a scoped collection using schema revision; native edition limits apply.",
+      "method": "POST",
+      "route": "/kodety/v1/cms/collections",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "singular": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "slug": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "expectedRevision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160,
+            "description": "Exact revision returned by the latest native schema or item read. Schema mutations/create/import use schema revision; item update/delete use item revision."
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "expectedRevision"
+        ]
+      },
+      "readOnly": false,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_update_collection",
+      "description": "Rename collection labels; internal and URL slugs remain immutable.",
+      "method": "PUT",
+      "route": "/kodety/v1/cms/collections/{post_type}",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "post_type": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,20}$",
+            "description": "Native post type slug returned by cms_schema, such as post or kodety_articles."
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "singular": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "expectedRevision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160,
+            "description": "Exact revision returned by the latest native schema or item read. Schema mutations/create/import use schema revision; item update/delete use item revision."
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "post_type",
+          "name",
+          "expectedRevision"
+        ]
+      },
+      "readOnly": false,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_delete_collection",
+      "description": "Delete an empty collection only. confirmation must equal post_type and deleteItems must be false; no cascading item deletion.",
+      "method": "DELETE",
+      "route": "/kodety/v1/cms/collections/{post_type}",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "post_type": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,20}$",
+            "description": "Native post type slug returned by cms_schema, such as post or kodety_articles."
+          },
+          "confirmation": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,20}$",
+            "description": "Native post type slug returned by cms_schema, such as post or kodety_articles."
+          },
+          "deleteItems": {
+            "type": "boolean",
+            "enum": [
+              false
+            ]
+          },
+          "expectedRevision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160,
+            "description": "Exact revision returned by the latest native schema or item read. Schema mutations/create/import use schema revision; item update/delete use item revision."
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "post_type",
+          "confirmation",
+          "deleteItems",
+          "expectedRevision"
+        ]
+      },
+      "readOnly": false,
+      "destructive": true,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_get_fields",
+      "description": "Read native editable fields and schema revision for a collection.",
+      "method": "GET",
+      "route": "/kodety/v1/cms/fields/{post_type}",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "post_type": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,20}$",
+            "description": "Native post type slug returned by cms_schema, such as post or kodety_articles."
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "post_type"
+        ]
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_update_fields",
+      "description": "Replace editable field definitions with schema revision. Read all fields first and preserve definitions the user did not request to remove.",
+      "method": "POST",
+      "route": "/kodety/v1/cms/fields/{post_type}",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "post_type": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,20}$",
+            "description": "Native post type slug returned by cms_schema, such as post or kodety_articles."
+          },
+          "expectedRevision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160,
+            "description": "Exact revision returned by the latest native schema or item read. Schema mutations/create/import use schema revision; item update/delete use item revision."
+          },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "pattern": "^[a-z0-9_-]+$",
+                  "maxLength": 100
+                },
+                "label": {
+                  "type": "string",
+                  "maxLength": 200
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "text",
+                    "textarea",
+                    "richtext",
+                    "image",
+                    "url",
+                    "number",
+                    "boolean",
+                    "date",
+                    "color"
+                  ]
+                },
+                "description": {
+                  "type": "string",
+                  "maxLength": 4000
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "default": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "min": {
+                  "type": [
+                    "number",
+                    "string"
+                  ]
+                },
+                "max": {
+                  "type": [
+                    "number",
+                    "string"
+                  ]
+                },
+                "step": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "unit": {
+                  "type": "string",
+                  "maxLength": 50
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "name",
+                "type"
+              ]
+            },
+            "maxItems": 1000
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "post_type",
+          "expectedRevision",
+          "fields"
+        ]
+      },
+      "readOnly": false,
+      "destructive": true,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_get_templates",
+      "description": "Read CMS template assignments. Read cms_schema for the schema revision before updating assignments.",
+      "method": "GET",
+      "route": "/kodety/v1/cms/templates",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "cms_update_template",
+      "description": "Assign a project HTML template to one content type, or clear with empty htmlPath; the native assignment moves a page from any previous type.",
+      "method": "POST",
+      "route": "/kodety/v1/cms/templates",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "postType": {
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9_-]{1,20}$",
+            "description": "Native post type slug returned by cms_schema, such as post or kodety_articles."
+          },
+          "htmlPath": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "expectedRevision": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160,
+            "description": "Exact revision returned by the latest native schema or item read. Schema mutations/create/import use schema revision; item update/delete use item revision."
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "postType",
+          "htmlPath",
+          "expectedRevision"
+        ]
+      },
+      "readOnly": false,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "project_get_settings",
+      "description": "Read the native Settings project surface, including source files, .incode/project.json metadata and workspaceRevision. Preserve unedited fields when preparing a native delta. requiresFullProject is a real limitation for protected/coded projects.",
+      "method": "GET",
+      "route": "/kodety/v1/project/surface",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "surface": {
+            "type": "string",
+            "enum": [
+              "settings"
+            ],
+            "default": "settings"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "project_apply_delta",
+      "description": "Persist a complete-file native delta for Settings, SEO, custom code, redirects or other project sources. Preserve all unedited bytes. Includes revision, SHA-256/length validation, staging/rollback and requestId receipt. Never publish implicitly. Paths are relative to the logical project root from project_get_settings.",
+      "method": "POST",
+      "route": "/kodety/v1/project/delta",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "protocolVersion": {
+            "type": "integer",
+            "enum": [
+              1
+            ]
+          },
+          "baseRevision": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "baseDigest": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "requestId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{16,128}$"
+          },
+          "upserts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 4096
+                },
+                "encoding": {
+                  "type": "string",
+                  "enum": [
+                    "utf8",
+                    "base64"
+                  ]
+                },
+                "content": {
+                  "type": "string",
+                  "maxLength": 64000000
+                },
+                "byteLength": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 268435456
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "path",
+                "encoding",
+                "content",
+                "byteLength",
+                "sha256"
+              ]
+            },
+            "maxItems": 5000
+          },
+          "deletes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            "maxItems": 5000
+          },
+          "moves": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 4096
+                },
+                "to": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 4096
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "from",
+                "to"
+              ]
+            },
+            "maxItems": 5000
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "protocolVersion",
+          "baseRevision",
+          "requestId"
+        ]
+      },
+      "readOnly": false,
+      "destructive": true,
+      "affectsWorkspace": true
+    },
+    {
+      "name": "localization_get",
+      "description": "Read the native project localization metadata and workspaceRevision, including locales, translations and per-element overrides. Returns a full-project-required error for protected/coded sources.",
+      "method": "GET",
+      "route": "/kodety/v1/project/surface",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "surface": {
+            "type": "string",
+            "enum": [
+              "settings"
+            ],
+            "default": "settings"
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "localization_update",
+      "description": "Replace the native localization payload after localization_get, preserving untouched locales/pages. Requires active Multi-language extension, native lease and exact expectedWorkspaceRevision in context or X-Kodety-Expected-Revision. HTML identity changes require native project delta.",
+      "method": "POST",
+      "route": "/kodety/v1/project/localization",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "localization": {
+            "type": "object",
+            "description": "Complete native project.localization object from localization_get; native PHP validates identities, locales, pages, translations, URLs and size bounds.",
+            "additionalProperties": true
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "localization"
+        ]
+      },
+      "readOnly": false,
+      "destructive": false,
+      "affectsWorkspace": true
+    },
+    {
+      "name": "editor_lock_acquire",
+      "description": "Acquire or heartbeat a real native editor lease. Choose fresh random sessionId and leaseId, then inspect mode=edit before mutation. A busy workspace returns mode=view and limited=true, never forced ownership.",
+      "method": "POST",
+      "route": "/kodety/v1/editor-lock",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{16,128}$"
+          },
+          "leaseId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{16,128}$"
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "sessionId",
+          "leaseId"
+        ]
+      },
+      "readOnly": false,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "editor_lock_release",
+      "description": "Release only the caller-owned native editor session/lease; stop heartbeat before releasing.",
+      "method": "DELETE",
+      "route": "/kodety/v1/editor-lock",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sessionId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{16,128}$"
+          },
+          "leaseId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{16,128}$"
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "sessionId",
+          "leaseId"
+        ]
+      },
+      "readOnly": false,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "optimizations_get",
+      "description": "Read native optimization status. Legacy source-rewriting switches are currently disabled and report false.",
+      "method": "GET",
+      "route": "/kodety/v1/optimizations",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "optimizations_update",
+      "description": "Save supported native optimization settings. Legacy switches currently remain false by native policy; inspect response instead of claiming the optimization was enabled.",
+      "method": "POST",
+      "route": "/kodety/v1/optimizations",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "minifyHtml": {
+            "type": "boolean"
+          },
+          "minifyCss": {
+            "type": "boolean"
+          },
+          "lazyImages": {
+            "type": "boolean"
+          },
+          "preloadFonts": {
+            "type": "boolean"
+          },
+          "deferScripts": {
+            "type": "boolean"
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": false,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "sitemap_get",
+      "description": "Read authenticated sitemap diagnostics without exposing private credentials.",
+      "method": "GET",
+      "route": "/kodety/v1/sitemap",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "releases_list",
+      "description": "List native project releases; this does not publish or roll back.",
+      "method": "GET",
+      "route": "/kodety/v1/releases",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "storage_get",
+      "description": "Read native storage status; administrator capability remains required.",
+      "method": "GET",
+      "route": "/kodety/v1/storage",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "ai_settings_get",
+      "description": "Read AI provider configuration and masked credential metadata, never the stored key.",
+      "method": "GET",
+      "route": "/kodety/v1/ai/settings",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "ai_settings_update",
+      "description": "Configure the native AI integration. apiKey is write-only; returned credentials stay masked. Native licensing, endpoint validation and administrator capability apply.",
+      "method": "POST",
+      "route": "/kodety/v1/ai/settings",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "openai",
+              "codex",
+              "kimi",
+              "openrouter",
+              "custom"
+            ]
+          },
+          "model": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "baseUrl": {
+            "type": "string",
+            "maxLength": 2048
+          },
+          "temperature": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1.5
+          },
+          "language": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "tone": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "apiKey": {
+            "type": "string",
+            "maxLength": 1024,
+            "writeOnly": true
+          },
+          "clearKey": {
+            "type": "boolean"
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "provider"
+        ]
+      },
+      "readOnly": false,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "adobe_fonts_get",
+      "description": "Read the native Adobe Fonts catalog/settings. Requires native administrator capability and browser nonce or authenticated MCP transport.",
+      "method": "GET",
+      "route": "/kodety/v1/fonts/adobe/settings",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "adobe_fonts_update",
+      "description": "Connect a published Adobe Fonts Web Project ID using the native validator and discovery.",
+      "method": "POST",
+      "route": "/kodety/v1/fonts/adobe/settings",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "projectId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "projectId"
+        ]
+      },
+      "readOnly": false,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "adobe_fonts_resync",
+      "description": "Refresh the configured Adobe Fonts project through the native integration.",
+      "method": "POST",
+      "route": "/kodety/v1/fonts/adobe/resync",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": false,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "adobe_fonts_disconnect",
+      "description": "Disconnect the native Adobe Fonts project.",
+      "method": "DELETE",
+      "route": "/kodety/v1/fonts/adobe/settings",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": false,
+      "destructive": true,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "meta_capi_get",
+      "description": "Read Meta CAPI configuration with a configured flag, never stored access tokens. Requires analytics-management capability and browser nonce or authenticated MCP transport.",
+      "method": "GET",
+      "route": "/kodety/v1/analytics/meta-capi/settings",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": true,
+      "destructive": false,
+      "affectsWorkspace": false
+    },
+    {
+      "name": "meta_capi_update",
+      "description": "Configure native Meta CAPI settings. accessToken is write-only. Native licensing and capability apply; authentication uses the browser nonce or verified MCP transport.",
+      "method": "POST",
+      "route": "/kodety/v1/analytics/meta-capi/settings",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean"
+          },
+          "pixelId": {
+            "type": "string",
+            "maxLength": 32
+          },
+          "graphVersion": {
+            "type": "string",
+            "pattern": "^v[0-9]{1,2}\\.[0-9]$"
+          },
+          "testEventCode": {
+            "type": "string",
+            "maxLength": 68
+          },
+          "accessToken": {
+            "type": "string",
+            "maxLength": 16384,
+            "writeOnly": true
+          },
+          "clearToken": {
+            "type": "boolean"
+          },
+          "limitedDataUse": {
+            "type": "boolean"
+          },
+          "dataProcessingCountry": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "dataProcessingState": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "editorSession": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "editorLease": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9_-]{16,128}$"
+              },
+              "expectedWorkspaceRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "description": "Optional explicit native editor lease context for external clients. Acquire a real lease first; never copy another editor session. Browser requests already carry these headers. Does not override contradictory request headers."
+          }
+        },
+        "additionalProperties": false
+      },
+      "readOnly": false,
+      "destructive": false,
+      "affectsWorkspace": false
+    }
+  ]
+}

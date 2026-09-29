@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "projectId": "kst-stability-small",
+  "name": "Kodety Stability Fixture",
+  "createdAt": "2026-09-05T06:13:36.458Z",
+  "mainHtmlPath": "index.html",
+  "homeHtmlPath": "index.html",
+  "rootPath": "",
+  "breakpointSchemaVersion": 2,
+  "breakpoints": [
+    {
+      "id": "wide",
+      "label": "Wide",
+      "mode": "min-width",
+      "width": 2560
+    },
+    {
+      "id": "notebook",
+      "label": "Notebook",
+      "mode": "max-width",
+      "width": 1200
+    },
+    {
+      "id": "tablet",
+      "label": "Tablet",
+      "mode": "max-width",
+      "width": 810
+    },
+    {
+      "id": "mobile",
+      "label": "Mobile",
+      "mode": "max-width",
+      "width": 480
+    }
+  ],
+  "updatedAt": "2026-09-05T00:00:00.000Z",
+  "primaryBreakpoint": {
+    "id": "base",
+    "label": "Primary",
+    "mode": "max-width",
+    "width": 1920
+  },
+  "siteSettings": {
+    "betaFeatures": {
+      "infiniteCanvas": true
+    }
+  }
+}

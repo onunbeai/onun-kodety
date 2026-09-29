@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Onun Kodety Recorder</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header>
+      <span class="mark">K</span>
+      <div><strong>Onun Kodety Recorder</strong><small data-i18n="captureAssisted">Assisted capture</small></div>
+      <span id="statusDot" class="status-dot"></span>
+    </header>
+    <section class="status-card">
+      <div><span id="statusLabel">Ready</span><strong id="eventCount">0 events</strong></div>
+      <div class="metrics"><span id="animationCount">0 animations</span><span id="mutationCount">0 changes</span></div>
+    </section>
+    <p id="hint" data-i18n="hint">Start recording, then interact with hover, click, focus, scroll, and page components.</p>
+    <div class="actions">
+      <button id="start" class="primary" data-i18n="startCapture">Start capture</button>
+      <button id="stop" data-i18n="stop" disabled>Stop</button>
+    </div>
+    <button id="export" class="download" data-i18n="compileDownloadZip" disabled>Compile and download ZIP</button>
+    <button id="clear" class="quiet" data-i18n="clearRecording">Clear recording</button>
+    <p id="message" role="status"></p>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

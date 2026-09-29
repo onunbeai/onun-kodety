@@ -1,0 +1,90 @@
+import assert from 'node:assert/strict';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import path from 'node:path';
+import { chromium, expect } from '@playwright/test';
+const args=process.argv.slice(2), arg=name=>args[args.indexOf(name)+1];
+assert.ok(args.includes('--environment')&&args.includes('--plugin-zip')&&args.includes('--expected-sha256')&&args.includes('--output'));
+const environment=JSON.parse(await readFile(arg('--environment'),'utf8'));
+const root=environment.KODETY_STABILITY_WP_ROOT,site=new URL(environment.KODETY_E2E_BASE_URL);
+assert.ok(path.basename(root).startsWith('kodety-stability-wp-'));assert.equal(site.hostname,'127.0.0.1');
+const wp=(...cmd)=>execFileSync('wp',['--path='+root,...cmd],{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+assert.match(wp('config','get','DB_NAME'),/^kodety_stability_/);assert.equal(wp('option','get','home'),site.origin);
+const sha=createHash('sha256').update(await readFile(arg('--plugin-zip'))).digest('hex');assert.equal(sha,arg('--expected-sha256'));
+wp('plugin','install',path.resolve(arg('--plugin-zip')),'--force','--activate');
+wp('--user=1','eval-file',path.resolve('scripts/fixtures/stability-stage-project.php'));
+wp('user','meta','update',environment.KODETY_E2E_USER,'locale','pt_BR');
+const report={sha256:sha,version:wp('plugin','get','kodety','--field=version'),steps:[]};
+const browser=await chromium.launch({headless:true});
+const context=await browser.newContext({viewport:{width:1600,height:1000}});
+const page=await context.newPage();page.setDefaultTimeout(45000);
+const step=async(name,fn)=>{console.log('RUN '+name);await fn();report.steps.push({name,status:'passed'});console.log('PASS '+name)};
+const canvas=p=>p.locator('iframe[title="Canvas persistente da página HTML"]:not([inert]):not([aria-hidden="true"]), iframe[title="Persistent HTML page canvas"]:not([inert]):not([aria-hidden="true"]), [data-infinite-canvas-active-iframe] iframe:not([inert]):not([aria-hidden="true"]), iframe[title$="— editável"]:not([inert]):not([aria-hidden="true"])').filter({visible:true}).first();
+try {
+  await page.goto(environment.KODETY_E2E_LOGIN_URL||wp('eval','echo wp_login_url();'));
+  await page.locator('#user_login').fill(environment.KODETY_E2E_USER);await page.locator('#user_pass').fill(environment.KODETY_E2E_PASSWORD);
+  await page.locator('#wp-submit').click();await page.waitForURL('**/wp-admin/**');
+  let failOpen=true;let failedDownloads=0;
+  await page.route('**/*',route=>{const url=new URL(route.request().url());if(failOpen&&url.searchParams.get('action')==='kodety_download_editor_project'){failedDownloads++;return route.fulfill({status:503,body:'Temporarily unavailable'})}return route.continue()});
+  await step('cold WordPress load failure never enters the file launcher; retry recovers',async()=>{
+    await page.goto(site.origin+'/kodety/editor/');
+    await expect(page.locator('[data-kodety-project-opening] [role=alert]')).toBeVisible({timeout:90000});
+    assert.ok(failedDownloads>0);
+    await expect.poll(()=>wp('--user=1','eval','echo Kodety_Sharing::instance()->has_active_editor_lock() ? "1" : "0";')).toBe('0');
+    await expect(page.getByText(/^(Open a project|Abrir um projeto)$/)).toHaveCount(0);
+    await expect(page.locator('input[type=file]')).toHaveCount(0);
+    failOpen=false;await page.getByRole('button',{name:/^(Tentar novamente|Try again)$/}).click();
+    await expect(canvas(page)).toBeVisible({timeout:90000});
+    await expect(page.locator('[data-kodety-project-opening]')).toHaveCount(0);
+  });
+  await step('Design to CMS completes and displays the native CMS',async()=>{
+    await page.getByRole('link',{name:'CMS',exact:true}).click();await page.waitForURL('**/kodety/cms/**',{timeout:90000});
+    await expect(page.getByRole('heading',{name:/^(CMS WordPress|WordPress CMS)$/})).toBeVisible();
+    await expect(page.getByText('Salvando projeto…',{exact:true})).toHaveCount(0);
+  });
+  await page.getByRole('button',{name:'Design',exact:true}).click();await expect(canvas(page)).toBeVisible({timeout:90000});
+  await step('Settings accepts the real empty PHP templates response',async()=>{
+    const schemaResponse=page.waitForResponse(r=>new URL(r.url()).pathname.endsWith('/cms/schema')&&r.request().method()==='GET');
+    await page.getByRole('link',{name:/^(Settings|Configurações|Ajustes)$/}).click();
+    const response=await schemaResponse;assert.ok(response.ok());const schema=await response.json();
+    assert.deepEqual(schema.templates,[],'Exercise the real WordPress empty-list shape');
+    await expect(page.locator('[data-kodety-light-workspace="settings"]')).toBeVisible();
+    await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+    await expect(page.getByText(/As collections não foram confirmadas|Não foi possível consultar o CMS|Could not retrieve CMS data/)).toHaveCount(0);
+  });
+  await step('a real CMS query failure can be retried inside Settings',async()=>{
+    await page.getByRole('link',{name:'Design',exact:true}).click();await expect(canvas(page)).toBeVisible({timeout:90000});
+    let failSchema=true;
+    await page.route('**/cms/schema*',route=>failSchema?route.fulfill({status:503,contentType:'application/json',body:'{"message":"Temporarily unavailable"}'}):route.continue());
+    await page.getByRole('link',{name:/^(Settings|Configurações|Ajustes)$/}).click();
+    await expect(page.getByText(/Não foi possível consultar o CMS|Could not retrieve CMS data/)).toBeVisible();
+    failSchema=false;
+    await page.getByRole('button',{name:/^(Tentar novamente|Try again)$/}).click();
+    await expect(page.getByText(/Não foi possível consultar o CMS|Could not retrieve CMS data/)).toHaveCount(0);
+    await expect(page.locator('[data-kodety-light-workspace="settings"]')).toBeVisible();
+  });
+  await page.getByRole('link',{name:'Design',exact:true}).click();await expect(canvas(page)).toBeVisible({timeout:90000});
+  const second=await context.newPage();let granted=false;
+  second.on('response',async r=>{if(new URL(r.url()).pathname.endsWith('/editor-lock')&&r.request().method()==='POST'&&r.ok()){const p=await r.json().catch(()=>null);if(p?.mode==='edit')granted=true}});
+  await step('only visual editor tabs contend; Settings stays editable beside them',async()=>{
+    await second.goto(site.origin+'/kodety/editor/');await expect(second.locator('[data-kodety-read-only="true"]').first()).toBeVisible();
+    const settings=await context.newPage();const settingsHeartbeats=[];
+    settings.on('request',request=>{if(new URL(request.url()).pathname.endsWith('/editor-lock'))settingsHeartbeats.push(request.method())});
+    await settings.goto(site.origin+'/kodety/settings/');
+    await expect(settings.locator('[data-kodety-light-workspace="settings"]')).toBeVisible();
+    await expect(settings.locator('[data-kodety-read-only="true"]')).toHaveCount(0);
+    assert.equal(await settings.evaluate(()=>window.kodetyWordPress.editorLockUrl),'');
+    assert.deepEqual(settingsHeartbeats,[],'Settings must never acquire or renew a visual-editor lease');
+    await settings.close();
+    await second.evaluate(()=>window.dispatchEvent(new Event('kodety-editor-lock-check')));
+    await expect(second.locator('[data-kodety-read-only="true"]').first()).toBeVisible();assert.equal(granted,false,'The other active visual editor tab must remain protected');
+    await page.close();await expect.poll(()=>granted,{timeout:30000}).toBe(true);
+    await expect(canvas(second)).toBeVisible();
+    await expect(second.locator('[data-kodety-read-only="true"]')).toHaveCount(0);
+  });
+  await second.close();
+} finally {
+  await mkdir(arg('--output'),{recursive:true});await writeFile(path.join(arg('--output'),'critical-hotfix.json'),JSON.stringify(report,null,2));
+  await browser.close();
+}

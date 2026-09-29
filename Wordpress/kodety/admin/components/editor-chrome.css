@@ -1,0 +1,310 @@
+/* WordPress editor controls only. No scripts, canvas filters or iframe styles.
+ * The same stylesheet serves Gutenberg, Site Editor and Customizer controls. */
+body.kodety-editor-chrome,
+body.wp-customizer {
+  --kec-panel: #1e1e1e;
+  --kec-raised: #282828;
+  --kec-control: #282828;
+  --kec-divider: #363636;
+  --kec-text: #b8b8b8;
+  --kec-muted: #969696;
+  --kec-accent: var(--kodety-admin-accent, #9393ff);
+}
+
+/* These are UI boundaries, never .editor-styles-wrapper or a block preview.
+ * Keep WordPress' positioning, resizing, keyboard handling and responsive UI. */
+:is(body.kodety-editor-chrome, body.wp-customizer)
+  :is(.interface-interface-skeleton__header, .interface-interface-skeleton__sidebar,
+      .interface-interface-skeleton__secondary-sidebar, .interface-interface-skeleton__footer,
+      .editor-header, .edit-post-header, .edit-site-header, .edit-widgets-header,
+      .edit-site-layout__sidebar, .edit-site-sidebar, .edit-site-navigation-panel,
+      .editor-sidebar, .edit-post-sidebar, .edit-widgets-sidebar,
+      .components-popover__content, .components-modal__frame, .media-modal,
+      #customize-controls, .wp-full-overlay-footer, #wpadminbar, #adminmenuwrap) {
+  --wp-components-color-background: var(--kec-panel);
+  --wp-components-color-foreground: var(--kec-text);
+  --wp-components-color-accent: var(--kec-accent);
+  --wp-components-color-accent-inverted: var(--kodety-admin-accent-foreground, #f0f0f0);
+  --wp-components-color-gray-100: var(--kec-panel);
+  --wp-components-color-gray-200: var(--kec-raised);
+  --wp-components-color-gray-300: var(--kec-divider);
+  --wp-components-color-gray-600: var(--kec-muted);
+  --wp-components-color-gray-700: var(--kec-text);
+  --wp-components-color-gray-900: #f0f0f0;
+  color-scheme: dark;
+  background: var(--kec-panel) !important;
+  color: var(--kec-text) !important;
+  border-color: var(--kec-divider) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 13px;
+}
+
+body.kodety-editor-chrome
+  :is(.components-panel, .components-panel__body, .components-panel__header,
+      .components-modal__header, .components-dropdown-menu__menu,
+      .components-menu-group, .components-tab-panel__tabs,
+      .components-tabs__tablist, .block-editor-inserter__tabs,
+      .block-editor-inserter__panel-header, .block-editor-inserter__panel-content,
+      .block-editor-list-view, .editor-post-publish-panel__header,
+      .editor-post-publish-panel__content, .editor-post-publish-panel__footer)
+  :is(h2, h3, label, .components-base-control__label, .components-button) {
+  color: inherit;
+}
+
+body.kodety-editor-chrome
+  :is(.components-panel, .components-panel__body, .components-panel__header,
+      .components-modal__header, .components-dropdown-menu__menu,
+      .components-tab-panel__tabs, .components-tabs__tablist,
+      .block-editor-inserter__tabs, .block-editor-inserter__panel-header,
+      .block-editor-inserter__panel-content, .editor-post-publish-panel__header,
+      .editor-post-publish-panel__content, .editor-post-publish-panel__footer) {
+  background: var(--kec-panel) !important;
+  border-color: var(--kec-divider) !important;
+  color: var(--kec-text);
+}
+
+body.kodety-editor-chrome
+  :is(.editor-header, .edit-post-header, .edit-site-header,
+      .interface-interface-skeleton__sidebar, .interface-interface-skeleton__secondary-sidebar,
+      .components-popover__content, .components-modal__frame)
+  .components-button:not(.is-primary):not(.is-destructive):not(:where(.editor-styles-wrapper *, .block-editor-block-preview__container *)) {
+  color: var(--kec-text);
+  border-radius: 6px;
+}
+
+body.kodety-editor-chrome
+  :is(.editor-header, .edit-post-header, .edit-site-header,
+      .interface-interface-skeleton__sidebar, .interface-interface-skeleton__secondary-sidebar,
+      .components-popover__content, .components-modal__frame)
+  .components-button:not(.is-primary):not(:disabled):hover {
+  background: var(--kec-control);
+  color: #f0f0f0;
+}
+
+body.kodety-editor-chrome
+  :is(.components-popover__content, .components-modal__frame) {
+  border: 1px solid var(--kec-divider);
+  border-radius: 10px;
+  box-shadow: 0 12px 40px rgb(0 0 0 / 28%);
+}
+
+body.kodety-editor-chrome :is(.editor-document-bar, .block-editor-block-breadcrumb) {
+  background: var(--kec-raised);
+  color: var(--kec-text);
+  border-radius: 6px;
+}
+
+body.kodety-editor-chrome :is(.editor-document-bar__title, .editor-document-bar__post-type-label,
+    .block-editor-block-breadcrumb__button, .block-editor-block-breadcrumb__current,
+    .components-guide h1, .components-guide__page h1,
+    .components-modal__header-heading) {
+  color: var(--kec-text);
+}
+
+body.kodety-editor-chrome
+  :is(.editor-header, .interface-interface-skeleton__sidebar,
+      .interface-interface-skeleton__secondary-sidebar, .components-popover__content)
+  .components-button.is-pressed:not(.is-primary) {
+  background: var(--kec-control);
+  color: #f0f0f0;
+}
+
+body.kodety-editor-chrome .components-button.is-secondary {
+  border: 1px solid var(--kec-divider);
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+body.kodety-editor-chrome .components-button.is-primary:not(:where(.editor-styles-wrapper *, .block-editor-block-preview__container *)) {
+  background: var(--kec-accent);
+  color: var(--kodety-admin-accent-foreground, #111);
+  border-radius: 6px;
+}
+
+body.kodety-editor-chrome .components-button.is-primary:not(:disabled):not(:where(.editor-styles-wrapper *, .block-editor-block-preview__container *)):hover {
+  background: var(--kec-accent);
+  box-shadow: inset 0 0 0 100px rgb(0 0 0 / 8%);
+}
+
+body.kodety-editor-chrome .components-button.is-destructive {
+  color: #ff7b7b;
+}
+
+/* Media selection belongs to editor chrome; thumbnails retain their colors. */
+body.kodety-editor-chrome .media-modal
+  :is(.media-modal-content, .media-frame-title, .media-frame-menu, .media-menu,
+      .media-frame-router, .media-router, .media-frame-content, .media-frame-toolbar,
+      .media-toolbar, .attachments-browser, .media-sidebar, .attachment-info,
+      .attachment-details, .uploader-inline, .media-selection) {
+  background: var(--kec-panel) !important;
+  color: var(--kec-text) !important;
+  border-color: var(--kec-divider) !important;
+}
+
+body.kodety-editor-chrome .media-modal
+  :is(h1, h2, h3, label, .setting, .media-menu-item, .media-modal-close,
+      .media-selection, .upload-ui, .instructions) {
+  color: var(--kec-text) !important;
+}
+
+body.kodety-editor-chrome .media-modal
+  :is(.media-menu-item:hover, .media-menu-item.active) {
+  background: var(--kec-control);
+  color: #f0f0f0 !important;
+}
+
+body.kodety-editor-chrome .media-modal
+  :is(input[type="search"], input[type="text"], input[type="url"], input[type="number"], select, textarea, .button:not(.button-primary)) {
+  background: var(--kec-control) !important;
+  color: var(--kec-text) !important;
+  border: 1px solid var(--kec-divider) !important;
+  border-radius: 6px;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+body.kodety-editor-chrome .media-modal .button-primary {
+  background: var(--kec-accent);
+  border-color: transparent;
+  border-radius: 6px;
+  color: var(--kodety-admin-accent-foreground, #f0f0f0);
+}
+
+body.kodety-editor-chrome .media-modal .button:disabled,
+body.kodety-editor-chrome .media-modal .button[aria-disabled="true"] {
+  background: var(--kec-raised) !important;
+  border-color: var(--kec-divider) !important;
+  color: var(--kec-muted) !important;
+  text-shadow: none !important;
+}
+
+body.kodety-editor-chrome .media-modal :is(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid var(--kec-accent);
+  outline-offset: 2px;
+}
+
+body.kodety-editor-chrome
+  :is(.interface-interface-skeleton__sidebar, .interface-interface-skeleton__secondary-sidebar,
+      .components-popover__content, .components-modal__frame)
+  :is(.components-text-control__input, .components-textarea-control__input,
+      .components-select-control__input, .components-input-control__backdrop) {
+  background: var(--kec-control) !important;
+  color: var(--kec-text) !important;
+  border-color: var(--kec-divider) !important;
+  border-radius: 6px;
+}
+
+body.kodety-editor-chrome :is(.components-base-control__help, .components-input-control__label) {
+  color: var(--kec-muted);
+}
+
+body.kodety-editor-chrome .components-button:focus-visible,
+body.wp-customizer #customize-controls :is(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid var(--kec-accent);
+  outline-offset: 2px;
+}
+
+body.kodety-editor-chrome :is(#adminmenu, #adminmenuback, #adminmenu .wp-submenu) {
+  background: var(--kec-panel);
+}
+
+body.kodety-editor-chrome #adminmenu :is(a, .wp-submenu-head) {
+  color: var(--kec-text);
+}
+
+body.kodety-editor-chrome #adminmenu :is(a:hover, a:focus, a.wp-has-current-submenu, a.current) {
+  background: var(--kec-raised);
+  color: #f0f0f0;
+}
+
+body.kodety-editor-chrome #adminmenu :is(.wp-has-current-submenu, .current) > a.menu-top {
+  box-shadow: inset 2px 0 var(--kec-accent);
+}
+
+body.kodety-editor-chrome
+  :is(.editor-header, .edit-post-header, .edit-site-header, .edit-widgets-header)
+  :is(h1, h2, h3) {
+  color: var(--kec-text);
+}
+
+/* Customizer only loads this file in its controls document, never the site. */
+body.wp-customizer :is(.wp-full-overlay-sidebar, #customize-header-actions,
+    #customize-info .accordion-section-title, #customize-theme-controls,
+    #customize-controls .accordion-section-content,
+    #customize-controls .accordion-section-title,
+    .customize-section-title, .customize-section-description,
+    #customize-controls .customize-info, .customize-control-notifications-container) {
+  background: var(--kec-panel) !important;
+  color: var(--kec-text) !important;
+  border-color: var(--kec-divider) !important;
+  box-shadow: none;
+}
+
+body.wp-customizer #customize-controls :is(h2, h3, label, .customize-control-title) {
+  color: var(--kec-text);
+}
+
+body.wp-customizer #customize-controls :is(.description, .customize-action) {
+  color: var(--kec-muted);
+}
+
+body.wp-customizer #customize-controls :is(input[type="text"], input[type="number"], input[type="search"], select, textarea, .button-secondary) {
+  background: var(--kec-control);
+  color: var(--kec-text);
+  border: 1px solid var(--kec-divider);
+  border-radius: 6px;
+}
+
+body.wp-customizer #customize-controls .button {
+  background: var(--kec-control);
+  border-color: var(--kec-divider);
+  border-radius: 6px;
+  color: var(--kec-text);
+  box-shadow: none;
+  text-shadow: none;
+}
+
+body.wp-customizer #customize-controls .button-primary {
+  background: var(--kec-accent);
+  color: var(--kodety-admin-accent-foreground, #111);
+}
+
+body.wp-customizer #customize-controls .button:disabled,
+body.wp-customizer #customize-controls .button[aria-disabled="true"] {
+  background: var(--kec-raised) !important;
+  border-color: var(--kec-divider) !important;
+  color: var(--kec-muted) !important;
+  text-shadow: none !important;
+}
+
+body.wp-customizer :is(.customize-controls-close, .customize-panel-back, .customize-section-back,
+    .wp-full-overlay-footer .devices, .wp-full-overlay-footer .devices button) {
+  background: var(--kec-panel);
+  border-color: var(--kec-divider);
+  color: var(--kec-muted);
+  box-shadow: none;
+}
+
+body.wp-customizer :is(.customize-controls-close:hover, .customize-panel-back:hover,
+    .customize-section-back:hover, .wp-full-overlay-footer .devices button:hover,
+    .wp-full-overlay-footer .devices button.active) {
+  background: var(--kec-control);
+  color: var(--kec-text);
+}
+
+body.wp-customizer .wp-full-overlay-footer .devices button::before {
+  color: currentColor;
+}
+
+@media (forced-colors: active) {
+  body.kodety-editor-chrome,
+  body.wp-customizer {
+    --kec-panel: #1e1e1e;
+    --kec-control: #282828;
+    --kec-raised: #282828;
+    --kec-text: CanvasText;
+    --kec-muted: CanvasText;
+    --kec-divider: CanvasText;
+    --kec-accent: Highlight;
+  }
+}

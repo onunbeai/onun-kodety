@@ -1,0 +1,643 @@
+{
+  "language.settings_title": [
+    "Idioma da interface do Onun Kodety",
+    "Onun Kodety interface language"
+  ],
+  "language.menu_title": [
+    "Idioma do Onun Kodety",
+    "Onun Kodety language"
+  ],
+  "language.settings_description": [
+    "Escolha o idioma usado nas áreas administrativas do Onun Kodety, incluindo Builder, CMS e Insights.",
+    "Choose the language used by Onun Kodety administration areas, including Builder, CMS, and Insights.",
+    "Escolha o idioma usado nas áreas administrativas do Onun Kodety, incluindo o Builder, o CMS e as Análises."
+  ],
+  "language.field_label": [
+    "Idioma da interface",
+    "Interface language"
+  ],
+  "language.auto_option": [
+    "Automático — seguir o idioma do WordPress",
+    "Automatic — follow the WordPress language"
+  ],
+  "language.add_title": [
+    "Adicionar outro idioma",
+    "Add another language"
+  ],
+  "common.save_changes": [
+    "Salvar alterações",
+    "Save Changes"
+  ],
+  "common.save": [
+    "Salvar",
+    "Save"
+  ],
+  "common.cancel": [
+    "Cancelar",
+    "Cancel"
+  ],
+  "common.close": [
+    "Fechar",
+    "Close"
+  ],
+  "common.delete": [
+    "Excluir",
+    "Delete"
+  ],
+  "common.remove": [
+    "Remover",
+    "Remove"
+  ],
+  "common.edit": [
+    "Editar",
+    "Edit"
+  ],
+  "common.add": [
+    "Adicionar",
+    "Add"
+  ],
+  "common.create": [
+    "Criar",
+    "Create"
+  ],
+  "common.update": [
+    "Atualizar",
+    "Update"
+  ],
+  "common.publish": [
+    "Publicar",
+    "Publish"
+  ],
+  "common.published": [
+    "Publicado",
+    "Published"
+  ],
+  "common.publishing": [
+    "Publicando…",
+    "Publishing…"
+  ],
+  "common.preview": [
+    "Visualizar",
+    "Preview"
+  ],
+  "common.open": [
+    "Abrir",
+    "Open"
+  ],
+  "common.back": [
+    "Voltar",
+    "Back"
+  ],
+  "common.next": [
+    "Próximo",
+    "Next"
+  ],
+  "common.search": [
+    "Buscar",
+    "Search"
+  ],
+  "common.filter": [
+    "Filtrar",
+    "Filter"
+  ],
+  "common.loading": [
+    "Carregando…",
+    "Loading…"
+  ],
+  "common.error": [
+    "Erro",
+    "Error"
+  ],
+  "common.success": [
+    "Sucesso",
+    "Success"
+  ],
+  "common.active": [
+    "Ativo",
+    "Active"
+  ],
+  "common.inactive": [
+    "Inativo",
+    "Inactive"
+  ],
+  "common.enabled": [
+    "Ativado",
+    "Enabled"
+  ],
+  "common.disabled": [
+    "Desativado",
+    "Disabled"
+  ],
+  "common.yes": [
+    "Sim",
+    "Yes"
+  ],
+  "common.no": [
+    "Não",
+    "No"
+  ],
+  "common.confirm": [
+    "Confirmar",
+    "Confirm"
+  ],
+  "common.settings": [
+    "Configurações",
+    "Settings",
+    "Ajustes"
+  ],
+  "common.learn_more": [
+    "Saiba mais",
+    "Learn more"
+  ],
+  "common.copy": [
+    "Copiar",
+    "Copy"
+  ],
+  "common.download": [
+    "Baixar",
+    "Download"
+  ],
+  "common.upload": [
+    "Enviar",
+    "Upload"
+  ],
+  "common.import": [
+    "Importar",
+    "Import"
+  ],
+  "common.export": [
+    "Exportar",
+    "Export"
+  ],
+  "common.restore": [
+    "Restaurar",
+    "Restore"
+  ],
+  "common.retry": [
+    "Tentar novamente",
+    "Try again"
+  ],
+  "common.select": [
+    "Selecionar",
+    "Select"
+  ],
+  "common.none": [
+    "Nenhum",
+    "None"
+  ],
+  "common.all": [
+    "Todos",
+    "All"
+  ],
+  "common.name": [
+    "Nome",
+    "Name"
+  ],
+  "common.description": [
+    "Descrição",
+    "Description"
+  ],
+  "common.status": [
+    "Status"
+  ],
+  "common.actions": [
+    "Ações",
+    "Actions"
+  ],
+  "common.date": [
+    "Data",
+    "Date"
+  ],
+  "common.language": [
+    "Idioma",
+    "Language"
+  ],
+  "nav.dashboard": [
+    "Painel",
+    "Dashboard"
+  ],
+  "nav.builder": [
+    "Editor visual",
+    "Visual editor",
+    "Builder"
+  ],
+  "nav.cms": [
+    "Onun Kodety CMS",
+    "CMS"
+  ],
+  "nav.analytics": [
+    "Analytics",
+    "Análises"
+  ],
+  "nav.insights": [
+    "Insights",
+    "Informações",
+    "Análises"
+  ],
+  "nav.settings": [
+    "Configurações",
+    "Settings",
+    "Ajustes"
+  ],
+  "nav.localization": [
+    "Localização",
+    "Localization"
+  ],
+  "nav.templates": [
+    "Templates",
+    "Modelos"
+  ],
+  "nav.members": [
+    "Membros",
+    "Members"
+  ],
+  "nav.emails": [
+    "Emails",
+    "E-mails"
+  ],
+  "nav.marketing": [
+    "Marketing"
+  ],
+  "nav.extensions": [
+    "Extensões",
+    "Extensions"
+  ],
+  "nav.media": [
+    "Mídia",
+    "Media"
+  ],
+  "nav.site": [
+    "Ver site",
+    "View site"
+  ],
+  "nav.logout": [
+    "Sair",
+    "Log out"
+  ],
+  "nav.help": [
+    "Ajuda",
+    "Help"
+  ],
+  "cms.overview": [
+    "Visão geral do CMS",
+    "CMS overview"
+  ],
+  "cms.overview_short": [
+    "Visão geral",
+    "Overview",
+    "Resumo"
+  ],
+  "cms.new_item": [
+    "Novo item",
+    "New item"
+  ],
+  "cms.collections": [
+    "Coleções",
+    "Collections"
+  ],
+  "cms.fields": [
+    "Campos",
+    "Fields"
+  ],
+  "cms.items": [
+    "Itens",
+    "Items"
+  ],
+  "cms.content": [
+    "Conteúdo",
+    "Content"
+  ],
+  "cms.slug": [
+    "Slug"
+  ],
+  "cms.empty": [
+    "Nenhum item encontrado.",
+    "No items found."
+  ],
+  "cms.create_collection": [
+    "Criar coleção",
+    "Create collection"
+  ],
+  "cms.add_field": [
+    "Adicionar campo",
+    "Add field"
+  ],
+  "analytics.overview": [
+    "Visão geral de analytics",
+    "Analytics overview",
+    "Visão geral das análises"
+  ],
+  "analytics.page_insights": [
+    "Insights da página",
+    "Page insights",
+    "Análises da página"
+  ],
+  "analytics.visitors": [
+    "Visitantes",
+    "Visitors"
+  ],
+  "analytics.views": [
+    "Visualizações",
+    "Views"
+  ],
+  "analytics.sessions": [
+    "Sessões",
+    "Sessions"
+  ],
+  "analytics.conversions": [
+    "Conversões",
+    "Conversions"
+  ],
+  "analytics.funnels": [
+    "Funis",
+    "Funnels"
+  ],
+  "analytics.experiments": [
+    "Experimentos",
+    "Experiments"
+  ],
+  "analytics.date_range": [
+    "Período",
+    "Date range"
+  ],
+  "analytics.live": [
+    "Tempo real",
+    "Real time"
+  ],
+  "builder.layers": [
+    "Camadas",
+    "Layers"
+  ],
+  "builder.insert": [
+    "Inserir",
+    "Insert"
+  ],
+  "builder.styles": [
+    "Estilos",
+    "Styles"
+  ],
+  "builder.assets": [
+    "Assets",
+    "Recursos"
+  ],
+  "builder.pages": [
+    "Páginas",
+    "Pages"
+  ],
+  "builder.components": [
+    "Componentes",
+    "Components"
+  ],
+  "builder.code": [
+    "Código",
+    "Code"
+  ],
+  "builder.desktop": [
+    "Desktop",
+    "Computador"
+  ],
+  "builder.tablet": [
+    "Tablet"
+  ],
+  "builder.mobile": [
+    "Celular",
+    "Mobile"
+  ],
+  "builder.undo": [
+    "Desfazer",
+    "Undo"
+  ],
+  "builder.redo": [
+    "Refazer",
+    "Redo"
+  ],
+  "builder.save_draft": [
+    "Salvar rascunho",
+    "Save draft"
+  ],
+  "builder.saved": [
+    "Alterações salvas",
+    "Changes saved"
+  ],
+  "updates.available_tooltip": [
+    "Atualização Onun Kodety {value0} disponível",
+    "Onun Kodety {value0} update available"
+  ],
+  "updates.available": [
+    "Onun Kodety {value0} está disponível",
+    "Onun Kodety {value0} is available"
+  ],
+  "updates.open": [
+    "Atualizar Onun Kodety",
+    "Update Onun Kodety"
+  ],
+  "updates.check": [
+    "Buscar atualizações",
+    "Check for updates"
+  ],
+  "updates.checking": [
+    "Buscando atualizações…",
+    "Checking for updates…"
+  ],
+  "updates.current": [
+    "O Onun Kodety já está atualizado",
+    "Onun Kodety is up to date"
+  ],
+  "updates.unavailable": [
+    "Canal de atualizações indisponível.",
+    "Update channel unavailable."
+  ],
+  "updates.check_failed": [
+    "Não foi possível buscar atualizações.",
+    "Não foi possível buscar atualizações",
+    "Could not check for updates.",
+    "Could not check for updates"
+  ],
+  "settings.wordpress_workspace": [
+    "Workspace do WordPress",
+    "WordPress workspace",
+    "Espaço de trabalho do WordPress"
+  ],
+  "settings.interface": [
+    "Interface do WordPress",
+    "WordPress interface"
+  ],
+  "settings.block_editor": [
+    "Editor de blocos",
+    "Block editor"
+  ],
+  "settings.accent": [
+    "Cor de destaque",
+    "Accent color",
+    "Cor destacada"
+  ],
+  "settings.brand": [
+    "Identidade do workspace",
+    "Workspace identity",
+    "Identidade do espaço de trabalho"
+  ],
+  "settings.storage": [
+    "Armazenamento",
+    "Storage"
+  ],
+  "settings.snapshots": [
+    "Snapshots de publicação",
+    "Publication snapshots",
+    "Pontos de restauração da publicação",
+    "Versões publicadas"
+  ],
+  "settings.delete_project": [
+    "Excluir este projeto",
+    "Delete this project"
+  ],
+  "settings.integrations": [
+    "Integrações",
+    "Integrations"
+  ],
+  "settings.ai": [
+    "Inteligência artificial",
+    "Artificial intelligence"
+  ],
+  "settings.mcp": [
+    "Conexões MCP",
+    "MCP connections"
+  ],
+  "settings.save_color": [
+    "Salvar cor",
+    "Save color"
+  ],
+  "settings.save_settings": [
+    "Salvar configurações",
+    "Save settings",
+    "Salvar ajustes"
+  ],
+  "settings.choose_logo": [
+    "Escolher logo",
+    "Choose logo"
+  ],
+  "settings.change_logo": [
+    "Trocar logo",
+    "Change logo"
+  ],
+  "settings.remove_logo": [
+    "Remover logo atual",
+    "Remove current logo"
+  ],
+  "settings.no_logo": [
+    "Nenhuma logo enviada",
+    "No logo uploaded"
+  ],
+  "settings.delete_snapshots": [
+    "Apagar todos os snapshots",
+    "Delete all snapshots",
+    "Apagar todos os pontos de restauração"
+  ],
+  "templates.library": [
+    "Biblioteca de templates",
+    "Template library",
+    "Biblioteca de modelos"
+  ],
+  "templates.apply": [
+    "Aplicar template",
+    "Apply template",
+    "Aplicar modelo"
+  ],
+  "templates.upload": [
+    "Enviar template",
+    "Upload template",
+    "Enviar modelo"
+  ],
+  "members.overview": [
+    "Visão geral de membros",
+    "Members overview"
+  ],
+  "members.plans": [
+    "Planos",
+    "Plans"
+  ],
+  "members.access": [
+    "Acessos",
+    "Access"
+  ],
+  "members.subscriptions": [
+    "Assinaturas",
+    "Subscriptions"
+  ],
+  "email.inbox": [
+    "Caixa de entrada",
+    "Inbox"
+  ],
+  "email.campaigns": [
+    "Campanhas",
+    "Campaigns"
+  ],
+  "email.contacts": [
+    "Contatos",
+    "Contacts"
+  ],
+  "email.audiences": [
+    "Audiências",
+    "Audiences"
+  ],
+  "email.automations": [
+    "Automações",
+    "Automations"
+  ],
+  "email.new_campaign": [
+    "Nova campanha",
+    "New campaign"
+  ],
+  "extensions.title": [
+    "Extensões do Onun Kodety",
+    "Onun Kodety extensions"
+  ],
+  "extensions.activate": [
+    "Ativar extensão",
+    "Activate extension"
+  ],
+  "extensions.deactivate": [
+    "Desativar extensão",
+    "Deactivate extension"
+  ],
+  "onboarding.welcome": [
+    "Bem-vindo ao Onun Kodety",
+    "Welcome to Onun Kodety"
+  ],
+  "onboarding.start": [
+    "Começar",
+    "Get started"
+  ],
+  "messages.permission_denied": [
+    "Sem permissão.",
+    "Permission denied."
+  ],
+  "messages.access_denied": [
+    "Acesso negado",
+    "Access denied"
+  ],
+  "messages.unavailable": [
+    "Área indisponível",
+    "Area unavailable"
+  ],
+  "messages.required": [
+    "Campo obrigatório",
+    "Required field"
+  ],
+  "messages.saved": [
+    "Configurações salvas.",
+    "Settings saved."
+  ],
+  "patterns.items_count": [
+    "{count} item(ns)",
+    "{count} item(s)"
+  ],
+  "patterns.snapshots_count": [
+    "{count} snapshot(s) armazenado(s)",
+    "{count} snapshot(s) stored",
+    "{count} ponto(s) de restauração armazenado(s)"
+  ],
+  "patterns.results_count": [
+    "{count} resultado(s)",
+    "{count} result(s)"
+  ]
+}

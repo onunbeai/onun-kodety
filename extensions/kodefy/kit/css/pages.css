@@ -1,0 +1,17 @@
+.shop-layout { display: grid; grid-template-columns: 220px 1fr; gap: 3rem; }
+.filter-panel { position: sticky; top: 1.5rem; align-self: start; }
+.filter-panel details { padding: 1rem 0; border-bottom: 1px solid var(--color-line); }
+.filter-panel summary { font-weight: 700; cursor: pointer; }
+.filter-panel label { display: flex; gap: .6rem; margin-top: .75rem; color: var(--color-muted); }
+.cart-page { display: grid; grid-template-columns: 1fr 380px; gap: 3rem; align-items: start; }
+.cart-summary { position: sticky; top: 2rem; padding: 2rem; border-radius: var(--radius-md); background: var(--color-surface); box-shadow: var(--shadow-soft); }
+.cart-summary__line { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+.cart-summary [data-kodefy-checkout] { width: 100%; }
+.account-card { max-width: 720px; padding: clamp(2rem, 6vw, 5rem); border-radius: var(--radius-lg); background: var(--color-surface); box-shadow: var(--shadow-soft); text-align: center; }
+.account-card h1 { font-size: clamp(3rem, 8vw, 6rem); line-height: .9; }
+.policy { max-width: 780px; }
+.policy h1 { font-size: clamp(3rem, 8vw, 6rem); }
+.policy h2 { margin-top: 2.5rem; font-family: var(--font-body); font-size: 1.35rem; font-weight: 750; letter-spacing: 0; }
+.policy p, .policy li { color: var(--color-muted); line-height: 1.75; }
+
+@media (max-width: 810px) { .shop-layout, .cart-page { grid-template-columns: 1fr; } .filter-panel, .cart-summary { position: static; } }

@@ -1,0 +1,21 @@
+{
+  "name": "@coday/component-runtime",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.tsx",
+    "./vendor": "./src/vendor.ts"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "dependencies": {
+    "@coday/components": "1.0.0",
+    "@coday/control-schema": "1.0.0",
+    "@coday/component-registry": "1.0.0",
+    "@coday/cms-bridge": "1.0.0",
+    "@coday/canvas-bridge": "1.0.0"
+  },
+  "sideEffects": false,
+  "license": "GPL-3.0-only"
+}

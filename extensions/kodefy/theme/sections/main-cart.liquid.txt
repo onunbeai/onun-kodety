@@ -1,0 +1,13 @@
+<header class="page-header"><div class="page-width"><span class="eyebrow">{{ 'sections.cart.eyebrow' | t }}</span><h1>{{ 'sections.cart.title' | t }}</h1></div></header>
+<section class="section"><div class="cart-layout page-width">
+  <form action="{{ routes.cart_url }}" method="post" id="cart">
+    {% if cart == empty %}<p class="empty-state">{{ 'sections.cart.empty' | t }} <a href="{{ routes.all_products_collection_url }}">{{ 'general.continue_shopping' | t }}</a></p>{% else %}
+      <table class="cart-items" role="table"><thead><tr><th scope="col">{{ 'sections.cart.product' | t }}</th><th scope="col">{{ 'sections.cart.quantity' | t }}</th><th scope="col">{{ 'sections.cart.total' | t }}</th></tr></thead><tbody>{% for item in cart.items %}<tr class="cart-item" id="CartItem-{{ forloop.index }}"><td><div class="drawer__item"><a href="{{ item.url }}">{% if item.image %}{{ item.image | image_url: width: 180 | image_tag: loading: 'lazy', class: 'cart-item__image', width: 84, height: 84, alt: item.image.alt | default: item.product.title }}{% endif %}</a><div><a class="cart-item__title" href="{{ item.url }}">{{ item.product.title | escape }}</a>{% unless item.product.has_only_default_variant %}<p class="cart-item__options">{{ item.variant.title | escape }}</p>{% endunless %}<a href="{{ item.url_to_remove }}">{{ 'sections.cart.remove' | t }}</a></div></div></td><td><label class="visually-hidden" for="Quantity-{{ forloop.index }}">{{ 'products.product.quantity' | t }}</label><input id="Quantity-{{ forloop.index }}" class="cart-item__quantity" type="number" name="updates[]" min="0" value="{{ item.quantity }}"></td><td>{{ item.final_line_price | money_with_currency }}</td></tr>{% endfor %}</tbody></table>
+    {% endif %}
+  </form>
+  <aside class="cart-summary"><h2>{{ 'sections.cart.summary' | t }}</h2><div class="cart-summary__total"><span>{{ 'sections.cart.estimated_total' | t }}</span><strong>{{ cart.total_price | money_with_currency }}</strong></div>{% if settings.show_cart_note %}<label class="cart-note" for="CartNote">{{ 'sections.cart.note' | t }}<textarea id="CartNote" name="note" form="cart">{{ cart.note }}</textarea></label>{% endif %}<button class="button" type="submit" name="checkout" form="cart"{% if cart == empty %} disabled{% endif %}>{{ 'sections.cart.checkout' | t }}</button></aside>
+</div></section>
+
+{% schema %}
+{ "name": "t:sections.main_cart.name", "settings": [] }
+{% endschema %}

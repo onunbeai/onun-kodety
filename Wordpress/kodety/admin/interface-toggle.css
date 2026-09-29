@@ -1,0 +1,170 @@
+.kodety-interface-setting {
+  width: min(760px, 100%);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 28px;
+  margin: 24px 0;
+  padding: 22px;
+  border: 1px solid var(--k-os-border, #c3c4c7);
+  border-radius: var(--k-os-radius, 10px);
+  background: var(--k-os-card, #fff);
+  color: var(--k-os-foreground, #1d2327);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+.kodety-interface-setting__copy {
+  min-width: 0;
+}
+
+.kodety-interface-setting__eyebrow {
+  margin: 0 0 5px !important;
+  color: var(--k-os-primary, #2271b1) !important;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.kodety-interface-setting h2 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 7px;
+  padding: 0;
+  color: inherit;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+.kodety-interface-setting h2 span {
+  padding: 2px 6px;
+  border: 1px solid var(--k-os-border-strong, #c3c4c7);
+  border-radius: 999px;
+  color: var(--k-os-muted-foreground, #646970);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.kodety-interface-setting__copy > p:last-child {
+  max-width: 590px;
+  margin: 0;
+  color: var(--k-os-muted-foreground, #646970);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.kodety-interface-setting__form {
+  min-width: 190px;
+  display: grid;
+  justify-items: end;
+  gap: 7px;
+}
+
+.kodety-interface-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--k-os-foreground, #1d2327);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+
+.kodety-interface-toggle input {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+.kodety-interface-toggle__track {
+  width: 40px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  padding: 2px;
+  border: 1px solid var(--k-os-border-strong, #8c8f94);
+  border-radius: 999px;
+  background: var(--k-os-input, #dcdcde);
+  box-sizing: border-box;
+  transition:
+    background-color 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.kodety-interface-toggle__track > span {
+  width: 16px;
+  height: 16px;
+  display: block;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
+  transform: translateX(0);
+  transition: transform 140ms ease;
+}
+
+.kodety-interface-toggle input:checked + .kodety-interface-toggle__track {
+  border-color: var(--k-os-primary, #2271b1);
+  background: var(--k-os-primary, #2271b1);
+}
+
+.kodety-interface-toggle input:checked + .kodety-interface-toggle__track > span {
+  transform: translateX(18px);
+}
+
+.kodety-interface-toggle input:focus-visible + .kodety-interface-toggle__track {
+  outline: 2px solid var(--k-os-ring, #2271b1);
+  outline-offset: 2px;
+}
+
+.kodety-interface-toggle:hover .kodety-interface-toggle__track {
+  border-color: var(--k-os-primary, #2271b1);
+}
+
+.kodety-interface-setting__status {
+  margin: 0 !important;
+  color: var(--k-os-muted-foreground, #646970) !important;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.kodety-interface-setting__submit {
+  margin-top: 1px !important;
+}
+
+.kodety-interface-setting__form[aria-busy="true"] {
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+@media (max-width: 782px) {
+  .kodety-interface-setting {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 18px;
+  }
+
+  .kodety-interface-setting__form {
+    justify-items: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kodety-interface-toggle__track,
+  .kodety-interface-toggle__track > span {
+    transition: none;
+  }
+}

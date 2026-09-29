@@ -1,0 +1,16 @@
+<header class="page-header"><div class="page-width"><span class="eyebrow">{{ 'collections.general.eyebrow' | t }}</span><h1>{{ collection.title | escape }}</h1>{% if collection.description != blank %}<div class="collection-description rte">{{ collection.description }}</div>{% endif %}</div></header>
+<section class="section"><div class="page-width">
+  {% paginate collection.products by section.settings.products_per_page %}
+    <div class="product-grid" id="ProductGridContainer">{% for product in collection.products %}{% render 'product-card', card_product: product %}{% else %}<p class="empty-state">{{ 'collections.general.empty' | t }}</p>{% endfor %}</div>
+    {% if paginate.pages > 1 %}<nav class="pagination" role="navigation" aria-label="{{ 'accessibility.pagination' | t }}">{{ paginate | default_pagination }}</nav>{% endif %}
+  {% endpaginate %}
+</div></section>
+
+{% schema %}
+{
+  "name": "t:sections.main_collection.name",
+  "settings": [
+    { "type": "range", "id": "products_per_page", "min": 8, "max": 48, "step": 4, "label": "t:sections.main_collection.settings.products_per_page.label", "default": 24 }
+  ]
+}
+{% endschema %}

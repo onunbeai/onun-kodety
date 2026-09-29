@@ -1,0 +1,37 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://coday.dev/schemas/control-definition-1.0.0.json",
+  "title":"Coday Control Definition",
+  "oneOf":[
+    {"$ref":"#/$defs/string"},{"$ref":"#/$defs/text"},{"$ref":"#/$defs/number"},{"$ref":"#/$defs/boolean"},{"$ref":"#/$defs/enum"},
+    {"$ref":"#/$defs/color"},{"$ref":"#/$defs/image"},{"$ref":"#/$defs/file"},{"$ref":"#/$defs/link"},{"$ref":"#/$defs/date"},
+    {"$ref":"#/$defs/spacing"},{"$ref":"#/$defs/radius"},{"$ref":"#/$defs/border"},{"$ref":"#/$defs/shadow"},{"$ref":"#/$defs/typography"},{"$ref":"#/$defs/transform"},{"$ref":"#/$defs/effects"},{"$ref":"#/$defs/layout"},
+    {"$ref":"#/$defs/object"},{"$ref":"#/$defs/array"},{"$ref":"#/$defs/slot"},{"$ref":"#/$defs/slots"}
+  ],
+  "$defs":{
+    "base":{"type":"object","properties":{"title":{"type":"string"},"description":{"type":"string"},"category":{"enum":["Content","Layout","Style","Typography","Effects","Animation","Data","Events","Advanced"]},"order":{"type":"number"},"responsive":{"type":"boolean"},"bindable":{"type":"boolean"},"hidden":{"$ref":"#/$defs/condition"},"disabled":{"$ref":"#/$defs/condition"},"required":{"$ref":"#/$defs/condition"}}},
+    "condition":{"oneOf":[{"type":"object","required":["property","operator"],"properties":{"property":{"type":"string"},"operator":{"enum":["equals","not-equals","includes","not-includes","greater-than","less-than","exists"]},"value":{}}},{"type":"object","required":["and"],"properties":{"and":{"type":"array","items":{"$ref":"#/$defs/condition"}}}},{"type":"object","required":["or"],"properties":{"or":{"type":"array","items":{"$ref":"#/$defs/condition"}}}},{"type":"object","required":["not"],"properties":{"not":{"$ref":"#/$defs/condition"}}}]},
+    "string":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"string"},"defaultValue":{"type":"string"},"placeholder":{"type":"string"},"maxLength":{"type":"integer","minimum":0},"pattern":{"type":"string"}}}]},
+    "text":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"text"},"defaultValue":{"type":"string"},"minRows":{"type":"integer","minimum":1},"maxRows":{"type":"integer","minimum":1},"maxLength":{"type":"integer","minimum":0}}}]},
+    "number":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"number"},"defaultValue":{"type":"number"},"min":{"type":"number"},"max":{"type":"number"},"step":{"type":"number","exclusiveMinimum":0},"unit":{"type":"string"},"display":{"enum":["input","slider","stepper","slider-input"]}}}]},
+    "boolean":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"boolean"},"defaultValue":{"type":"boolean"},"enabledTitle":{"type":"string"},"disabledTitle":{"type":"string"}}}]},
+    "enum":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type","options"],"properties":{"type":{"const":"enum"},"options":{"type":"array","minItems":1,"items":{"type":["string","number","boolean","null"]}},"optionTitles":{"type":"array","items":{"type":"string"}},"optionIcons":{"type":"array","items":{"type":"string"}},"display":{"enum":["select","segmented","radio","icon-grid"]}}}]},
+    "color":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"color"},"allowAlpha":{"type":"boolean"},"allowTokens":{"type":"boolean"}}}]},
+    "image":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"image"},"acceptedMimeTypes":{"type":"array","items":{"type":"string"}},"maxBytes":{"type":"integer","minimum":1}}}]},
+    "file":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"file"},"extensions":{"type":"array","items":{"type":"string"}},"mimeTypes":{"type":"array","items":{"type":"string"}},"maxBytes":{"type":"integer","minimum":1}}}]},
+    "link":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"link"},"allowedTypes":{"type":"array","items":{"enum":["url","page","section","email","phone","file"]}}}}]},
+    "date":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"date"},"mode":{"enum":["date","datetime"]},"timezone":{"type":"string"},"min":{"type":"string"},"max":{"type":"string"}}}]},
+    "spacing":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"spacing"},"units":{"type":"array","items":{"enum":["px","rem","em","%","vw","vh"]}}}}]},
+    "radius":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"radius"}}}]},
+    "border":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"border"},"allowTokens":{"type":"boolean"}}}]},
+    "shadow":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"shadow"},"maxCount":{"type":"integer","minimum":1}}}]},
+    "typography":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"typography"},"allowTokens":{"type":"boolean"}}}]},
+    "transform":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"transform"}}}]},
+    "effects":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"effects"}}}]},
+    "layout":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"layout"}}}]},
+    "object":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type","controls"],"properties":{"type":{"const":"object"},"controls":{"type":"object","additionalProperties":{"$ref":"#"}},"collapsed":{"type":"boolean"}}}]},
+    "array":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type","control"],"properties":{"type":{"const":"array"},"control":{"$ref":"#"},"minCount":{"type":"integer","minimum":0},"maxCount":{"type":"integer","minimum":0},"itemTitleAdapter":{"type":"string"}}}]},
+    "slot":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"slot"},"accepts":{"type":"array","items":{"type":"string"}}}}]},
+    "slots":{"allOf":[{"$ref":"#/$defs/base"},{"type":"object","required":["type"],"properties":{"type":{"const":"slots"},"accepts":{"type":"array","items":{"type":"string"}},"minCount":{"type":"integer","minimum":0},"maxCount":{"type":"integer","minimum":0}}}]}
+  }
+}

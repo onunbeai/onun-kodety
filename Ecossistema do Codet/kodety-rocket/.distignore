@@ -1,0 +1,16 @@
+/.git
+/.gitignore
+/.distignore
+/composer.json
+/composer.lock
+/vendor
+/src/Optimization/ConservativeGlobalCssMinifier.php
+/README.md
+/tests
+/tools
+/dist
+/vendor-prefixed/*/bin
+/vendor-prefixed/*/composer.json
+*.log
+*.map
+.DS_Store

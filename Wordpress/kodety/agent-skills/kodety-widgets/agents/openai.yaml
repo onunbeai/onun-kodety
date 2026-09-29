@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kodety Widgets"
+  short_description: "Crie Code Components React completos no Builder"
+  default_prompt: "Use $kodety-widgets para criar, inserir e testar um Code Component configurável neste projeto."

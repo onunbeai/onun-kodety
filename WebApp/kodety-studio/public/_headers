@@ -1,0 +1,11 @@
+/*
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: credentialless
+
+/project-storage.html
+  ! Cross-Origin-Embedder-Policy
+  Document-Isolation-Policy: isolate-and-credentialless
+
+/project-storage
+  ! Cross-Origin-Embedder-Policy
+  Document-Isolation-Policy: isolate-and-credentialless

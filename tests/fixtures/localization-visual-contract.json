@@ -1,0 +1,329 @@
+{
+  "pagePath": "contract.html",
+  "locales": ["pt-BR", "en-US", "fr-FR"],
+  "additionalCases": [
+    {
+      "id": "site-metadata-fallback",
+      "pagePath": "metadata-only.html",
+      "locale": "de-DE",
+      "expectedMetadata": {
+        "title": "English global title",
+        "description": "English global description"
+      }
+    },
+    {
+      "id": "stylesheet-metadata-only",
+      "pagePath": "pages/stylesheet-only.html",
+      "locale": "fr-FR",
+      "expectedMetadata": {
+        "title": "French current global title",
+        "description": "French current global description"
+      },
+      "expectedStylesheets": [
+        "../styles/localized-en.css",
+        "localized-fr.css"
+      ]
+    }
+  ],
+  "source": "<!doctype html><html lang=\"pt-BR\"><head><title>Base title</title><meta name=\"description\" content=\"Base description\"><link rel=\"stylesheet\" href=\"styles/base.css\"></head><body><section id=\"hero-dom\" data-kodety-l10n-id=\"hero\" data-mode=\"base\" style=\"display: grid !important; padding: 20px !important; color: red\"><h1 data-kodety-l10n-id=\"heading\">Base heading</h1></section><picture data-kodety-l10n-id=\"hero-picture\"><source data-kodety-l10n-id=\"hero-source\" srcset=\"/hero-base.webp 2x\" sizes=\"50vw\"><img data-kodety-l10n-id=\"hero-image\" src=\"/hero-base.jpg\" srcset=\"/hero-base@2x.jpg 2x\" sizes=\"50vw\" alt=\"Base hero\"></picture><footer id=\"footer-dom\" data-kodety-l10n-id=\"footer\">Base footer</footer></body></html>",
+  "settings": {
+    "version": 2,
+    "sourceLocale": "pt-BR",
+    "defaultLocale": "pt-BR",
+    "automaticLocale": false,
+    "rememberLocale": true,
+    "translatePagePaths": false,
+    "includePathsInAi": false,
+    "locales": [
+      {
+        "code": "pt-BR",
+        "language": "pt",
+        "region": "BR",
+        "name": "Português (Brasil)",
+        "slug": "",
+        "enabled": true,
+        "direction": "ltr"
+      },
+      {
+        "code": "en-US",
+        "language": "en",
+        "region": "US",
+        "name": "English (United States)",
+        "slug": "en-us",
+        "fallback": "pt-BR",
+        "enabled": true,
+        "direction": "ltr"
+      },
+      {
+        "code": "fr-FR",
+        "language": "fr",
+        "region": "FR",
+        "name": "Français",
+        "slug": "fr-fr",
+        "fallback": "en-US",
+        "enabled": true,
+        "direction": "ltr"
+      },
+      {
+        "code": "de-DE",
+        "language": "de",
+        "region": "DE",
+        "name": "Deutsch",
+        "slug": "de-de",
+        "fallback": "en-US",
+        "enabled": true,
+        "direction": "ltr"
+      }
+    ],
+    "translations": {
+      "pt-BR": {
+        "siteTitle": "CORRUPTED SOURCE TITLE",
+        "siteDescription": "CORRUPTED SOURCE DESCRIPTION",
+        "pages": {
+          "contract.html": {
+            "title": "CORRUPTED SOURCE PAGE TITLE",
+            "description": "CORRUPTED SOURCE PAGE DESCRIPTION",
+            "entries": {
+              "id:heading:text": "CORRUPTED SOURCE HEADING"
+            },
+            "overrides": {
+              "id:hero": {
+                "visible": false,
+                "attributes": {
+                  "data-mode": "corrupted-source"
+                },
+                "styles": {
+                  "padding-left": "999px"
+                }
+              },
+              "id:hero-image": {
+                "attributes": {
+                  "src": "/corrupted-source.jpg"
+                }
+              }
+            },
+            "insertions": [
+              {
+                "id": "corrupted-source-only",
+                "anchor": "body",
+                "position": "append",
+                "html": "<section id=\"corrupted-source-only\">Corrupted source insertion</section>"
+              }
+            ]
+          }
+        }
+      },
+      "en-US": {
+        "siteTitle": "English global title",
+        "siteDescription": "English global description",
+        "pages": {
+          "contract.html": {
+            "stylesheet": "styles/localized-en.css",
+            "title": "English page title",
+            "description": "English page description",
+            "entries": {
+              "id:heading:text": "English heading"
+            },
+            "overrides": {
+              "id:hero": {
+                "visible": false,
+                "attributes": {
+                  "data-mode": "english",
+                  "data-kodety-locale-insertion": "forged"
+                },
+                "styles": {
+                  "padding-left": "24px",
+                  "color": "green"
+                }
+              },
+              "id:hero-source": {
+                "attributes": {
+                  "srcset": "/hero-en.webp 2x",
+                  "sizes": "100vw"
+                }
+              },
+              "id:hero-image": {
+                "attributes": {
+                  "src": "/hero-en.jpg",
+                  "srcset": "/hero-en@2x.jpg 2x",
+                  "alt": "English hero"
+                }
+              },
+              "id:footer": {
+                "attributes": {
+                  "id": "hero-dom"
+                }
+              },
+              "insertion:en-only": {
+                "attributes": {
+                  "data-locale-only": "en"
+                }
+              }
+            },
+            "insertions": [
+              {
+                "id": "en-only",
+                "anchor": "id:footer",
+                "position": "before",
+                "html": "<section id=\"en-only\">Only in English</section>"
+              },
+              {
+                "id": "forged-dependent",
+                "anchor": "insertion:forged",
+                "position": "append",
+                "html": "<section id=\"forged-dependent\">Forged marker must not become an anchor</section>"
+              }
+            ]
+          },
+          "pages/stylesheet-only.html": {
+            "stylesheet": "styles/localized-en.css",
+            "entries": {}
+          }
+        }
+      },
+      "fr-FR": {
+        "siteTitle": "French current global title",
+        "siteDescription": "French current global description",
+        "pages": {
+          "contract.html": {
+            "stylesheet": "styles/localized-fr.css",
+            "entries": {},
+            "overrides": {
+              "id:hero": {
+                "visible": true,
+                "attributes": {
+                  "data-mode": "french"
+                },
+                "styles": {
+                  "padding": "12px",
+                  "color": "blue"
+                }
+              },
+              "insertion:fr-only": {
+                "attributes": {
+                  "data-locale-only": "fr"
+                }
+              }
+            },
+            "insertions": [
+              {
+                "id": "en-only",
+                "anchor": "body",
+                "position": "append",
+                "html": "",
+                "removed": true
+              },
+              {
+                "id": "fr-only",
+                "anchor": "id:footer",
+                "position": "before",
+                "html": "<section id=\"fr-only\">Seulement en français</section>"
+              }
+            ]
+          },
+          "pages/stylesheet-only.html": {
+            "stylesheet": "pages/localized-fr.css",
+            "entries": {}
+          }
+        }
+      }
+    }
+  },
+  "expected": {
+    "pt-BR": {
+      "metadata": {
+        "title": "Base title",
+        "description": "Base description"
+      },
+      "heading": "Base heading",
+      "hero": {
+        "mode": "base",
+        "hidden": false,
+        "ariaHidden": null,
+        "styles": {
+          "color": "red",
+          "display": "grid !important",
+          "padding": "20px !important"
+        }
+      },
+      "media": {
+        "sourceSrcset": "/hero-base.webp 2x",
+        "sourceSizes": "50vw",
+        "imageSrc": "/hero-base.jpg",
+        "imageSrcset": "/hero-base@2x.jpg 2x",
+        "imageSizes": "50vw",
+        "imageAlt": "Base hero"
+      },
+      "localeSections": [],
+      "documentIds": ["hero-dom", "footer-dom"]
+    },
+    "en-US": {
+      "metadata": {
+        "title": "English page title",
+        "description": "English page description"
+      },
+      "heading": "English heading",
+      "hero": {
+        "mode": "english",
+        "hidden": true,
+        "ariaHidden": "true",
+        "styles": {
+          "color": "green",
+          "display": "none",
+          "padding-left": "24px"
+        }
+      },
+      "media": {
+        "sourceSrcset": "/hero-en.webp 2x",
+        "sourceSizes": "100vw",
+        "imageSrc": "/hero-en.jpg",
+        "imageSrcset": "/hero-en@2x.jpg 2x",
+        "imageSizes": null,
+        "imageAlt": "English hero"
+      },
+      "localeSections": [
+        {
+          "owner": "en-only",
+          "id": "en-only",
+          "locale": "en",
+          "text": "Only in English"
+        }
+      ],
+      "documentIds": ["hero-dom", "en-only", "footer-dom"]
+    },
+    "fr-FR": {
+      "metadata": {
+        "title": "English page title",
+        "description": "English page description"
+      },
+      "heading": "English heading",
+      "hero": {
+        "mode": "french",
+        "hidden": false,
+        "ariaHidden": null,
+        "styles": {
+          "color": "blue",
+          "display": "grid",
+          "padding": "12px"
+        }
+      },
+      "media": {
+        "sourceSrcset": "/hero-en.webp 2x",
+        "sourceSizes": "100vw",
+        "imageSrc": "/hero-en.jpg",
+        "imageSrcset": "/hero-en@2x.jpg 2x",
+        "imageSizes": null,
+        "imageAlt": "English hero"
+      },
+      "localeSections": [
+        {
+          "owner": "fr-only",
+          "id": "fr-only",
+          "locale": "fr",
+          "text": "Seulement en français"
+        }
+      ],
+      "documentIds": ["hero-dom", "fr-only", "footer-dom"]
+    }
+  }
+}

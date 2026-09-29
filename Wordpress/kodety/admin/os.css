@@ -1,0 +1,2315 @@
+/*
+ * Kodety OS — WordPress compatibility layer
+ * Mirrors the editor primitives instead of redesigning native workflows.
+ */
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/inter-latin-variable.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC,
+    U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+    U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+body.kodety-admin-skin {
+  --k-os-background: #121212;
+  --k-os-background-subtle: #151515;
+  --k-os-foreground: #f4f4f4;
+  --k-os-card: #1c1c1c;
+  --k-os-surface-raised: #232323;
+  --k-os-popover: #232323;
+  --k-os-primary: #9393FF;
+  --k-os-primary-hover: #AFAFFF;
+  --k-os-primary-foreground: #fff;
+  --k-os-secondary: rgb(255 255 255 / 7%);
+  --k-os-secondary-hover: rgb(255 255 255 / 11%);
+  --k-os-muted: #232323;
+  --k-os-muted-foreground: #999999;
+  --k-os-accent: #292929;
+  --k-os-border: rgb(255 255 255 / 8%);
+  --k-os-border-strong: rgb(255 255 255 / 12%);
+  --k-os-input: #181818;
+  --k-os-ring: #9393FF;
+  --k-os-destructive: #ff7b72;
+  --k-os-success: #62d99c;
+  --k-os-warning: #e7bd63;
+  --k-os-radius-lg: 16px;
+  --k-os-radius: 12px;
+  --k-os-radius-md: 10px;
+  --k-os-radius-sm: 10px;
+  --k-os-control: 36px;
+  --k-os-panel-padding: 16px;
+  --k-os-page-gap: 28px;
+  --k-os-ease: 160ms cubic-bezier(0.2, 0, 0, 1);
+  --kd-bg: var(--k-os-background);
+  --kd-sidebar: var(--k-os-background-subtle);
+  --kd-surface: var(--k-os-card);
+  --kd-surface-2: var(--k-os-secondary);
+  --kd-surface-3: var(--k-os-accent);
+  --kd-border: var(--k-os-border);
+  --kd-border-strong: var(--k-os-border-strong);
+  --kd-text: var(--k-os-foreground);
+  --kd-text-2: color-mix(in oklch, var(--k-os-foreground) 86%, transparent);
+  --kd-muted: var(--k-os-muted-foreground);
+  --kd-blue: var(--k-os-primary);
+  --kd-blue-hover: var(--k-os-primary-hover);
+  --kd-blue-soft: color-mix(in oklch, var(--k-os-primary) 14%, transparent);
+  --kd-radius: var(--k-os-radius);
+  --wp-admin-theme-color: var(--k-os-primary);
+  --wp-admin-theme-color-darker-10: var(--k-os-primary-hover);
+  --wp-admin-theme-color-darker-20: #AFAFFF;
+  --wp-components-color-accent: var(--k-os-primary);
+  --wp-components-color-accent-darker-10: var(--k-os-primary-hover);
+  --wp-components-color-accent-darker-20: #AFAFFF;
+  --wp-components-color-accent-inverted: var(--k-os-primary-foreground);
+  --wp-components-color-background: var(--k-os-background);
+  --wp-components-color-foreground: var(--k-os-foreground);
+  background: var(--k-os-background);
+  color: var(--k-os-foreground);
+  font-family:
+    "Inter",
+    ui-sans-serif,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif !important;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.kodety-admin-skin
+  :where(
+    #wpwrap,
+    #wpadminbar,
+    #adminmenu,
+    .kodety-ui-shell,
+    button,
+    input,
+    select,
+    textarea
+  ):not(:where(.editor-styles-wrapper, .editor-styles-wrapper *)) {
+  font-family:
+    "Inter",
+    ui-sans-serif,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page) {
+  color-scheme: dark;
+  font-size: 13px;
+}
+
+.kodety-admin-skin :where(#wpwrap, #wpbody, #wpbody-content) {
+  background: var(--k-os-background) !important;
+}
+
+.kodety-admin-skin
+  :where(a, button, input, select, textarea):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  transition:
+    color var(--k-os-ease),
+    background-color var(--k-os-ease),
+    border-color var(--k-os-ease),
+    box-shadow var(--k-os-ease),
+    opacity var(--k-os-ease);
+}
+
+.kodety-admin-skin
+  :where(button, a, input, select, textarea):not(
+    :where(.editor-styles-wrapper *)
+  ):focus-visible {
+  outline: 2px solid var(--k-os-ring) !important;
+  outline-offset: 2px;
+}
+
+.kodety-admin-skin #wpcontent {
+  padding-left: var(--k-os-page-gap);
+}
+.kodety-admin-skin #wpbody-content {
+  padding: var(--k-os-page-gap) var(--k-os-page-gap) 84px 0;
+}
+.kodety-admin-skin .wrap {
+  width: 100%;
+  max-width: none;
+}
+.kodety-admin-skin .wrap > h1,
+.kodety-admin-skin .wrap .wp-heading-inline {
+  margin: 0 10px 22px 0;
+  color: var(--k-os-foreground);
+  font-size: clamp(24px, 1.9vw, 29px);
+  font-weight: 650;
+  line-height: 1.18;
+  letter-spacing: -0.04em;
+}
+.kodety-admin-skin .wrap > h2,
+.kodety-admin-skin .wrap > h3 {
+  color: var(--k-os-foreground) !important;
+  letter-spacing: -0.015em;
+}
+.kodety-admin-skin .wrap > p:not(.search-box) {
+  max-width: 900px;
+  line-height: 1.55;
+}
+
+/* Controls: exactly the editor's xs/sm primitives. */
+.kodety-admin-skin
+  :where(
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="time"],
+    input[type="datetime-local"],
+    select
+  ):not(:where(.editor-styles-wrapper *)) {
+  width: auto;
+  min-height: var(--k-os-control) !important;
+  height: var(--k-os-control) !important;
+  padding: 0 9px !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--k-os-radius) !important;
+  background-color: var(--k-os-input) !important;
+  color: var(--k-os-foreground) !important;
+  font-size: 13px !important;
+  line-height: 34px !important;
+  box-shadow: none !important;
+}
+.kodety-admin-skin select:not(:where(.editor-styles-wrapper *)) {
+  color-scheme: dark;
+  padding-right: 30px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a1a1a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 9px center !important;
+  background-size: 12px !important;
+  cursor: pointer;
+}
+
+/* Chromium/macOS keeps the popup native even when the closed control is
+   custom styled. Give every native menu row an opaque dark surface so light
+   text never lands on the system's white fallback menu. */
+.kodety-admin-skin
+  select:not(:where(.editor-styles-wrapper *, [multiple]))
+  :where(option, optgroup) {
+  background-color: #202020 !important;
+  color: var(--k-os-foreground) !important;
+}
+
+.kodety-admin-skin
+  select:not(:where(.editor-styles-wrapper *, [multiple]))
+  :where(option:disabled, optgroup:disabled) {
+  color: var(--k-os-muted-foreground) !important;
+}
+
+.kodety-admin-skin
+  select:not(:where(.editor-styles-wrapper *, [multiple]))
+  option:checked {
+  background: linear-gradient(
+    color-mix(in srgb, var(--k-os-primary) 14%, #202020),
+    color-mix(in srgb, var(--k-os-primary) 14%, #202020)
+  );
+  color: var(--k-os-primary-hover) !important;
+}
+.kodety-admin-skin select[multiple]:not(:where(.editor-styles-wrapper *)),
+.kodety-admin-skin
+  select[size]:not([size="1"]):not(:where(.editor-styles-wrapper *)) {
+  height: auto !important;
+  min-height: 72px !important;
+  padding: 6px 9px !important;
+  background-image: none !important;
+  line-height: 1.45 !important;
+}
+.kodety-admin-skin textarea:not(:where(.editor-styles-wrapper *)) {
+  min-height: 64px !important;
+  padding: 9px 10px !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-input) !important;
+  color: var(--k-os-foreground) !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  box-shadow: none !important;
+}
+.kodety-admin-skin
+  :where(input, select, textarea):not(
+    :where(.editor-styles-wrapper *)
+  )::placeholder {
+  color: color-mix(
+    in oklch,
+    var(--k-os-muted-foreground) 62%,
+    transparent
+  ) !important;
+}
+.kodety-admin-skin
+  :where(input, select, textarea):not(
+    :where(.editor-styles-wrapper *)
+  ):hover:not(:disabled) {
+  background-color: var(--k-os-card) !important;
+}
+.kodety-admin-skin
+  :where(input, select, textarea):not(:where(.editor-styles-wrapper *)):focus {
+  border-color: var(--k-os-ring) !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+.kodety-admin-skin
+  :where(input, select, textarea):not(
+    :where(.editor-styles-wrapper *)
+  ):focus-visible {
+  border-color: var(--k-os-ring) !important;
+  outline: 2px solid color-mix(in srgb, var(--k-os-ring) 45%, transparent) !important;
+  outline-offset: 1px;
+}
+.kodety-admin-skin
+  :where(input, select, textarea):not(
+    :where(.editor-styles-wrapper *)
+  ):disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.kodety-admin-skin input[type="file"]:not(:where(.editor-styles-wrapper *)) {
+  color: var(--k-os-muted-foreground);
+  font-size: 11px;
+}
+.kodety-admin-skin input[type="color"]:not(:where(.editor-styles-wrapper *)) {
+  width: 32px;
+  height: 32px;
+  padding: 3px;
+  border: 0;
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-input);
+}
+.kodety-admin-skin
+  :where(input[type="checkbox"], input[type="radio"]):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  width: 16px !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  min-height: 16px !important;
+  margin: 0 6px 0 0 !important;
+  border: 1px solid transparent !important;
+  background: var(--k-os-input) !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-border) !important;
+}
+.kodety-admin-skin input[type="checkbox"]:not(:where(.editor-styles-wrapper *)) {
+  border-radius: 4px !important;
+}
+.kodety-admin-skin input[type="radio"]:not(:where(.editor-styles-wrapper *)) {
+  border-radius: 50% !important;
+}
+.kodety-admin-skin
+  :where(input[type="checkbox"], input[type="radio"]):not(
+    :where(.editor-styles-wrapper *)
+  ):checked {
+  border-color: var(--k-os-primary) !important;
+  background: var(--k-os-primary) !important;
+  box-shadow: none !important;
+}
+.kodety-admin-skin
+  input[type="checkbox"]:not(:where(.editor-styles-wrapper *)):checked::before {
+  width: 18px;
+  height: 18px;
+  margin: -2px 0 0 -2px;
+  color: var(--k-os-primary-foreground);
+}
+.kodety-admin-skin
+  input[type="radio"]:not(:where(.editor-styles-wrapper *)):checked::before {
+  width: 6px;
+  height: 6px;
+  margin: 4px;
+  background: var(--k-os-primary-foreground);
+}
+
+.kodety-admin-skin
+  :where(
+    .button,
+    .button-secondary,
+    .button-primary,
+    .page-title-action,
+    input[type="submit"],
+    input[type="button"]
+  ):not(:where(.editor-styles-wrapper *)) {
+  min-height: var(--k-os-control) !important;
+  height: var(--k-os-control) !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 10px !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 30px !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  cursor: pointer;
+}
+.kodety-admin-skin .page-title-action {
+  top: 0 !important;
+  margin: 0 4px 18px 0 !important;
+  vertical-align: top;
+}
+.kodety-admin-skin
+  :where(
+    .button,
+    .button-secondary,
+    .page-title-action,
+    input[type="button"]
+  ):not(:where(.editor-styles-wrapper *)):hover {
+  background: var(--k-os-secondary-hover) !important;
+  color: var(--k-os-foreground) !important;
+}
+.kodety-admin-skin
+  :where(
+    .button-primary,
+    input[type="submit"].button-primary,
+    .wrap .add-new-h2
+  ):not(:where(.editor-styles-wrapper *)) {
+  background: var(--k-os-primary) !important;
+  color: var(--k-os-primary-foreground) !important;
+}
+.kodety-admin-skin
+  :where(
+    .button-primary,
+    input[type="submit"].button-primary,
+    .wrap .add-new-h2
+  ):not(:where(.editor-styles-wrapper *)):hover {
+  background: var(--k-os-primary-hover) !important;
+  color: var(--k-os-primary-foreground) !important;
+}
+.kodety-admin-skin
+  :where(.button-link-delete, .submitdelete, .delete a, .trash a) {
+  color: var(--k-os-destructive) !important;
+}
+.kodety-admin-skin
+  :where(.button, input, select, textarea):not(
+    :where(.editor-styles-wrapper *)
+  )[disabled] {
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+}
+
+/* Segmented navigation mirrors TabsList/TabsTrigger. */
+.kodety-admin-skin .subsubsub {
+  width: fit-content;
+  max-width: 100%;
+  min-height: var(--k-os-control);
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  margin: 0 0 16px !important;
+  padding: 3px !important;
+  border: 0 !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-input) !important;
+  overflow-x: auto;
+  color: transparent !important;
+  white-space: nowrap;
+}
+.kodety-admin-skin .subsubsub li {
+  margin: 0 !important;
+  font-size: 0 !important;
+  line-height: 1 !important;
+}
+.kodety-admin-skin .subsubsub a {
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: var(--k-os-radius-md) !important;
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 11px !important;
+  font-weight: 500;
+  line-height: 26px;
+  text-decoration: none;
+}
+.kodety-admin-skin .subsubsub a:hover {
+  background: var(--k-os-secondary);
+  color: var(--k-os-foreground) !important;
+}
+.kodety-admin-skin .subsubsub a.current {
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-foreground) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+.kodety-admin-skin .subsubsub .count {
+  color: inherit !important;
+  font-size: 9px;
+  opacity: 0.65;
+}
+.kodety-admin-skin .nav-tab-wrapper,
+.kodety-admin-skin .wrap h2.nav-tab-wrapper {
+  width: fit-content;
+  max-width: 100%;
+  min-height: var(--k-os-control);
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  margin: 0 0 18px !important;
+  padding: 3px !important;
+  border: 0 !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-input) !important;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  white-space: nowrap;
+}
+.kodety-admin-skin .nav-tab {
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  margin: 0 !important;
+  padding: 0 10px !important;
+  border: 0 !important;
+  border-radius: var(--k-os-radius-md) !important;
+  background: transparent !important;
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 26px;
+}
+.kodety-admin-skin .nav-tab:hover {
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-foreground) !important;
+}
+.kodety-admin-skin .nav-tab-active {
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-foreground) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+/* Tool rows and list tables. */
+.kodety-admin-skin .search-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 12px;
+}
+.kodety-admin-skin .search-box input[type="search"] {
+  min-width: 220px;
+}
+.kodety-admin-skin .tablenav {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  margin: 0 0 8px;
+  padding: 0;
+}
+.kodety-admin-skin .tablenav.bottom {
+  margin: 8px 0 0;
+}
+.kodety-admin-skin .tablenav .alignleft.actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+}
+.kodety-admin-skin .tablenav .actions select {
+  max-width: 210px;
+  margin: 0;
+}
+.kodety-admin-skin .tablenav .actions .button {
+  margin: 0;
+}
+.kodety-admin-skin .tablenav-pages {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 0 auto !important;
+  color: var(--k-os-muted-foreground);
+  font-size: 10px;
+}
+.kodety-admin-skin .tablenav-pages .pagination-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.kodety-admin-skin .tablenav-pages .button,
+.kodety-admin-skin .tablenav-pages .tablenav-pages-navspan {
+  width: 28px;
+  min-width: 28px;
+  height: 28px !important;
+  min-height: 28px !important;
+  padding: 0 !important;
+  border-radius: var(--k-os-radius-md) !important;
+}
+.kodety-admin-skin .tablenav-pages input.current-page {
+  width: 42px;
+  height: 28px !important;
+  min-height: 28px !important;
+  text-align: center;
+}
+
+.kodety-admin-skin :where(.wp-list-table, .widefat) {
+  border: 1px solid var(--k-os-border) !important;
+  border-spacing: 0;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+.kodety-admin-skin :where(.wp-list-table, .widefat) thead,
+.kodety-admin-skin :where(.wp-list-table, .widefat) tfoot {
+  background: color-mix(in oklch, var(--k-os-card) 88%, black);
+}
+.kodety-admin-skin :where(.wp-list-table, .widefat) :where(thead, tfoot) tr {
+  background: color-mix(in oklch, var(--k-os-card) 88%, black) !important;
+}
+.kodety-admin-skin :where(.wp-list-table, .widefat) :where(thead, tfoot) th,
+.kodety-admin-skin :where(.wp-list-table, .widefat) :where(thead, tfoot) td {
+  height: 40px;
+  padding: 0 12px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--k-os-border) !important;
+  background: transparent !important;
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 10px;
+  font-weight: 500;
+  vertical-align: middle;
+}
+.kodety-admin-skin :where(.wp-list-table, .widefat) tfoot th,
+.kodety-admin-skin :where(.wp-list-table, .widefat) tfoot td {
+  border-top: 1px solid var(--k-os-border) !important;
+  border-bottom: 0 !important;
+}
+.kodety-admin-skin :where(.wp-list-table, .widefat) tbody tr {
+  background: var(--k-os-card) !important;
+}
+.kodety-admin-skin :where(.wp-list-table, .widefat) tbody tr:hover {
+  background: color-mix(in oklch, var(--k-os-card) 92%, white 2%) !important;
+}
+.kodety-admin-skin :where(.wp-list-table, .widefat) tbody :where(th, td) {
+  min-height: 52px;
+  padding: 11px 12px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--k-os-border) !important;
+  background: transparent !important;
+  color: color-mix(
+    in oklch,
+    var(--k-os-foreground) 78%,
+    transparent
+  ) !important;
+  font-size: 11px;
+  line-height: 1.45;
+  vertical-align: middle;
+}
+.kodety-admin-skin
+  :where(.wp-list-table, .widefat)
+  tbody
+  tr:last-child
+  :where(th, td) {
+  border-bottom: 0 !important;
+}
+.kodety-admin-skin .wp-list-table .column-primary strong,
+.kodety-admin-skin .wp-list-table .row-title,
+.kodety-admin-skin .wp-list-table .plugin-title strong {
+  color: var(--k-os-foreground) !important;
+  font-size: 11px;
+  font-weight: 600;
+}
+.kodety-admin-skin .wp-list-table .row-actions {
+  padding-top: 5px;
+  color: color-mix(in oklch, var(--k-os-muted-foreground) 48%, transparent);
+  font-size: 9px;
+}
+.kodety-admin-skin .wp-list-table .row-actions a {
+  color: var(--k-os-muted-foreground);
+}
+.kodety-admin-skin .wp-list-table .row-actions a:hover {
+  color: var(--k-os-foreground);
+}
+
+/* Importers are a core `widefat` table, but WordPress hard-codes the service
+ * name to black instead of inheriting the cell color. Keep that title inside
+ * Kodety's foreground hierarchy without affecting importer descriptions. */
+body.kodety-admin-skin.kodety-screen-import
+  .importers
+  .import-system
+  .importer-title {
+  color: var(--k-os-foreground) !important;
+  font-weight: 600;
+}
+
+.kodety-admin-skin .column-author img,
+.kodety-admin-skin .column-username img {
+  border-radius: var(--k-os-radius-md);
+}
+.kodety-admin-skin .sort-indicator::before {
+  color: var(--k-os-muted-foreground);
+}
+
+/* Cards, settings and form hierarchy. */
+.kodety-admin-skin :where(.postbox, .stuffbox, .card, .plugin-card) {
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-foreground) !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+.kodety-admin-skin :where(.postbox-header, .stuffbox > h3) {
+  min-height: 42px;
+  border: 0 !important;
+  border-bottom: 1px solid var(--k-os-border) !important;
+  background: transparent !important;
+}
+.kodety-admin-skin .postbox .hndle {
+  padding: 0 14px !important;
+  color: var(--k-os-foreground) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 42px;
+}
+.kodety-admin-skin .postbox .inside {
+  margin: 0 !important;
+  padding: var(--k-os-panel-padding) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+.kodety-admin-skin .postbox .handle-actions button {
+  width: 30px;
+  height: 30px;
+  min-height: 30px;
+  margin: 5px 3px;
+  border-radius: var(--k-os-radius-md);
+  color: var(--k-os-muted-foreground);
+}
+.kodety-admin-skin .postbox .handle-actions button:hover {
+  background: var(--k-os-secondary);
+  color: var(--k-os-foreground);
+}
+.kodety-admin-skin .form-table {
+  width: 100%;
+  margin: 14px 0 22px;
+  border: 1px solid var(--k-os-border);
+  border-spacing: 0;
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-card);
+  overflow: hidden;
+}
+.kodety-admin-skin .form-table tr:last-child :where(th, td) {
+  border-bottom: 0;
+}
+.kodety-admin-skin .form-table :where(th, td) {
+  padding: 16px !important;
+  border-bottom: 1px solid var(--k-os-border);
+  color: var(--k-os-muted-foreground) !important;
+  vertical-align: top;
+}
+.kodety-admin-skin .form-table th {
+  width: 220px;
+  color: var(--k-os-foreground) !important;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.kodety-admin-skin .form-table td {
+  font-size: 11px;
+}
+.kodety-admin-skin .form-table :where(input.regular-text, textarea) {
+  width: min(100%, 520px);
+}
+.kodety-admin-skin .form-table select {
+  max-width: min(100%, 520px);
+}
+.kodety-admin-skin .form-table .description {
+  margin: 6px 0 0;
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.kodety-admin-skin .form-table fieldset {
+  display: grid;
+  gap: 8px;
+}
+.kodety-admin-skin .form-table fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  color: color-mix(in oklch, var(--k-os-foreground) 82%, transparent);
+}
+.kodety-admin-skin .submit {
+  margin: 18px 0 0 !important;
+  padding: 0 !important;
+}
+
+/* Notices use the editor alert proportions. */
+.kodety-admin-skin :where(.notice, div.updated, div.error) {
+  min-height: 40px;
+  margin: 0 0 14px !important;
+  padding: 8px 40px 8px 12px !important;
+  border: 1px solid var(--k-os-border) !important;
+  border-left-width: 3px !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: none !important;
+}
+.kodety-admin-skin .notice p {
+  margin: 3px 0 !important;
+  color: inherit !important;
+  font-size: 11px;
+}
+.kodety-admin-skin :where(.notice-info, .notice.notice-info) {
+  border-left-color: var(--k-os-primary) !important;
+}
+.kodety-admin-skin :where(.notice-success, div.updated) {
+  border-left-color: var(--k-os-success) !important;
+}
+.kodety-admin-skin :where(.notice-warning) {
+  border-left-color: var(--k-os-warning) !important;
+}
+.kodety-admin-skin :where(.notice-error, div.error) {
+  border-left-color: var(--k-os-destructive) !important;
+}
+.kodety-admin-skin .notice-dismiss {
+  top: 4px;
+  right: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--k-os-radius-md);
+}
+.kodety-admin-skin .notice-dismiss:hover {
+  background: var(--k-os-secondary);
+}
+.kodety-admin-skin .notice-dismiss::before {
+  color: var(--k-os-muted-foreground) !important;
+}
+.kodety-admin-skin .notice-dismiss:is(:hover, :focus-visible)::before {
+  color: var(--k-os-foreground) !important;
+}
+
+/* Screen options, help and dropdown surfaces. */
+.kodety-admin-skin #screen-meta {
+  margin: 0 var(--k-os-page-gap) 0 0;
+  border: 1px solid var(--k-os-border) !important;
+  border-top: 0 !important;
+  border-radius: 0 0 var(--k-os-radius) var(--k-os-radius);
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
+}
+.kodety-admin-skin #screen-meta-links {
+  right: var(--k-os-page-gap);
+}
+.kodety-admin-skin #screen-meta-links .show-settings {
+  min-height: var(--k-os-control) !important;
+  height: var(--k-os-control) !important;
+  margin-left: 5px;
+  padding: 0 10px !important;
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 10px !important;
+  line-height: 30px !important;
+  box-shadow: none !important;
+}
+.kodety-admin-skin #screen-meta-links .show-settings:hover {
+  background: var(--k-os-accent) !important;
+  color: var(--k-os-foreground) !important;
+}
+.kodety-admin-skin :where(.wp-pointer-content, .ui-autocomplete, .ac_results) {
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-popover) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: 0 16px 46px rgba(0, 0, 0, 0.35) !important;
+  overflow: hidden;
+}
+.kodety-admin-skin .ui-autocomplete li a {
+  padding: 7px 9px;
+  border-radius: var(--k-os-radius-sm);
+  color: var(--k-os-muted-foreground);
+}
+.kodety-admin-skin .ui-autocomplete li a:hover,
+.kodety-admin-skin .ui-state-focus {
+  border: 0 !important;
+  background: var(--k-os-accent) !important;
+  color: var(--k-os-foreground) !important;
+}
+
+/* Media library and native overlays. */
+.kodety-admin-skin .media-frame,
+.kodety-admin-skin .media-frame-content,
+.kodety-admin-skin .media-frame-router,
+.kodety-admin-skin .media-frame-toolbar,
+.kodety-admin-skin .media-sidebar {
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-background) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+.kodety-admin-skin .media-toolbar {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+}
+.kodety-admin-skin .media-toolbar-secondary,
+.kodety-admin-skin .media-toolbar-primary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.kodety-admin-skin .media-frame-title h1 {
+  color: var(--k-os-foreground) !important;
+  font-size: 18px;
+  font-weight: 600;
+}
+.kodety-admin-skin .media-router .media-menu-item {
+  height: 32px;
+  margin: 0 2px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--k-os-radius-md);
+  color: var(--k-os-muted-foreground);
+  line-height: 32px;
+}
+.kodety-admin-skin .media-router .media-menu-item:hover {
+  background: var(--k-os-secondary);
+  color: var(--k-os-foreground);
+}
+.kodety-admin-skin .media-router .active {
+  background: var(--k-os-secondary);
+  color: var(--k-os-foreground);
+}
+.kodety-admin-skin .attachments {
+  padding: 12px;
+}
+.kodety-admin-skin .attachment {
+  padding: 4px;
+}
+.kodety-admin-skin .attachment-preview {
+  border-radius: var(--k-os-radius-md) !important;
+  background: var(--k-os-input) !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-border) !important;
+  overflow: hidden;
+}
+.kodety-admin-skin .attachment:hover .attachment-preview {
+  box-shadow: inset 0 0 0 1px var(--k-os-border-strong) !important;
+}
+.kodety-admin-skin .attachment.selected .attachment-preview,
+.kodety-admin-skin .attachment.details .attachment-preview {
+  box-shadow: inset 0 0 0 2px var(--k-os-primary) !important;
+}
+.kodety-admin-skin .attachment .check {
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: var(--k-os-radius-sm);
+  background: var(--k-os-popover);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.24);
+}
+.kodety-admin-skin .attachment.selected .check {
+  background: var(--k-os-primary);
+}
+.kodety-admin-skin .uploader-inline {
+  margin: 12px;
+  padding: 50px 20px;
+  border: 1px dashed var(--k-os-border-strong);
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-input);
+}
+.kodety-admin-skin .media-modal-backdrop,
+.kodety-admin-skin #TB_overlay {
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(3px);
+}
+.kodety-admin-skin .media-modal {
+  inset: 5vh 4vw !important;
+}
+.kodety-admin-skin .media-modal-content,
+.kodety-admin-skin #TB_window {
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-background) !important;
+  color: var(--k-os-foreground) !important;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.58) !important;
+  overflow: hidden;
+}
+.kodety-admin-skin .media-modal-close {
+  width: 42px;
+  height: 42px;
+  border-left: 1px solid var(--k-os-border);
+  color: var(--k-os-muted-foreground);
+}
+.kodety-admin-skin .media-modal-close:hover {
+  background: var(--k-os-secondary);
+  color: var(--k-os-foreground);
+}
+.kodety-admin-skin .attachment-details {
+  color: var(--k-os-muted-foreground);
+}
+.kodety-admin-skin .attachment-details .setting {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+
+/* Plugins, themes, menus and settings-specific composition. */
+.kodety-admin-skin .plugins tbody tr.active {
+  box-shadow: inset 2px 0 0 var(--k-os-primary);
+}
+.kodety-admin-skin .plugins tbody tr.active :where(th, td) {
+  background: color-mix(
+    in oklch,
+    var(--k-os-primary) 7%,
+    var(--k-os-card)
+  ) !important;
+}
+.kodety-admin-skin .plugins .plugin-description p {
+  margin: 4px 0;
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 10px;
+}
+.kodety-admin-skin .plugins .plugin-version-author-uri {
+  color: color-mix(in oklch, var(--k-os-muted-foreground) 72%, transparent);
+  font-size: 9px;
+}
+.kodety-admin-skin .plugin-update-tr .plugin-update {
+  padding: 10px 12px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--k-os-border) !important;
+  background: color-mix(
+    in oklch,
+    var(--k-os-warning) 7%,
+    var(--k-os-card)
+  ) !important;
+  color: var(--k-os-muted-foreground);
+}
+.kodety-admin-skin .plugin-card {
+  margin: 0 8px 12px 0;
+}
+.kodety-admin-skin .plugin-card-top {
+  padding: 16px;
+  border: 0;
+  background: transparent;
+}
+.kodety-admin-skin .plugin-card-bottom {
+  min-height: 40px;
+  padding: 8px 16px;
+  border-top: 1px solid var(--k-os-border);
+  background: color-mix(in oklch, var(--k-os-card) 92%, black);
+}
+.kodety-admin-skin .plugin-card :where(.name h3, .name h3 a) {
+  color: var(--k-os-foreground) !important;
+}
+.kodety-admin-skin
+  .plugin-card
+  :where(.desc, .desc p, .authors, .column-description, .column-description p) {
+  color: var(--k-os-muted-foreground) !important;
+}
+.kodety-admin-skin .plugin-card :where(.authors a, .plugin-card-bottom a) {
+  color: color-mix(in oklch, var(--k-os-primary) 72%, white 14%) !important;
+}
+.kodety-admin-skin .plugin-card-bottom :where(span, div) {
+  color: var(--k-os-muted-foreground);
+}
+.kodety-admin-skin .plugin-card .column-compatibility span::before {
+  color: var(--k-os-muted-foreground) !important;
+}
+
+/* Core updates retain native actions while sharing the OS text hierarchy. */
+.kodety-admin-skin.update-core-php
+  .wrap
+  :where(h2, h3, .response, .plugin-title, .theme-title) {
+  color: var(--k-os-foreground) !important;
+}
+.kodety-admin-skin.update-core-php
+  .wrap
+  :where(
+    p,
+    .update-message,
+    .plugin-version-author-uri,
+    .theme-update-message
+  ) {
+  color: var(--k-os-muted-foreground) !important;
+}
+.kodety-admin-skin.update-core-php .wrap > h2 {
+  margin-top: 32px !important;
+}
+.kodety-admin-skin.update-core-php .wrap :where(p, .update-message) strong {
+  color: var(--k-os-foreground) !important;
+}
+.kodety-admin-skin #nav-menus-frame {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 14px;
+  margin-left: 0;
+}
+.kodety-admin-skin #nav-menus-frame #menu-settings-column {
+  width: auto;
+  margin: 0;
+}
+.kodety-admin-skin #nav-menus-frame #menu-management-liquid {
+  width: auto;
+  min-width: 0;
+}
+.kodety-admin-skin #nav-menus-frame .accordion-section {
+  margin-bottom: 6px;
+  border: 1px solid var(--k-os-border);
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-card);
+  overflow: hidden;
+}
+.kodety-admin-skin #nav-menus-frame .accordion-section-title {
+  min-height: 40px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--k-os-foreground);
+  font-size: 11px;
+  line-height: 40px;
+}
+.kodety-admin-skin #nav-menus-frame .accordion-section-title:hover {
+  background: var(--k-os-secondary);
+}
+.kodety-admin-skin #nav-menus-frame .menu-item-handle {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--k-os-border);
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-card);
+  color: var(--k-os-foreground);
+  line-height: 40px;
+  box-shadow: none;
+}
+.kodety-admin-skin #nav-menus-frame .menu-item-settings {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--k-os-border);
+  border-top: 0;
+  border-radius: 0 0 var(--k-os-radius) var(--k-os-radius);
+  background: var(--k-os-card);
+}
+
+/* Core component library / Gutenberg chrome. */
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.components-button, .components-dropdown-menu__toggle) {
+  min-height: var(--k-os-control);
+  border-radius: var(--k-os-radius) !important;
+  color: var(--k-os-muted-foreground);
+  box-shadow: none !important;
+}
+body.kodety-admin-skin:not(.block-editor-page)
+  .components-button:hover:not(:disabled) {
+  background: var(--k-os-secondary);
+  color: var(--k-os-foreground);
+}
+body.kodety-admin-skin:not(.block-editor-page) .components-button.is-primary {
+  background: var(--k-os-primary);
+  color: var(--k-os-primary-foreground);
+}
+body.kodety-admin-skin:not(.block-editor-page)
+  .components-button.is-primary:hover {
+  background: var(--k-os-primary-hover);
+  color: var(--k-os-primary-foreground);
+}
+body.kodety-admin-skin:not(.block-editor-page) .components-button.is-secondary {
+  border: 0;
+  background: var(--k-os-secondary);
+  color: var(--k-os-muted-foreground);
+  box-shadow: none;
+}
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(
+    .components-text-control__input,
+    .components-select-control__input,
+    .components-input-control__input,
+    .components-combobox-control__input
+  ) {
+  min-height: var(--k-os-control) !important;
+  height: var(--k-os-control) !important;
+  border: 0 !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-input) !important;
+  color: var(--k-os-foreground) !important;
+  font-size: 12px !important;
+  box-shadow: none !important;
+}
+body.kodety-admin-skin:not(.block-editor-page)
+  .components-input-control__backdrop {
+  border: 0 !important;
+  border-radius: var(--k-os-radius) !important;
+  box-shadow: inset 0 0 0 1px transparent !important;
+}
+body.kodety-admin-skin:not(.block-editor-page)
+  .components-input-control__container:focus-within
+  .components-input-control__backdrop {
+  box-shadow: inset 0 0 0 1px var(--k-os-ring) !important;
+}
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(
+    .components-dropdown__content,
+    .components-popover__content,
+    .components-menu-group
+  ) {
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-popover) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.4) !important;
+}
+body.kodety-admin-skin:not(.block-editor-page) .components-popover__content {
+  padding: 4px;
+}
+body.kodety-admin-skin:not(.block-editor-page) .components-menu-item__button {
+  min-height: 32px;
+  border-radius: var(--k-os-radius-md);
+  color: var(--k-os-muted-foreground);
+  font-size: 11px;
+}
+body.kodety-admin-skin:not(.block-editor-page)
+  .components-menu-item__button:hover {
+  background: var(--k-os-accent);
+  color: var(--k-os-foreground);
+}
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.components-panel, .components-panel__body) {
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground);
+}
+body.kodety-admin-skin:not(.block-editor-page) .components-panel__body-title {
+  margin: 0 !important;
+}
+body.kodety-admin-skin:not(.block-editor-page) .components-panel__body-toggle {
+  min-height: 42px;
+  padding: 0 14px !important;
+  color: var(--k-os-foreground) !important;
+  font-size: 11px !important;
+}
+body.kodety-admin-skin:not(.block-editor-page)
+  .components-panel__body.is-opened {
+  padding: 0 14px 14px;
+}
+body.kodety-admin-skin:not(.block-editor-page) .components-tab-panel__tabs {
+  min-height: var(--k-os-control);
+  gap: 1px;
+  padding: 3px;
+  border: 0 !important;
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-input);
+}
+body.kodety-admin-skin:not(.block-editor-page) .components-tab-panel__tabs-item {
+  height: 26px;
+  padding: 0 9px;
+  border: 0 !important;
+  border-radius: var(--k-os-radius-md);
+  color: var(--k-os-muted-foreground);
+  font-size: 11px;
+}
+body.kodety-admin-skin:not(.block-editor-page)
+  .components-tab-panel__tabs-item:hover,
+body.kodety-admin-skin:not(.block-editor-page)
+  .components-tab-panel__tabs-item.is-active {
+  background: var(--k-os-secondary);
+  color: var(--k-os-foreground);
+  box-shadow: none;
+}
+body.kodety-admin-skin:not(.block-editor-page)
+  .components-modal__screen-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+}
+body.kodety-admin-skin:not(.block-editor-page) .components-modal__frame {
+  border: 1px solid var(--k-os-border);
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-background);
+  color: var(--k-os-foreground);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.58);
+  overflow: hidden;
+}
+body.kodety-admin-skin:not(.block-editor-page) .components-modal__header {
+  min-height: 48px;
+  padding: 0 14px;
+  border-bottom: 1px solid var(--k-os-border);
+}
+body.kodety-admin-skin:not(.block-editor-page)
+  .components-modal__header-heading {
+  color: var(--k-os-foreground);
+  font-size: 13px;
+  font-weight: 600;
+}
+body.kodety-admin-skin:not(.block-editor-page) .components-tooltip {
+  border-radius: var(--k-os-radius-md);
+  background: var(--k-os-foreground);
+  color: var(--k-os-background);
+  font-size: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Block editor chrome is isolated in editor-os.css so theme canvas styles stay native. */
+.kodety-admin-skin #poststuff .inside {
+  margin-top: 0;
+}
+.kodety-admin-skin #titlediv #title {
+  height: 44px !important;
+  font-size: 18px !important;
+}
+.kodety-admin-skin .wp-editor-container {
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius);
+  overflow: hidden;
+}
+.kodety-admin-skin .wp-editor-tools {
+  min-height: 38px;
+  display: flex;
+  align-items: end;
+}
+.kodety-admin-skin .wp-switch-editor {
+  height: 30px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--k-os-radius-md) var(--k-os-radius-md) 0 0;
+  background: var(--k-os-input);
+  color: var(--k-os-muted-foreground);
+  line-height: 30px;
+}
+
+/* Inline editing, pickers and legacy editors remain native but use Kodety primitives. */
+.kodety-admin-skin :where(.inline-edit-row, .quick-edit-row, .bulk-edit-row) td {
+  padding: 14px !important;
+  background: color-mix(in oklch, var(--k-os-card) 92%, black) !important;
+}
+.kodety-admin-skin
+  :where(.inline-edit-row, .quick-edit-row, .bulk-edit-row)
+  fieldset {
+  min-width: 0;
+  margin: 0 12px 0 0;
+  padding: 0;
+}
+.kodety-admin-skin
+  :where(.inline-edit-row, .quick-edit-row, .bulk-edit-row)
+  .inline-edit-legend {
+  margin: 0 0 12px;
+  color: var(--k-os-foreground);
+  font-size: 12px;
+  font-weight: 600;
+}
+.kodety-admin-skin
+  :where(.inline-edit-row, .quick-edit-row, .bulk-edit-row)
+  label {
+  margin-bottom: 8px;
+  color: var(--k-os-muted-foreground);
+  font-size: 10px;
+}
+.kodety-admin-skin .inline-edit-save {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 14px -14px -14px;
+  padding: 6px 14px;
+  border-top: 1px solid var(--k-os-border);
+  background: var(--k-os-card);
+}
+.kodety-admin-skin .wp-picker-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.kodety-admin-skin .wp-color-result.button {
+  min-width: 44px;
+  padding-left: 30px !important;
+  overflow: hidden;
+}
+.kodety-admin-skin .wp-color-result-text {
+  height: 30px;
+  padding: 0 8px;
+  border-left: 1px solid var(--k-os-border);
+  color: var(--k-os-muted-foreground);
+  line-height: 30px;
+}
+.kodety-admin-skin .wp-picker-holder {
+  position: absolute;
+  z-index: 100100;
+  margin-top: 5px;
+  padding: 6px;
+  border: 1px solid var(--k-os-border);
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-popover);
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.4);
+}
+.kodety-admin-skin .iris-picker {
+  border: 0 !important;
+  border-radius: var(--k-os-radius-md);
+  background: var(--k-os-popover) !important;
+}
+.kodety-admin-skin .ui-datepicker {
+  width: 248px;
+  padding: 6px;
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-popover) !important;
+  color: var(--k-os-muted-foreground);
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.4);
+}
+.kodety-admin-skin .ui-datepicker-header {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0 !important;
+  border-radius: var(--k-os-radius-md);
+  background: var(--k-os-input) !important;
+  color: var(--k-os-foreground);
+}
+.kodety-admin-skin .ui-datepicker-calendar th {
+  color: var(--k-os-muted-foreground);
+  font-size: 9px;
+  font-weight: 500;
+}
+.kodety-admin-skin .ui-datepicker-calendar td a {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 0 !important;
+  border-radius: var(--k-os-radius-md);
+  background: transparent !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+.kodety-admin-skin .ui-datepicker-calendar td a:hover {
+  background: var(--k-os-accent) !important;
+  color: var(--k-os-foreground) !important;
+}
+.kodety-admin-skin .ui-datepicker-calendar .ui-state-active {
+  border: 1px solid color-mix(in srgb, var(--k-os-primary) 30%, transparent) !important;
+  background: color-mix(in srgb, var(--k-os-primary) 14%, transparent) !important;
+  color: var(--k-os-primary-hover) !important;
+}
+.kodety-admin-skin :where(.mce-panel, .mce-toolbar-grp, .quicktags-toolbar) {
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+.kodety-admin-skin .quicktags-toolbar {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 4px !important;
+}
+.kodety-admin-skin .quicktags-toolbar input.button {
+  height: 28px !important;
+  min-height: 28px !important;
+  border-radius: var(--k-os-radius-md) !important;
+}
+.kodety-admin-skin .mce-toolbar .mce-btn {
+  border: 0;
+  border-radius: var(--k-os-radius-md);
+  background: transparent;
+}
+.kodety-admin-skin .mce-toolbar .mce-btn:hover,
+.kodety-admin-skin .mce-toolbar .mce-btn.mce-active {
+  border: 0;
+  background: var(--k-os-secondary);
+}
+.kodety-admin-skin :where(.mce-menu, .mce-floatpanel, .mce-window) {
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-popover) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45) !important;
+  overflow: hidden;
+}
+.kodety-admin-skin .CodeMirror {
+  border: 1px solid var(--k-os-border);
+  border-radius: var(--k-os-radius);
+  background: #111;
+  color: #ddd;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+/* Health, privacy and user-management accordions. */
+.kodety-admin-skin
+  :where(
+    .health-check-accordion,
+    .privacy-settings-accordion,
+    .site-health-view-passed
+  ) {
+  border: 1px solid var(--k-os-border);
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-card);
+  overflow: hidden;
+}
+.kodety-admin-skin
+  :where(
+    .health-check-accordion-heading,
+    .privacy-settings-accordion .privacy-settings-accordion-heading
+  ) {
+  margin: 0;
+  border-bottom: 1px solid var(--k-os-border);
+  background: transparent;
+}
+.kodety-admin-skin
+  :where(.health-check-accordion-trigger, .privacy-settings-accordion button) {
+  min-height: 44px;
+  padding: 0 14px !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--k-os-foreground) !important;
+  font-size: 11px;
+}
+.kodety-admin-skin
+  :where(
+    .health-check-accordion-trigger,
+    .privacy-settings-accordion button
+  ):hover {
+  background: var(--k-os-secondary) !important;
+}
+.kodety-admin-skin .user-profile-picture img {
+  border-radius: var(--k-os-radius);
+  box-shadow: 0 0 0 1px var(--k-os-border);
+}
+.kodety-admin-skin .application-passwords-list-table {
+  margin-top: 12px;
+}
+
+/* Keep critical notifications visible on the Kodety dashboard. */
+.kodety-admin-skin.index-php
+  #wpbody-content
+  > .wrap
+  > .notice:not(.kodety-dashboard-notice) {
+  display: block !important;
+}
+
+/* Dashboard contrast uses the same muted token as the editor. */
+.kodety-admin-skin
+  :where(
+    .kodety-control-kicker,
+    .kodety-control-head p,
+    .kodety-control-metric-label,
+    .kodety-control-metric small,
+    .kodety-control-panel-head p,
+    .kodety-content-main small,
+    .kodety-content-row time,
+    .kodety-publishing-total span,
+    .kodety-publishing-legend li span,
+    .kodety-project-card small,
+    .kodety-system-grid span,
+    .kodety-system-grid small
+  ) {
+  color: var(--k-os-muted-foreground) !important;
+}
+
+/* Preserve the native collapse affordance as a compact OS control. */
+.kodety-admin-skin #collapse-menu {
+  min-height: 32px;
+  display: flex !important;
+  align-items: center;
+  margin: 12px 4px 0 !important;
+  border-radius: var(--k-os-radius);
+  color: var(--k-os-muted-foreground);
+}
+.kodety-admin-skin #collapse-menu:hover {
+  background: var(--k-os-secondary);
+  color: var(--k-os-foreground);
+}
+.kodety-admin-skin #collapse-button {
+  width: 100%;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: 11px;
+  cursor: pointer;
+}
+.kodety-admin-skin #collapse-button .collapse-button-icon {
+  width: 22px;
+  height: 22px;
+  margin-right: 6px;
+}
+
+/* Snackbar/toast and progress states. */
+.kodety-admin-skin :where(.components-snackbar, .components-notice.is-snackbar) {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid var(--k-os-border);
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-foreground);
+  color: var(--k-os-background);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+  font-size: 11px;
+}
+.kodety-admin-skin
+  :where(.progress, .media-progress-bar, .components-progress-bar) {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--k-os-input);
+  overflow: hidden;
+}
+.kodety-admin-skin :where(.progress, .media-progress-bar) div {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--k-os-primary);
+}
+
+/* One canonical application shell (48px / 244px / 32px rows). */
+.kodety-admin-skin #adminmenuback,
+.kodety-admin-skin #adminmenuwrap,
+.kodety-admin-skin #adminmenu {
+  width: 244px !important;
+  background: var(--k-os-background-subtle) !important;
+}
+.kodety-admin-skin #adminmenuback,
+.kodety-admin-skin #adminmenuwrap {
+  top: 0 !important;
+  height: 100vh;
+  border-right: 1px solid var(--k-os-border) !important;
+}
+.kodety-admin-skin #adminmenuwrap {
+  padding-top: 56px !important;
+}
+.kodety-admin-skin #adminmenu {
+  padding: 4px 10px 16px !important;
+}
+.kodety-admin-skin .kodety-admin-brand {
+  height: 48px !important;
+  padding: 0 10px !important;
+  border-bottom: 1px solid var(--k-os-border) !important;
+  background: var(--k-os-background-subtle) !important;
+}
+.kodety-admin-skin .kodety-brand-mark {
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: var(--k-os-radius-md) !important;
+  border-color: transparent !important;
+  background: transparent !important;
+  color: var(--k-os-foreground) !important;
+  box-shadow: none !important;
+}
+.kodety-admin-skin .kodety-brand-name {
+  color: color-mix(
+    in oklch,
+    var(--k-os-foreground) 86%,
+    transparent
+  ) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+.kodety-admin-skin #adminmenu li.menu-top {
+  min-height: 32px !important;
+  margin: 2px 0 !important;
+  border-radius: var(--k-os-radius) !important;
+}
+.kodety-admin-skin #adminmenu a.menu-top {
+  min-height: 32px !important;
+  border-radius: var(--k-os-radius) !important;
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 12px !important;
+}
+.kodety-admin-skin #adminmenu div.wp-menu-image {
+  width: 32px !important;
+  height: 32px !important;
+  flex-basis: 32px !important;
+}
+.kodety-admin-skin #adminmenu div.wp-menu-name {
+  padding: 0 7px !important;
+  line-height: 32px !important;
+}
+.kodety-admin-skin #adminmenu .kodety-menu-icon svg {
+  width: 15px !important;
+  height: 15px !important;
+}
+.kodety-admin-skin #adminmenu li:hover > a.menu-top,
+.kodety-admin-skin #adminmenu li.opensub > a.menu-top {
+  background: var(--k-os-accent) !important;
+  color: var(--k-os-foreground) !important;
+}
+.kodety-admin-skin #adminmenu li.current > a.menu-top,
+.kodety-admin-skin #adminmenu li.wp-has-current-submenu > a.menu-top {
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-foreground) !important;
+}
+.kodety-admin-skin #adminmenu li.current > a.menu-top::before,
+.kodety-admin-skin #adminmenu li.wp-has-current-submenu > a.menu-top::before {
+  width: 2px !important;
+  height: 16px !important;
+  background: var(--k-os-primary) !important;
+}
+.kodety-admin-skin #adminmenu .wp-has-current-submenu .wp-submenu {
+  margin: 3px 4px 7px 32px !important;
+  padding: 2px !important;
+}
+.kodety-admin-skin #adminmenu .wp-has-current-submenu .wp-submenu li a {
+  min-height: 28px;
+  padding: 0 8px !important;
+  border-radius: var(--k-os-radius-md) !important;
+  color: color-mix(
+    in oklch,
+    var(--k-os-muted-foreground) 74%,
+    transparent
+  ) !important;
+  font-size: 10px !important;
+  line-height: 28px !important;
+}
+.kodety-admin-skin #adminmenu .wp-has-current-submenu .wp-submenu li a:hover,
+.kodety-admin-skin #adminmenu .wp-has-current-submenu .wp-submenu li.current a {
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-foreground) !important;
+}
+.kodety-admin-skin #wpcontent,
+.kodety-admin-skin #wpfooter {
+  margin-left: 244px !important;
+}
+.kodety-admin-skin #wpcontent {
+  padding-top: 48px !important;
+}
+.kodety-admin-skin #wpadminbar {
+  left: 244px !important;
+  width: calc(100% - 244px) !important;
+  height: 48px !important;
+  padding: 0 10px !important;
+  border-bottom: 1px solid var(--k-os-border) !important;
+  background: var(--k-os-background-subtle) !important;
+  box-shadow: none !important;
+}
+.kodety-admin-skin #wpadminbar .quicklinks > ul > li {
+  height: 48px !important;
+}
+.kodety-admin-skin #wpadminbar .quicklinks > ul > li > .ab-item,
+.kodety-admin-skin #wpadminbar .quicklinks > ul > li > .ab-empty-item {
+  height: 28px !important;
+  min-width: 28px;
+  margin: 10px 0 0 !important;
+  padding: 0 8px !important;
+  border: 0 !important;
+  border-radius: var(--k-os-radius-md) !important;
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 11px !important;
+  line-height: 28px !important;
+}
+.kodety-admin-skin #wpadminbar .quicklinks > ul > li:hover > .ab-item,
+.kodety-admin-skin #wpadminbar .quicklinks > ul > li.hover > .ab-item {
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-foreground) !important;
+}
+.kodety-admin-skin #wpadminbar #wp-admin-bar-root-default {
+  height: 32px !important;
+  margin-top: 8px !important;
+  padding: 2px !important;
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-input) !important;
+}
+.kodety-admin-skin #wpadminbar .ab-sub-wrapper {
+  top: 39px !important;
+  padding: 4px !important;
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-popover) !important;
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.4) !important;
+}
+.kodety-admin-skin #wpadminbar .ab-submenu .ab-item {
+  min-height: 30px !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 8px !important;
+  border-radius: var(--k-os-radius-md);
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 11px !important;
+  line-height: 30px !important;
+}
+.kodety-admin-skin #wpadminbar .ab-submenu .ab-item:hover {
+  background: var(--k-os-accent) !important;
+  color: var(--k-os-foreground) !important;
+}
+.kodety-admin-skin #screen-meta-links {
+  top: 48px !important;
+}
+
+body.kodety-admin-skin.folded #adminmenuback,
+body.kodety-admin-skin.folded #adminmenuwrap,
+body.kodety-admin-skin.folded #adminmenu {
+  width: 56px !important;
+}
+body.kodety-admin-skin.folded #wpcontent,
+body.kodety-admin-skin.folded #wpfooter {
+  margin-left: 56px !important;
+}
+body.kodety-admin-skin.folded #wpadminbar {
+  left: 56px !important;
+  width: calc(100% - 56px) !important;
+}
+body.kodety-admin-skin.folded .kodety-admin-brand {
+  justify-content: center;
+  padding: 0 !important;
+}
+body.kodety-admin-skin.folded :where(.kodety-brand-name, .kodety-brand-badge) {
+  display: none !important;
+}
+body.kodety-admin-skin.folded #adminmenu {
+  padding-inline: 8px !important;
+}
+body.kodety-admin-skin.folded #adminmenu li.menu-top {
+  width: 40px !important;
+}
+body.kodety-admin-skin.folded #adminmenu a.menu-top {
+  justify-content: center;
+}
+body.kodety-admin-skin.folded #adminmenu div.wp-menu-image {
+  width: 40px !important;
+  flex-basis: 40px !important;
+}
+body.kodety-admin-skin.folded #adminmenu div.wp-menu-name {
+  display: none !important;
+}
+body.kodety-admin-skin.folded
+  #adminmenu
+  li:not(.wp-has-current-submenu)
+  .wp-submenu {
+  left: 48px !important;
+}
+
+/* Axio-derived Kodety foundations -----------------------------------------
+ * Native WordPress structures stay intact; this layer normalizes their
+ * visual hierarchy into the same quiet, high-contrast system as the editor.
+ */
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.wrap, #screen-meta, .media-modal-content, #TB_window) {
+  color: var(--k-os-foreground);
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  .wrap
+  :where(h1, h2, h3, h4, h5, h6, legend, .title, .widget-title) {
+  color: var(--k-os-foreground) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  .wrap
+  :where(p, .description, .howto, .help, .hint, .sub, .meta, small) {
+  color: var(--k-os-muted-foreground);
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.wrap, #screen-meta, .media-modal-content)
+  a:not(.button, .page-title-action, .nav-tab) {
+  color: #AFAFFF;
+  text-underline-offset: 2px;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.wrap, #screen-meta, .media-modal-content)
+  a:not(.button, .page-title-action, .nav-tab):hover {
+  color: #AFAFFF;
+}
+
+body.kodety-admin-skin:not(.block-editor-page) :where(code, kbd, samp) {
+  border: 1px solid var(--k-os-border);
+  border-radius: 6px;
+  background: var(--k-os-input);
+  color: #AFAFFF;
+  font-size: 0.9em;
+}
+
+/* Form geometry and reliable widths. */
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(
+    input.regular-text,
+    input[type="email"],
+    input[type="url"],
+    input[type="password"],
+    .form-table input[type="text"],
+    .form-table input[type="tel"]
+  ) {
+  width: min(100%, 480px) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(input.large-text, textarea.large-text, .form-table .large-text) {
+  width: 100% !important;
+  max-width: 760px;
+}
+
+body.kodety-admin-skin:not(.block-editor-page) input.small-text {
+  width: 88px !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page) input.tiny-text {
+  width: 64px !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.search-box, .wp-filter-search, .media-toolbar-primary)
+  input[type="search"] {
+  width: min(100%, 320px) !important;
+  min-width: 240px;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  select[multiple]:not(:where(.editor-styles-wrapper *)),
+body.kodety-admin-skin:not(.block-editor-page)
+  select[size]:not([size="1"]):not(:where(.editor-styles-wrapper *)) {
+  width: min(100%, 480px) !important;
+  min-height: 112px !important;
+  padding: 6px !important;
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-input) !important;
+  overflow: auto;
+}
+
+body.kodety-admin-skin:not(.block-editor-page) select[multiple] option,
+body.kodety-admin-skin:not(.block-editor-page)
+  select[size]:not([size="1"])
+  option {
+  min-height: 30px;
+  margin: 1px 0;
+  padding: 6px 8px;
+  border-radius: 8px;
+  color: var(--k-os-foreground);
+}
+
+body.kodety-admin-skin:not(.block-editor-page) select[multiple] option:checked,
+body.kodety-admin-skin:not(.block-editor-page)
+  select[size]:not([size="1"])
+  option:checked {
+  background: linear-gradient(
+    color-mix(in srgb, var(--k-os-primary) 14%, #202020),
+    color-mix(in srgb, var(--k-os-primary) 14%, #202020)
+  );
+  color: var(--k-os-primary-hover);
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.button, .button-secondary, .page-title-action) {
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: #c9c9c9 !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.button, .button-secondary, .page-title-action):hover {
+  border-color: var(--k-os-border-strong) !important;
+  background: var(--k-os-surface-raised) !important;
+  color: var(--k-os-foreground) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.button-primary, input[type="submit"].button-primary) {
+  border-color: transparent !important;
+  background: var(--k-os-primary) !important;
+  color: var(--k-os-primary-foreground) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.button-primary, input[type="submit"].button-primary):hover {
+  background: var(--k-os-primary-hover) !important;
+  color: var(--k-os-primary-foreground) !important;
+}
+
+/* Segmented tabs keep their full labels and scroll rather than wrapping. */
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.subsubsub, .nav-tab-wrapper, .components-tab-panel__tabs) {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+  scroll-snap-type: inline proximity;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(
+    .subsubsub,
+    .nav-tab-wrapper,
+    .components-tab-panel__tabs
+  )::-webkit-scrollbar {
+  display: none;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.subsubsub a, .nav-tab, .components-tab-panel__tabs-item) {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(
+    .subsubsub a.current,
+    .nav-tab-active,
+    .components-tab-panel__tabs-item.is-active
+  ) {
+  background: var(--k-os-surface-raised) !important;
+  color: var(--k-os-foreground) !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-border);
+}
+
+/* Cards and data surfaces use a clear header/body hierarchy. */
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.postbox, .stuffbox, .card, .plugin-card, .widefat, .wp-list-table) {
+  border-color: var(--k-os-border) !important;
+  border-radius: var(--k-os-radius-lg) !important;
+  background: var(--k-os-card) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.postbox-header, .plugin-card-bottom, .widefat thead, .widefat tfoot) {
+  background: var(--k-os-background-subtle) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.striped > tbody > :nth-child(odd), ul.striped > :nth-child(odd)) {
+  background: rgb(255 255 255 / 2%) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.postbox .inside, .stuffbox .inside, .card p) {
+  color: #b4b4b4 !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.postbox .inside, .stuffbox .inside)
+  :where(h2, h3, h4, strong, label) {
+  color: var(--k-os-foreground) !important;
+}
+
+/* Notices must remain legible across core and third-party markup. */
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.notice, div.updated, div.error) {
+  position: relative;
+  border-width: 1px !important;
+  border-left-width: 3px !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-card) !important;
+  color: #c4c4c4 !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.notice, div.updated, div.error)
+  :where(h2, h3, strong) {
+  color: var(--k-os-foreground) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.notice, div.updated, div.error)
+  a {
+  color: #AFAFFF !important;
+}
+
+/* Plugin discovery is one of the core screens most prone to dark-on-dark. */
+body.kodety-admin-skin:not(.block-editor-page)
+  .plugin-card
+  :where(
+    .desc,
+    .desc p,
+    .authors,
+    .authors cite,
+    .column-description,
+    .column-description p
+  ) {
+  color: #b0b0b0 !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  .plugin-card
+  :where(.name, .name h3, .name h3 a, strong) {
+  color: var(--k-os-foreground) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  .plugin-card
+  :where(
+    .vers,
+    .column-rating,
+    .num-ratings,
+    .active-installs,
+    .last-updated,
+    .compatibility-compatible
+  ) {
+  color: var(--k-os-muted-foreground) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page) .plugin-card .plugin-icon {
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-background-subtle);
+  box-shadow: 0 0 0 1px var(--k-os-border);
+}
+
+/* Component-library parity outside Gutenberg. */
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.components-base-control__label, .components-input-control__label) {
+  color: var(--k-os-foreground) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(.components-base-control__help, .components-form-token-field__help) {
+  color: var(--k-os-muted-foreground) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  .components-input-control__backdrop {
+  box-shadow: inset 0 0 0 1px var(--k-os-border) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page) .components-button.is-secondary {
+  border: 1px solid var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: #c9c9c9 !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page) .components-button.is-link {
+  color: #AFAFFF !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(
+    .components-checkbox-control__input,
+    .components-radio-control__input
+  ) {
+  border: 1px solid var(--k-os-border-strong) !important;
+  background: var(--k-os-input) !important;
+  box-shadow: none !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(
+    .components-checkbox-control__input:checked,
+    .components-radio-control__input:checked
+  ) {
+  border-color: var(--k-os-primary) !important;
+  background: var(--k-os-primary) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  .components-form-toggle
+  .components-form-toggle__track {
+  border: 1px solid var(--k-os-border-strong) !important;
+  background: var(--k-os-input) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  .components-form-toggle.is-checked
+  .components-form-toggle__track {
+  border-color: var(--k-os-primary) !important;
+  background: var(--k-os-primary) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page)
+  :where(
+    .components-popover__content,
+    .components-dropdown__content,
+    .components-modal__frame
+  ) {
+  border-color: var(--k-os-border-strong) !important;
+  background: var(--k-os-popover) !important;
+}
+
+body.kodety-admin-skin:not(.block-editor-page) .components-button:focus-visible {
+  outline: 2px solid var(--k-os-ring) !important;
+  outline-offset: 2px;
+}
+
+/* Responsive alignment. */
+@media (max-width: 960px) {
+  body.kodety-admin-skin {
+    --k-os-page-gap: 18px;
+  }
+  .kodety-admin-skin #adminmenuback,
+  .kodety-admin-skin #adminmenuwrap,
+  .kodety-admin-skin #adminmenu {
+    width: 56px !important;
+  }
+  .kodety-admin-skin #wpcontent,
+  .kodety-admin-skin #wpfooter {
+    margin-left: 56px !important;
+  }
+  .kodety-admin-skin #wpadminbar {
+    left: 56px !important;
+    width: calc(100% - 56px) !important;
+  }
+  .kodety-admin-skin .kodety-admin-brand {
+    justify-content: center;
+    padding: 0 !important;
+  }
+  .kodety-admin-skin :where(.kodety-brand-name, .kodety-brand-badge) {
+    display: none !important;
+  }
+  .kodety-admin-skin #adminmenu {
+    padding-inline: 8px !important;
+  }
+  .kodety-admin-skin #adminmenu li.menu-top {
+    width: 40px !important;
+  }
+  .kodety-admin-skin #adminmenu div.wp-menu-image {
+    width: 40px !important;
+    flex-basis: 40px !important;
+  }
+  .kodety-admin-skin #adminmenu div.wp-menu-name {
+    display: none !important;
+  }
+  .kodety-admin-skin .form-table th {
+    width: 180px;
+  }
+  .kodety-admin-skin #nav-menus-frame {
+    grid-template-columns: 260px minmax(0, 1fr);
+  }
+}
+@media (max-width: 782px) {
+  body.kodety-admin-skin {
+    --k-os-page-gap: 14px;
+    --k-os-control: 44px;
+  }
+  .kodety-admin-skin #wpcontent,
+  .kodety-admin-skin #wpfooter {
+    margin-left: 0 !important;
+  }
+  .kodety-admin-skin #wpcontent {
+    padding-top: 46px !important;
+    padding-left: var(--k-os-page-gap);
+  }
+  .kodety-admin-skin #wpadminbar {
+    left: 0 !important;
+    width: 100% !important;
+    height: 46px !important;
+  }
+  .kodety-admin-skin #screen-meta-links {
+    top: 46px !important;
+  }
+  .kodety-admin-skin #wpbody-content {
+    padding-right: var(--k-os-page-gap);
+  }
+  .kodety-admin-skin .wrap > h1,
+  .kodety-admin-skin .wrap .wp-heading-inline {
+    font-size: 21px;
+    line-height: 30px;
+  }
+  .kodety-admin-skin .subsubsub {
+    width: 100%;
+  }
+  body.kodety-admin-skin:not(.block-editor-page)
+    :where(.subsubsub a, .nav-tab, .components-tab-panel__tabs-item) {
+    min-height: 36px;
+    padding-inline: 12px !important;
+    line-height: 36px;
+  }
+  body.kodety-admin-skin:not(.block-editor-page)
+    :where(.button, .button-secondary, .button-primary, .page-title-action) {
+    min-height: 44px !important;
+    height: 44px !important;
+    padding-inline: 14px !important;
+  }
+  body.kodety-admin-skin:not(.block-editor-page)
+    :where(
+      input[type="text"],
+      input[type="password"],
+      input[type="email"],
+      input[type="url"],
+      input[type="search"],
+      input[type="number"],
+      input[type="tel"],
+      select
+    ) {
+    min-height: 44px !important;
+    height: 44px !important;
+    line-height: 42px !important;
+  }
+  body.kodety-admin-skin:not(.block-editor-page)
+    :where(.search-box, .wp-filter-search, .media-toolbar-primary)
+    input[type="search"] {
+    width: 100% !important;
+    min-width: 0;
+  }
+  .kodety-admin-skin .tablenav {
+    min-height: 0;
+    flex-wrap: wrap;
+  }
+  .kodety-admin-skin .tablenav .alignleft.actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .kodety-admin-skin .tablenav .actions select {
+    max-width: none;
+    flex: 1;
+  }
+  .kodety-admin-skin .tablenav-pages .button,
+  .kodety-admin-skin .tablenav-pages .tablenav-pages-navspan {
+    width: 40px;
+    min-width: 40px;
+    height: 40px !important;
+    min-height: 40px !important;
+  }
+  .kodety-admin-skin .tablenav-pages input.current-page {
+    width: 52px;
+    height: 40px !important;
+    min-height: 40px !important;
+  }
+  .kodety-admin-skin .search-box {
+    width: 100%;
+    float: none;
+  }
+  .kodety-admin-skin .search-box input[type="search"] {
+    min-width: 0;
+    flex: 1;
+  }
+  .kodety-admin-skin .form-table,
+  .kodety-admin-skin .form-table tbody,
+  .kodety-admin-skin .form-table tr,
+  .kodety-admin-skin .form-table th,
+  .kodety-admin-skin .form-table td {
+    display: block;
+    width: 100%;
+  }
+  .kodety-admin-skin .form-table th {
+    padding-bottom: 5px !important;
+    border-bottom: 0;
+  }
+  .kodety-admin-skin .form-table td {
+    padding-top: 5px !important;
+  }
+  .kodety-admin-skin #nav-menus-frame {
+    display: block;
+  }
+  .kodety-admin-skin #nav-menus-frame #menu-settings-column {
+    margin-bottom: 12px;
+  }
+  .kodety-admin-skin .media-modal {
+    inset: 0 !important;
+  }
+  .kodety-admin-skin .attachment-details .setting {
+    grid-template-columns: 1fr;
+  }
+  .kodety-admin-skin :where(.interface-complementary-area, .edit-post-sidebar) {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kodety-admin-skin
+    :where(a, button, input, select, textarea):not(
+      :where(.editor-styles-wrapper *)
+    ) {
+    transition: none !important;
+  }
+}

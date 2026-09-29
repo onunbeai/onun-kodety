@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "controls": [
+    {"type":"string","value":"string","uses":["single-line","slug","label"]},
+    {"type":"text","value":"string","uses":["paragraph","multiline"]},
+    {"type":"number","value":"number","displays":["input","slider","stepper","slider-input"]},
+    {"type":"boolean","value":"boolean","display":"switch"},
+    {"type":"enum","value":"JSON primitive","displays":["select","segmented","radio","icon-grid"]},
+    {"type":"color","value":"CodayColor|string","features":["alpha","tokens","css-variables"]},
+    {"type":"image","value":"CodayImage","features":["assets","alt","focal-point","responsive","cms"]},
+    {"type":"file","value":"CodayFile","features":["mime","extension","max-bytes"]},
+    {"type":"link","value":"CodayLink"},
+    {"type":"date","value":"ISO string"},
+    {"type":"spacing","value":"CodaySpacing"},
+    {"type":"radius","value":"CodayRadius"},
+    {"type":"border","value":"CodayBorder"},
+    {"type":"shadow","value":"CodayShadow[]"},
+    {"type":"typography","value":"CodayTypography"},
+    {"type":"transform","value":"CodayTransform"},
+    {"type":"effects","value":"CodayEffects"},
+    {"type":"layout","value":"CodayLayout","modes":["stack","grid","free","diagonal"]},
+    {"type":"object","value":"object","nested":true},
+    {"type":"array","value":"array","reorder":true},
+    {"type":"slot","value":"SlotReference"},
+    {"type":"slots","value":"SlotReference[]","reorder":true}
+  ]
+}

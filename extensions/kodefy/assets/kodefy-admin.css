@@ -1,0 +1,58 @@
+.kodefy-admin {
+  --kodefy-ink: #171713;
+  --kodefy-muted: #68685f;
+  --kodefy-line: #deded4;
+  --kodefy-surface: #ffffff;
+  --kodefy-accent: #c9ff3d;
+  max-width: 1180px;
+  color: var(--kodefy-ink);
+}
+
+.kodefy-admin__hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 24px 0;
+  padding: 32px;
+  border-radius: 20px;
+  background: var(--kodefy-ink);
+  color: #fff;
+}
+
+.kodefy-admin__hero h1 { margin: 4px 0 8px; color: #fff; font-size: 38px; line-height: 1; }
+.kodefy-admin__hero p { max-width: 680px; margin: 0; color: #c9c9bf; font-size: 15px; }
+.kodefy-admin__eyebrow { color: var(--kodefy-accent); font-size: 11px; font-weight: 700; letter-spacing: .16em; }
+.kodefy-admin__status { flex: 0 0 auto; padding: 9px 13px; border: 1px solid #4b4b45; border-radius: 999px; color: #c9c9bf; font-size: 12px; }
+.kodefy-admin__status.is-connected { border-color: var(--kodefy-accent); color: var(--kodefy-accent); }
+.kodefy-admin__grid { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 20px; align-items: start; }
+.kodefy-card { padding: 28px; border: 1px solid var(--kodefy-line); border-radius: 18px; background: var(--kodefy-surface); box-shadow: 0 8px 28px rgba(23, 23, 19, .05); }
+.kodefy-card h2 { margin-top: 0; font-size: 22px; }
+.kodefy-card h3 { margin: 28px 0 12px; font-size: 15px; }
+.kodefy-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
+.kodefy-fields--routes { grid-template-columns: repeat(3, 1fr); }
+.kodefy-field--wide { grid-column: 1 / -1; }
+.kodefy-card label { display: grid; gap: 7px; font-weight: 600; }
+.kodefy-card label > span { font-size: 12px; }
+.kodefy-card input[type="text"],
+.kodefy-card input[type="password"],
+.kodefy-card select { width: 100%; min-height: 42px; border-color: var(--kodefy-line); border-radius: 9px; }
+.kodefy-card .kodefy-check { display: flex; grid-column: 1 / -1; grid-template-columns: auto 1fr; align-items: center; font-weight: 400; }
+.kodefy-inline-form { display: inline-block; margin-left: 8px; transform: translateY(-48px); }
+.kodefy-steps { display: grid; gap: 12px; padding-left: 22px; color: var(--kodefy-muted); }
+.kodefy-export { display: grid; gap: 6px; margin-top: 12px; }
+.kodefy-export .button { display: inline-flex; justify-content: center; min-height: 40px; align-items: center; }
+.kodefy-export small { color: var(--kodefy-muted); line-height: 1.4; }
+.kodefy-admin__note { margin-top: 24px; padding: 16px; border-radius: 12px; background: #f3f3ec; }
+.kodefy-admin__note p { margin-bottom: 0; color: var(--kodefy-muted); }
+
+@media (max-width: 960px) {
+  .kodefy-admin__grid { grid-template-columns: 1fr; }
+  .kodefy-fields--routes { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  .kodefy-admin__hero { align-items: flex-start; flex-direction: column; padding: 24px; }
+  .kodefy-fields, .kodefy-fields--routes { grid-template-columns: 1fr; }
+  .kodefy-field--wide { grid-column: auto; }
+}

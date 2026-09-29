@@ -1,0 +1,4 @@
+interface:
+  display_name: "Código de Sites Kodety"
+  short_description: "Crie sites e opere painéis nativos do Kodety"
+  default_prompt: "Use $kodety-site-code para criar, revisar ou enviar um site ao Kodety Builder e, dentro do Agent, operar os controles visuais reais de Settings, CMS, Analytics, Localization e demais painéis nativos sem contornar a interface."

@@ -1,0 +1,3092 @@
+[
+  {
+    "source": "Auto",
+    "en": "Auto",
+    "pt": "Auto"
+  },
+  {
+    "source": "Tentar novamente",
+    "en": "Try again",
+    "pt": "Tentar novamente"
+  },
+  {
+    "source": "Área do projeto",
+    "en": "Project area",
+    "pt": "Área do projeto"
+  },
+  {
+    "source": "Carregando dados do projeto",
+    "en": "Loading project data",
+    "pt": "Carregando projeto"
+  },
+  {
+    "source": "Dados do projeto indisponíveis",
+    "en": "Project data unavailable",
+    "pt": "Dados indisponíveis"
+  },
+  {
+    "source": "Kodety Analytics",
+    "en": "Kodety Analytics",
+    "pt": "Kodety Análises"
+  },
+  {
+    "source": "Verificar agora",
+    "en": "Check now",
+    "pt": "Checar agora"
+  },
+  {
+    "source": "Carregando configurações",
+    "en": "Loading settings",
+    "pt": "Carregando ajustes"
+  },
+  {
+    "source": "Adicionar bloco",
+    "en": "Add block",
+    "pt": "Novo bloco"
+  },
+  {
+    "source": "Mover para cima",
+    "en": "Move up",
+    "pt": "Subir"
+  },
+  {
+    "source": "Mover para baixo",
+    "en": "Move down",
+    "pt": "Descer"
+  },
+  {
+    "source": "Nome do site",
+    "en": "Site name",
+    "pt": "Site: nome"
+  },
+  {
+    "source": "Endereço do site",
+    "en": "Site address",
+    "pt": "Site: endereço"
+  },
+  {
+    "source": "Cor da borda",
+    "en": "Border color",
+    "pt": "Borda: cor"
+  },
+  {
+    "source": "Padding do conteúdo",
+    "en": "Content padding",
+    "pt": "Recuo interno"
+  },
+  {
+    "source": "Nome do template",
+    "en": "Template name",
+    "pt": "Modelo: nome"
+  },
+  {
+    "source": "Alterações não salvas",
+    "en": "Unsaved changes",
+    "pt": "Edições pendentes"
+  },
+  {
+    "source": "Adicionar rodapé legal",
+    "en": "Add legal footer",
+    "pt": "Novo rodapé legal"
+  },
+  {
+    "source": "Pré-visualização do email",
+    "en": "Email preview",
+    "pt": "Prévia: email"
+  },
+  {
+    "source": "Substituir arquivo",
+    "en": "Replace asset",
+    "pt": "Trocar arquivo"
+  },
+  {
+    "source": "Boas-vindas de volta",
+    "en": "Welcome back",
+    "pt": "Bem-vindo novamente"
+  },
+  {
+    "source": "Tudo pronto",
+    "en": "All set",
+    "pt": "Tudo pronto"
+  },
+  {
+    "source": "Collection fields",
+    "en": "Collection fields",
+    "pt": "Campos CMS"
+  },
+  {
+    "source": "File manager",
+    "en": "File manager",
+    "pt": "Gerenciar arquivos"
+  },
+  {
+    "source": "Custom URL",
+    "en": "Custom URL",
+    "pt": "URL própria"
+  },
+  {
+    "source": "CMS field",
+    "en": "CMS field",
+    "pt": "Campo CMS"
+  },
+  {
+    "source": "Choose file",
+    "en": "Choose file",
+    "pt": "Abrir arquivo"
+  },
+  {
+    "source": "Select...",
+    "en": "Select...",
+    "pt": "Escolher..."
+  },
+  {
+    "source": "Top / Left",
+    "en": "Top / Left",
+    "pt": "Topo / esquerda"
+  },
+  {
+    "source": "Top / Center",
+    "en": "Top / Center",
+    "pt": "Topo / centro"
+  },
+  {
+    "source": "Top / Right",
+    "en": "Top / Right",
+    "pt": "Topo / direita"
+  },
+  {
+    "source": "Repeat X",
+    "en": "Repeat X",
+    "pt": "Repetir X"
+  },
+  {
+    "source": "Repeat Y",
+    "en": "Repeat Y",
+    "pt": "Repetir Y"
+  },
+  {
+    "source": "Repeat round",
+    "en": "Repeat round",
+    "pt": "Ajustar repetição"
+  },
+  {
+    "source": "Repeat space",
+    "en": "Repeat space",
+    "pt": "Repetição espaçada"
+  },
+  {
+    "source": "Top center",
+    "en": "Top center",
+    "pt": "Topo central"
+  },
+  {
+    "source": "{value0} value",
+    "en": "{value0} value",
+    "pt": "Valor: {value0}"
+  },
+  {
+    "source": "Add…",
+    "en": "Add…",
+    "pt": "Criar…"
+  },
+  {
+    "source": "{value0} preset",
+    "en": "{value0} preset",
+    "pt": "Modelo {value0}"
+  },
+  {
+    "source": "All constraints added",
+    "en": "All constraints added",
+    "pt": "Limites definidos"
+  },
+  {
+    "source": "Object fit",
+    "en": "Object fit",
+    "pt": "Ajuste interno"
+  },
+  {
+    "source": "Scale down",
+    "en": "Scale down",
+    "pt": "Reduzir"
+  },
+  {
+    "source": "Object position",
+    "en": "Object position",
+    "pt": "Posição interna"
+  },
+  {
+    "source": "Letter spacing",
+    "en": "Letter spacing",
+    "pt": "Entreletras"
+  },
+  {
+    "source": "Line height",
+    "en": "Line height",
+    "pt": "Entrelinha"
+  },
+  {
+    "source": "Line clamp",
+    "en": "Line clamp",
+    "pt": "Limitar linhas"
+  },
+  {
+    "source": "Text wrap",
+    "en": "Text wrap",
+    "pt": "Quebrar texto"
+  },
+  {
+    "source": "Add...",
+    "en": "Add...",
+    "pt": "Criar..."
+  },
+  {
+    "source": "Variable name",
+    "en": "Variable name",
+    "pt": "Variável: nome"
+  },
+  {
+    "source": "Color field",
+    "en": "Color field",
+    "pt": "Campo: cor"
+  },
+  {
+    "source": "Variáveis de cor",
+    "en": "Color variables",
+    "pt": "Variáveis: cor"
+  },
+  {
+    "source": "Color variables",
+    "en": "Color variables",
+    "pt": "Variáveis: cor"
+  },
+  {
+    "source": "Transform origin",
+    "en": "Transform origin",
+    "pt": "Pivô"
+  },
+  {
+    "source": "Copy to clipboard",
+    "en": "Copy to clipboard",
+    "pt": "Copiar"
+  },
+  {
+    "source": "File fields",
+    "en": "File fields",
+    "pt": "Campos multimídia"
+  },
+  {
+    "source": "Alinhar à esquerda",
+    "en": "Align left",
+    "pt": "Alinhar esquerda"
+  },
+  {
+    "source": "Centralizar horizontalmente",
+    "en": "Center horizontally",
+    "pt": "Centralizar horizontal"
+  },
+  {
+    "source": "Alinhar à direita",
+    "en": "Align right",
+    "pt": "Alinhar direita"
+  },
+  {
+    "source": "Escolher valor predefinido",
+    "en": "Choose preset value",
+    "pt": "Usar valor predefinido"
+  },
+  {
+    "source": "BG Blur",
+    "en": "BG Blur",
+    "pt": "Fundo desfocado"
+  },
+  {
+    "source": "Ease In",
+    "en": "Ease In",
+    "pt": "Acelerar"
+  },
+  {
+    "source": "Ease Out",
+    "en": "Ease Out",
+    "pt": "Desacelerar"
+  },
+  {
+    "source": "Ease In Out",
+    "en": "Ease In Out",
+    "pt": "Acelerar e desacelerar"
+  },
+  {
+    "source": "Preview Image",
+    "en": "Preview Image",
+    "pt": "Imagem prévia"
+  },
+  {
+    "source": "Margin and padding",
+    "en": "Margin and padding",
+    "pt": "Margem e recuo"
+  },
+  {
+    "source": "Margem superior",
+    "en": "Top margin",
+    "pt": "Margem acima"
+  },
+  {
+    "source": "Margem esquerda",
+    "en": "Left margin",
+    "pt": "Margem esquerda"
+  },
+  {
+    "source": "Padding superior",
+    "en": "Top padding",
+    "pt": "Recuo acima"
+  },
+  {
+    "source": "Top Left",
+    "en": "Top Left",
+    "pt": "Topo esquerdo"
+  },
+  {
+    "source": "Top Right",
+    "en": "Top Right",
+    "pt": "Topo direito"
+  },
+  {
+    "source": "Bottom Left",
+    "en": "Bottom Left",
+    "pt": "Base esquerda"
+  },
+  {
+    "source": "Bottom Right",
+    "en": "Bottom Right",
+    "pt": "Base direita"
+  },
+  {
+    "source": "Nenhuma fonte encontrada",
+    "en": "No fonts found",
+    "pt": "Sem fontes"
+  },
+  {
+    "source": "Família CSS do projeto",
+    "en": "Project CSS family",
+    "pt": "Família CSS local"
+  },
+  {
+    "source": "Família CSS da fonte",
+    "en": "Font CSS family",
+    "pt": "Família CSS"
+  },
+  {
+    "source": "Duas colunas de texto",
+    "en": "Two text columns",
+    "pt": "Duas colunas textuais"
+  },
+  {
+    "source": "Lançamento de produto",
+    "en": "Product launch",
+    "pt": "Produto: lançamento"
+  },
+  {
+    "source": "Visão geral",
+    "en": "Overview",
+    "pt": "Resumo"
+  },
+  {
+    "source": "Opções da classe",
+    "en": "Class options",
+    "pt": "Classe: opções"
+  },
+  {
+    "source": "Adicionar classe…",
+    "en": "Add class…",
+    "pt": "Nova classe…"
+  },
+  {
+    "source": "Adicionar classe",
+    "en": "Add class",
+    "pt": "Nova classe"
+  },
+  {
+    "source": "Nenhuma imagem",
+    "en": "No image",
+    "pt": "Sem imagem"
+  },
+  {
+    "source": "Select media source",
+    "en": "Select media source",
+    "pt": "Escolher origem multimídia"
+  },
+  {
+    "source": "Origem da mídia",
+    "en": "Media source",
+    "pt": "Origem multimídia"
+  },
+  {
+    "source": "Assets do projeto",
+    "en": "Project assets",
+    "pt": "Arquivos locais"
+  },
+  {
+    "source": "Sem título",
+    "en": "Untitled",
+    "pt": "Sem título"
+  },
+  {
+    "source": "Mover {value0} para cima",
+    "en": "Move {value0} up",
+    "pt": "Subir {value0}"
+  },
+  {
+    "source": "Mover {value0} para baixo",
+    "en": "Move {value0} down",
+    "pt": "Descer {value0}"
+  },
+  {
+    "source": "CSS personalizado",
+    "en": "Custom CSS",
+    "pt": "CSS próprio"
+  },
+  {
+    "source": "Add property",
+    "en": "Add property",
+    "pt": "Nova propriedade"
+  },
+  {
+    "source": "Nome do breakpoint",
+    "en": "Breakpoint name",
+    "pt": "Largura: nome"
+  },
+  {
+    "source": "Direção do breakpoint",
+    "en": "Breakpoint direction",
+    "pt": "Direção responsiva"
+  },
+  {
+    "source": "Primary breakpoint name",
+    "en": "Primary breakpoint name",
+    "pt": "Nome principal"
+  },
+  {
+    "source": "Somente leitura",
+    "en": "Read only",
+    "pt": "Só leitura"
+  },
+  {
+    "source": "Remove {value0} override",
+    "en": "Remove {value0} override",
+    "pt": "Redefinir {value0}"
+  },
+  {
+    "source": "Scroll Section",
+    "en": "Scroll Section",
+    "pt": "Seção navegável"
+  },
+  {
+    "source": "Offset Y",
+    "en": "Offset Y",
+    "pt": "Desvio Y"
+  },
+  {
+    "source": "Code Overrides",
+    "en": "Code Overrides",
+    "pt": "Código alternativo"
+  },
+  {
+    "source": "Link to",
+    "en": "Link to",
+    "pt": "Vincular"
+  },
+  {
+    "source": "Select page",
+    "en": "Select page",
+    "pt": "Escolher página"
+  },
+  {
+    "source": "Select asset",
+    "en": "Select asset",
+    "pt": "Abrir arquivo"
+  },
+  {
+    "source": "Add link",
+    "en": "Add link",
+    "pt": "Novo link"
+  },
+  {
+    "source": "Checkout Overlay",
+    "en": "Checkout Overlay",
+    "pt": "Painel de pagamento"
+  },
+  {
+    "source": "Close outside",
+    "en": "Close outside",
+    "pt": "Fechar externamente"
+  },
+  {
+    "source": "Lock page scroll",
+    "en": "Lock page scroll",
+    "pt": "Travar rolagem"
+  },
+  {
+    "source": "Add slide",
+    "en": "Add slide",
+    "pt": "Novo slide"
+  },
+  {
+    "source": "Code Block",
+    "en": "Code Block",
+    "pt": "Bloco de código"
+  },
+  {
+    "source": "Radio Button",
+    "en": "Radio Button",
+    "pt": "Opção única"
+  },
+  {
+    "source": "Form Label",
+    "en": "Form Label",
+    "pt": "Rótulo"
+  },
+  {
+    "source": "For / input ID",
+    "en": "For / input ID",
+    "pt": "For / ID alvo"
+  },
+  {
+    "source": "Embed URL",
+    "en": "Embed URL",
+    "pt": "URL incorporada"
+  },
+  {
+    "source": "Facebook Link",
+    "en": "Facebook Link",
+    "pt": "Link Facebook"
+  },
+  {
+    "source": "Custom Element",
+    "en": "Custom Element",
+    "pt": "Elemento próprio"
+  },
+  {
+    "source": "Background Video",
+    "en": "Background Video",
+    "pt": "Vídeo de fundo"
+  },
+  {
+    "source": "Focus point",
+    "en": "Focus point",
+    "pt": "Foco visual"
+  },
+  {
+    "source": "Code Embed",
+    "en": "Code Embed",
+    "pt": "Código incorporado"
+  },
+  {
+    "source": "Search Form",
+    "en": "Search Form",
+    "pt": "Formulário: busca"
+  },
+  {
+    "source": "File Upload",
+    "en": "File Upload",
+    "pt": "Enviar arquivo"
+  },
+  {
+    "source": "Text Area",
+    "en": "Text Area",
+    "pt": "Texto longo"
+  },
+  {
+    "source": "Form Button",
+    "en": "Form Button",
+    "pt": "Formulário: botão"
+  },
+  {
+    "source": "Add step",
+    "en": "Add step",
+    "pt": "Nova etapa"
+  },
+  {
+    "source": "Redirect URL",
+    "en": "Redirect URL",
+    "pt": "URL final"
+  },
+  {
+    "source": "Input mode",
+    "en": "Input mode",
+    "pt": "Modo textual"
+  },
+  {
+    "source": "Submitting label",
+    "en": "Submitting label",
+    "pt": "Texto durante envio"
+  },
+  {
+    "source": "Pointer events",
+    "en": "Pointer events",
+    "pt": "Ponteiro: eventos"
+  },
+  {
+    "source": "Add attribute",
+    "en": "Add attribute",
+    "pt": "Novo atributo"
+  },
+  {
+    "source": "Page transitions",
+    "en": "Page transitions",
+    "pt": "Transições: páginas"
+  },
+  {
+    "source": "Estilos da layer",
+    "en": "Layer styles",
+    "pt": "Camada: estilos"
+  },
+  {
+    "source": "Todos os efeitos",
+    "en": "All effects",
+    "pt": "Efeitos"
+  },
+  {
+    "source": "Scroll checkpoints",
+    "en": "Scroll checkpoints",
+    "pt": "Marcos navegáveis"
+  },
+  {
+    "source": "Segundo do vídeo",
+    "en": "Video second",
+    "pt": "Vídeo: segundo"
+  },
+  {
+    "source": "Frame da sequência",
+    "en": "Sequence frame",
+    "pt": "Quadro sequencial"
+  },
+  {
+    "source": "Offset em pixels",
+    "en": "Offset in pixels",
+    "pt": "Desvio em pixels"
+  },
+  {
+    "source": "No hover",
+    "en": "No hover",
+    "pt": "Sem interação"
+  },
+  {
+    "source": "Velocidade no hover",
+    "en": "Hover speed",
+    "pt": "Velocidade ao apontar"
+  },
+  {
+    "source": "Transição do hover",
+    "en": "Hover transition",
+    "pt": "Transição ao apontar"
+  },
+  {
+    "source": "Effects Library",
+    "en": "Effects Library",
+    "pt": "Biblioteca: efeitos"
+  },
+  {
+    "source": "Passe o mouse para visualizar",
+    "en": "Hover to preview",
+    "pt": "Aponte para visualizar"
+  },
+  {
+    "source": "Fechar Effects Library",
+    "en": "Close Effects Library",
+    "pt": "Fechar biblioteca: efeitos"
+  },
+  {
+    "source": "Buscar na Effects Library",
+    "en": "Search Effects Library",
+    "pt": "Buscar biblioteca: efeitos"
+  },
+  {
+    "source": "Nenhum efeito encontrado",
+    "en": "No effects found",
+    "pt": "Sem efeitos"
+  },
+  {
+    "source": "Tipo de efeito",
+    "en": "Effect type",
+    "pt": "Tipo visual"
+  },
+  {
+    "source": "Verificando os componentes necessários…",
+    "en": "Checking required components…",
+    "pt": "Verificando componentes necessários…"
+  },
+  {
+    "source": "Preparação dos componentes do Agent",
+    "en": "Preparing Agent components",
+    "pt": "Preparando componentes do Agente"
+  },
+  {
+    "source": "Aguarde um instante",
+    "en": "Please wait",
+    "pt": "Aguarde"
+  },
+  {
+    "source": "Validando o serviço",
+    "en": "Validating service",
+    "pt": "Validando serviço"
+  },
+  {
+    "source": "Alterar carregamento de imagens",
+    "en": "Change image loading",
+    "pt": "Alterar carga de imagens"
+  },
+  {
+    "source": "Injetar preload de fontes",
+    "en": "Inject font preloads",
+    "pt": "Pré-carregar fontes"
+  },
+  {
+    "source": "Progresso da publicação",
+    "en": "Publishing progress",
+    "pt": "Progresso atual"
+  },
+  {
+    "source": "Continuar no editor",
+    "en": "Continue editing",
+    "pt": "Continuar editando"
+  },
+  {
+    "source": "Rich text",
+    "en": "Rich text",
+    "pt": "Texto rico"
+  },
+  {
+    "source": "{value0} preview",
+    "en": "{value0} preview",
+    "pt": "Prévia: {value0}"
+  },
+  {
+    "source": "Add variable",
+    "en": "Add variable",
+    "pt": "Nova variável"
+  },
+  {
+    "source": "Add destination rule",
+    "en": "Add destination rule",
+    "pt": "Nova regra final"
+  },
+  {
+    "source": "Nome do projeto",
+    "en": "Project name",
+    "pt": "Projeto: nome"
+  },
+  {
+    "source": "Selecionar arquivo HTML",
+    "en": "Select HTML file",
+    "pt": "Abrir arquivo HTML"
+  },
+  {
+    "source": "Selecionar arquivo ZIP",
+    "en": "Select ZIP file",
+    "pt": "Abrir arquivo ZIP"
+  },
+  {
+    "source": "Navegação do componente",
+    "en": "Component navigation",
+    "pt": "Navegação interna"
+  },
+  {
+    "source": "Preview CMS",
+    "en": "Preview CMS",
+    "pt": "Prévia CMS"
+  },
+  {
+    "source": "Ações do elemento",
+    "en": "Element actions",
+    "pt": "Elemento: ações"
+  },
+  {
+    "source": "Abrir preview de {value0}",
+    "en": "Open {value0} preview",
+    "pt": "Visualizar {value0}"
+  },
+  {
+    "source": "Ferramenta de seleção",
+    "en": "Selection tool",
+    "pt": "Selecionar"
+  },
+  {
+    "source": "Ferramenta de mão",
+    "en": "Hand tool",
+    "pt": "Mover tela"
+  },
+  {
+    "source": "Usar canvas único",
+    "en": "Use single canvas",
+    "pt": "Usar tela única"
+  },
+  {
+    "source": "Desativar canvas infinito",
+    "en": "Disable infinite canvas",
+    "pt": "Desativar tela infinita"
+  },
+  {
+    "source": "Atualização ao vivo",
+    "en": "Live updates",
+    "pt": "Atualizações contínuas"
+  },
+  {
+    "source": "Tokens do projeto",
+    "en": "Project tokens",
+    "pt": "Projeto: tokens"
+  },
+  {
+    "source": "Nome da coleção",
+    "en": "Collection name",
+    "pt": "Coleção: nome"
+  },
+  {
+    "source": "Nenhuma variável encontrada",
+    "en": "No variables found",
+    "pt": "Sem variáveis"
+  },
+  {
+    "source": "Variáveis de {value0}",
+    "en": "{value0} variables",
+    "pt": "Variáveis: {value0}"
+  },
+  {
+    "source": "Fechar menu de variável",
+    "en": "Close variable menu",
+    "pt": "Fechar menu contextual"
+  },
+  {
+    "source": "Configuração pendente",
+    "en": "Setup pending",
+    "pt": "Ajustes pendentes"
+  },
+  {
+    "source": "Rotas no WordPress",
+    "en": "WordPress routes",
+    "pt": "Rotas WordPress"
+  },
+  {
+    "source": "Sincronizando…",
+    "en": "Syncing…",
+    "pt": "Sincronizando…"
+  },
+  {
+    "source": "Kit editável Kodety",
+    "en": "Editable Kodety kit",
+    "pt": "Kit Kodety editável"
+  },
+  {
+    "source": "Shopify Checkout",
+    "en": "Shopify Checkout",
+    "pt": "Pagamento Shopify"
+  },
+  {
+    "source": "Custom Code",
+    "en": "Custom Code",
+    "pt": "Código próprio"
+  },
+  {
+    "source": "Texto alternativo",
+    "en": "Alt text",
+    "pt": "Texto alternativo"
+  },
+  {
+    "source": "Inserir valor da collection",
+    "en": "Insert collection value",
+    "pt": "Inserir valor CMS"
+  },
+  {
+    "source": "Imagem do favicon",
+    "en": "Favicon image",
+    "pt": "Imagem favicon"
+  },
+  {
+    "source": "Biblioteca do WordPress",
+    "en": "WordPress Library",
+    "pt": "Biblioteca WordPress"
+  },
+  {
+    "source": "Biblioteca de Mídia",
+    "en": "Media Library",
+    "pt": "Biblioteca multimídia"
+  },
+  {
+    "source": "Nenhuma imagem encontrada.",
+    "en": "No images found.",
+    "pt": "Sem imagens."
+  },
+  {
+    "source": "Seção de configurações",
+    "en": "Settings section",
+    "pt": "Seção de ajustes"
+  },
+  {
+    "source": "Site Settings",
+    "en": "Site Settings",
+    "pt": "Ajustes gerais"
+  },
+  {
+    "source": "Page Settings",
+    "en": "Page Settings",
+    "pt": "Ajustes locais"
+  },
+  {
+    "source": "Imagens do site",
+    "en": "Site images",
+    "pt": "Imagens gerais"
+  },
+  {
+    "source": "Social Image Builder",
+    "en": "Social Image Builder",
+    "pt": "Editor social"
+  },
+  {
+    "source": "Padrão do site",
+    "en": "Site Default",
+    "pt": "Padrão geral"
+  },
+  {
+    "source": "Layout da direita para a esquerda",
+    "en": "Right-to-left layout",
+    "pt": "Direção RTL"
+  },
+  {
+    "source": "Salvar configurações",
+    "en": "Save settings",
+    "pt": "Salvar ajustes"
+  },
+  {
+    "source": "Modelo de título",
+    "en": "Title template",
+    "pt": "Título: modelo"
+  },
+  {
+    "source": "Prévia de busca",
+    "en": "Search preview",
+    "pt": "Prévia: busca"
+  },
+  {
+    "source": "Prévia de imagem",
+    "en": "Image preview",
+    "pt": "Imagem prévia"
+  },
+  {
+    "source": "Regras adicionais de robots.txt",
+    "en": "Additional robots.txt rules",
+    "pt": "Regras adicionais robots.txt"
+  },
+  {
+    "source": "Tipo de organização",
+    "en": "Organization type",
+    "pt": "Organização: tipo"
+  },
+  {
+    "source": "Nome da entidade",
+    "en": "Entity name",
+    "pt": "Entidade: nome"
+  },
+  {
+    "source": "Código da meta tag",
+    "en": "Meta tag code",
+    "pt": "Código meta tag"
+  },
+  {
+    "source": "Salvar Custom Code",
+    "en": "Save Custom Code",
+    "pt": "Salvar código próprio"
+  },
+  {
+    "source": "Project ID",
+    "en": "Project ID",
+    "pt": "Projeto: ID"
+  },
+  {
+    "source": "Token de acesso",
+    "en": "Access token",
+    "pt": "Token de acesso"
+  },
+  {
+    "source": "Versão da Graph API",
+    "en": "Graph API version",
+    "pt": "Versão Graph API"
+  },
+  {
+    "source": "Código de evento de teste",
+    "en": "Test event code",
+    "pt": "Código de teste"
+  },
+  {
+    "source": "· {value0} na fila",
+    "en": "· {value0} queued",
+    "pt": "· {value0} aguardando"
+  },
+  {
+    "source": "Enviar evento de teste",
+    "en": "Send test event",
+    "pt": "Enviar evento experimental"
+  },
+  {
+    "source": "IA de conteúdo",
+    "en": "Content AI",
+    "pt": "IA editorial"
+  },
+  {
+    "source": "Provedor de IA",
+    "en": "AI provider",
+    "pt": "Provedor IA"
+  },
+  {
+    "source": "ID do modelo",
+    "en": "Model ID",
+    "pt": "Modelo: ID"
+  },
+  {
+    "source": "Chave da API",
+    "en": "API key",
+    "pt": "Chave API"
+  },
+  {
+    "source": "Preferências de escrita",
+    "en": "Writing preferences",
+    "pt": "Preferências editoriais"
+  },
+  {
+    "source": "Carregando configuração da Shopify…",
+    "en": "Loading Shopify configuration…",
+    "pt": "Carregando ajustes Shopify…"
+  },
+  {
+    "source": "Conexão da loja",
+    "en": "Store connection",
+    "pt": "Conexão comercial"
+  },
+  {
+    "source": "Token Storefront",
+    "en": "Token Storefront",
+    "pt": "Token Storefront"
+  },
+  {
+    "source": "Remover token Storefront",
+    "en": "Remove Storefront token",
+    "pt": "Remover token Storefront"
+  },
+  {
+    "source": "Template de produto",
+    "en": "Product template",
+    "pt": "Produto: modelo"
+  },
+  {
+    "source": "Template de coleção",
+    "en": "Collection template",
+    "pt": "Coleção: modelo"
+  },
+  {
+    "source": "Checkout headless",
+    "en": "Checkout headless",
+    "pt": "Pagamento desacoplado"
+  },
+  {
+    "source": "Endpoint de sessão",
+    "en": "Session endpoint",
+    "pt": "API da sessão"
+  },
+  {
+    "source": "Segredo do endpoint",
+    "en": "Endpoint secret",
+    "pt": "Segredo API"
+  },
+  {
+    "source": "Template do link",
+    "en": "Link template",
+    "pt": "Link modelo"
+  },
+  {
+    "source": "Hosts de checkout permitidos",
+    "en": "Allowed checkout hosts",
+    "pt": "Pagamento: servidores permitidos"
+  },
+  {
+    "source": "Seletor do overlay",
+    "en": "Overlay selector",
+    "pt": "Seletor: sobreposição"
+  },
+  {
+    "source": "Fallback Shopify",
+    "en": "Fallback Shopify",
+    "pt": "Alternativa Shopify"
+  },
+  {
+    "source": "Snapshots de publicação",
+    "en": "Publication snapshots",
+    "pt": "Versões publicadas"
+  },
+  {
+    "source": "Snapshots armazenados",
+    "en": "Stored snapshots",
+    "pt": "Versões salvas"
+  },
+  {
+    "source": "Carregando snapshots…",
+    "en": "Loading snapshots…",
+    "pt": "Carregando versões…"
+  },
+  {
+    "source": "Snapshots disponíveis",
+    "en": "Available snapshots",
+    "pt": "Versões disponíveis"
+  },
+  {
+    "source": "Zona de perigo",
+    "en": "Danger zone",
+    "pt": "Área crítica"
+  },
+  {
+    "source": "Raiz do domínio",
+    "en": "Domain root",
+    "pt": "Raiz pública"
+  },
+  {
+    "source": "Item da prévia",
+    "en": "Preview item",
+    "pt": "Item para prévia"
+  },
+  {
+    "source": "Título da página",
+    "en": "Page title",
+    "pt": "Página: título"
+  },
+  {
+    "source": "Não armazenar em cache",
+    "en": "Do not cache",
+    "pt": "Sem cache"
+  },
+  {
+    "source": "JSON-LD personalizado",
+    "en": "Custom JSON-LD",
+    "pt": "JSON-LD próprio"
+  },
+  {
+    "source": "Usar título da página",
+    "en": "Use page title",
+    "pt": "Usar título local"
+  },
+  {
+    "source": "Use page description",
+    "en": "Use page description",
+    "pt": "Usar descrição local"
+  },
+  {
+    "source": "Usar descrição da página",
+    "en": "Use page description",
+    "pt": "Usar descrição local"
+  },
+  {
+    "source": "Prévia de compartilhamento",
+    "en": "Sharing preview",
+    "pt": "Prévia social"
+  },
+  {
+    "source": "Template da Social Image",
+    "en": "Social Image template",
+    "pt": "Modelo social"
+  },
+  {
+    "source": "Resultado da página",
+    "en": "Page result",
+    "pt": "Página: resultado"
+  },
+  {
+    "source": "Confirmação do projeto",
+    "en": "Project confirmation",
+    "pt": "Projeto: confirmação"
+  },
+  {
+    "source": "Lado maior, no máximo",
+    "en": "Maximum longest side",
+    "pt": "Maior lado: limite"
+  },
+  {
+    "source": "Mover para fora",
+    "en": "Move out",
+    "pt": "Mover externamente"
+  },
+  {
+    "source": "Página de template",
+    "en": "Template page",
+    "pt": "Página modelo"
+  },
+  {
+    "source": "Arquivos do projeto",
+    "en": "Project files",
+    "pt": "Arquivos locais"
+  },
+  {
+    "source": "Nenhum arquivo encontrado.",
+    "en": "No files found.",
+    "pt": "Sem arquivos."
+  },
+  {
+    "source": "Todas as páginas",
+    "en": "All Pages",
+    "pt": "Páginas: todas"
+  },
+  {
+    "source": "Campo do formulário",
+    "en": "Form field",
+    "pt": "Formulário: campo"
+  },
+  {
+    "source": "Escolha a UTM",
+    "en": "Choose UTM",
+    "pt": "Escolha UTM"
+  },
+  {
+    "source": "Destino no checkout",
+    "en": "Checkout target",
+    "pt": "Pagamento: destino"
+  },
+  {
+    "source": "Manter o valor atual",
+    "en": "Keep current value",
+    "pt": "Manter valor atual"
+  },
+  {
+    "source": "Resize layers sidebar",
+    "en": "Resize layers sidebar",
+    "pt": "Redimensionar painel lateral"
+  },
+  {
+    "source": "Prévia do snapshot",
+    "en": "Snapshot preview",
+    "pt": "Prévia salva"
+  },
+  {
+    "source": "Página do snapshot",
+    "en": "Snapshot page",
+    "pt": "Página salva"
+  },
+  {
+    "source": "Curva da animação",
+    "en": "Animation curve",
+    "pt": "Curva animada"
+  },
+  {
+    "source": "Fechar editor de curva",
+    "en": "Close curve editor",
+    "pt": "Fechar editor Bézier"
+  },
+  {
+    "source": "Buscar predefinições de curva",
+    "en": "Search curve presets",
+    "pt": "Buscar curvas predefinidas"
+  },
+  {
+    "source": "Nenhuma predefinição encontrada.",
+    "en": "No presets found.",
+    "pt": "Sem predefinições."
+  },
+  {
+    "source": "Todos os dispositivos",
+    "en": "All devices",
+    "pt": "Dispositivos: todos"
+  },
+  {
+    "source": "Visão de página",
+    "en": "Page view",
+    "pt": "Página: visualização"
+  },
+  {
+    "source": "Taxa de rejeição",
+    "en": "Bounce rate",
+    "pt": "Rejeição: taxa"
+  },
+  {
+    "source": "Profundidade de scroll",
+    "en": "Scroll depth",
+    "pt": "Profundidade rolada"
+  },
+  {
+    "source": "Buscar campo do CMS",
+    "en": "Search CMS fields",
+    "pt": "Buscar campos CMS"
+  },
+  {
+    "source": "Máximo de itens",
+    "en": "Maximum items",
+    "pt": "Itens: máximo"
+  },
+  {
+    "source": "Ação ao clicar",
+    "en": "Click action",
+    "pt": "Clique: ação"
+  },
+  {
+    "source": "Redirect inteligente",
+    "en": "Smart redirect",
+    "pt": "Redirecionamento inteligente"
+  },
+  {
+    "source": "Plataforma do checkout",
+    "en": "Checkout platform",
+    "pt": "Pagamento: plataforma"
+  },
+  {
+    "source": "URL do checkout",
+    "en": "Checkout URL",
+    "pt": "Pagamento: URL"
+  },
+  {
+    "source": "Lembrar durante a sessão",
+    "en": "Remember during session",
+    "pt": "Lembrar nesta sessão"
+  },
+  {
+    "source": "· Code Component",
+    "en": "· Code Component",
+    "pt": "· Componente React"
+  },
+  {
+    "source": "Acesso de edição",
+    "en": "Editing access",
+    "pt": "Acesso editável"
+  },
+  {
+    "source": "Link do Figma",
+    "en": "Figma link",
+    "pt": "Link Figma"
+  },
+  {
+    "source": "Ativar acesso de edição",
+    "en": "Enable editing access",
+    "pt": "Ativar acesso editável"
+  },
+  {
+    "source": "Confirme a senha",
+    "en": "Confirm Password",
+    "pt": "Confirmar senha"
+  },
+  {
+    "source": "Link do projeto",
+    "en": "Project link",
+    "pt": "Projeto: link"
+  },
+  {
+    "source": "Qualquer pessoa pode visualizar",
+    "en": "Anyone can view",
+    "pt": "Todos podem visualizar"
+  },
+  {
+    "source": "Nenhuma variável de imagem",
+    "en": "No image variables",
+    "pt": "Sem variáveis multimídia"
+  },
+  {
+    "source": "Tamanho do canvas",
+    "en": "Canvas size",
+    "pt": "Tela: tamanho"
+  },
+  {
+    "source": "Nome da camada",
+    "en": "Layer name",
+    "pt": "Camada: nome"
+  },
+  {
+    "source": "Limite de render",
+    "en": "Render limit",
+    "pt": "Renderização: limite"
+  },
+  {
+    "source": "Collection de destino",
+    "en": "Destination collection",
+    "pt": "Coleção final"
+  },
+  {
+    "source": "Amostra de 3 × 6",
+    "en": "3 × 6 sample",
+    "pt": "Amostra 3 × 6"
+  },
+  {
+    "source": "Nome do componente",
+    "en": "Component name",
+    "pt": "Componente: nome"
+  },
+  {
+    "source": "Copiar código de acesso",
+    "en": "Copy access code",
+    "pt": "Copiar código privado"
+  },
+  {
+    "source": "Em execução",
+    "en": "Running",
+    "pt": "Executando"
+  },
+  {
+    "source": "Elemento de conversão",
+    "en": "Conversion element",
+    "pt": "Elemento conversor"
+  },
+  {
+    "source": "Dias de persistência da variante",
+    "en": "Variant persistence days",
+    "pt": "Persistência: dias"
+  },
+  {
+    "source": "Domínio de referência",
+    "en": "Referring domain",
+    "pt": "Domínio referenciador"
+  },
+  {
+    "source": "Parâmetro da campanha",
+    "en": "Campaign parameter",
+    "pt": "Campanha: parâmetro"
+  },
+  {
+    "source": "Limite de exposições",
+    "en": "Exposure limit",
+    "pt": "Exposições: limite"
+  },
+  {
+    "source": "Troca no servidor",
+    "en": "Server-side assignment",
+    "pt": "Atribuição remota"
+  },
+  {
+    "source": "{value0} de abandono",
+    "en": "{value0} drop-off",
+    "pt": "{value0} abandonos"
+  },
+  {
+    "source": "Página do Builder",
+    "en": "Builder page",
+    "pt": "Página Builder"
+  },
+  {
+    "source": "Envio de formulário",
+    "en": "Form submission",
+    "pt": "Formulário enviado"
+  },
+  {
+    "source": "Ação de email marketing",
+    "en": "Email marketing action",
+    "pt": "Email: ação"
+  },
+  {
+    "source": "Selecione o próximo nó",
+    "en": "Select next node",
+    "pt": "Selecionar próximo nó"
+  },
+  {
+    "source": "Nome da etapa",
+    "en": "Step name",
+    "pt": "Etapa: nome"
+  },
+  {
+    "source": "Todas as variantes",
+    "en": "All variants",
+    "pt": "Variantes: todas"
+  },
+  {
+    "source": "Campo de email do formulário",
+    "en": "Form email field",
+    "pt": "Campo para email"
+  },
+  {
+    "source": "campo de email",
+    "en": "email field",
+    "pt": "campo: email"
+  },
+  {
+    "source": "Campo de nome do formulário",
+    "en": "Form name field",
+    "pt": "Campo para nome"
+  },
+  {
+    "source": "campo de nome",
+    "en": "name field",
+    "pt": "campo: nome"
+  },
+  {
+    "source": "Campo de consentimento do formulário",
+    "en": "Form consent field",
+    "pt": "Campo de consentimento"
+  },
+  {
+    "source": "campo de consentimento (opcional)",
+    "en": "consent field (optional)",
+    "pt": "consentimento (opcional)"
+  },
+  {
+    "source": "Origem do tráfego",
+    "en": "Traffic source",
+    "pt": "Tráfego: origem"
+  },
+  {
+    "source": "Janela de conversão",
+    "en": "Conversion window",
+    "pt": "Conversão: janela"
+  },
+  {
+    "source": "ex.: concluiu checkout",
+    "en": "e.g.: completed checkout",
+    "pt": "ex.: pagamento concluído"
+  },
+  {
+    "source": "Concluir em até",
+    "en": "Complete within",
+    "pt": "Concluir até"
+  },
+  {
+    "source": "Condições da rota",
+    "en": "Route conditions",
+    "pt": "Rota: condições"
+  },
+  {
+    "source": "Não exibir nada",
+    "en": "Display nothing",
+    "pt": "Exibir nada"
+  },
+  {
+    "source": "Download protegido",
+    "en": "Protected download",
+    "pt": "Arquivo protegido"
+  },
+  {
+    "source": "Todos os planos",
+    "en": "All plans",
+    "pt": "Planos: todos"
+  },
+  {
+    "source": "Visitante não logado",
+    "en": "Logged-out visitor",
+    "pt": "Visitante desconectado"
+  },
+  {
+    "source": "Precisa de atenção",
+    "en": "Needs attention",
+    "pt": "Exige atenção"
+  },
+  {
+    "source": "Autenticação oficial do Codex",
+    "en": "Official Codex authentication",
+    "pt": "Autenticação oficial Codex"
+  },
+  {
+    "source": "Link Block",
+    "en": "Link Block",
+    "pt": "Bloco clicável"
+  },
+  {
+    "source": "Text Block",
+    "en": "Text Block",
+    "pt": "Bloco textual"
+  },
+  {
+    "source": "Text Link",
+    "en": "Text Link",
+    "pt": "Link textual"
+  },
+  {
+    "source": "Collection List",
+    "en": "Collection List",
+    "pt": "Lista CMS"
+  },
+  {
+    "source": "Member Login",
+    "en": "Member Login",
+    "pt": "Acesso individual"
+  },
+  {
+    "source": "Member Register",
+    "en": "Member Register",
+    "pt": "Cadastro individual"
+  },
+  {
+    "source": "Member Profile",
+    "en": "Member Profile",
+    "pt": "Perfil individual"
+  },
+  {
+    "source": "Member Logout",
+    "en": "Member Logout",
+    "pt": "Encerrar sessão"
+  },
+  {
+    "source": "Componente de código",
+    "en": "Code component",
+    "pt": "Componente React"
+  },
+  {
+    "source": "Componente do projeto",
+    "en": "Project component",
+    "pt": "Componente local"
+  },
+  {
+    "source": "Nenhum resultado encontrado",
+    "en": "No results found",
+    "pt": "Sem resultados"
+  },
+  {
+    "source": "Preview state",
+    "en": "Preview state",
+    "pt": "Prévia: estado"
+  },
+  {
+    "source": "Preview viewport",
+    "en": "Preview viewport",
+    "pt": "Prévia: largura"
+  },
+  {
+    "source": "Preview visual theme",
+    "en": "Preview visual theme",
+    "pt": "Prévia: tema visual"
+  },
+  {
+    "source": "Preview banner type",
+    "en": "Preview banner type",
+    "pt": "Prévia: tipo visual"
+  },
+  {
+    "source": "Block page interaction",
+    "en": "Block page interaction",
+    "pt": "Bloquear interação local"
+  },
+  {
+    "source": "Border width",
+    "en": "Border width",
+    "pt": "Borda: largura"
+  },
+  {
+    "source": "Border radius",
+    "en": "Border radius",
+    "pt": "Borda: raio"
+  },
+  {
+    "source": "Button radius",
+    "en": "Button radius",
+    "pt": "Botão: raio"
+  },
+  {
+    "source": "Font family",
+    "en": "Font family",
+    "pt": "Fonte: família"
+  },
+  {
+    "source": "Font size",
+    "en": "Font size",
+    "pt": "Fonte: tamanho"
+  },
+  {
+    "source": "Preferences description",
+    "en": "Preferences description",
+    "pt": "Preferências: descrição"
+  },
+  {
+    "source": "Accept button label",
+    "en": "Accept button label",
+    "pt": "Botão Aceitar: rótulo"
+  },
+  {
+    "source": "Reject button label",
+    "en": "Reject button label",
+    "pt": "Botão Recusar: rótulo"
+  },
+  {
+    "source": "Settings button label",
+    "en": "Settings button label",
+    "pt": "Botão Ajustes: rótulo"
+  },
+  {
+    "source": "Service details label",
+    "en": "Service details label",
+    "pt": "Detalhes: rótulo"
+  },
+  {
+    "source": "Category description",
+    "en": "Category description",
+    "pt": "Categoria: descrição"
+  },
+  {
+    "source": "Allow visitor control",
+    "en": "Allow visitor control",
+    "pt": "Permitir controle individual"
+  },
+  {
+    "source": "Service description",
+    "en": "Service description",
+    "pt": "Serviço: descrição"
+  },
+  {
+    "source": "Local project diagnosis",
+    "en": "Local project diagnosis",
+    "pt": "Diagnóstico local"
+  },
+  {
+    "source": "Link label",
+    "en": "Link label",
+    "pt": "Link: rótulo"
+  },
+  {
+    "source": "Floating preferences button",
+    "en": "Floating preferences button",
+    "pt": "Preferências: botão flutuante"
+  },
+  {
+    "source": "Título do site",
+    "en": "Site Title",
+    "pt": "Site: título"
+  },
+  {
+    "source": "Descrição do site",
+    "en": "Site Tagline",
+    "pt": "Site: descrição"
+  },
+  {
+    "source": "Nenhum idioma de destino",
+    "en": "No target language",
+    "pt": "Sem idioma-alvo"
+  },
+  {
+    "source": "Configurações de localização",
+    "en": "Localization settings",
+    "pt": "Ajustes multilíngues"
+  },
+  {
+    "source": "Seção de localização",
+    "en": "Localization section",
+    "pt": "Seção multilíngue"
+  },
+  {
+    "source": "Prefixo da URL",
+    "en": "URL prefix",
+    "pt": "URL: prefixo"
+  },
+  {
+    "source": "Access token",
+    "en": "Access token",
+    "pt": "Token de acesso"
+  },
+  {
+    "source": "API key",
+    "en": "API key",
+    "pt": "Chave API"
+  },
+  {
+    "source": "Provedores de checkout",
+    "en": "Checkout providers",
+    "pt": "Pagamento: provedores"
+  },
+  {
+    "source": "Usar no upgrade",
+    "en": "Use for upgrade",
+    "pt": "Usar na mudança de plano"
+  },
+  {
+    "source": "Todos os provedores",
+    "en": "All providers",
+    "pt": "Provedores: todos"
+  },
+  {
+    "source": "Todos os status",
+    "en": "All statuses",
+    "pt": "Status: todos"
+  },
+  {
+    "source": "Valor da venda",
+    "en": "Sale amount",
+    "pt": "Valor vendido"
+  },
+  {
+    "source": "Nome da conexão",
+    "en": "Connection name",
+    "pt": "Conexão: nome"
+  },
+  {
+    "source": "Código da oferta · obrigatório",
+    "en": "Offer code · required",
+    "pt": "Código comercial · obrigatório"
+  },
+  {
+    "source": "Valor de referência · opcional",
+    "en": "Reference amount · optional",
+    "pt": "Valor referencial · opcional"
+  },
+  {
+    "source": "Salvar mapeamento",
+    "en": "Save mapping",
+    "pt": "Salvar vínculos"
+  },
+  {
+    "source": "Criar checkout temporário",
+    "en": "Create temporary checkout",
+    "pt": "Criar pagamento temporário"
+  },
+  {
+    "source": "Criar checkout",
+    "en": "Create checkout",
+    "pt": "Criar pagamento"
+  },
+  {
+    "source": "Nome da interação",
+    "en": "Interaction name",
+    "pt": "Interação: nome"
+  },
+  {
+    "source": "Salvar como predefinição",
+    "en": "Save as preset",
+    "pt": "Salvar como modelo"
+  },
+  {
+    "source": "Seletor do alvo",
+    "en": "Target selector",
+    "pt": "Seletor alvo"
+  },
+  {
+    "source": "Alvo da interação",
+    "en": "Interaction target",
+    "pt": "Alvo interativo"
+  },
+  {
+    "source": "Código da animação",
+    "en": "Animation code",
+    "pt": "Animação: código"
+  },
+  {
+    "source": "Linha do tempo",
+    "en": "Timeline",
+    "pt": "Cronologia"
+  },
+  {
+    "source": "Elemento do gatilho",
+    "en": "Trigger element",
+    "pt": "Elemento gatilho"
+  },
+  {
+    "source": "Adicionar ação",
+    "en": "Add action",
+    "pt": "Nova ação"
+  },
+  {
+    "source": "Editar configuração",
+    "en": "Edit settings",
+    "pt": "Editar ajustes"
+  },
+  {
+    "source": "Remover configuração",
+    "en": "Remove settings",
+    "pt": "Remover ajustes"
+  },
+  {
+    "source": "Selecione a propriedade",
+    "en": "Select property",
+    "pt": "Escolher propriedade"
+  },
+  {
+    "source": "Ancestral mais próximo",
+    "en": "Closest ancestor",
+    "pt": "Ancestral próximo"
+  },
+  {
+    "source": "Variante de componente",
+    "en": "Component variant",
+    "pt": "Componente: variante"
+  },
+  {
+    "source": "Adicionar animação",
+    "en": "Add animation",
+    "pt": "Nova animação"
+  },
+  {
+    "source": "Tipo de animação",
+    "en": "Animation type",
+    "pt": "Animação: tipo"
+  },
+  {
+    "source": "Nenhuma ação encontrada.",
+    "en": "No actions found.",
+    "pt": "Sem ações."
+  },
+  {
+    "source": "Nome da ação",
+    "en": "Action name",
+    "pt": "Ação: nome"
+  },
+  {
+    "source": "Propriedades da animação",
+    "en": "Animation properties",
+    "pt": "Animação: propriedades"
+  },
+  {
+    "source": "Adicionar propriedade",
+    "en": "Add property",
+    "pt": "Nova propriedade"
+  },
+  {
+    "source": "Buscar propriedades de design",
+    "en": "Search design properties",
+    "pt": "Buscar propriedades visuais"
+  },
+  {
+    "source": "Nenhuma propriedade encontrada.",
+    "en": "No properties found.",
+    "pt": "Sem propriedades."
+  },
+  {
+    "source": "Adicionar “",
+    "en": "Add “",
+    "pt": "Criar “"
+  },
+  {
+    "source": "Nome da classe",
+    "en": "Class name",
+    "pt": "Classe: nome"
+  },
+  {
+    "source": "Select component",
+    "en": "Select component",
+    "pt": "Escolher componente"
+  },
+  {
+    "source": "Select variant",
+    "en": "Select variant",
+    "pt": "Escolher variante"
+  },
+  {
+    "source": "Nome do evento",
+    "en": "Event name",
+    "pt": "Evento: nome"
+  },
+  {
+    "source": "Redimensionar altura da timeline",
+    "en": "Resize timeline height",
+    "pt": "Redimensionar altura temporal"
+  },
+  {
+    "source": "Fechar timeline",
+    "en": "Close timeline",
+    "pt": "Fechar cronologia"
+  },
+  {
+    "source": "Ajustar timeline",
+    "en": "Fit timeline",
+    "pt": "Ajustar cronologia"
+  },
+  {
+    "source": "Diminuir zoom da timeline",
+    "en": "Zoom out timeline",
+    "pt": "Reduzir cronologia"
+  },
+  {
+    "source": "Zoom da timeline",
+    "en": "Timeline zoom",
+    "pt": "Zoom temporal"
+  },
+  {
+    "source": "Aumentar zoom da timeline",
+    "en": "Zoom in timeline",
+    "pt": "Ampliar cronologia"
+  },
+  {
+    "source": "Posição da timeline",
+    "en": "Timeline position",
+    "pt": "Posição temporal"
+  },
+  {
+    "source": "Surface de overlay",
+    "en": "Overlay surface",
+    "pt": "Superfície suspensa"
+  },
+  {
+    "source": "Backdrop de overlay",
+    "en": "Overlay backdrop",
+    "pt": "Fundo suspenso"
+  },
+  {
+    "source": "Seletor de idiomas",
+    "en": "Language selector",
+    "pt": "Seletor multilíngue"
+  },
+  {
+    "source": "Resetar overrides da layer",
+    "en": "Reset layer overrides",
+    "pt": "Redefinir ajustes locais"
+  },
+  {
+    "source": "Fora do container",
+    "en": "Outside container",
+    "pt": "Área externa"
+  },
+  {
+    "source": "Ações da layer {value0}",
+    "en": "Layer actions {value0}",
+    "pt": "Camada {value0}: ações"
+  },
+  {
+    "source": "Ações da layer",
+    "en": "Layer actions",
+    "pt": "Camada: ações"
+  },
+  {
+    "source": "Nenhuma layer encontrada.",
+    "en": "No layers found.",
+    "pt": "Sem camadas."
+  },
+  {
+    "source": "Nenhum redirecionamento",
+    "en": "No redirects",
+    "pt": "Sem redirecionamentos"
+  },
+  {
+    "source": "Adicionar redirecionamento",
+    "en": "Add redirect",
+    "pt": "Novo redirecionamento"
+  },
+  {
+    "source": "Origem do inventário",
+    "en": "Inventory source",
+    "pt": "Origem comercial"
+  },
+  {
+    "source": "Nenhum arquivo",
+    "en": "No files",
+    "pt": "Sem arquivos"
+  },
+  {
+    "source": "Substituir asset",
+    "en": "Replace asset",
+    "pt": "Trocar arquivo"
+  },
+  {
+    "source": "Selecionar asset",
+    "en": "Select asset",
+    "pt": "Abrir arquivo"
+  },
+  {
+    "source": "Adicionar sombra",
+    "en": "Add shadow",
+    "pt": "Nova sombra"
+  },
+  {
+    "source": "Mover X",
+    "en": "Move X",
+    "pt": "Mover X"
+  },
+  {
+    "source": "Mover Y",
+    "en": "Move Y",
+    "pt": "Mover Y"
+  },
+  {
+    "source": "Mover Z",
+    "en": "Move Z",
+    "pt": "Mover Z"
+  },
+  {
+    "source": "Escala X",
+    "en": "Scale X",
+    "pt": "Escala X"
+  },
+  {
+    "source": "Escala Y",
+    "en": "Scale Y",
+    "pt": "Escala Y"
+  },
+  {
+    "source": "Mover item para cima",
+    "en": "Move item up",
+    "pt": "Subir item"
+  },
+  {
+    "source": "Mover item para baixo",
+    "en": "Move item down",
+    "pt": "Descer item"
+  },
+  {
+    "source": "Adicionar item",
+    "en": "Add item",
+    "pt": "Novo item"
+  },
+  {
+    "source": "Visitantes ao vivo",
+    "en": "Live visitors",
+    "pt": "Visitantes atuais"
+  },
+  {
+    "source": "Carregando métricas de Analytics.",
+    "en": "Loading Analytics metrics.",
+    "pt": "Carregando métricas analíticas."
+  },
+  {
+    "source": "Nome deste template",
+    "en": "Template name",
+    "pt": "Modelo: nome"
+  },
+  {
+    "source": "Sites completos e reutilizáveis",
+    "en": "Complete, reusable sites",
+    "pt": "Sites completos, reutilizáveis"
+  },
+  {
+    "source": "Nenhum template encontrado.",
+    "en": "No templates found.",
+    "pt": "Sem modelos."
+  },
+  {
+    "source": "Carregando seletor de cor…",
+    "en": "Loading color picker…",
+    "pt": "Carregando seletor cromático…"
+  },
+  {
+    "source": "Texto formatado",
+    "en": "Rich text",
+    "pt": "Texto rico"
+  },
+  {
+    "source": "Buscar tipo de campo…",
+    "en": "Search field types…",
+    "pt": "Buscar tipos disponíveis…"
+  },
+  {
+    "source": "Buscar tipo de campo",
+    "en": "Search field types",
+    "pt": "Buscar tipos disponíveis"
+  },
+  {
+    "source": "Status de {value0}",
+    "en": "{value0} status",
+    "pt": "Status: {value0}"
+  },
+  {
+    "source": "Ferramentas de formatação",
+    "en": "Formatting tools",
+    "pt": "Ferramentas editoriais"
+  },
+  {
+    "source": "Adicionar link",
+    "en": "Add link",
+    "pt": "Novo link"
+  },
+  {
+    "source": "URL do link",
+    "en": "Link URL",
+    "pt": "URL final"
+  },
+  {
+    "source": "Lista com marcadores",
+    "en": "Bulleted list",
+    "pt": "Lista pontuada"
+  },
+  {
+    "source": "Sem texto alternativo",
+    "en": "No alt text",
+    "pt": "Sem texto acessível"
+  },
+  {
+    "source": "URL da Biblioteca de Mídia",
+    "en": "Media Library URL",
+    "pt": "URL multimídia"
+  },
+  {
+    "source": "Faixa de {value0}",
+    "en": "{value0} range",
+    "pt": "Faixa: {value0}"
+  },
+  {
+    "source": "CMS do WordPress",
+    "en": "WordPress CMS",
+    "pt": "CMS WordPress"
+  },
+  {
+    "source": "Área do CMS",
+    "en": "CMS area",
+    "pt": "Área CMS"
+  },
+  {
+    "source": "Nome da collection",
+    "en": "Collection name",
+    "pt": "Coleção: nome"
+  },
+  {
+    "source": "Slug da collection",
+    "en": "Collection slug",
+    "pt": "Slug CMS"
+  },
+  {
+    "source": "Mover campo para cima",
+    "en": "Move field up",
+    "pt": "Subir campo"
+  },
+  {
+    "source": "Mover campo para baixo",
+    "en": "Move field down",
+    "pt": "Descer campo"
+  },
+  {
+    "source": "Nenhum campo personalizado.",
+    "en": "No custom fields.",
+    "pt": "Sem campos próprios."
+  },
+  {
+    "source": "Selecionar campo",
+    "en": "Select Field",
+    "pt": "Escolher campo"
+  },
+  {
+    "source": "Voltar para a lista",
+    "en": "Return to list",
+    "pt": "Voltar à lista"
+  },
+  {
+    "source": "Mover para lixeira",
+    "en": "Move to Trash",
+    "pt": "Mover à lixeira"
+  },
+  {
+    "source": "Mover para a lixeira",
+    "en": "Move to trash",
+    "pt": "Mover à lixeira"
+  },
+  {
+    "source": "Nenhum item encontrado",
+    "en": "No items found",
+    "pt": "Sem itens"
+  },
+  {
+    "source": "Tipo de rascunho",
+    "en": "Draft type",
+    "pt": "Rascunho: tipo"
+  },
+  {
+    "source": "Redimensionar largura do viewport",
+    "en": "Resize viewport width",
+    "pt": "Redimensionar largura visível"
+  },
+  {
+    "source": "Ferramentas do canvas",
+    "en": "Canvas tools",
+    "pt": "Ferramentas visuais"
+  },
+  {
+    "source": "Abrir ferramentas de inserção",
+    "en": "Open insertion tools",
+    "pt": "Abrir inserção"
+  },
+  {
+    "source": "Cancelar ferramenta de texto",
+    "en": "Cancel text tool",
+    "pt": "Cancelar edição textual"
+  },
+  {
+    "source": "Ativar ferramenta de texto",
+    "en": "Enable text tool",
+    "pt": "Ativar edição textual"
+  },
+  {
+    "source": "Projeto do Builder",
+    "en": "Builder project",
+    "pt": "Projeto Builder"
+  },
+  {
+    "source": "Link de acesso",
+    "en": "Access link",
+    "pt": "Link privado"
+  },
+  {
+    "source": "Link de redefinição",
+    "en": "Reset link",
+    "pt": "Redefinir link"
+  },
+  {
+    "source": "Adicionar membro",
+    "en": "Add member",
+    "pt": "Novo membro"
+  },
+  {
+    "source": "Nenhum membro encontrado",
+    "en": "No members found",
+    "pt": "Sem membros"
+  },
+  {
+    "source": "Planos de acesso",
+    "en": "Access plans",
+    "pt": "Planos de acesso"
+  },
+  {
+    "source": "Configurações do runtime",
+    "en": "Runtime settings",
+    "pt": "Ajustes operacionais"
+  },
+  {
+    "source": "Função padrão do WordPress",
+    "en": "Default WordPress role",
+    "pt": "Função padrão WordPress"
+  },
+  {
+    "source": "Retenção de auditoria (dias)",
+    "en": "Audit retention (days)",
+    "pt": "Auditoria: retenção (dias)"
+  },
+  {
+    "source": "Retenção de eventos (dias)",
+    "en": "Event retention (days)",
+    "pt": "Eventos: retenção (dias)"
+  },
+  {
+    "source": "Área de Membros",
+    "en": "Members Area",
+    "pt": "Área de membros"
+  },
+  {
+    "source": "Seções da Área de Membros",
+    "en": "Members Area sections",
+    "pt": "Seções de membros"
+  },
+  {
+    "source": "Acesso seguro do membro",
+    "en": "Secure member access",
+    "pt": "Acesso individual seguro"
+  },
+  {
+    "source": "Motivo para auditoria · opcional",
+    "en": "Audit reason · optional",
+    "pt": "Auditoria: motivo · opcional"
+  },
+  {
+    "source": "Adicionar acesso",
+    "en": "Add access",
+    "pt": "Novo acesso"
+  },
+  {
+    "source": "URL de upgrade",
+    "en": "Upgrade URL",
+    "pt": "URL de mudança"
+  },
+  {
+    "source": "Adicionar evento de variante",
+    "en": "Add variant event",
+    "pt": "Variante: novo evento"
+  },
+  {
+    "source": "Remover evento de variante",
+    "en": "Remove variant event",
+    "pt": "Variante: remover evento"
+  },
+  {
+    "source": "Nenhum evento de variante.",
+    "en": "No variant events.",
+    "pt": "Variante sem eventos."
+  },
+  {
+    "source": "MCP do Studio desativado",
+    "en": "Studio MCP disabled",
+    "pt": "MCP Studio desativado"
+  },
+  {
+    "source": "Atualizar status do MCP",
+    "en": "Refresh MCP status",
+    "pt": "Atualizar status MCP"
+  },
+  {
+    "source": "Conexões por projeto",
+    "en": "Per-project connections",
+    "pt": "Conexões por projeto"
+  },
+  {
+    "source": "Copiar prompt de instalação",
+    "en": "Copy installation prompt",
+    "pt": "Copiar instruções de instalação"
+  },
+  {
+    "source": "Align left",
+    "en": "Align left",
+    "pt": "Alinhar esquerda"
+  },
+  {
+    "source": "Align center",
+    "en": "Align center",
+    "pt": "Alinhar centro"
+  },
+  {
+    "source": "Align right",
+    "en": "Align right",
+    "pt": "Alinhar direita"
+  },
+  {
+    "source": "Grid container",
+    "en": "Grid container",
+    "pt": "Grade"
+  },
+  {
+    "source": "Backface visibility",
+    "en": "Backface visibility",
+    "pt": "Visibilidade traseira"
+  },
+  {
+    "source": "No fonts found",
+    "en": "No fonts found",
+    "pt": "Sem fontes"
+  },
+  {
+    "source": "Ease in",
+    "en": "Ease in",
+    "pt": "Acelerar"
+  },
+  {
+    "source": "Ease out",
+    "en": "Ease out",
+    "pt": "Desacelerar"
+  },
+  {
+    "source": "Ease in out",
+    "en": "Ease in out",
+    "pt": "Suavizar pontas"
+  },
+  {
+    "source": "Preço do produto",
+    "en": "Product price",
+    "pt": "Produto: preço"
+  },
+  {
+    "source": "Imagem do produto",
+    "en": "Product image",
+    "pt": "Produto: imagem"
+  },
+  {
+    "source": "Move X",
+    "en": "Move X",
+    "pt": "Mover X"
+  },
+  {
+    "source": "Move Y",
+    "en": "Move Y",
+    "pt": "Mover Y"
+  },
+  {
+    "source": "Move Z",
+    "en": "Move Z",
+    "pt": "Mover Z"
+  },
+  {
+    "source": "Move X %",
+    "en": "Move X %",
+    "pt": "Mover X %"
+  },
+  {
+    "source": "Move Y %",
+    "en": "Move Y %",
+    "pt": "Mover Y %"
+  },
+  {
+    "source": "Scale X",
+    "en": "Scale X",
+    "pt": "Escala X"
+  },
+  {
+    "source": "Scale Y",
+    "en": "Scale Y",
+    "pt": "Escala Y"
+  },
+  {
+    "source": "Rotate X",
+    "en": "Rotate X",
+    "pt": "Girar X"
+  },
+  {
+    "source": "Rotate Y",
+    "en": "Rotate Y",
+    "pt": "Girar Y"
+  },
+  {
+    "source": "Rotate Z",
+    "en": "Rotate Z",
+    "pt": "Girar Z"
+  },
+  {
+    "source": "Skew X",
+    "en": "Skew X",
+    "pt": "Inclinar X"
+  },
+  {
+    "source": "Skew Y",
+    "en": "Skew Y",
+    "pt": "Inclinar Y"
+  },
+  {
+    "source": "Transform perspective",
+    "en": "Transform perspective",
+    "pt": "Transformação: perspectiva"
+  },
+  {
+    "source": "Transform style",
+    "en": "Transform style",
+    "pt": "Transformação: estilo"
+  },
+  {
+    "source": "Overflow X",
+    "en": "Overflow X",
+    "pt": "Excesso X"
+  },
+  {
+    "source": "Overflow Y",
+    "en": "Overflow Y",
+    "pt": "Excesso Y"
+  },
+  {
+    "source": "Align self",
+    "en": "Align self",
+    "pt": "Alinhar item"
+  },
+  {
+    "source": "Justify self",
+    "en": "Justify self",
+    "pt": "Justificar item"
+  },
+  {
+    "source": "Place self",
+    "en": "Place self",
+    "pt": "Posicionar item"
+  },
+  {
+    "source": "Row gap",
+    "en": "Row gap",
+    "pt": "Espaço vertical"
+  },
+  {
+    "source": "Column gap",
+    "en": "Column gap",
+    "pt": "Espaço horizontal"
+  },
+  {
+    "source": "Grid columns",
+    "en": "Grid columns",
+    "pt": "Grade: colunas"
+  },
+  {
+    "source": "Grid rows",
+    "en": "Grid rows",
+    "pt": "Grade: linhas"
+  },
+  {
+    "source": "Grid areas",
+    "en": "Grid areas",
+    "pt": "Grade: áreas"
+  },
+  {
+    "source": "Grid auto columns",
+    "en": "Grid auto columns",
+    "pt": "Colunas automáticas"
+  },
+  {
+    "source": "Grid auto rows",
+    "en": "Grid auto rows",
+    "pt": "Linhas automáticas"
+  },
+  {
+    "source": "Grid auto flow",
+    "en": "Grid auto flow",
+    "pt": "Fluxo automático"
+  },
+  {
+    "source": "Grid column",
+    "en": "Grid column",
+    "pt": "Grade: coluna"
+  },
+  {
+    "source": "Grid row",
+    "en": "Grid row",
+    "pt": "Grade: linha"
+  },
+  {
+    "source": "Grid column start",
+    "en": "Grid column start",
+    "pt": "Início da coluna"
+  },
+  {
+    "source": "Grid column end",
+    "en": "Grid column end",
+    "pt": "Fim da coluna"
+  },
+  {
+    "source": "Grid row start",
+    "en": "Grid row start",
+    "pt": "Início da linha"
+  },
+  {
+    "source": "Grid row end",
+    "en": "Grid row end",
+    "pt": "Fim da linha"
+  },
+  {
+    "source": "Box sizing",
+    "en": "Box sizing",
+    "pt": "Caixa: cálculo"
+  },
+  {
+    "source": "Motion path",
+    "en": "Motion path",
+    "pt": "Trajetória animada"
+  },
+  {
+    "source": "Path distance",
+    "en": "Path distance",
+    "pt": "Trajetória: distância"
+  },
+  {
+    "source": "Path rotation",
+    "en": "Path rotation",
+    "pt": "Trajetória: rotação"
+  },
+  {
+    "source": "Margin top",
+    "en": "Margin top",
+    "pt": "Margem acima"
+  },
+  {
+    "source": "Margin right",
+    "en": "Margin right",
+    "pt": "Margem direita"
+  },
+  {
+    "source": "Margin bottom",
+    "en": "Margin bottom",
+    "pt": "Margem abaixo"
+  },
+  {
+    "source": "Margin left",
+    "en": "Margin left",
+    "pt": "Margem esquerda"
+  },
+  {
+    "source": "Padding top",
+    "en": "Padding top",
+    "pt": "Recuo acima"
+  },
+  {
+    "source": "Padding right",
+    "en": "Padding right",
+    "pt": "Recuo direito"
+  },
+  {
+    "source": "Padding bottom",
+    "en": "Padding bottom",
+    "pt": "Recuo abaixo"
+  },
+  {
+    "source": "Padding left",
+    "en": "Padding left",
+    "pt": "Recuo esquerdo"
+  },
+  {
+    "source": "Text color",
+    "en": "Text color",
+    "pt": "Texto: cor"
+  },
+  {
+    "source": "Font weight",
+    "en": "Font weight",
+    "pt": "Fonte: peso"
+  },
+  {
+    "source": "Font style",
+    "en": "Font style",
+    "pt": "Fonte: estilo"
+  },
+  {
+    "source": "Font stretch",
+    "en": "Font stretch",
+    "pt": "Fonte: expansão"
+  },
+  {
+    "source": "Text align",
+    "en": "Text align",
+    "pt": "Texto: alinhamento"
+  },
+  {
+    "source": "Text transform",
+    "en": "Text transform",
+    "pt": "Texto: transformação"
+  },
+  {
+    "source": "Text decoration",
+    "en": "Text decoration",
+    "pt": "Texto: decoração"
+  },
+  {
+    "source": "Decoration color",
+    "en": "Decoration color",
+    "pt": "Decoração: cor"
+  },
+  {
+    "source": "Decoration thickness",
+    "en": "Decoration thickness",
+    "pt": "Decoração: espessura"
+  },
+  {
+    "source": "Underline offset",
+    "en": "Underline offset",
+    "pt": "Sublinhado: desvio"
+  },
+  {
+    "source": "Text indent",
+    "en": "Text indent",
+    "pt": "Texto: recuo"
+  },
+  {
+    "source": "Text shadow",
+    "en": "Text shadow",
+    "pt": "Texto: sombra"
+  },
+  {
+    "source": "White space",
+    "en": "White space",
+    "pt": "Espaço branco"
+  },
+  {
+    "source": "Word break",
+    "en": "Word break",
+    "pt": "Quebra textual"
+  },
+  {
+    "source": "Overflow wrap",
+    "en": "Overflow wrap",
+    "pt": "Quebra excedente"
+  },
+  {
+    "source": "Text overflow",
+    "en": "Text overflow",
+    "pt": "Texto: excesso"
+  },
+  {
+    "source": "Background color",
+    "en": "Background color",
+    "pt": "Fundo: cor"
+  },
+  {
+    "source": "Background image / gradient",
+    "en": "Background image / gradient",
+    "pt": "Fundo: imagem / gradiente"
+  },
+  {
+    "source": "Background position",
+    "en": "Background position",
+    "pt": "Fundo: posição"
+  },
+  {
+    "source": "Background size",
+    "en": "Background size",
+    "pt": "Fundo: tamanho"
+  },
+  {
+    "source": "Background repeat",
+    "en": "Background repeat",
+    "pt": "Fundo: repetição"
+  },
+  {
+    "source": "Background attachment",
+    "en": "Background attachment",
+    "pt": "Fundo: fixação"
+  },
+  {
+    "source": "Background origin",
+    "en": "Background origin",
+    "pt": "Fundo: origem"
+  },
+  {
+    "source": "Background clip",
+    "en": "Background clip",
+    "pt": "Fundo: recorte"
+  },
+  {
+    "source": "Background blend",
+    "en": "Background blend",
+    "pt": "Fundo: mesclagem"
+  },
+  {
+    "source": "Border color",
+    "en": "Border color",
+    "pt": "Borda: cor"
+  },
+  {
+    "source": "Border style",
+    "en": "Border style",
+    "pt": "Borda: estilo"
+  },
+  {
+    "source": "Border top width",
+    "en": "Border top width",
+    "pt": "Borda superior: largura"
+  },
+  {
+    "source": "Border right width",
+    "en": "Border right width",
+    "pt": "Borda direita: largura"
+  },
+  {
+    "source": "Border bottom width",
+    "en": "Border bottom width",
+    "pt": "Borda inferior: largura"
+  },
+  {
+    "source": "Border left width",
+    "en": "Border left width",
+    "pt": "Borda esquerda: largura"
+  },
+  {
+    "source": "Border top color",
+    "en": "Border top color",
+    "pt": "Borda superior: cor"
+  },
+  {
+    "source": "Border right color",
+    "en": "Border right color",
+    "pt": "Borda direita: cor"
+  },
+  {
+    "source": "Border bottom color",
+    "en": "Border bottom color",
+    "pt": "Borda inferior: cor"
+  },
+  {
+    "source": "Border left color",
+    "en": "Border left color",
+    "pt": "Borda esquerda: cor"
+  },
+  {
+    "source": "Outline color",
+    "en": "Outline color",
+    "pt": "Contorno: cor"
+  },
+  {
+    "source": "Outline style",
+    "en": "Outline style",
+    "pt": "Contorno: estilo"
+  },
+  {
+    "source": "Outline width",
+    "en": "Outline width",
+    "pt": "Contorno: largura"
+  },
+  {
+    "source": "Outline offset",
+    "en": "Outline offset",
+    "pt": "Contorno: desvio"
+  },
+  {
+    "source": "Filter / blur",
+    "en": "Filter / blur",
+    "pt": "Filtro / desfoque"
+  },
+  {
+    "source": "Backdrop filter",
+    "en": "Backdrop filter",
+    "pt": "Fundo: filtro"
+  },
+  {
+    "source": "Box shadow",
+    "en": "Box shadow",
+    "pt": "Caixa: sombra"
+  },
+  {
+    "source": "Clip path",
+    "en": "Clip path",
+    "pt": "Traçado recortado"
+  },
+  {
+    "source": "Mask image",
+    "en": "Mask image",
+    "pt": "Máscara: imagem"
+  },
+  {
+    "source": "Mask position",
+    "en": "Mask position",
+    "pt": "Máscara: posição"
+  },
+  {
+    "source": "Mask size",
+    "en": "Mask size",
+    "pt": "Máscara: tamanho"
+  },
+  {
+    "source": "Mask repeat",
+    "en": "Mask repeat",
+    "pt": "Máscara: repetição"
+  },
+  {
+    "source": "Blend mode",
+    "en": "Blend mode",
+    "pt": "Modo combinado"
+  },
+  {
+    "source": "User select",
+    "en": "User select",
+    "pt": "Seleção permitida"
+  },
+  {
+    "source": "Accent color",
+    "en": "Accent color",
+    "pt": "Cor destacada"
+  },
+  {
+    "source": "Caret color",
+    "en": "Caret color",
+    "pt": "Cursor: cor"
+  },
+  {
+    "source": "Fill opacity",
+    "en": "Fill opacity",
+    "pt": "Opacidade interna"
+  },
+  {
+    "source": "Stroke width",
+    "en": "Stroke width",
+    "pt": "Traço: largura"
+  },
+  {
+    "source": "Stroke opacity",
+    "en": "Stroke opacity",
+    "pt": "Traço: opacidade"
+  },
+  {
+    "source": "Stroke dash array",
+    "en": "Stroke dash array",
+    "pt": "Padrão de traços"
+  },
+  {
+    "source": "Transition property",
+    "en": "Transition property",
+    "pt": "Transição: propriedade"
+  },
+  {
+    "source": "Transition duration",
+    "en": "Transition duration",
+    "pt": "Transição: duração"
+  },
+  {
+    "source": "Transition easing",
+    "en": "Transition easing",
+    "pt": "Transição: curva"
+  },
+  {
+    "source": "Transition delay",
+    "en": "Transition delay",
+    "pt": "Transição: atraso"
+  },
+  {
+    "source": "Trigger element",
+    "en": "Trigger element",
+    "pt": "Elemento gatilho"
+  },
+  {
+    "source": "Fade in",
+    "en": "Fade in",
+    "pt": "Aparecer"
+  },
+  {
+    "source": "Fade out",
+    "en": "Fade out",
+    "pt": "Desaparecer"
+  },
+  {
+    "source": "Slide out right",
+    "en": "Slide out right",
+    "pt": "Deslizar à direita"
+  },
+  {
+    "source": "Scale in",
+    "en": "Scale in",
+    "pt": "Ampliar entrada"
+  },
+  {
+    "source": "Drop in",
+    "en": "Drop in",
+    "pt": "Cair entrando"
+  },
+  {
+    "source": "Stagger fall out",
+    "en": "Stagger fall out",
+    "pt": "Cair em cascata"
+  },
+  {
+    "source": "Valor do controle",
+    "en": "Control value",
+    "pt": "Controle: valor"
+  },
+  {
+    "source": "Gap horizontal",
+    "en": "Horizontal gap",
+    "pt": "Espaço horizontal"
+  },
+  {
+    "source": "Gap vertical",
+    "en": "Vertical gap",
+    "pt": "Espaço vertical"
+  },
+  {
+    "source": "Breakpoint ·",
+    "en": "Breakpoint ·",
+    "pt": "Largura ·"
+  },
+  {
+    "source": "Settings",
+    "en": "Settings",
+    "pt": "Ajustes"
+  },
+  {
+    "source": "Configurações",
+    "en": "Settings",
+    "pt": "Ajustes"
+  },
+  {
+    "source": "Ajustes",
+    "en": "Settings",
+    "pt": "Ajustes"
+  },
+  {
+    "source": "Editing",
+    "en": "Editing",
+    "pt": "Editando"
+  },
+  {
+    "source": "Justify",
+    "en": "Justify",
+    "pt": "Justificar"
+  },
+  {
+    "source": "Wrap",
+    "en": "Wrap",
+    "pt": "Quebra"
+  },
+  {
+    "source": "Sizing",
+    "en": "Sizing",
+    "pt": "Tamanho"
+  },
+  {
+    "source": "Geral",
+    "en": "General",
+    "pt": "Geral"
+  },
+  {
+    "source": "Redirects",
+    "en": "Redirects",
+    "pt": "Redirecionamentos"
+  },
+  {
+    "source": "Cookie Consent",
+    "en": "Cookie Consent",
+    "pt": "Consentimento"
+  },
+  {
+    "source": "Data de publicação",
+    "en": "Published on",
+    "pt": "Publicado em"
+  },
+  {
+    "source": "Texto alternativo da imagem",
+    "en": "Alt text",
+    "pt": "Texto alternativo"
+  },
+  {
+    "source": "Atualizado",
+    "en": "Updated",
+    "pt": "Atualizado"
+  }
+]

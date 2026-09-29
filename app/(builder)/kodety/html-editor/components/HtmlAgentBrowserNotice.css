@@ -1,0 +1,42 @@
+.kodety-agent-browser-notice {
+  margin: 12px;
+  padding: 16px;
+  border-radius: 10px;
+  background: rgb(255 255 255 / 4%);
+  color: var(--foreground);
+  text-align: left;
+}
+.kodety-agent-browser-notice h3 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+.kodety-agent-browser-notice p {
+  margin: 8px 0 0;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+.kodety-agent-browser-notice ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0;
+  margin: 14px 0;
+  list-style: none;
+}
+.kodety-agent-browser-notice li {
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: rgb(255 255 255 / 7%);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.kodety-agent-browser-notice .kodety-agent-browser-notice-footnote {
+  margin-top: 12px;
+  font-size: 11px;
+}

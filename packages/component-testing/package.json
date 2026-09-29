@@ -1,0 +1,19 @@
+{
+  "name": "@coday/component-testing",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "dependencies": {
+    "@coday/components": "1.0.0",
+    "@coday/control-schema": "1.0.0",
+    "@coday/component-runtime": "1.0.0"
+  },
+  "sideEffects": false,
+  "license": "GPL-3.0-only"
+}

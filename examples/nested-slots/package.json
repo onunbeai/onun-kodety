@@ -1,0 +1,10 @@
+{
+  "name": "@coday-example/nested-slots",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/NestedSlots.tsx"
+  },
+  "license": "GPL-3.0-only"
+}

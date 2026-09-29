@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "type": "extension",
+  "slug": "kodety-commerce",
+  "name": "Onun Kodety Commerce",
+  "description": "Checkouts, provedores, assinaturas e projeção comercial.",
+  "version": "1.36.100",
+  "entry": "extension.php",
+  "icon": "cart",
+  "requires": { "php": "8.0", "kodety": "1.36.100" },
+  "dependencies": ["kodety-membership"]
+}

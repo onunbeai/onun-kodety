@@ -1,0 +1,1555 @@
+/*
+ * Kodety OS — Gutenberg compatibility layer
+ *
+ * This file styles the WordPress editor chrome only. Theme content is an
+ * explicit boundary: never target `.editor-styles-wrapper`, its descendants,
+ * `iframe[name="editor-canvas"]`, or the contents of block preview iframes.
+ */
+
+body.kodety-admin-skin.block-editor-page {
+  --k-editor-header-height: 48px;
+  --k-editor-mobile-header-height: 46px;
+  --k-editor-sidebar-width: 320px;
+  --k-editor-menu-shadow: 0 20px 64px rgb(0 0 0 / 52%);
+  --wp-admin-theme-color: var(--k-os-primary);
+  --wp-admin-theme-color-darker-10: var(--k-os-primary-hover);
+  --wp-components-color-accent: var(--k-os-primary);
+  --wp-components-color-accent-darker-10: var(--k-os-primary-hover);
+  --wp-components-color-accent-darker-20: var(--k-os-primary-hover);
+  --wp-components-color-accent-inverted: var(--k-os-primary-foreground);
+  --wp-components-color-background: var(--k-os-card);
+  --wp-components-color-foreground: var(--k-os-foreground);
+  --wp-components-color-gray-50: var(--k-os-background-subtle);
+  --wp-components-color-gray-100: var(--k-os-card);
+  --wp-components-color-gray-200: var(--k-os-surface-raised);
+  --wp-components-color-gray-300: var(--k-os-border-strong);
+  --wp-components-color-gray-400: #626262;
+  --wp-components-color-gray-500: #7d7d7d;
+  --wp-components-color-gray-600: #999999;
+  --wp-components-color-gray-700: #b8b8b8;
+  --wp-components-color-gray-800: #d9d9d9;
+  --wp-components-color-gray-900: var(--k-os-foreground);
+}
+
+/* Application frame ------------------------------------------------------ */
+
+body.kodety-admin-skin.block-editor-page #wpcontent {
+  padding-left: 0 !important;
+}
+
+body.kodety-admin-skin.block-editor-page #wpbody-content {
+  padding: 0 !important;
+}
+
+body.kodety-admin-skin.block-editor-page:not(.is-fullscreen-mode)
+  :where(.interface-interface-skeleton, .editor-interface-skeleton) {
+  top: var(--k-editor-header-height) !important;
+  right: 0;
+  bottom: 0;
+  left: 244px !important;
+  background: var(--k-os-background) !important;
+  color: var(--k-os-foreground);
+}
+
+body.kodety-admin-skin.block-editor-page.folded:not(.is-fullscreen-mode)
+  :where(.interface-interface-skeleton, .editor-interface-skeleton) {
+  left: 56px !important;
+}
+
+body.kodety-admin-skin.block-editor-page.is-fullscreen-mode #wpcontent,
+body.kodety-admin-skin.block-editor-page.is-fullscreen-mode #wpfooter {
+  margin-left: 0 !important;
+}
+
+body.kodety-admin-skin.block-editor-page.is-fullscreen-mode
+  :where(.interface-interface-skeleton, .editor-interface-skeleton) {
+  top: 0 !important;
+  left: 0 !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .interface-interface-skeleton__body,
+    .editor-interface-skeleton__body,
+    .interface-interface-skeleton__content,
+    .editor-interface-skeleton__content
+  ) {
+  background: var(--k-os-background);
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .interface-interface-skeleton__footer,
+    .editor-interface-skeleton__footer,
+    .interface-interface-skeleton__actions,
+    .editor-interface-skeleton__actions
+  ) {
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .interface-interface-skeleton__footer
+  .block-editor-block-breadcrumb {
+  height: 24px;
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+/* Keep the site's design canvas native. These are the only canvas selectors
+ * in this file, and they repeat WordPress' own transparent iframe behavior. */
+body.kodety-admin-skin.block-editor-page .editor-visual-editor {
+  background-color: var(--wp-editor-canvas-background);
+}
+
+body.kodety-admin-skin.block-editor-page
+  .editor-visual-editor
+  iframe[name="editor-canvas"] {
+  background-color: transparent;
+}
+
+/* Header and document bar ------------------------------------------------ */
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .interface-interface-skeleton__header,
+    .editor-interface-skeleton__header
+  ) {
+  min-height: var(--k-editor-header-height);
+  border-bottom: 1px solid var(--k-os-border) !important;
+  background: var(--k-os-background-subtle) !important;
+  color: var(--k-os-foreground) !important;
+  box-shadow: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page .editor-header {
+  height: var(--k-editor-header-height) !important;
+  min-height: var(--k-editor-header-height) !important;
+  grid-template-rows: var(--k-editor-header-height) !important;
+  align-items: center;
+  gap: 8px !important;
+  border: 0 !important;
+  background: var(--k-os-background-subtle) !important;
+  color: var(--k-os-foreground) !important;
+  box-shadow: none !important;
+}
+
+/* WordPress keeps the fullscreen back-button wrappers at 64px. Constrain every
+ * wrapper to the Kodety header track so the rest of the toolbar cannot inherit a
+ * taller implicit grid row. */
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .editor-header__back-button,
+    .editor-header__back-button > div,
+    .editor-header__back-button > div > div,
+    .edit-post-fullscreen-mode-close__view-mode-toggle
+  ) {
+  width: var(--k-editor-header-height) !important;
+  min-width: var(--k-editor-header-height) !important;
+  height: var(--k-editor-header-height) !important;
+  min-height: var(--k-editor-header-height) !important;
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden;
+}
+
+body.kodety-admin-skin.block-editor-page .edit-post-fullscreen-mode-close svg {
+  display: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .editor-header:has(> .editor-header__center) {
+  grid-template:
+    var(--k-editor-header-height) / 48px minmax(min-content, 2fr) 2.5fr
+    minmax(min-content, 2fr)
+    48px !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(.editor-header__toolbar, .editor-header__settings) {
+  min-width: 0;
+  height: 100%;
+  align-items: center;
+  gap: 4px;
+}
+
+body.kodety-admin-skin.block-editor-page .editor-header__center {
+  min-width: 0;
+  overflow: hidden;
+}
+
+body.kodety-admin-skin.block-editor-page .editor-header__toolbar > :first-child {
+  margin-inline-start: 8px;
+}
+
+body.kodety-admin-skin.block-editor-page .editor-document-bar {
+  width: min(100%, 420px);
+  max-width: 420px;
+  min-width: 0;
+  height: var(--k-os-control);
+  min-height: var(--k-os-control);
+  border: 0;
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-input);
+  color: var(--k-os-muted-foreground);
+  box-shadow: none;
+  overflow: hidden;
+  transition:
+    color var(--k-os-ease),
+    background-color var(--k-os-ease);
+}
+
+body.kodety-admin-skin.block-editor-page .editor-document-bar:hover {
+  background: var(--k-os-secondary);
+  color: var(--k-os-foreground);
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .editor-document-bar__title,
+    .editor-document-bar__post-title,
+    .editor-document-bar__post-type-label,
+    .editor-document-bar__shortcut
+  ) {
+  color: inherit;
+}
+
+body.kodety-admin-skin.block-editor-page .editor-document-bar__title {
+  padding-inline: 8px !important;
+  font-size: 11px;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .editor-document-bar__back.components-button {
+  min-width: 32px;
+  color: var(--k-os-muted-foreground);
+}
+
+body.kodety-admin-skin.block-editor-page
+  .editor-document-bar__back.components-button:hover {
+  background: var(--k-os-secondary);
+  color: var(--k-os-foreground);
+}
+
+/* Editor buttons and controls ------------------------------------------- */
+
+body.kodety-admin-skin.block-editor-page
+  .components-button:not(:where(.editor-styles-wrapper *)) {
+  min-height: var(--k-os-control);
+  height: var(--k-os-control);
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--k-os-radius) !important;
+  color: var(--k-os-muted-foreground);
+  font-size: 11px;
+  line-height: 1;
+  box-shadow: none !important;
+  transition:
+    color var(--k-os-ease),
+    background-color var(--k-os-ease),
+    opacity var(--k-os-ease);
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button.has-icon:not(.has-text):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  width: var(--k-os-control);
+  min-width: var(--k-os-control);
+  padding: 0;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button.is-link:not(:where(.editor-styles-wrapper *)) {
+  width: auto;
+  min-width: 0;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  border-radius: 0 !important;
+  color: #AFAFFF;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button.is-link:hover:not(:disabled):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  background: transparent !important;
+  color: #AFAFFF !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button:hover:not(:disabled):not([aria-disabled="true"]):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  background: var(--k-os-secondary);
+  color: var(--k-os-foreground);
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button:is(.is-pressed, [aria-pressed="true"]):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button.is-primary:not(:where(.editor-styles-wrapper *)) {
+  background: var(--k-os-primary) !important;
+  color: var(--k-os-primary-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button.is-primary:hover:not(:disabled):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  background: var(--k-os-primary-hover) !important;
+  color: var(--k-os-primary-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button.is-secondary:not(:where(.editor-styles-wrapper *)) {
+  border: 1px solid var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: #c9c9c9 !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button.is-tertiary:not(:where(.editor-styles-wrapper *)) {
+  background: transparent;
+  color: var(--k-os-muted-foreground);
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button:focus-visible:not(:where(.editor-styles-wrapper *)) {
+  outline: 2px solid var(--k-os-ring) !important;
+  outline-offset: 2px;
+  box-shadow: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button:is(:disabled, [aria-disabled="true"]):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+/* Keep the fullscreen exit control visually independent from the generic
+ * WordPress button rules. The icon is a background asset so core can retain its
+ * own ::before focus treatment without colliding with our chevron. */
+body.kodety-admin-skin.block-editor-page
+  .edit-post-fullscreen-mode-close.components-button {
+  position: relative;
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  padding: 0 !important;
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background-color: var(--k-os-input) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a6a6a6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m15 18-6-6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 14px 14px !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .edit-post-fullscreen-mode-close.components-button:hover:not(:disabled) {
+  border-color: var(--k-os-border-strong) !important;
+  background-color: var(--k-os-secondary) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f4f4f4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m15 18-6-6 6-6'/%3E%3C/svg%3E") !important;
+  color: var(--k-os-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .components-text-control__input,
+    .components-textarea-control__input,
+    .components-select-control__input,
+    .components-input-control__input,
+    .components-combobox-control__input
+  ):not(:where(.editor-styles-wrapper *)) {
+  border: 0 !important;
+  border-radius: var(--k-os-radius) !important;
+  background-color: var(--k-os-input) !important;
+  color: var(--k-os-foreground) !important;
+  font-size: 12px !important;
+  box-shadow: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .components-text-control__input,
+    .components-textarea-control__input,
+    .components-select-control__input,
+    .components-input-control__input,
+    .components-combobox-control__input
+  ):focus-visible:not(:where(.editor-styles-wrapper *)) {
+  outline: 2px solid color-mix(in srgb, var(--k-os-ring) 45%, transparent) !important;
+  outline-offset: 1px;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .components-text-control__input,
+    .components-select-control__input,
+    .components-input-control__input,
+    .components-combobox-control__input
+  ):not(:where(.editor-styles-wrapper *)) {
+  min-height: var(--k-os-control) !important;
+  height: var(--k-os-control) !important;
+  width: 100%;
+  max-width: 100%;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    select.components-select-control__input,
+    .components-select-control select,
+    .components-input-control__input[type="select-one"]
+  ):not(:where(.editor-styles-wrapper *)) {
+  background-image: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-input-control__backdrop:not(:where(.editor-styles-wrapper *)) {
+  border: 0 !important;
+  border-radius: var(--k-os-radius) !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-border) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-input-control__container:focus-within:not(
+    :where(.editor-styles-wrapper *)
+  )
+  .components-input-control__backdrop {
+  box-shadow: inset 0 0 0 1px var(--k-os-ring) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .components-base-control__label,
+    .components-input-control__label,
+    .components-toggle-control__label,
+    .components-checkbox-control__label,
+    .components-radio-control__option
+  ):not(:where(.editor-styles-wrapper *)) {
+  color: var(--k-os-foreground) !important;
+  font-size: 11px !important;
+  font-weight: 500;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .components-base-control__help,
+    .components-form-token-field__help,
+    .components-input-control__help
+  ):not(:where(.editor-styles-wrapper *)) {
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+/* Tabs ------------------------------------------------------------------- */
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    [role="tablist"]:not([aria-orientation="vertical"]),
+    .components-tab-panel__tabs
+  ):not(:where(.editor-styles-wrapper *)) {
+  min-height: var(--k-os-control);
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 3px;
+  border: 0 !important;
+  border-radius: var(--k-os-radius);
+  background: var(--k-os-input);
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+  white-space: nowrap;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    [role="tablist"]:not([aria-orientation="vertical"]),
+    .components-tab-panel__tabs
+  ):not(:where(.editor-styles-wrapper *))::-webkit-scrollbar {
+  display: none;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    [role="tablist"]:not([aria-orientation="vertical"]) > [role="tab"],
+    .components-tab-panel__tabs-item
+  ):not(:where(.editor-styles-wrapper *)) {
+  flex: 0 0 auto;
+  min-height: 26px;
+  height: 26px;
+  padding: 0 9px;
+  border: 0 !important;
+  border-radius: var(--k-os-radius-md) !important;
+  background: transparent;
+  color: var(--k-os-muted-foreground);
+  font-size: 11px;
+  line-height: 26px;
+  box-shadow: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    [role="tablist"]:not([aria-orientation="vertical"]) > [role="tab"]:hover,
+    [role="tablist"]:not([aria-orientation="vertical"])
+      > [role="tab"][aria-selected="true"],
+    .components-tab-panel__tabs-item:hover,
+    .components-tab-panel__tabs-item.is-active
+  ):not(:where(.editor-styles-wrapper *)) {
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    [role="tablist"]:not([aria-orientation="vertical"]) > [role="tab"],
+    .components-tab-panel__tabs-item
+  ):focus-visible:not(:where(.editor-styles-wrapper *)) {
+  outline: 2px solid var(--k-os-ring) !important;
+  outline-offset: 2px;
+}
+
+/* Sidebars and panels ---------------------------------------------------- */
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .interface-interface-skeleton__sidebar,
+    .editor-interface-skeleton__sidebar,
+    .interface-interface-skeleton__secondary-sidebar,
+    .editor-interface-skeleton__secondary-sidebar
+  ) {
+  width: var(--k-editor-sidebar-width) !important;
+  min-width: var(--k-editor-sidebar-width) !important;
+  flex-basis: var(--k-editor-sidebar-width) !important;
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .interface-interface-skeleton__content,
+    .editor-interface-skeleton__content
+  ) {
+  min-width: 0;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(.interface-complementary-area, .edit-post-sidebar) {
+  width: var(--k-editor-sidebar-width) !important;
+  border: 0;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .editor-list-view-sidebar,
+    .editor-inserter-sidebar,
+    .block-editor-tabbed-sidebar
+  ) {
+  width: var(--k-editor-sidebar-width) !important;
+  border: 0;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .block-editor-tabbed-sidebar__tablist-and-close-button,
+    .interface-complementary-area-header,
+    .components-panel__header.editor-sidebar__panel-tabs,
+    .edit-post-sidebar__panel-tabs
+  ) {
+  min-height: var(--k-editor-header-height);
+  padding: 8px !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-foreground) !important;
+  box-shadow: none !important;
+}
+
+/* Gutenberg's tabs draw a second animated underline from inline geometry.
+ * Kodety uses a single segmented control, so keep one selected-state language. */
+body.kodety-admin-skin.block-editor-page
+  .editor-sidebar__panel-tabs
+  > [role="tablist"]::before,
+body.kodety-admin-skin.block-editor-page
+  .editor-sidebar__panel-tabs
+  > [role="tablist"]
+  > [role="tab"]::after {
+  display: none !important;
+  content: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .editor-sidebar__panel-tabs
+  > [role="tablist"]
+  > [role="tab"]
+  svg {
+  display: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page .editor-sidebar__panel {
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .block-editor-block-inspector__no-blocks,
+    .block-editor-block-inspector__no-block-tools
+  ) {
+  min-height: 112px;
+  display: grid !important;
+  place-items: center;
+  margin: 0;
+  padding: 24px !important;
+  border-top: 0 !important;
+  border-bottom: 1px solid var(--k-os-border);
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+  font-size: 11px !important;
+  line-height: 1.45;
+  text-align: center;
+  text-wrap: balance;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-tabbed-sidebar__close-button {
+  background: transparent !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .interface-complementary-area
+  :where(h2, h3) {
+  color: var(--k-os-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page .interface-complementary-area hr {
+  border: 0;
+  border-bottom: 1px solid var(--k-os-border);
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(.components-panel, .components-panel__body) {
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page .components-panel__header {
+  min-height: 48px;
+  padding: 0 12px;
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page .components-panel__body-title {
+  margin: 0 !important;
+}
+
+body.kodety-admin-skin.block-editor-page .components-panel__body-toggle {
+  min-height: 42px;
+  height: 42px;
+  padding: 0 14px !important;
+  border-radius: 0 !important;
+  color: var(--k-os-foreground) !important;
+  font-size: 11px !important;
+}
+
+body.kodety-admin-skin.block-editor-page .components-panel__body-toggle:hover {
+  background: var(--k-os-secondary) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(.components-panel__arrow, .components-panel__body-toggle svg) {
+  color: var(--k-os-muted-foreground) !important;
+  fill: currentColor !important;
+}
+
+body.kodety-admin-skin.block-editor-page .components-panel__body.is-opened {
+  padding: 0 14px 14px;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .editor-list-view-sidebar__list-view-panel-content,
+    .editor-list-view-sidebar__list-view-container > .document-outline,
+    .block-editor-tabbed-sidebar__tabpanel
+  ) {
+  scrollbar-color: var(--k-os-border-strong) transparent;
+  scrollbar-width: thin;
+}
+
+/* Toolbars, inserter and popovers --------------------------------------- */
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .edit-post-header-toolbar,
+    .editor-document-tools,
+    .editor-document-tools__left,
+    .block-editor-block-toolbar,
+    .components-toolbar,
+    .components-toolbar-group
+  ):not(:where(.editor-styles-wrapper *)) {
+  gap: 3px;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(.components-toolbar, .components-toolbar-group):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  min-height: var(--k-os-control);
+  padding: 0;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-toolbar-group
+  + .components-toolbar-group:not(:where(.editor-styles-wrapper *)) {
+  border-left: 1px solid var(--k-os-border) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-block-toolbar:not(:where(.editor-styles-wrapper *)) {
+  padding: 3px;
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-popover) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: var(--k-editor-menu-shadow) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(.components-popover__content, .components-dropdown__content):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  padding: 0;
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-popover) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: var(--k-editor-menu-shadow) !important;
+  max-block-size: min(70vh, 640px);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(.components-dropdown-menu__menu, .components-menu-group):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  padding: 4px;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-menu-group
+  + .components-menu-group {
+  border-top: 1px solid var(--k-os-border) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-menu-item__button:not(:where(.editor-styles-wrapper *)) {
+  width: 100%;
+  height: auto;
+  min-height: 32px;
+  justify-content: flex-start;
+  border-radius: var(--k-os-radius-md) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-menu-item__button:hover:not(:where(.editor-styles-wrapper *)) {
+  background: var(--k-os-accent) !important;
+  color: var(--k-os-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page .block-editor-inserter__menu {
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-background) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: var(--k-editor-menu-shadow) !important;
+  overflow: hidden;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-inserter__menu.is-bottom::after {
+  border-bottom-color: var(--k-os-background) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-inserter__tabs
+  .components-tab-panel__tabs {
+  margin: 8px;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .block-editor-inserter__panel-title,
+    .block-editor-inserter__panel-title button
+  ) {
+  color: var(--k-os-foreground) !important;
+  font-size: 11px;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .block-editor-inserter__main-area,
+    .block-editor-inserter__no-tab-container,
+    .block-editor-inserter__panel-content
+  ) {
+  background: var(--k-os-background);
+  color: var(--k-os-muted-foreground);
+}
+
+/* Quick block inserter ---------------------------------------------------
+ * Core draws the quick inserter from stacked bordered children. Keep that
+ * implementation detail out of Kodety's component surface and restore the
+ * natural height of block tiles after the generic button normalization.
+ */
+
+body.kodety-admin-skin.block-editor-page
+  .components-popover.block-editor-inserter__popover.is-quick
+  > .components-popover__content:not(:where(.editor-styles-wrapper *)) {
+  width: 350px;
+  max-block-size: min(70vh, 520px);
+  padding: 0 !important;
+  border: 1px solid var(--k-os-border-strong) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-popover) !important;
+  color: var(--k-os-foreground) !important;
+  box-shadow: var(--k-editor-menu-shadow) !important;
+  overflow: hidden !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-inserter__popover.is-quick
+  .block-editor-inserter__quick-inserter:not(:where(.editor-styles-wrapper *)) {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  max-height: min(70vh, 520px);
+  background: var(--k-os-popover);
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-inserter__popover.is-quick
+  .block-editor-inserter__quick-inserter
+  > * {
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-inserter__popover.is-quick
+  .block-editor-inserter__search {
+  flex: none;
+  padding: 12px !important;
+  background: var(--k-os-popover);
+}
+
+/* Both inserter surfaces share this SearchControl. Keep the field on one
+ * 40px control and let only the component backdrop draw its focus ring. */
+body.kodety-admin-skin.block-editor-page
+  .block-editor-inserter__search.components-search-control
+  .components-input-control__container {
+  min-height: 40px;
+  border-radius: var(--k-os-radius-md);
+  background: var(--k-os-input);
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-inserter__search.components-search-control
+  .components-input-control__input[type="search"] {
+  min-height: 40px !important;
+  height: 40px !important;
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-inserter__search.components-search-control
+  .components-input-control__input[type="search"]:is(
+    :hover,
+    :focus,
+    :focus-visible
+  ) {
+  border: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-inserter__search.components-search-control
+  .components-input-control__backdrop {
+  border: 0 !important;
+  border-radius: var(--k-os-radius-md) !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-border-strong) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-inserter__search.components-search-control
+  .components-input-control__container:focus-within
+  .components-input-control__backdrop {
+  box-shadow: inset 0 0 0 1px var(--k-os-ring) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-inserter__search.components-search-control
+  :where(.components-input-control__prefix, .components-input-control__suffix) {
+  color: var(--k-os-muted-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-inserter__popover.is-quick
+  .block-editor-inserter__quick-inserter-results {
+  min-height: 0;
+  background: var(--k-os-background-subtle);
+  overflow-y: auto;
+  scrollbar-color: var(--k-os-border-strong) transparent;
+  scrollbar-width: thin;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button.block-editor-block-types-list__item:not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  width: 100%;
+  min-height: 80px !important;
+  height: auto !important;
+  padding: 8px !important;
+  border-radius: var(--k-os-radius-md) !important;
+  background: transparent !important;
+  color: #c9c9c9 !important;
+  line-height: 1.25;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button.block-editor-block-types-list__item:not(
+    :where(.editor-styles-wrapper *)
+  ):hover:not(:disabled):not([aria-disabled="true"]) {
+  background: var(--k-os-secondary) !important;
+  color: var(--k-os-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-block-types-list__item:not(:where(.editor-styles-wrapper *))
+  :where(
+    .block-editor-block-types-list__item-icon,
+    .block-editor-block-types-list__item-title,
+    .block-editor-block-icon,
+    svg
+  ) {
+  color: #c9c9c9 !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-block-types-list__item:not(:disabled):not(
+    [aria-disabled="true"]
+  ):hover
+  :where(
+    .block-editor-block-types-list__item-icon,
+    .block-editor-block-types-list__item-title,
+    .block-editor-block-icon,
+    svg
+  ) {
+  color: var(--k-os-primary) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-block-types-list__item-icon:not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  padding: 8px 12px;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-block-types-list__item-title:not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  padding: 3px 2px 6px;
+  font-size: 11px;
+  line-height: 1.25;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-inserter__popover.is-quick
+  .block-editor-inserter__quick-inserter-expand.components-button {
+  flex: none;
+  width: 100%;
+  min-height: 40px !important;
+  height: 40px !important;
+  border-top: 1px solid var(--k-os-border) !important;
+  border-radius: 0 !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-foreground) !important;
+  font-weight: 500;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .block-editor-inserter__popover.is-quick
+  .block-editor-inserter__quick-inserter-expand.components-button:hover {
+  background: var(--k-os-secondary) !important;
+  color: white !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(.components-tooltip, .components-tooltip__content) {
+  border: 0;
+  border-radius: var(--k-os-radius-md);
+  background: var(--k-os-foreground) !important;
+  color: var(--k-os-background) !important;
+  font-size: 10px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 25%);
+}
+
+/* Publish flow ----------------------------------------------------------- */
+
+body.kodety-admin-skin.block-editor-page .editor-post-publish-panel {
+  top: var(--k-editor-header-height) !important;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  width: var(--k-editor-sidebar-width) !important;
+  border-left: 1px solid var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+  color: var(--k-os-muted-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page.is-fullscreen-mode
+  .editor-post-publish-panel {
+  top: 0 !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .editor-post-publish-panel__header,
+    .editor-post-publish-panel__footer
+  ) {
+  min-height: var(--k-editor-header-height);
+  padding: 8px 12px;
+  border-color: var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .editor-post-publish-panel__prepublish
+  .components-panel__body {
+  border-color: var(--k-os-border) !important;
+}
+
+/* Modals and notices ----------------------------------------------------- */
+
+body.kodety-admin-skin.block-editor-page .components-modal__screen-overlay {
+  background: rgb(0 0 0 / 62%);
+  backdrop-filter: blur(3px);
+}
+
+body.kodety-admin-skin.block-editor-page .components-modal__frame {
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-background) !important;
+  color: var(--k-os-muted-foreground) !important;
+  box-shadow: 0 30px 90px rgb(0 0 0 / 58%) !important;
+  overflow: hidden;
+}
+
+body.kodety-admin-skin.block-editor-page .components-modal__header {
+  min-height: var(--k-editor-header-height);
+  padding: 0 14px;
+  border-bottom: 1px solid var(--k-os-border) !important;
+  background: var(--k-os-card) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(.components-modal__header-heading, .components-modal__header h1) {
+  color: var(--k-os-foreground) !important;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+body.kodety-admin-skin.block-editor-page .components-modal__content {
+  background: var(--k-os-background);
+  color: var(--k-os-muted-foreground);
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(.components-notice, .components-snackbar) {
+  border: 1px solid var(--k-os-border) !important;
+  border-radius: var(--k-os-radius) !important;
+  background: var(--k-os-popover) !important;
+  color: var(--k-os-foreground) !important;
+  box-shadow: var(--k-editor-menu-shadow) !important;
+}
+
+/* Kodety component parity -------------------------------------------------
+ * Everything below is restricted to application chrome. The site canvas is
+ * deliberately excluded so a theme's typography, controls and colors win.
+ */
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .interface-interface-skeleton,
+    .editor-interface-skeleton,
+    .components-popover__content,
+    .components-modal__frame
+  )
+  :where(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    legend,
+    .components-heading,
+    .components-text
+  ):not(:where(.editor-styles-wrapper *)) {
+  color: var(--k-os-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .interface-interface-skeleton,
+    .editor-interface-skeleton,
+    .components-popover__content,
+    .components-modal__frame
+  )
+  :where(p, small, .description, .components-base-control__help):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  color: var(--k-os-muted-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(.components-base-control, .components-input-control__container):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-textarea-control__input:not(:where(.editor-styles-wrapper *)) {
+  width: 100%;
+  min-height: 88px;
+  height: auto;
+  max-width: 100%;
+  padding: 10px 12px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    select.components-select-control__input[multiple],
+    .components-select-control select[multiple],
+    select.components-select-control__input[size]:not([size="1"]),
+    .components-select-control select[size]:not([size="1"])
+  ):not(:where(.editor-styles-wrapper *)) {
+  height: auto !important;
+  min-height: 112px !important;
+  padding: 6px !important;
+  background: var(--k-os-input) !important;
+  overflow: auto;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    select.components-select-control__input[multiple],
+    .components-select-control select[multiple],
+    select.components-select-control__input[size]:not([size="1"]),
+    .components-select-control select[size]:not([size="1"])
+  ):not(:where(.editor-styles-wrapper *))
+  option {
+  min-height: 30px;
+  margin: 1px 0;
+  padding: 6px 8px;
+  border-radius: 8px;
+  color: var(--k-os-foreground);
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    select.components-select-control__input[multiple],
+    .components-select-control select[multiple],
+    select.components-select-control__input[size]:not([size="1"]),
+    .components-select-control select[size]:not([size="1"])
+  ):not(:where(.editor-styles-wrapper *))
+  option:checked {
+  background: linear-gradient(
+    color-mix(in srgb, var(--k-os-primary) 14%, #202020),
+    color-mix(in srgb, var(--k-os-primary) 14%, #202020)
+  );
+  color: var(--k-os-primary-hover);
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button.is-primary:not(:where(.editor-styles-wrapper *)),
+body.kodety-admin-skin.block-editor-page
+  .components-button.is-primary:hover:not(:disabled):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  color: var(--k-os-primary-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button.is-destructive:not(:where(.editor-styles-wrapper *)) {
+  color: var(--k-os-destructive) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-button.is-destructive:hover:not(:disabled):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  background: color-mix(
+    in srgb,
+    var(--k-os-destructive) 12%,
+    transparent
+  ) !important;
+  color: #ffaaa4 !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .components-checkbox-control__input,
+    .components-radio-control__input
+  ):not(:where(.editor-styles-wrapper *)) {
+  border: 1px solid var(--k-os-border-strong) !important;
+  background: var(--k-os-input) !important;
+  box-shadow: none !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .components-checkbox-control__input:checked,
+    .components-radio-control__input:checked
+  ):not(:where(.editor-styles-wrapper *)) {
+  border-color: var(--k-os-primary) !important;
+  background: var(--k-os-primary) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-form-toggle:not(:where(.editor-styles-wrapper *))
+  .components-form-toggle__track {
+  border: 1px solid var(--k-os-border-strong) !important;
+  background: var(--k-os-input) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-form-toggle.is-checked:not(:where(.editor-styles-wrapper *))
+  .components-form-toggle__track {
+  border-color: var(--k-os-primary) !important;
+  background: var(--k-os-primary) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-form-toggle:not(:where(.editor-styles-wrapper *))
+  .components-form-toggle__thumb {
+  background: #d5d5d5 !important;
+  border-color: transparent !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-form-toggle.is-checked:not(:where(.editor-styles-wrapper *))
+  .components-form-toggle__thumb {
+  background: var(--k-os-primary-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-range-control__track:not(:where(.editor-styles-wrapper *)) {
+  background: var(--k-os-surface-raised) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-range-control__track
+  + span:not(:where(.editor-styles-wrapper *)),
+body.kodety-admin-skin.block-editor-page
+  .components-range-control__thumb-wrapper:not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  color: var(--k-os-primary) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    [role="tablist"]:not([aria-orientation="vertical"])
+      > [role="tab"][aria-selected="true"],
+    .components-tab-panel__tabs-item.is-active
+  ):not(:where(.editor-styles-wrapper *)) {
+  background: var(--k-os-surface-raised) !important;
+  box-shadow: inset 0 0 0 1px var(--k-os-border) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    [role="tablist"]:not([aria-orientation="vertical"]) > [role="tab"],
+    .components-tab-panel__tabs-item
+  ):focus-visible:not(:where(.editor-styles-wrapper *)) {
+  outline: 2px solid var(--k-os-ring) !important;
+  outline-offset: 2px;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .interface-interface-skeleton__sidebar,
+    .editor-interface-skeleton__sidebar,
+    .interface-interface-skeleton__secondary-sidebar,
+    .editor-interface-skeleton__secondary-sidebar,
+    .interface-complementary-area,
+    .edit-post-sidebar
+  ) {
+  overflow-x: hidden;
+  scrollbar-color: var(--k-os-border-strong) transparent;
+  scrollbar-width: thin;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .interface-complementary-area-header,
+    .components-panel__header,
+    .block-editor-tabbed-sidebar__tablist-and-close-button
+  )
+  :where(button, [role="tab"]):not(:where(.editor-styles-wrapper *)) {
+  color: #c4c4c4 !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(
+    .interface-complementary-area-header,
+    .components-panel__header,
+    .block-editor-tabbed-sidebar__tablist-and-close-button
+  )
+  :where(button, [role="tab"]):hover:not(:where(.editor-styles-wrapper *)) {
+  color: var(--k-os-foreground) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(.components-popover__content, .components-dropdown__content) {
+  border-color: var(--k-os-border-strong) !important;
+  background: var(--k-os-popover) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(.components-popover__content, .components-dropdown__content)
+  :where(.components-menu-item__item, .components-menu-item__info):not(
+    :where(.editor-styles-wrapper *)
+  ) {
+  color: inherit !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  :where(.components-notice, .components-snackbar)
+  :where(p, span, strong):not(:where(.editor-styles-wrapper *)) {
+  color: inherit !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-notice.is-success:not(:where(.editor-styles-wrapper *)) {
+  border-left: 3px solid var(--k-os-success) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-notice.is-warning:not(:where(.editor-styles-wrapper *)) {
+  border-left: 3px solid var(--k-os-warning) !important;
+}
+
+body.kodety-admin-skin.block-editor-page
+  .components-notice.is-error:not(:where(.editor-styles-wrapper *)) {
+  border-left: 3px solid var(--k-os-destructive) !important;
+}
+
+/* Responsive editor frame ------------------------------------------------ */
+
+@media (max-width: 960px) and (min-width: 783px) {
+  body.kodety-admin-skin.block-editor-page:not(.is-fullscreen-mode)
+    :where(.interface-interface-skeleton, .editor-interface-skeleton) {
+    left: 56px !important;
+  }
+}
+
+@media (max-width: 782px) {
+  body.kodety-admin-skin.block-editor-page {
+    --k-editor-sidebar-width: 100vw;
+    --k-os-control: 44px;
+  }
+
+  body.kodety-admin-skin.block-editor-page:not(.is-fullscreen-mode)
+    :where(.interface-interface-skeleton, .editor-interface-skeleton) {
+    top: var(--k-editor-mobile-header-height) !important;
+    left: 0 !important;
+  }
+
+  body.kodety-admin-skin.block-editor-page
+    :where(
+      .interface-interface-skeleton__header,
+      .editor-interface-skeleton__header
+    ) {
+    height: var(--k-editor-mobile-header-height) !important;
+    min-height: var(--k-editor-mobile-header-height) !important;
+  }
+
+  body.kodety-admin-skin.block-editor-page .editor-header {
+    height: var(--k-editor-mobile-header-height) !important;
+    min-height: var(--k-editor-mobile-header-height) !important;
+    grid-template-rows: var(--k-editor-mobile-header-height) !important;
+    gap: 2px !important;
+  }
+
+  body.kodety-admin-skin.block-editor-page
+    .editor-header:has(> .editor-header__center) {
+    grid-template:
+      var(--k-editor-mobile-header-height) / 46px min-content 1fr min-content
+      46px !important;
+  }
+
+  body.kodety-admin-skin.block-editor-page
+    :where(
+      .editor-header__back-button,
+      .editor-header__back-button > div,
+      .editor-header__back-button > div > div,
+      .edit-post-fullscreen-mode-close__view-mode-toggle
+    ) {
+    width: var(--k-editor-mobile-header-height) !important;
+    min-width: var(--k-editor-mobile-header-height) !important;
+    height: var(--k-editor-mobile-header-height) !important;
+    min-height: var(--k-editor-mobile-header-height) !important;
+  }
+
+  body.kodety-admin-skin.block-editor-page
+    :where(
+      .interface-interface-skeleton__sidebar,
+      .editor-interface-skeleton__sidebar,
+      .interface-interface-skeleton__secondary-sidebar,
+      .editor-interface-skeleton__secondary-sidebar
+    ) {
+    width: 100% !important;
+    min-width: 100% !important;
+    flex-basis: 100% !important;
+  }
+
+  body.kodety-admin-skin.block-editor-page
+    :where(
+      .interface-complementary-area,
+      .edit-post-sidebar,
+      .editor-list-view-sidebar,
+      .editor-inserter-sidebar,
+      .block-editor-tabbed-sidebar
+    ) {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  body.kodety-admin-skin.block-editor-page
+    .components-button:not(.is-link):not(.components-menu-item__button):not(
+      :where(.editor-styles-wrapper *)
+    ) {
+    min-height: 44px;
+    height: 44px;
+  }
+
+  body.kodety-admin-skin.block-editor-page
+    .edit-post-fullscreen-mode-close.components-button {
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+  }
+
+  body.kodety-admin-skin.block-editor-page
+    :where(
+      .components-text-control__input,
+      .components-select-control__input,
+      .components-input-control__input,
+      .components-combobox-control__input
+    ):not(:where(.editor-styles-wrapper *)) {
+    min-height: 44px !important;
+    height: 44px !important;
+  }
+
+  body.kodety-admin-skin.block-editor-page
+    :where(
+      [role="tablist"]:not([aria-orientation="vertical"]) > [role="tab"],
+      .components-tab-panel__tabs-item
+    ):not(:where(.editor-styles-wrapper *)) {
+    min-height: 38px;
+    height: 38px;
+    padding-inline: 12px;
+    line-height: 38px;
+  }
+
+  body.kodety-admin-skin.block-editor-page .editor-document-bar {
+    width: 100%;
+    min-width: 0;
+  }
+
+  body.kodety-admin-skin.block-editor-page
+    :where(.editor-header__toolbar, .editor-header__settings) {
+    gap: 0 !important;
+  }
+
+  body.kodety-admin-skin.block-editor-page .editor-post-publish-panel {
+    top: var(--k-editor-mobile-header-height) !important;
+    left: 0;
+    width: 100% !important;
+    border-left: 0 !important;
+  }
+
+  body.kodety-admin-skin.block-editor-page.is-fullscreen-mode
+    .editor-post-publish-panel {
+    top: 0 !important;
+  }
+}
+
+@media (forced-colors: active) {
+  body.kodety-admin-skin.block-editor-page
+    .edit-post-fullscreen-mode-close.components-button {
+    background-image: none !important;
+  }
+
+  body.kodety-admin-skin.block-editor-page .edit-post-fullscreen-mode-close svg {
+    display: block !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.kodety-admin-skin.block-editor-page
+    :where(.components-button, .editor-document-bar):not(
+      :where(.editor-styles-wrapper *)
+    ) {
+    transition: none !important;
+  }
+}

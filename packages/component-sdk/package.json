@@ -1,0 +1,16 @@
+{
+  "name": "@coday/components",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "dependencies": {
+    "@coday/control-schema": "1.0.0"
+  },
+  "sideEffects": false,
+  "license": "GPL-3.0-only"
+}

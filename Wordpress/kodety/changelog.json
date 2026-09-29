@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "releases": [
+    {
+      "version": "1.1.40",
+      "date": "2026-09-14",
+      "title": "Onun Kodety 1.1.40 — Agent no navegador e modos HTML e WordPress",
+      "summary": "Dois modos de criar: HTML no studio.kodety.com, com envio ao GitHub, deploy direto na Vercel e publicação na Cloudflare; ou o Builder integrado ao WordPress. O Agent funciona nos dois modos e pode executar no navegador em hospedagens WordPress sem Node.js.",
+      "items": [
+        "Modo HTML: crie e edite sites pelo studio.kodety.com, com deploy direto na Vercel, envio ao GitHub e publicação na Cloudflare por GitHub ou upload",
+        "Modo WordPress: use o Onun Kodety diretamente dentro da sua instalação WordPress, com o Builder e suas ferramentas integradas",
+        "Agent em hospedagens com ou sem Node.js: escolha executar no servidor ou no navegador; a opção No navegador substitui o Code Cloud",
+        "Mantém o login OpenAI ao reabrir as configurações e recarregar o Builder, com renovação da sessão coordenada entre abas",
+        "Disponibiliza no navegador as mesmas cinco skills incluídas no modo servidor, com seleção, instalação e leitura de referências",
+        "Adiciona suporte a imagens e documentos TXT, DOC e DOCX no Agent do navegador",
+        "Corrige falhas de conexão por CORS no HTML e no WordPress, incluindo o WordPress executado dentro do Studio",
+        "Sincroniza a licença do Agent com o Builder e mostra o andamento e o resultado da verificação de acesso",
+        "Para projetos HTML em hospedagem totalmente estática, use o Agent pelo Studio; a execução no navegador requer HTTPS e navegador compatível"
+      ]
+    }
+  ]
+}

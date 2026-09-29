@@ -1,0 +1,28 @@
+{% if section.settings.announcement != blank %}<div class="announcement" role="region" aria-label="{{ 'accessibility.announcement' | t }}">{{ section.settings.announcement | escape }}</div>{% endif %}
+<header class="header">
+  <div class="header__inner page-width">
+    <nav class="header__nav" aria-label="{{ 'accessibility.primary_navigation' | t }}">
+      {% for link in section.settings.menu.links %}<a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>{% endfor %}
+    </nav>
+    <a class="header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+      {% if section.settings.logo %}{{ section.settings.logo | image_url: width: 360 | image_tag: widths: '120, 180, 240, 360', width: section.settings.logo_width, alt: shop.name }}{% else %}{{ shop.name | escape }}{% endif %}
+    </a>
+    <div class="header__actions">
+      <a href="{{ routes.search_url }}">{{ 'general.search.search' | t }}</a>
+      {% if shop.customer_accounts_enabled %}<a href="{{ routes.account_url }}">{{ 'general.account' | t }}</a>{% endif %}
+      <a class="header__cart" id="HeaderCart" href="{{ routes.cart_url }}"{% if settings.cart_drawer_enabled %} data-cart-drawer-open aria-controls="CartDrawer"{% endif %}>{{ 'general.cart' | t }} <span id="HeaderCartCount">{{ cart.item_count }}</span></a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "t:sections.header.name",
+  "settings": [
+    { "type": "text", "id": "announcement", "label": "t:sections.header.settings.announcement.label", "default": "t:sections.header.settings.announcement.default" },
+    { "type": "link_list", "id": "menu", "label": "t:sections.header.settings.menu.label" },
+    { "type": "image_picker", "id": "logo", "label": "t:sections.header.settings.logo.label" },
+    { "type": "range", "id": "logo_width", "min": 80, "max": 240, "step": 10, "unit": "px", "label": "t:sections.header.settings.logo_width.label", "default": 120 }
+  ]
+}
+{% endschema %}

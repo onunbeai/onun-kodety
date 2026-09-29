@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "releases": [
+    {
+      "version": "1.1.39",
+      "date": "2026-09-07",
+      "title": "Onun Kodety 1.1.39 — Agent local e conexão Cloud ou MCP",
+      "summary": "O Agent usa a hospedagem do cliente por padrão. Quando o processo local não pode iniciar, oferece Onun Kodety Cloud ou MCP, com login centralizado em Settings → Agentes.",
+      "items": [
+        "Usa Neste servidor por padrão e preserva a escolha de ambiente já salva pelo administrador",
+        "Explica bloqueios do processo do Codex App Server e oferece Onun Kodety Cloud, com aviso de possível instabilidade, ou conexão via MCP",
+        "Detecta WordPress em WebAssembly antes de tentar instalar processos nativos",
+        "Centraliza o login OpenAI e a configuração das skills em Settings → Agentes, sincronizando a conta com a sidebar",
+        "Preserva o transporte Cloud ao salvar preferências de modelo e skills",
+        "Mostra um spinner durante a instalação da atualização e impede envios duplicados"
+      ]
+    },
+    {
+      "version": "1.1.38",
+      "date": "2026-09-06",
+      "title": "Onun Kodety 1.1.38 — Interface WordPress e importação de sites",
+      "summary": "Melhorias na interface do WordPress, na conversão de sites para edição no Onun Kodety e na importação por URL, com avanços para Elementor, Framer, Webflow e sites em código.",
+      "items": [
+        "Refina a interface do Onun Kodety no WordPress, com melhorias visuais, organização dos controles e navegação nas áreas administrativas",
+        "Melhora a importação do Elementor por URL e pelo próprio WordPress; a conversão nativa passa a suportar 15 tipos de widget, com avanços em fontes, tipografia, espaçamentos e responsividade",
+        "Adiciona conversão de projetos Framer hidratados com várias páginas para HTML e CSS editáveis, preservando o conteúdo carregado, com backup e opção de desfazer",
+        "Corrige contornos azuis indevidos em elementos importados do Framer, preservando o foco de navegação pelo teclado",
+        "Melhora a importação por URL de Webflow e sites em código, incluindo CSS, imagens responsivas, fontes, vídeos e referências de arquivos",
+        "Fortalece a preservação de assets entre Preview, edição, salvamento, reimportação e publicação, com verificações de revisão e recuperação após falhas"
+      ]
+    },
+    {
+      "version": "1.1.37",
+      "date": "2026-09-05",
+      "title": "Onun Kodety 1.1.37 — Agent, MCP e idiomas",
+      "summary": "Operações nativas compartilhadas entre Agent e MCP, com CMS, configurações, idiomas e revisão da interface PT/EN.",
+      "items": [
+        "Integra Agent e MCP às APIs nativas de CMS, idiomas e configurações, com catálogo de parâmetros, permissões e controle de revisão",
+        "Adiciona operações de criação, edição, importação e remoção de artigos, coleções, campos e templates pelo catálogo nativo",
+        "Permite gerenciar idiomas pelo Agent nas áreas de edição e amplia os contratos das ferramentas MCP",
+        "Revisa traduções completas e rótulos compactos em português e inglês para reduzir a mistura de idiomas na interface"
+      ]
+    },
+    {
+      "version": "1.1.36",
+      "date": "2026-09-05",
+      "title": "Onun Kodety 1.1.36 — Hotfix geral",
+      "summary": "Hotfix geral de edição visual, breakpoints, resposta do canvas, histórico e salvamento, com preservação do Play da timeline.",
+      "items": [
+        "Separa Visível do tipo de Layout e restaura o display anterior ao mostrar, preservando grid, flex, breakpoints e o projeto salvo; reduz os ícones de Type e Align",
+        "Corrige a escolha da regra CSS para respeitar a classe selecionada e evitar que ocultar uma imagem altere outras classes",
+        "Mantém a largura exata dos breakpoints com zoom da aba, evitando que edições no Mobile deixem de ser aplicadas",
+        "Corrige a confirmação com Enter e a sincronização de incrementos rápidos; preserva variáveis, cálculos CSS, prioridades e eixos não editados nos controles visuais",
+        "Reduz o trabalho repetido de seleção e encerra ciclos de observação que mantinham o canvas ocupado sem novas ações",
+        "Encontra camadas pelo nome exibido e libera as imagens da próxima página durante sua preparação, reduzindo esperas na navegação",
+        "Aplica movimentações e histórico compatíveis diretamente no canvas, preservando o documento durante a preparação de atualizações",
+        "Isola a autoridade temporária do Play da timeline da pausa de animações autorais no Design",
+        "Preserva as referências responsivas do canvas infinito e corrige câmera, pan, captura de ponteiro e redimensionamento",
+        "Fortalece a gravação e a recuperação por projeto, incluindo resposta de rede perdida e falha no armazenamento local",
+        "Corrige prévias, snapshots, imports CSS, imagens responsivas, renomeação de classes e navegação para erros de Code Components",
+        "Adiciona sitemap XML vinculado à publicação, com CMS, idiomas, rollback e diagnóstico em Settings",
+        "Corrige Settings em sites sem templates CMS e permite repetir a consulta sem recarregar o projeto",
+        "Impede a abertura do seletor de arquivos local no WordPress e adiciona recuperação quando o projeto não carrega",
+        "Expira avisos de bloqueio desatualizados, identifica a sessão em uso e permite verificar o acesso novamente",
+        "Limita a espera ao salvar antes de navegar, preservando o projeto aberto quando a conexão não responde"
+      ]
+    },
+    {
+      "version": "1.1.35",
+      "date": "2026-09-05",
+      "title": "Onun Kodety 1.1.35 — Trial Pro de uma hora",
+      "summary": "Reconhece a licença de teste Pro de uma hora e encerra os recursos temporários no prazo, sem perder os projetos em edição.",
+      "items": [
+        "Reconhece chaves de trial emitidas pela dashboard, com uma única ativação vinculada ao site",
+        "Valida a expiração assinada com precisão de milissegundos, sem estender o trial durante falhas de conexão",
+        "Atualiza o Builder aberto para os recursos gratuitos ao término do trial, preservando o projeto e as alterações em edição",
+        "Exibe aviso de trial encerrado em português, inglês e espanhol e permite recuperar o acesso ao ativar uma licença paga",
+        "Bloqueia novas ferramentas do Agent após a expiração e impede reaproveitar o grant de licença ao copiar a instalação para outro site"
+      ]
+    },
+    {
+      "version": "1.1.34",
+      "date": "2026-09-02",
+      "title": "Onun Kodety 1.1.34 — Canvas Infinito íntegro e fluido",
+      "summary": "Canvas Infinito agora abre corretamente e renderiza a página completa em todos os breakpoints, sem expor o código interno do runtime.",
+      "items": [
+        "Corrige o contêiner do Canvas Infinito que podia colapsar para zero pixel de altura e deixar apenas a barra de ferramentas visível",
+        "Descarta a preferência de enquadramento inválida em 2% criada pelo contêiner colapsado e recalcula a visão ao recuperar dimensões reais",
+        "Insere o runtime no fechamento estrutural real do documento, sem confundir snippets HTML existentes dentro do bridge",
+        "Impede que o restante do JavaScript do editor seja interpretado e exibido como texto dentro dos breakpoints",
+        "Monta todos os breakpoints juntos com um documento de referência leve e mantém somente o breakpoint ativo com recursos de edição",
+        "Mantém seleção, edição visual e customização responsiva no breakpoint ativo sem alterar o canvas único nativo"
+      ]
+    }
+  ]
+}

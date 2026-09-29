@@ -1,0 +1,10 @@
+{
+  "name": "@coday-example/responsive-hero",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/ResponsiveHero.tsx"
+  },
+  "license": "GPL-3.0-only"
+}

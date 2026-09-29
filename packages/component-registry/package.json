@@ -1,0 +1,14 @@
+{
+  "name": "@coday/component-registry",
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@coday/components": "1.0.0",
+    "@coday/control-schema": "1.0.0"
+  },
+  "sideEffects": false,
+  "license": "GPL-3.0-only"
+}

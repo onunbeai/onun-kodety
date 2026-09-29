@@ -1,0 +1,74 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@coday/components": [
+        "./packages/component-sdk/src/index.ts"
+      ],
+      "@coday/control-schema": [
+        "./packages/control-schema/src/index.ts"
+      ],
+      "@coday/component-runtime": [
+        "./packages/component-runtime/src/index.tsx"
+      ],
+      "@coday/component-runtime/vendor": [
+        "./packages/component-runtime/src/vendor.ts"
+      ],
+      "@coday/component-compiler": [
+        "./packages/component-compiler/src/index.ts"
+      ],
+      "@coday/property-inspector": [
+        "./packages/property-inspector/src/index.tsx"
+      ],
+      "@coday/canvas-bridge": [
+        "./packages/canvas-bridge/src/index.ts"
+      ],
+      "@coday/asset-bridge": [
+        "./packages/asset-bridge/src/index.ts"
+      ],
+      "@coday/cms-bridge": [
+        "./packages/cms-bridge/src/index.ts"
+      ],
+      "@coday/component-registry": [
+        "./packages/component-registry/src/index.ts"
+      ],
+      "@coday/component-sandbox": [
+        "./packages/component-sandbox/src/index.ts"
+      ],
+      "@coday/component-testing": [
+        "./packages/component-testing/src/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "Wordpress/kodety/assets",
+    "Wordpress/dist",
+    "WebApp/agent-gateway/base44",
+    "WebApp/kodety-studio/backend"
+  ]
+}

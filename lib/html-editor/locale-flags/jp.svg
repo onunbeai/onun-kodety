@@ -1,0 +1,20 @@
+<svg width="60" height="45" viewBox="0 0 60 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Flag">
+<g clip-path="url(#clip0_0_1)">
+<g id="jp Japan" clip-path="url(#clip1_0_1)">
+<g id="Group">
+<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M-3.75 0H63.75V45H-3.75V0Z" fill="white"/>
+<path id="Vector_2" d="M30.0051 36.4899C37.7303 36.4899 43.9929 30.2274 43.9929 22.5021C43.9929 14.7768 37.7303 8.51424 30.0051 8.51424C22.2798 8.51424 16.0172 14.7768 16.0172 22.5021C16.0172 30.2274 22.2798 36.4899 30.0051 36.4899Z" fill="#BC002D"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_1">
+<rect width="60" height="45" rx="6" fill="white"/>
+</clipPath>
+<clipPath id="clip1_0_1">
+<rect width="60" height="45" fill="white"/>
+</clipPath>
+</defs>
+</svg>

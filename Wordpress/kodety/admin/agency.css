@@ -1,0 +1,1001 @@
+body.kodety-agency-page {
+  --ka-bg: var(--kds-canvas, #111111);
+  --ka-surface: var(--kds-carbon,#181818);
+  --ka-surface-hover: var(--kds-hover,#282828);
+  --ka-field: var(--kds-input,#242424);
+  --ka-line: var(--kds-border-subtle,#262626);
+  --ka-line-strong: var(--kds-graphite,#303030);
+  --ka-text: var(--kds-paper,#f0f0f0);
+  --ka-muted: var(--kds-fog,#969696);
+  --ka-subtle: var(--kds-fog,#969696);
+  --ka-accent: var(--kodety-admin-accent, #9393FF);
+  --ka-accent-text: var(--kodety-admin-accent-hover, #AFAFFF);
+  background: var(--ka-bg) !important;
+}
+
+:host {
+  --ka-bg: var(--kds-canvas, #111111);
+  --ka-surface: var(--kds-carbon,#181818);
+  --ka-surface-hover: var(--kds-hover,#282828);
+  --ka-field: var(--kds-input,#242424);
+  --ka-line: var(--kds-border-subtle,#262626);
+  --ka-line-strong: var(--kds-graphite,#303030);
+  --ka-text: var(--kds-paper,#f0f0f0);
+  --ka-muted: var(--kds-fog,#969696);
+  --ka-subtle: var(--kds-fog,#969696);
+  --ka-accent: var(--kodety-admin-accent, #9393FF);
+  --ka-accent-text: var(--kodety-admin-accent-hover, #AFAFFF);
+  display: block;
+  min-width: 0;
+  color-scheme: dark;
+  contain: style;
+}
+
+body.kodety-agency-page #wpbody-content,
+body.kodety-agency-page #wpcontent {
+  background: var(--ka-bg) !important;
+}
+
+body.kodety-agency-page.index-php #wpbody-content {
+  padding: 0 !important;
+}
+
+body.kodety-agency-page.index-php #wpbody-content > .wrap > h1,
+body.kodety-agency-page.index-php #kodety_dashboard > :is(.postbox-header, .handlediv) {
+  display: none !important;
+}
+
+body.kodety-agency-page.index-php #wpbody-content > .wrap,
+body.kodety-agency-page.index-php #dashboard-widgets-wrap,
+body.kodety-agency-page.index-php #dashboard-widgets,
+body.kodety-agency-page.index-php #dashboard-widgets .postbox-container,
+body.kodety-agency-page.index-php #dashboard-widgets .meta-box-sortables {
+  width: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body.kodety-agency-page.index-php #dashboard-widgets .postbox-container:not(:first-child) {
+  display: none !important;
+}
+
+body.kodety-agency-page.index-php #kodety_dashboard,
+body.kodety-agency-page.index-php #kodety_dashboard > .inside {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.kodety-agency-host {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+.kodety-agency,
+.kodety-agency * {
+  box-sizing: border-box;
+}
+
+.kodety-agency {
+  width: 100%;
+  margin: 0;
+  padding: 28px var(--kodety-ui-content-gutter, 32px) 48px;
+  color: var(--ka-text);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  font-synthesis: none;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.kodety-agency :is(button, input, select, textarea) {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.kodety-agency button {
+  appearance: none;
+}
+
+.kodety-agency .kodety-dashboard-icon {
+  display: inline-flex;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+  line-height: 0;
+  vertical-align: middle;
+}
+
+.kodety-agency .kodety-dashboard-icon > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.kodety-agency .screen-reader-text {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+.kodety-agency__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.kodety-agency h1 {
+  margin: 0;
+  color: var(--ka-text);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -.025em;
+}
+
+.kodety-agency__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kodety-agency__header-actions button,
+.kodety-agency__empty button {
+  display: inline-flex;
+  min-height: 32px;
+  margin: 0;
+  padding: 0 11px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid var(--ka-line) !important;
+  border-radius: var(--kds-radius-control,8px) !important;
+  outline: 0;
+  background: transparent !important;
+  color: var(--ka-text) !important;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: none !important;
+}
+
+.kodety-agency__header-actions button:hover {
+  border-color: var(--kds-hover-border,#484848) !important;
+  background: var(--kds-hover,#282828) !important;
+}
+
+.kodety-agency__header-actions .is-primary,
+.kodety-agency__empty button {
+  border-color: var(--ka-accent) !important;
+  background: var(--ka-accent) !important;
+  color: var(--kodety-admin-accent-foreground,#000) !important;
+}
+
+.kodety-agency__header-actions .kodety-dashboard-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.kodety-agency__toolbar {
+  display: grid;
+  grid-template-columns: minmax(180px, 360px) 170px;
+  gap: 8px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--ka-line);
+}
+
+.kodety-agency__search,
+.kodety-agency__filter {
+  position: relative;
+  min-height: 34px;
+  border: 1px solid var(--ka-line);
+  border-radius: var(--kds-radius-control,8px);
+  background: var(--ka-field);
+  color: var(--ka-muted);
+}
+
+.kodety-agency__search {
+  display: flex;
+  padding: 0 13px;
+  align-items: center;
+  gap: 10px;
+}
+
+.kodety-agency__search:focus-within,
+.kodety-agency__filter:focus-within {
+  border-color: color-mix(in srgb, var(--ka-accent) 58%, var(--ka-line));
+}
+
+.kodety-agency__search .kodety-dashboard-icon {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+.kodety-agency__search > input[type="search"] {
+  all: unset !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 32px !important;
+  flex: 1 1 auto !important;
+  color: var(--ka-text) !important;
+  font: 400 12px/1.4 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+.kodety-agency__search input::placeholder {
+  color: var(--ka-subtle);
+  opacity: 1;
+}
+
+.kodety-agency__filter > button {
+  all: unset !important;
+  display: flex !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-height: 32px !important;
+  padding: 0 12px !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  color: var(--ka-text) !important;
+  font: 400 12px/1.4 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  cursor: pointer !important;
+  font-size: 12px;
+}
+
+.kodety-agency__filter > button > .kodety-dashboard-icon {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  transition: transform 140ms ease;
+}
+
+.kodety-agency__filter > button[aria-expanded="true"] > .kodety-dashboard-icon {
+  transform: rotate(180deg);
+}
+
+.kodety-agency__filter-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 250;
+  width: max(100%, 210px);
+  padding: 5px;
+  border: 1px solid var(--ka-line-strong);
+  border-radius: var(--kds-radius-card,10px);
+  background: var(--ka-field);
+  box-shadow: 0 8px 24px #0004;
+}
+
+.kodety-agency__filter-menu > button {
+  all: unset !important;
+  display: flex !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-height: 34px !important;
+  padding: 0 9px !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  border-radius: var(--kds-radius-control,8px) !important;
+  color: var(--ka-text) !important;
+  font: 400 12px/1.4 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  cursor: pointer !important;
+}
+
+.kodety-agency__filter-menu > button:hover {
+  background: var(--kds-hover,#282828) !important;
+}
+
+.kodety-agency__filter-menu > button .kodety-dashboard-icon {
+  display: none;
+  width: 13px;
+  height: 13px;
+  color: var(--ka-accent-text);
+}
+
+.kodety-agency__filter-menu > button[aria-selected="true"] .kodety-dashboard-icon {
+  display: block;
+}
+
+.kodety-agency__filter-menu > button:focus-visible {
+  outline: 1px solid var(--ka-accent) !important;
+  outline-offset: -2px;
+}
+
+.kodety-agency__filter-menu,
+.kodety-agency__menu {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.kodety-agency__filter-menu[hidden] {
+  display: none !important;
+}
+
+.kodety-agency__filter .kodety-dashboard-icon {
+  pointer-events: none;
+}
+
+.kodety-agency__section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.kodety-agency__section-title h2 {
+  margin: 0;
+  color: var(--ka-muted);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.kodety-agency__folders {
+  margin-bottom: 28px;
+}
+
+.kodety-agency__folder-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  padding-top: 0;
+}
+
+.kodety-agency__folder {
+  position: relative;
+  min-width: 0;
+  height: 70px;
+  border: 1px solid var(--ka-line);
+  border-radius: var(--kds-radius-card,10px);
+  background: var(--ka-surface);
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+.kodety-agency__folder::after {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 3;
+  padding: 4px 7px;
+  border-radius: var(--kds-radius-control,8px);
+  background: var(--ka-accent);
+  color: var(--kodety-admin-accent-foreground,#000);
+  content: "Mover para cá";
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(3px);
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+.kodety-agency__folder:hover {
+  border-color: var(--kds-hover-border,#484848);
+  background: var(--ka-surface-hover);
+  transform: none;
+}
+
+.kodety-agency.is-project-dragging .kodety-agency__folder {
+  border-color: color-mix(in srgb, var(--ka-accent) 28%, var(--ka-line));
+}
+
+.kodety-agency__folder.is-drop-target {
+  border-color: color-mix(in srgb, var(--ka-accent) 84%, var(--ka-line));
+  background: color-mix(in srgb, var(--ka-accent) 9%, var(--ka-surface));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ka-accent) 12%, transparent);
+  transform: none;
+}
+
+.kodety-agency__folder.is-drop-target::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.kodety-agency__folder.is-drop-target .kodety-agency__folder-open > .kodety-dashboard-icon {
+  color: var(--ka-accent-text);
+}
+
+.kodety-agency__folder.is-receiving {
+  pointer-events: none;
+}
+
+.kodety-agency__folder-open {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 12px 36px 12px 14px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 12px;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--ka-text) !important;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: none !important;
+}
+
+.kodety-agency__folder-open > .kodety-dashboard-icon {
+  width: 19px;
+  height: 19px;
+  flex: none;
+  color: var(--ka-muted);
+}
+
+.kodety-agency__folder-open span {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.kodety-agency__folder-open strong {
+  overflow: hidden;
+  color: var(--ka-text);
+  font-size: 12px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kodety-agency__folder-open small {
+  color: var(--ka-muted);
+  font-size: 11px;
+}
+
+.kodety-agency__folder-menu-wrap {
+  position: absolute;
+  top: 20px;
+  right: 6px;
+  z-index: 5;
+}
+
+.kodety-agency__projects {
+  scroll-margin-top: 24px;
+}
+
+.kodety-agency__project-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px 16px;
+}
+
+.kodety-agency__project {
+  position: relative;
+  min-width: 0;
+  cursor: grab;
+  transition: opacity 120ms ease, transform 120ms ease;
+  user-select: none;
+  border: 1px solid var(--ka-line);
+  border-radius: var(--kds-radius-card,10px);
+  background: var(--ka-surface);
+}
+
+.kodety-agency__project:active {
+  cursor: grabbing;
+}
+
+.kodety-agency__project.is-dragging {
+  z-index: 20;
+  opacity: 0.34;
+  transform: scale(0.985);
+}
+
+.kodety-agency__project.is-moving {
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.kodety-agency__project.is-menu-open,
+.kodety-agency__folder.is-menu-open {
+  z-index: 200;
+}
+
+.kodety-agency__preview {
+  position: relative;
+  display: grid;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  place-items: center;
+  border: 0;
+  border-radius: 7px 7px 0 0;
+  background: var(--ka-field);
+  transition: background-color 120ms ease;
+  border-bottom: 1px solid var(--ka-line);
+}
+
+.kodety-agency__project:hover .kodety-agency__preview {
+  border-color: var(--ka-line-strong);
+  transform: none;
+}
+
+.kodety-agency__project.is-active .kodety-agency__preview {
+  border-color: color-mix(in srgb, var(--ka-accent) 64%, var(--ka-line));
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ka-accent) 10%, transparent);
+}
+
+.kodety-agency__preview > iframe[data-kodety-live-cover] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  display: block;
+  width: 1200px;
+  height: 1400px;
+  border: 0;
+  outline: 0;
+  background: #fff;
+  transform-origin: top left;
+  pointer-events: none;
+}
+
+.kodety-agency__unpublished {
+  display: grid;
+  place-items: center;
+  color: var(--kds-fog,#969696);
+}
+
+.kodety-agency__unpublished small {
+  color: var(--ka-subtle);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.kodety-agency__project-open,
+.kodety-agency__project-open button {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0 !important;
+  background: transparent !important;
+  cursor: grab;
+  box-shadow: none !important;
+}
+
+.kodety-agency__project-open button:active {
+  cursor: grabbing;
+}
+
+.kodety-agency__project-body {
+  padding: 10px 12px 12px;
+}
+
+.kodety-agency__project-title {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.kodety-agency__project-title > strong {
+  display: flex;
+  min-width: 0;
+  overflow: hidden;
+  align-items: center;
+  gap: 7px;
+  color: var(--ka-text);
+  font-size: 12px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kodety-agency__project-title > strong > i {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--ka-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ka-accent) 12%, transparent);
+}
+
+.kodety-agency__project-body > p {
+  margin: 4px 0 0;
+  color: var(--ka-muted);
+  font-size: 11px;
+}
+
+.kodety-agency__more {
+  display: grid;
+  width: 28px;
+  height: 26px;
+  margin: 0 -5px 0 0;
+  padding: 0;
+  place-items: center;
+  border: 0 !important;
+  border-radius: var(--kds-radius-control,8px) !important;
+  background: transparent !important;
+  color: var(--ka-muted) !important;
+  cursor: pointer;
+  box-shadow: none !important;
+}
+
+.kodety-agency__more:hover,
+.kodety-agency__more[aria-expanded="true"] {
+  background: var(--kds-hover,#282828) !important;
+  color: var(--ka-text) !important;
+}
+
+.kodety-agency__more .kodety-dashboard-icon {
+  width: 15px;
+  height: 15px;
+}
+
+.kodety-agency__menu {
+  position: absolute;
+  top: 28px;
+  right: 0;
+  z-index: 50;
+  width: 210px;
+  padding: 5px;
+  border: 1px solid var(--ka-line-strong);
+  border-radius: var(--kds-radius-card,10px);
+  background: var(--ka-field);
+  box-shadow: 0 8px 24px #0004;
+}
+
+.kodety-agency__project-title > .kodety-agency__menu {
+  top: auto;
+  right: -4px;
+  bottom: 32px;
+}
+
+.kodety-agency__folder-menu-wrap > .kodety-agency__menu {
+  top: 32px;
+  right: 0;
+}
+
+.kodety-agency__menu form {
+  margin: 0;
+  padding: 0;
+}
+
+.kodety-agency__menu :is(a, button) {
+  display: flex;
+  width: 100%;
+  min-height: 34px;
+  margin: 0;
+  padding: 0 9px;
+  align-items: center;
+  gap: 9px;
+  border: 0 !important;
+  border-radius: var(--kds-radius-control,8px) !important;
+  background: transparent !important;
+  color: var(--ka-text) !important;
+  font: 400 12px/1.4 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: none !important;
+}
+
+.kodety-agency__menu :is(a, button):hover {
+  background: var(--kds-hover,#282828) !important;
+}
+
+.kodety-agency__menu .kodety-dashboard-icon {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  color: var(--ka-muted);
+}
+
+.kodety-agency__menu button.is-danger {
+  color: #f98b84 !important;
+}
+
+.kodety-agency__empty {
+  display: grid;
+  min-height: 240px;
+  place-items: center;
+  align-content: center;
+  border: 1px dashed var(--ka-line-strong);
+  border-radius: var(--kds-radius-card,10px);
+  color: var(--ka-muted);
+  text-align: center;
+  background: var(--ka-surface);
+  border-style: solid;
+}
+
+.kodety-agency__empty > .kodety-dashboard-icon {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 15px;
+}
+
+.kodety-agency__empty h2 {
+  margin: 0;
+  color: var(--ka-text);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.kodety-agency__empty p {
+  margin: 7px 0 18px;
+  font-size: 12px;
+}
+
+.kodety-agency__dialog {
+  width: min(540px, calc(100% - 28px));
+  padding: 0;
+  border: 1px solid var(--ka-line-strong);
+  border-radius: var(--kds-radius-card,10px);
+  background: var(--ka-surface);
+  color: var(--ka-text);
+  box-shadow: 0 16px 48px #0006;
+}
+
+.kodety-agency__dialog.is-small {
+  width: min(470px, calc(100% - 28px));
+}
+
+.kodety-agency__dialog::backdrop {
+  background: #0009;
+}
+
+.kodety-agency__dialog form {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 20px;
+}
+
+.kodety-agency__dialog header,
+.kodety-agency__dialog footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.kodety-agency__dialog h2 {
+  margin: 0;
+  color: var(--ka-text);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.kodety-agency__dialog p {
+  margin: 5px 0 0;
+  color: var(--ka-muted);
+  font-size: 12px;
+}
+
+.kodety-agency__dialog header > button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--ka-muted) !important;
+  cursor: pointer;
+  box-shadow: none !important;
+}
+
+.kodety-agency__dialog label:not(fieldset label, .kodety-agency__check) {
+  display: grid;
+  gap: 7px;
+  color: var(--ka-muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.kodety-agency__dialog :is(input[type="text"], select, input[type="file"]) {
+  width: 100%;
+  min-height: 34px;
+  margin: 0;
+  padding: 0 11px;
+  border: 1px solid var(--ka-line) !important;
+  border-radius: var(--kds-radius-control,8px) !important;
+  outline: 0;
+  background: var(--ka-field) !important;
+  color: var(--ka-text) !important;
+  font-size: 12px;
+  box-shadow: none !important;
+}
+
+.kodety-agency__dialog :is(input[type="text"], select):focus {
+  border-color: color-mix(in srgb, var(--ka-accent) 64%, var(--ka-line)) !important;
+}
+
+.kodety-agency__slug-field {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  border: 1px solid var(--ka-line);
+  border-radius: var(--kds-radius-control,8px);
+  background: var(--ka-field);
+}
+
+.kodety-agency__slug-field:focus-within {
+  border-color: color-mix(in srgb, var(--ka-accent) 64%, var(--ka-line));
+}
+
+.kodety-agency__slug-field i {
+  flex: none;
+  padding-left: 11px;
+  color: var(--ka-subtle);
+  font-size: 11px;
+  font-style: normal;
+}
+
+.kodety-agency__dialog .kodety-agency__slug-field > input[type="text"] {
+  min-width: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.kodety-agency__check {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: var(--ka-text);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.kodety-agency__check input {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  flex: none;
+  accent-color: var(--ka-accent);
+}
+
+.kodety-agency__check code {
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: var(--kds-obsidian,#242424);
+  color: var(--ka-text);
+  font-size: 11px;
+}
+
+.kodety-agency__dialog fieldset {
+  display: flex;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.kodety-agency__dialog legend {
+  margin-bottom: 9px;
+  color: var(--ka-muted);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.kodety-agency__dialog fieldset label {
+  color: var(--ka-text);
+  font-size: 11px;
+}
+
+.kodety-agency__dialog footer {
+  justify-content: flex-end;
+  padding-top: 16px;
+  border-top: 1px solid var(--ka-line);
+}
+
+.kodety-agency__dialog footer button {
+  min-height: 32px;
+  margin: 0;
+  padding: 0 13px;
+  border: 1px solid var(--ka-line) !important;
+  border-radius: var(--kds-radius-control,8px) !important;
+  background: transparent !important;
+  color: var(--ka-text) !important;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: none !important;
+}
+
+.kodety-agency__dialog footer button.is-primary {
+  border-color: var(--ka-accent) !important;
+  background: var(--ka-accent) !important;
+  color: var(--kodety-admin-accent-foreground,#000) !important;
+}
+
+.kodety-agency [hidden] {
+  display: none !important;
+}
+
+@media (max-width: 1400px) {
+  .kodety-agency__project-grid,
+  .kodety-agency__folder-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1080px) {
+  .kodety-agency {
+    width: 100%;
+  }
+
+  .kodety-agency__project-grid,
+  .kodety-agency__folder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .kodety-agency {
+    width: 100%;
+    padding-top: 34px;
+    padding: 20px 16px 36px;
+  }
+
+  .kodety-agency__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .kodety-agency__header-actions {
+    width: 100%;
+  }
+
+  .kodety-agency__toolbar {
+    grid-template-columns: minmax(0, 1fr) 140px;
+  }
+
+  .kodety-agency__project-grid,
+  .kodety-agency__folder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 500px) {
+  .kodety-agency__project-grid,
+  .kodety-agency__folder-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.kodety-agency :is(button, a, input, select):focus-visible { outline: 2px solid var(--ka-accent); outline-offset: 2px; }
+
+@media (max-width: 500px) { .kodety-agency__toolbar { grid-template-columns: 1fr; } .kodety-agency__dialog fieldset { flex-wrap: wrap; gap: 12px; } }
+
+@media (prefers-reduced-motion: reduce) { .kodety-agency *, .kodety-agency *::after { transition: none !important; scroll-behavior: auto !important; } }
+
+.kodety-agency__dialog footer button:not(.is-primary):hover:not(:disabled),.kodety-agency__dialog header > button:hover { background:var(--kds-hover,#282828)!important;border-color:var(--kds-hover-border,#484848)!important;color:var(--ka-text)!important; }
+
+.kodety-agency__header-actions button.is-primary:hover:not(:disabled),.kodety-agency__empty button:hover:not(:disabled),.kodety-agency__dialog footer button.is-primary:hover:not(:disabled) { background:var(--kodety-admin-accent-hover,#AFAFFF)!important;border-color:var(--kodety-admin-accent-hover,#AFAFFF)!important; }

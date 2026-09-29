@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Onun Kodety admin UI language catalog",
+  "type": "object",
+  "required": ["locale", "name", "nativeName", "direction", "messages"],
+  "properties": {
+    "locale": { "type": "string", "minLength": 2 },
+    "name": { "type": "string", "minLength": 1 },
+    "nativeName": { "type": "string", "minLength": 1 },
+    "direction": { "enum": ["ltr", "rtl"] },
+    "messages": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "direct": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "glossary": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "legacy": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false
+}

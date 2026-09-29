@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "type": "extension",
+  "slug": "hello-kodety",
+  "name": "Hello Onun Kodety",
+  "description": "Exemplo instalável da Public Extension API v1 com storage, admin, REST e shortcode.",
+  "version": "1.0.0",
+  "entry": "extension.php",
+  "icon": "smiley",
+  "requires": {
+    "php": ">=8.0",
+    "kodety": ">=1.0.17",
+    "extensionApi": ">=1.0.0"
+  },
+  "dependencies": [],
+  "permissions": [
+    "storage.read",
+    "storage.write",
+    "routes.register",
+    "admin.register",
+    "auth.read",
+    "ui.render",
+    "frontend.register"
+  ],
+  "capabilities": [
+    "manage_options"
+  ],
+  "author": {
+    "name": "Onun Kodety"
+  }
+}

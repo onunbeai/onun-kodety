@@ -1,0 +1,670 @@
+/* Kodety UI — Media Library component
+ * Owns the grid-library presentation while leaving WordPress selection, upload,
+ * filtering, bulk actions and attachment dialogs untouched.
+ */
+
+body.kodety-ui-media-screen {
+  --kodety-ui-media-bg: var(--k-os-background, #141414);
+  --kodety-ui-media-surface: var(--k-os-card, #191919);
+  --kodety-ui-media-raised: var(--k-os-input, #202020);
+  --kodety-ui-media-hover: var(--k-os-secondary, #282828);
+  --kodety-ui-media-border: var(--k-os-border, rgba(255, 255, 255, 0.08));
+  --kodety-ui-media-border-strong: var(
+    --k-os-border-strong,
+    rgba(255, 255, 255, 0.14)
+  );
+  --kodety-ui-media-text: var(--k-os-foreground, #f2f2f2);
+  --kodety-ui-media-muted: var(--k-os-muted-foreground, #969696);
+  --kodety-ui-media-primary: var(--k-os-primary, #9393FF);
+  --kodety-ui-media-radius: var(--k-os-radius, 8px);
+}
+
+/* The grid library has no media-frame side menu; WordPress still renders its
+ * generic mobile trigger, leaving a stray "Menu" row above the real toolbar. */
+body.upload-php .media-frame.mode-grid > .media-frame-menu-toggle {
+  display: none !important;
+}
+
+/* Media details reuse the same imported icon controls as the admin shell. */
+.kodety-admin-skin .kodety-ui-media-modal-icon-button::before,
+.kodety-admin-skin .kodety-ui-media-modal-icon-button .media-modal-icon::before {
+  display: none !important;
+  content: none !important;
+}
+
+.kodety-admin-skin .kodety-ui-media-modal-icon-button {
+  display: grid !important;
+  place-items: center !important;
+  color: var(--kodety-ui-media-muted, var(--k-os-muted-foreground)) !important;
+}
+
+.kodety-admin-skin .kodety-ui-media-modal-icon-button:hover,
+.kodety-admin-skin .kodety-ui-media-modal-icon-button:focus-visible {
+  background: var(--kodety-ui-media-hover, var(--k-os-secondary)) !important;
+  color: var(--kodety-ui-media-text, var(--k-os-foreground)) !important;
+  outline: 0 !important;
+}
+
+.kodety-admin-skin .kodety-ui-media-modal-icon {
+  width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
+}
+
+.kodety-admin-skin
+  :where(.kodety-ui-media-action-button, .kodety-ui-media-copy-button) {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  white-space: nowrap !important;
+}
+
+.kodety-admin-skin .kodety-ui-media-action-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-grid;
+  flex: 0 0 14px;
+  place-items: center;
+}
+
+.kodety-admin-skin .attachment-details .copy-to-clipboard-container {
+  min-width: 0;
+  display: flex !important;
+  grid-column: 2;
+  align-items: center;
+  gap: 8px;
+}
+
+.kodety-admin-skin .attachment-details .kodety-ui-media-copy-button {
+  width: auto !important;
+  max-width: 100% !important;
+  padding-inline: 10px !important;
+}
+
+/* Attachment details modal: WordPress core paints these panels white, which
+ * clashed with the dark fields and shell. Apply the same media surface so the
+ * whole dialog reads as one dark theme. */
+.kodety-admin-skin .media-modal-content,
+.kodety-admin-skin .media-modal .media-frame,
+.kodety-admin-skin .media-modal .media-frame-content,
+.kodety-admin-skin .media-modal .media-frame-title,
+.kodety-admin-skin .media-modal .attachment-details,
+.kodety-admin-skin .media-modal .attachment-media-view,
+.kodety-admin-skin .media-modal .attachment-info {
+  border-color: var(--kodety-ui-media-border) !important;
+  background-color: var(--kodety-ui-media-bg) !important;
+  color: var(--kodety-ui-media-text) !important;
+}
+
+.kodety-admin-skin .media-modal .media-frame-title h1,
+.kodety-admin-skin .media-modal .attachment-details h2 {
+  color: var(--kodety-ui-media-text) !important;
+}
+
+.kodety-admin-skin .media-modal .attachment-info .details,
+.kodety-admin-skin .media-modal .attachment-info .settings-save-status,
+.kodety-admin-skin .media-modal .attachment-info .setting > .name,
+.kodety-admin-skin .media-modal .attachment-info .setting .name {
+  color: var(--kodety-ui-media-muted) !important;
+}
+
+.kodety-admin-skin .media-modal .attachment-info .setting input[type="text"],
+.kodety-admin-skin .media-modal .attachment-info .setting input[readonly],
+.kodety-admin-skin .media-modal .attachment-info .setting textarea,
+.kodety-admin-skin .media-modal .attachment-info .copy-to-clipboard-container input {
+  border: 1px solid var(--kodety-ui-media-border) !important;
+  background: var(--kodety-ui-media-raised) !important;
+  color: var(--kodety-ui-media-text) !important;
+}
+
+/* The media submenu is a small navigation stack, not a tree diagram. */
+.kodety-os #adminmenu .kodety-ui-media-submenu {
+  display: grid !important;
+  gap: 2px !important;
+  margin: 2px 0 8px !important;
+  padding: 2px 0 2px 28px !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.kodety-os #adminmenu .kodety-ui-media-submenu::before,
+.kodety-os #adminmenu .kodety-ui-media-submenu::after,
+.kodety-os #adminmenu .kodety-ui-media-submenu-item::before,
+.kodety-os #adminmenu .kodety-ui-media-submenu-item::after,
+.kodety-os #adminmenu .kodety-ui-media-submenu-link::before,
+.kodety-os #adminmenu .kodety-ui-media-submenu-link::after {
+  display: none !important;
+  content: none !important;
+}
+
+.kodety-os #adminmenu .kodety-ui-media-submenu-item {
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.kodety-os #adminmenu .kodety-ui-media-submenu-link {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 10px !important;
+  border: 1px solid transparent !important;
+  border-radius: var(--kodety-ui-media-radius) !important;
+  background: transparent !important;
+  color: var(--kodety-ui-media-muted) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  line-height: 30px !important;
+  box-shadow: none !important;
+}
+
+.kodety-os #adminmenu .kodety-ui-media-submenu-link:hover,
+.kodety-os #adminmenu .kodety-ui-media-submenu-link:focus-visible {
+  border-color: var(--kodety-ui-media-border) !important;
+  background: var(--kodety-ui-media-hover) !important;
+  color: var(--kodety-ui-media-text) !important;
+  outline: 0 !important;
+}
+
+.kodety-os
+  #adminmenu
+  .kodety-ui-media-submenu-item.current
+  > .kodety-ui-media-submenu-link {
+  border-color: var(--kodety-ui-media-border) !important;
+  background: var(--kodety-ui-media-hover) !important;
+  color: var(--kodety-ui-media-text) !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+}
+
+/* Compact, balanced toolbar. Native controls remain the source of truth. */
+.media-frame.mode-grid .kodety-ui-media-browser > .kodety-ui-media-toolbar {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-height: 52px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  margin: 0 0 14px !important;
+  padding: 9px 10px !important;
+  border: 1px solid var(--kodety-ui-media-border) !important;
+  border-radius: var(--kodety-ui-media-radius) !important;
+  background: var(--kodety-ui-media-surface) !important;
+  color: var(--kodety-ui-media-muted) !important;
+  box-shadow: none !important;
+}
+
+.media-frame.mode-grid
+  .kodety-ui-media-toolbar
+  > :where(.kodety-ui-media-toolbar-primary, .kodety-ui-media-toolbar-secondary) {
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  max-width: none !important;
+  min-height: 32px !important;
+  display: flex !important;
+  float: none !important;
+  align-items: center !important;
+  gap: 7px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-toolbar-primary {
+  position: relative !important;
+  flex: 0 1 260px !important;
+  justify-content: flex-end !important;
+  order: 2;
+}
+
+.media-frame.mode-grid .kodety-ui-media-toolbar-secondary {
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+  flex-wrap: wrap !important;
+  order: 1;
+}
+
+.media-frame.mode-grid
+  .kodety-ui-media-toolbar
+  :where(select, input[type="search"], .button) {
+  box-sizing: border-box !important;
+  min-height: 32px !important;
+  margin: 0 !important;
+  border: 1px solid var(--kodety-ui-media-border-strong) !important;
+  border-radius: calc(var(--kodety-ui-media-radius) - 1px) !important;
+  background-color: var(--kodety-ui-media-raised) !important;
+  color: var(--kodety-ui-media-text) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  line-height: 30px !important;
+  box-shadow: none !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-toolbar select {
+  max-width: 180px !important;
+  padding: 0 28px 0 10px !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-toolbar .kodety-ui-media-search {
+  width: 100% !important;
+  min-width: 170px !important;
+  padding: 0 10px 0 32px !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-search-label {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-search-icon {
+  position: absolute;
+  z-index: 2;
+  left: 10px;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  display: grid;
+  place-items: center;
+  color: var(--kodety-ui-media-muted);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+body.upload-php .kodety-ui-media-view-switch {
+  box-sizing: border-box !important;
+  width: auto !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+  margin: 0 !important;
+  padding: 3px !important;
+  border: 1px solid var(--kodety-ui-media-border) !important;
+  border-radius: calc(var(--kodety-ui-media-radius) - 1px) !important;
+  background: var(--kodety-ui-media-raised) !important;
+}
+
+body.upload-php .kodety-ui-media-view-button {
+  box-sizing: border-box !important;
+  width: 28px !important;
+  min-width: 28px !important;
+  max-width: 28px !important;
+  height: 28px !important;
+  min-height: 28px !important;
+  max-height: 28px !important;
+  flex: 0 0 28px !important;
+  display: grid !important;
+  place-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 7px !important;
+  background: transparent !important;
+  color: var(--kodety-ui-media-muted) !important;
+  box-shadow: none !important;
+}
+
+body.upload-php .kodety-ui-media-view-button::before {
+  display: none !important;
+  content: none !important;
+}
+
+body.upload-php
+  .kodety-ui-media-view-button:is(:hover, :focus-visible, :active, .current) {
+  border-radius: 7px !important;
+  background: var(--kodety-ui-media-hover) !important;
+  color: var(--kodety-ui-media-text) !important;
+  outline: 0 !important;
+  transform: none !important;
+}
+
+body.upload-php .kodety-ui-media-view-icon,
+body.upload-php .kodety-ui-media-view-icon > svg {
+  width: 16px !important;
+  height: 16px !important;
+  display: grid;
+  place-items: center;
+}
+
+.media-frame.mode-grid
+  .kodety-ui-media-toolbar
+  :where(select, input[type="search"], .button):hover:not(:disabled) {
+  border-color: var(--kodety-ui-media-border-strong) !important;
+  background-color: var(--kodety-ui-media-hover) !important;
+}
+
+.media-frame.mode-grid
+  .kodety-ui-media-toolbar
+  :where(select, input[type="search"], .button):focus-visible {
+  border-color: var(--kodety-ui-media-primary) !important;
+  outline: 0 !important;
+  box-shadow: 0 0 0 2px
+    color-mix(in srgb, var(--kodety-ui-media-primary) 22%, transparent) !important;
+}
+
+.media-frame.mode-grid
+  .kodety-ui-media-toolbar
+  :where(.button, select, input):disabled {
+  border-color: var(--kodety-ui-media-border) !important;
+  background: var(--kodety-ui-media-raised) !important;
+  color: color-mix(
+    in srgb,
+    var(--kodety-ui-media-muted) 48%,
+    transparent
+  ) !important;
+  cursor: not-allowed !important;
+  opacity: 0.62 !important;
+}
+
+/* Each asset is a predictable image tile plus a dedicated one-line footer. */
+.media-frame.mode-grid .kodety-ui-media-grid {
+  box-sizing: border-box !important;
+  margin: 0 -6px !important;
+  padding: 0 !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-grid::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.media-frame.mode-grid .kodety-ui-media-card {
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 6px 6px 38px !important;
+  color: var(--kodety-ui-media-muted) !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-card:not(:has(.filename))::after {
+  display: none !important;
+  content: none !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-card > .attachment-preview {
+  position: relative !important;
+  aspect-ratio: 1 / 1 !important;
+  height: auto !important;
+  border: 0 !important;
+  border-radius: var(--kodety-ui-media-radius) var(--kodety-ui-media-radius) 0 0 !important;
+  background: var(--kodety-ui-media-raised) !important;
+  box-shadow: inset 0 0 0 1px var(--kodety-ui-media-border) !important;
+  overflow: hidden !important;
+  transition:
+    box-shadow 120ms ease,
+    filter 120ms ease !important;
+}
+
+/* Square thumbnails filled uniformly, so the grid never goes ragged. */
+.media-frame.mode-grid .kodety-ui-media-card > .attachment-preview::before {
+  content: none !important;
+  padding-top: 0 !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-card:hover > .attachment-preview {
+  box-shadow: inset 0 0 0 1px var(--kodety-ui-media-border-strong) !important;
+  filter: brightness(1.025);
+}
+
+.media-frame.mode-grid
+  :where(
+    .kodety-ui-media-card:focus,
+    .kodety-ui-media-card.selected,
+    .kodety-ui-media-card.details
+  )
+  > .attachment-preview {
+  box-shadow: inset 0 0 0 2px var(--kodety-ui-media-primary) !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-card .thumbnail {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  border-radius: inherit !important;
+  background: var(--kodety-ui-media-raised) !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-card .thumbnail::after {
+  border-radius: inherit !important;
+  box-shadow: inset 0 0 0 1px var(--kodety-ui-media-border) !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-card .thumbnail img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  transform: none !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-card .filename {
+  display: none !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-card__caption {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  left: 6px;
+  box-sizing: border-box;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  padding: 0 9px;
+  border: 1px solid var(--kodety-ui-media-border);
+  border-top-color: color-mix(
+    in srgb,
+    var(--kodety-ui-media-border) 72%,
+    transparent
+  );
+  border-radius: 0 0 var(--kodety-ui-media-radius) var(--kodety-ui-media-radius);
+  background: var(--kodety-ui-media-raised);
+  color: var(--kodety-ui-media-text);
+  font-size: 11px;
+  font-weight: 550;
+  line-height: 1;
+  text-align: left;
+  cursor: pointer;
+}
+
+.media-frame.mode-grid .kodety-ui-media-card__caption > span {
+  min-width: 0;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.media-frame.mode-grid .kodety-ui-media-card > .check {
+  top: 10px !important;
+  right: 10px !important;
+  width: 22px !important;
+  height: 22px !important;
+  margin: 0 !important;
+  border: 1px solid var(--kodety-ui-media-border-strong) !important;
+  border-radius: 6px !important;
+  background: color-mix(
+    in srgb,
+    var(--kodety-ui-media-bg) 86%,
+    transparent
+  ) !important;
+  color: var(--kodety-ui-media-text) !important;
+  box-shadow: none !important;
+}
+
+.media-frame.mode-grid
+  :where(.kodety-ui-media-card.selected, .kodety-ui-media-card.details)
+  > .check {
+  border-color: var(--kodety-ui-media-primary) !important;
+  background: var(--kodety-ui-media-primary) !important;
+}
+
+/* Loading more is a compact status row, never a second hero section. */
+.media-frame.mode-grid .kodety-ui-media-pagination {
+  box-sizing: border-box !important;
+  min-height: 44px !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  margin: 8px 0 0 !important;
+  padding: 10px 8px !important;
+  border-top: 1px solid var(--kodety-ui-media-border) !important;
+  color: var(--kodety-ui-media-muted) !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-pagination::after {
+  display: none !important;
+  content: none !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-pagination > .hidden,
+.media-frame.mode-grid .kodety-ui-media-pagination .spinner:not(.is-active) {
+  display: none !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-pagination.is-idle {
+  display: none !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-pagination .load-more-count {
+  min-width: 0 !important;
+  margin: 0 !important;
+  color: var(--kodety-ui-media-muted) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  line-height: 32px !important;
+  text-align: center !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-pagination .button {
+  box-sizing: border-box !important;
+  min-height: 32px !important;
+  margin: 0 !important;
+  padding: 0 11px !important;
+  border: 1px solid var(--kodety-ui-media-border-strong) !important;
+  border-radius: calc(var(--kodety-ui-media-radius) - 1px) !important;
+  background: var(--kodety-ui-media-raised) !important;
+  color: var(--kodety-ui-media-text) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 30px !important;
+  box-shadow: none !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-pagination .load-more.button {
+  border-color: var(--kodety-ui-media-primary) !important;
+  background: var(--kodety-ui-media-primary) !important;
+  color: #fff !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-pagination .button:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.media-frame.mode-grid .kodety-ui-media-pagination .button:focus-visible {
+  outline: 0 !important;
+  box-shadow: 0 0 0 2px
+    color-mix(in srgb, var(--kodety-ui-media-primary) 25%, transparent) !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-pagination .button:disabled,
+.media-frame.mode-grid
+  .kodety-ui-media-pagination
+  .button[aria-disabled="true"] {
+  display: none !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-pagination .spinner {
+  float: none !important;
+  margin: 0 !important;
+}
+
+.media-frame.mode-grid .kodety-ui-media-pagination.is-complete {
+  min-height: 36px !important;
+  padding-block: 2px !important;
+}
+
+@media (max-width: 960px) {
+  .media-frame.mode-grid .kodety-ui-media-browser > .kodety-ui-media-toolbar {
+    align-items: stretch !important;
+    flex-direction: column !important;
+  }
+
+  .media-frame.mode-grid
+    .kodety-ui-media-toolbar
+    > :where(
+      .kodety-ui-media-toolbar-primary,
+      .kodety-ui-media-toolbar-secondary
+    ) {
+    width: 100% !important;
+    flex-basis: auto !important;
+  }
+
+  .media-frame.mode-grid .kodety-ui-media-toolbar-primary {
+    justify-content: stretch !important;
+    order: 1;
+  }
+
+  .media-frame.mode-grid .kodety-ui-media-toolbar-secondary {
+    order: 2;
+  }
+
+  .media-frame.mode-grid .kodety-ui-media-toolbar .kodety-ui-media-search {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 782px) {
+  .media-frame.mode-grid .kodety-ui-media-toolbar-secondary {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .media-frame.mode-grid
+    .kodety-ui-media-toolbar-secondary
+    :where(select, .button) {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .media-frame.mode-grid .kodety-ui-media-card {
+    padding: 4px 4px 36px !important;
+  }
+
+  .media-frame.mode-grid .kodety-ui-media-card__caption {
+    right: 4px;
+    bottom: 4px;
+    left: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .media-frame.mode-grid .kodety-ui-media-card > .attachment-preview {
+    transition: none !important;
+  }
+}

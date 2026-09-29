@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+    <style>
+      :root {
+        --accent: oklch(62% 0.19 252);
+        --overlay: hsl(220 30% 10% / 42%);
+        --spacing: 16px;
+      }
+      .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 17px 29px; }
+      .card { width: 180px; height: 96px; border: 1px solid #333; }
+      .card.featured { background: #111 linear-gradient(rgb(255 0 0 / 40%), transparent); }
+      .card:nth-child(2)::before { content: "Different"; color: red; }
+      .reverse { display: flex; flex-direction: row-reverse; }
+      .ordered { display: flex; }
+      .ordered > :first-child { order: 2; }
+      .vertical { display: flex; flex-direction: column; row-gap: 13px; column-gap: 31px; }
+      .stretch { align-items: stretch; }
+      .grow { flex: 1 1 auto; }
+      .mixed-absolute { position: relative; display: flex; }
+      .mixed-absolute .badge { position: absolute; right: 0; top: 0; }
+      .copy { white-space: pre-line; font-family: Inter, sans-serif; }
+      .copy em { font-family: Georgia, serif; font-style: italic; }
+      .rich-button { display: flex; justify-content: center; align-items: flex-end; }
+      img { width: 320px; height: 180px; object-fit: cover; object-position: 20% 80%; }
+    </style>
+  </head>
+  <body>
+    <section class="grid">
+      <article class="card featured">One</article>
+      <article class="card">Two</article>
+    </section>
+    <div class="reverse"><span>A</span><span>B</span></div>
+    <div class="ordered"><span>A</span><span>B</span></div>
+    <div class="vertical stretch"><span class="grow">Grow</span></div>
+    <div class="mixed-absolute"><i>Icon</i>direct text<span class="badge">Badge</span></div>
+    <p class="copy">First line<br><em>Italic family</em>
+      preserved line</p>
+    <button class="rich-button">Base <em>Italic action</em></button>
+    <img alt="Crop focus fixture">
+  </body>
+</html>

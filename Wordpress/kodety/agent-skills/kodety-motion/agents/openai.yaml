@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kodety Motion"
+  short_description: "Crie motion nativo e consistente no Builder"
+  default_prompt: "Use $kodety-motion para analisar esta seção e criar uma animação nativa consistente com o projeto."

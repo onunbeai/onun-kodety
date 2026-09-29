@@ -1,0 +1,108 @@
+/* Documentation is an admin workspace, with a persistent index and reading pane. */
+.toplevel_page_kodety-manual { --kodety-help-bg:var(--kds-canvas,#111111);--kodety-help-surface:var(--kds-carbon,#181818);--kodety-help-surface-raised:var(--kds-obsidian,#242424);--kodety-help-border:var(--kds-border-subtle,#262626);--kodety-help-border-strong:var(--kds-graphite,#303030);--kodety-help-text:var(--kds-paper,#f0f0f0);--kodety-help-muted:var(--kds-fog,#969696);--kodety-help-subtle:var(--kds-fog,#969696);--kodety-help-accent:var(--kodety-admin-accent,#9393ff); }
+.kodety-help-page { box-sizing:border-box;min-width:0;margin:0!important;padding:0;color:var(--kodety-help-text);font-size:13px; }
+.kodety-help-page *,.kodety-help-page *::before,.kodety-help-page *::after { box-sizing:border-box; }
+.kodety-help-page [hidden] { display:none!important; }
+.kodety-help-page a { color:inherit;text-decoration:none; }
+.kodety-help-page :is(p,li,dd,td,th) { font-size:13px;line-height:1.7; }
+.kodety-help-page p { margin:0 0 14px;color:var(--kodety-help-muted); }
+.kodety-help-page :is(ul,ol) { margin:14px 0 20px 20px;color:var(--kodety-help-muted); }
+.kodety-help-page li { margin-bottom:7px; }
+.kodety-help-page strong { color:var(--kodety-help-text);font-weight:500; }
+.kodety-help-page :is(code,kbd) { padding:2px 5px;border:1px solid var(--kodety-help-border);border-radius:4px;color:var(--kds-mist,#b8b8b8);background:var(--kds-obsidian,#242424);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;overflow-wrap:anywhere; }
+.kodety-help-primary-tabs { display:flex;gap:4px;margin:0 0 20px;padding:0 0 14px;border-bottom:1px solid var(--kodety-help-border);overflow-x:auto; }
+.kodety-help-primary-tab,.kodety-help-skill-tab { flex:none;min-height:32px;padding:7px 12px;border:0;border-radius:var(--kds-radius-control,8px);background:transparent;color:var(--kodety-help-muted);font-size:12px;font-weight:400;cursor:pointer;white-space:nowrap; }
+.kodety-help-primary-tab:hover,.kodety-help-skill-tab:hover { color:var(--kodety-help-text);background:var(--kds-hover,#282828); }
+.kodety-help-primary-tab.is-active,.kodety-help-skill-tab.is-active { color:var(--kds-paper,#f0f0f0);background:var(--kds-obsidian,#242424); }
+.kodety-help-view-panel:focus,.kodety-help-content { outline:none; }
+.kodety-help-layout { display:grid;grid-template-columns:220px minmax(0,1fr);gap:0;width:100%;min-width:0;border:1px solid var(--kodety-help-border);border-radius:var(--kds-radius-card,10px);background:var(--kodety-help-bg); }
+.kodety-help-sidebar { position:sticky;top:70px;align-self:start;max-height:calc(100dvh - 88px);min-width:0;padding:20px 16px;overflow:auto;scrollbar-width:thin;background:var(--kodety-help-surface);border-radius:var(--kds-radius-card,10px) 0 0 var(--kds-radius-card,10px); }
+.kodety-help-search { margin-bottom:25px; }
+.kodety-help-search label { display:block;margin-bottom:9px;color:var(--kds-mist,#b8b8b8);font-size:12px;font-weight:500; }
+.kodety-help-search input[type=search] { box-sizing:border-box;width:100%;min-width:0;min-height:34px;margin:0;padding:6px 9px;border:1px solid var(--kds-graphite,#303030);border-radius:var(--kds-radius-control,8px);background:var(--kds-obsidian,#242424);color:var(--kds-paper,#f0f0f0);font-size:12px;box-shadow:none; }
+.kodety-help-search > p { margin:8px 0 0;color:var(--kds-fog,#969696);font-size:10px;line-height:1.5; }
+.kodety-help-navigation section { margin-bottom:22px; }
+.kodety-help-navigation h2 { margin:0 0 7px;color:var(--kds-mist,#b8b8b8);font-size:11px;font-weight:500; }
+.kodety-help-navigation ul { margin:0;padding:0;list-style:none; }
+.kodety-help-navigation li { margin:0;font-size:12px;line-height:1.4; }
+.kodety-help-navigation a { display:block;margin:2px -7px;padding:7px;border-radius:var(--kds-radius-control,8px);color:var(--kds-fog,#969696); }
+.kodety-help-navigation a:hover { color:var(--kds-paper,#f0f0f0);background:var(--kds-hover,#282828); }
+.kodety-help-navigation a.is-active,.kodety-help-navigation a[aria-current=location] { color:var(--kds-paper,#f0f0f0);background:var(--kds-obsidian,#242424); }
+.kodety-help-content { min-width:0;padding:26px 32px;border-left:1px solid var(--kodety-help-border); }
+.kodety-help-hero,.kodety-help-section { scroll-margin-top:85px; }
+.kodety-help-hero { padding:0 0 22px;border-bottom:1px solid var(--kodety-help-border); }
+.kodety-help-eyebrow { margin:0 0 9px!important;color:var(--kds-fog,#969696)!important;font-size:11px!important;font-weight:400; }
+.kodety-help-hero h1,.kodety-help-skill-header h1 { margin:0 0 10px;color:var(--kds-paper,#f0f0f0);font-size:21px;font-weight:500;line-height:1.4;letter-spacing:-.02em; }
+.kodety-help-lead { max-width:760px;font-size:13px!important;line-height:1.7!important; }
+.kodety-help-hero-actions { display:flex;flex-wrap:wrap;gap:8px;margin:20px 0; }
+.kodety-help-button { display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:32px;padding:6px 11px;border:1px solid var(--kds-graphite,#303030);border-radius:var(--kds-radius-control,8px);background:var(--kds-obsidian,#242424);color:var(--kds-mist,#b8b8b8);font-size:12px;font-weight:400;line-height:1.5;cursor:pointer; }
+.kodety-help-button:hover { background:var(--kds-hover,#282828);border-color:var(--kds-hover-border,#484848);color:var(--kds-paper,#f0f0f0); }
+.kodety-help-button.is-primary { border-color:transparent;background:var(--kodety-help-accent);color:var(--kodety-admin-accent-foreground,#000); }
+.kodety-help-button.is-primary:hover { background:var(--kodety-admin-accent-hover,#afafff); }
+.kodety-help-button.is-compact { min-height:28px;padding:4px 9px;font-size:11px; }
+.kodety-help-note,.kodety-help-callout,.kodety-help-tip,.kodety-help-warning { margin:20px 0;padding:15px 17px;border:1px solid var(--kodety-help-border);border-left:2px solid var(--kds-graphite,#303030);border-radius:var(--kds-radius-card,10px);background:var(--kds-obsidian,#242424); }
+.kodety-help-note strong,.kodety-help-callout strong,.kodety-help-tip strong,.kodety-help-warning strong { display:block;margin-bottom:6px;font-size:13px;font-weight:500; }
+.kodety-help-note p,.kodety-help-callout p,.kodety-help-tip p,.kodety-help-warning p { margin:0;font-size:12px; }
+.kodety-help-tip { border-left-color:var(--kodety-help-accent); }.kodety-help-warning { border-left-color:#bb995f; }
+.kodety-help-standard { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:20px 0;border:1px solid var(--kodety-help-border);border-radius:var(--kds-radius-card,10px);overflow:hidden; }
+.kodety-help-standard-label { grid-column:1/-1;margin:0!important;padding:9px 13px;border-bottom:1px solid var(--kodety-help-border);background:var(--kds-carbon,#181818);font-size:11px!important;color:var(--kds-fog,#969696)!important; }
+.kodety-help-standard > div { min-width:0;padding:15px 13px; }
+.kodety-help-standard > div:not(:last-child) { border-right:1px solid var(--kodety-help-border); }
+.kodety-help-standard strong,.kodety-help-standard span { display:block;font-size:12px;line-height:1.6; }
+.kodety-help-standard strong { margin-bottom:5px;font-weight:500; }.kodety-help-standard span { color:var(--kds-fog,#969696); }
+.kodety-help-paths,.kodety-help-area-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:20px 0; }
+.kodety-help-paths a,.kodety-help-area-card { display:flex;flex-direction:column;gap:5px;min-width:0;padding:15px;border:1px solid var(--kodety-help-border);border-radius:var(--kds-radius-card,10px);background:var(--kds-carbon,#181818); }
+.kodety-help-paths a:hover,.kodety-help-area-card:hover { background:var(--kds-hover,#282828);border-color:var(--kds-hover-border,#484848); }
+.kodety-help-paths strong,.kodety-help-area-card strong { color:var(--kds-mist,#b8b8b8);font-size:13px;font-weight:500; }
+.kodety-help-paths span,.kodety-help-area-card span,.kodety-help-area-card small { color:var(--kds-fog,#969696);font-size:12px;line-height:1.6; }
+.kodety-help-area-grid > :only-child { grid-column:1/-1; }
+.kodety-help-section { padding:30px 0 16px;border-bottom:1px solid var(--kodety-help-border); }
+.kodety-help-section:last-of-type { border-bottom:0; }
+.kodety-help-section > h2,.kodety-help-empty h2,.kodety-help-module-header h2 { margin:0 0 14px;color:var(--kds-paper,#f0f0f0);font-size:18px;font-weight:500;line-height:1.4; }
+.kodety-help-section > h3 { margin:24px 0 10px;color:var(--kds-mist,#b8b8b8);font-size:14px;font-weight:500; }
+.kodety-help-module-header { margin-bottom:22px; }
+.kodety-help-module-purpose { font-size:13px!important; }
+.kodety-help-module-meta { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin:20px 0;border:1px solid var(--kodety-help-border);border-radius:var(--kds-radius-card,10px); }
+.kodety-help-module-meta > div { padding:13px;min-width:0;border-bottom:1px solid var(--kodety-help-border); }
+.kodety-help-module-meta dt { color:var(--kds-fog,#969696);font-size:11px;margin-bottom:4px; }.kodety-help-module-meta dd { margin:0;color:var(--kds-mist,#b8b8b8);font-size:12px; }
+.kodety-help-module-block { margin:24px 0; }
+.kodety-help-module-block > h3,.kodety-help-result > h3,.kodety-help-crossrefs > h3 { margin:0 0 12px;color:var(--kds-mist,#b8b8b8);font-size:13px;font-weight:500; }
+.kodety-help-result { margin:20px 0;padding:16px;border:1px solid var(--kodety-help-border);border-radius:var(--kds-radius-card,10px);background:var(--kds-carbon,#181818); }
+.kodety-help-result ul { margin-bottom:0; }
+.kodety-help-diagnostics { margin:0!important;padding:0;list-style:none; }.kodety-help-diagnostics li { display:grid;gap:5px;padding:12px 0;border-bottom:1px solid var(--kodety-help-border); }.kodety-help-diagnostics span { color:var(--kds-mist,#b8b8b8);font-weight:500; }.kodety-help-diagnostics p { margin:0; }
+.kodety-help-crossrefs { margin:24px 0; }.kodety-help-crossrefs ul { display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none; }.kodety-help-crossrefs li { margin:0; }.kodety-help-crossrefs a { display:block;padding:6px 10px;border:1px solid var(--kodety-help-border);border-radius:var(--kds-radius-control,8px);color:var(--kds-mist,#b8b8b8);font-size:12px; }
+.kodety-help-definition-list { display:grid;gap:0; }.kodety-help-definition-list article { padding:16px 0;border-bottom:1px solid var(--kodety-help-border); }.kodety-help-definition-list h3 { margin:0 0 7px;color:var(--kds-mist,#b8b8b8);font-size:13px;font-weight:500; }.kodety-help-definition-list p { margin:0; }
+.kodety-help-steps { display:grid;gap:0;margin:18px 0!important;padding:0;list-style:none; }.kodety-help-steps > li { display:grid;grid-template-columns:26px minmax(0,1fr);gap:12px;margin:0;padding:12px 0; }.kodety-help-steps > li > div > span { display:grid;place-items:center;width:23px;height:23px;border:1px solid var(--kds-graphite,#303030);border-radius:var(--kds-radius-control,8px);background:var(--kds-obsidian,#242424);color:var(--kds-fog,#969696);font-size:11px; }.kodety-help-steps h3 { margin:0 0 5px;color:var(--kds-mist,#b8b8b8);font-size:13px;font-weight:500; }.kodety-help-steps p { margin:0;font-size:12px; }
+.kodety-help-checklist { margin-left:18px!important; }.kodety-help-checklist li { padding-left:3px; }
+.kodety-help-table-wrap { overflow-x:auto;margin:20px 0;border:1px solid var(--kodety-help-border);border-radius:var(--kds-radius-card,10px); }.kodety-help-table-wrap table { width:100%;border-collapse:collapse; }.kodety-help-table-wrap th,.kodety-help-table-wrap td { padding:11px 13px;border-bottom:1px solid var(--kodety-help-border);text-align:left;font-size:12px; }.kodety-help-table-wrap th { color:var(--kds-mist,#b8b8b8);background:var(--kds-carbon,#181818);font-weight:500; }.kodety-help-table-wrap tr:last-child td { border-bottom:0; }
+.kodety-help-troubleshooting { display:grid;gap:8px;margin:20px 0; }.kodety-help-troubleshooting details { border:1px solid var(--kodety-help-border);border-radius:var(--kds-radius-card,10px);background:var(--kds-carbon,#181818); }.kodety-help-troubleshooting summary { padding:13px 16px;color:var(--kds-mist,#b8b8b8);font-size:13px;cursor:pointer; }.kodety-help-troubleshooting details > div { padding:0 16px 15px; }.kodety-help-troubleshooting details p { margin:0; }
+.kodety-help-glossary { display:grid;gap:0;margin:20px 0; }.kodety-help-glossary > div { display:grid;grid-template-columns:160px minmax(0,1fr);gap:18px;padding:13px 0;border-bottom:1px solid var(--kodety-help-border); }.kodety-help-glossary dt { color:var(--kds-mist,#b8b8b8);font-size:12px; }.kodety-help-glossary dd { margin:0;color:var(--kds-fog,#969696);font-size:12px; }
+.kodety-help-empty { padding:40px 20px;text-align:center; }.kodety-help-footer { display:flex;justify-content:space-between;gap:20px;margin-top:28px;padding-top:20px;border-top:1px solid var(--kodety-help-border); }.kodety-help-footer p,.kodety-help-footer a { color:var(--kds-fog,#969696);font-size:11px; }
+.kodety-help-skill-view,.kodety-help-skill-workspace { min-width:0;width:100%; }
+.kodety-help-skill-header { display:flex;align-items:center;justify-content:space-between;gap:25px;margin-bottom:20px; }.kodety-help-skill-header p { max-width:750px;margin:0;font-size:13px; }.kodety-help-skill-download { flex:none; }
+.kodety-help-skill-meta { display:flex;flex-wrap:wrap;gap:20px;margin-bottom:18px; }.kodety-help-skill-meta span { color:var(--kds-fog,#969696);font-size:11px; }
+.kodety-help-skill-shell { display:grid;grid-template-columns:180px minmax(0,1fr);min-width:0;overflow:hidden;border:1px solid var(--kodety-help-border);border-radius:var(--kds-radius-card,10px);background:var(--kds-carbon,#181818); }
+.kodety-help-skill-tabs { display:flex;flex-direction:column;align-items:stretch;gap:4px;min-width:0;padding:12px;border-right:1px solid var(--kodety-help-border);background:var(--kds-carbon,#181818); }.kodety-help-skill-tab { text-align:left;overflow:hidden;text-overflow:ellipsis; }
+.kodety-help-skill-documents,.kodety-help-skill-document { min-width:0; }
+.kodety-help-skill-document-header { display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 24px;border-bottom:1px solid var(--kodety-help-border); }.kodety-help-skill-document-header > div:first-child { min-width:0; }.kodety-help-skill-document-header p { margin:0 0 5px;color:var(--kds-fog,#969696);font-size:11px; }.kodety-help-skill-document-header h2 { margin:0 0 7px;color:var(--kds-paper,#f0f0f0);font-size:15px;font-weight:500; }.kodety-help-skill-document-header span { display:block;color:var(--kds-fog,#969696);font-size:12px; }.kodety-help-skill-document-actions { display:flex;flex:none;align-items:center;gap:10px; }.kodety-help-skill-document-actions > span { color:var(--kds-fog,#969696);font-size:11px; }
+.kodety-help-skill-source { min-height:420px;max-height:65dvh;margin:0;padding:24px;overflow:auto;color:var(--kds-mist,#b8b8b8);background:var(--kds-carbon,#181818);font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;tab-size:2;white-space:pre;scrollbar-width:thin; }
+.kodety-help-page .kodety-help-skill-source code { display:block;min-width:max-content;margin:0;padding:0;border:0;background:transparent;color:inherit;font:inherit; }
+.kodety-help-page :where(button,a[href],input,[tabindex],summary):focus-visible { outline:2px solid var(--kodety-help-accent);outline-offset:2px; }
+@media(max-width:1100px) { .kodety-help-layout { grid-template-columns:190px minmax(0,1fr); }.kodety-help-content { padding:24px; }.kodety-help-skill-document-header { flex-wrap:wrap; }.kodety-help-standard { grid-template-columns:1fr; }.kodety-help-standard > div:not(:last-child) { border-right:0;border-bottom:1px solid var(--kodety-help-border); } }
+@media(max-width:782px) { .kodety-help-layout { grid-template-columns:1fr; }.kodety-help-sidebar { position:static;max-height:280px;border-radius:var(--kds-radius-card,10px) var(--kds-radius-card,10px) 0 0;border-bottom:1px solid var(--kodety-help-border); }.kodety-help-content { padding:20px;border-left:0; }.kodety-help-navigation { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px; }.kodety-help-navigation section { margin:0; }.kodety-help-search input[type=search] { font-size:16px; }.kodety-help-paths,.kodety-help-area-grid,.kodety-help-module-meta { grid-template-columns:1fr; }.kodety-help-glossary > div { grid-template-columns:1fr;gap:6px; }.kodety-help-skill-header { flex-wrap:wrap; }.kodety-help-skill-shell { grid-template-columns:1fr; }.kodety-help-skill-tabs { flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--kodety-help-border); }.kodety-help-skill-document-header,.kodety-help-skill-source { padding:18px; }.kodety-help-footer { flex-direction:column;gap:8px; }.kodety-help-table-wrap table { min-width:500px; } }
+@media print { .kodety-help-page { color:#111;background:#fff;padding:0; }.kodety-help-layout { display:block;border:0; }.kodety-help-sidebar,.kodety-help-primary-tabs,.kodety-help-hero-actions,.kodety-help-footer { display:none!important; }.kodety-help-content { padding:0;border:0; }.kodety-help-page :is(h1,h2,h3,p,li,dd) { color:#111!important; }.kodety-help-section { break-inside:avoid;border-color:#e0e0e6; } }
+
+/* Keep the documentation index and the reading column in the same workspace. */
+@media screen and (min-width:783px) {
+ .kodety-help-layout { height:calc(100dvh - 168px);min-height:360px;overflow:hidden; }
+ body.kodety-os #wpbody #wpbody-content:has(.kodety-help-page) { padding-bottom:20px!important; }
+ .kodety-help-sidebar { position:static;align-self:stretch;max-height:none;height:100%;padding:20px 16px;overflow:auto;overscroll-behavior:contain; }
+ .kodety-help-content { height:100%;min-height:0;padding:26px 30px;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin; }
+ .kodety-help-content :is(.kodety-help-hero,.kodety-help-section) { scroll-margin-top:24px; }
+}
+.kodety-help-page .kodety-help-button { gap:8px;line-height:20px; }.kodety-help-page .kodety-help-button svg { display:block;flex:none;width:16px;height:16px; }
+.kodety-help-navigation a { display:flex;align-items:center;gap:8px; }.kodety-help-search { margin-bottom:20px; }
+@media(max-width:782px) { .kodety-help-sidebar { max-height:240px;padding:16px; }.kodety-help-search { margin-bottom:16px; }.kodety-help-content { padding:22px 18px; }.kodety-help-hero-actions { gap:8px; }.kodety-help-button { min-height:34px; } }
+
+.kodety-help-page a.kodety-help-button.is-primary { color:var(--kodety-admin-accent-foreground,#000)!important; }
+.kodety-help-paths > :last-child:nth-child(odd) { grid-column:1/-1; }

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Kodety Languages"
+  short_description: "Traduza sites e páginas em massa no Kodety"
+  default_prompt: "Use $kodety-languages para traduzir o conteúdo deste site em massa, preservar traduções existentes e verificar o resultado no painel de idiomas."
+

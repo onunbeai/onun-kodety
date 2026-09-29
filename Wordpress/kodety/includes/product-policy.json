@@ -1,0 +1,44 @@
+{
+  "features": {
+    "visualBuilder": "always",
+    "zipImport": "always",
+    "urlImport": "licensed",
+    "cms": "always",
+    "emails": "always",
+    "mcp": "licensed",
+    "basicSeo": "always",
+    "advancedSeo": "licensed",
+    "ai": "licensed",
+    "analytics": "always",
+    "analyticsHistory": "licensed",
+    "analyticsPageInsights": "licensed",
+    "analyticsFunnels": "licensed",
+    "analyticsUtms": "licensed",
+    "analyticsMetaCapi": "licensed",
+    "marketing": "always",
+    "membership": "always",
+    "commerce": "always",
+    "localization": "localization",
+    "collaboration": "licensed",
+    "redirects": "licensed",
+    "socialImageBuilder": "licensed",
+    "imageCompression": "licensed",
+    "imageConversion": "licensed",
+    "experiments": "licensed",
+    "cookieConsent": "licensed",
+    "optionalExtensions": "always",
+    "removeBranding": "licensed"
+  },
+  "unlicensedLimits": {
+    "collections": 1,
+    "connectedCollections": 1,
+    "itemsPerCollection": 50,
+    "analyticsHistoryDays": 7
+  },
+  "licensedLimits": {
+    "collections": ["collections"],
+    "connectedCollections": ["connectedCollections", "connected_collections"],
+    "itemsPerCollection": ["itemsPerCollection", "items_per_collection", "collection_items_per_collection"],
+    "analyticsHistoryDays": null
+  }
+}

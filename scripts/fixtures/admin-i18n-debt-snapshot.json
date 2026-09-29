@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "algorithm": "sha256",
+  "canonicalization": "sha256(JSON UTF-8 de categoria + source + pares únicos {file,context}, todos em ordem binária)",
+  "categories": {
+    "missingEnglish": {
+      "count": 0,
+      "sha256": "b3ab50e0e6636477ff85d23e7c3b685c90a2c9d754960e14115c523a04393bd9"
+    },
+    "missingPortuguese": {
+      "count": 0,
+      "sha256": "04f5e485297eae513c4aa374378c5e3786c7c053e43c46b83607b755a03375a6"
+    },
+    "unreviewedMixedPortuguese": {
+      "count": 0,
+      "sha256": "144f7f09a2868be56e2909fb62b80f7b9154811f06720c3cf897722ef27fac73"
+    }
+  }
+}
