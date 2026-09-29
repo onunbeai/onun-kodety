@@ -1,6 +1,6 @@
 ![Onun Kodety — editor visual para HTML e WordPress](docs/assets/readme-cover.png)
 
-# Onun Kodety
+# Onun Kodety — Open Source Alternative to Framer & Webflow
 
 Editor visual de sites para **HTML, CSS, JavaScript e WordPress**, desenvolvido pela Onun como uma alternativa aberta ao Framer e ao Webflow.
 
