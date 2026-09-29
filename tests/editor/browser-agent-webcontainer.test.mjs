@@ -5,7 +5,14 @@ import ts from 'typescript';
 
 const source = await readFile(new URL('../../lib/html-editor/browser-agent-webcontainer.ts', import.meta.url), 'utf8');
 const tree = ts.createSourceFile('browser-agent-webcontainer.ts', source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
-const testSource = tree.statements.filter(node => !(ts.isFunctionDeclaration(node) && ['container', 'historyStore', 'credentialStore'].includes(node.name?.text))).map(node => node.getText(tree)).join('\n');
+const moduleQueueNames = ['historyWriteQueues', 'attachmentWriteQueues', 'credentialWriteQueues', 'credentialLockQueues'];
+const isModuleQueue = node => ts.isVariableStatement(node) && node.declarationList.declarations.some(declaration => moduleQueueNames.includes(declaration.name.getText(tree)));
+const queueSource = tree.statements.filter(isModuleQueue).map(node => node.getText(tree)).join('\n');
+const createModuleQueues = new Function(ts.transpileModule(`${queueSource}\nreturn { ${moduleQueueNames.join(', ')} };`, { compilerOptions: { target: ts.ScriptTarget.ES2022 } }).outputText);
+const moduleQueuesByTest = new WeakMap();
+// Each fixture replaces worker/storage dependencies, but bindings in one test
+// still belong to the same production module and share its fallback queues.
+const testSource = tree.statements.filter(node => !isModuleQueue(node) && !(ts.isFunctionDeclaration(node) && ['container', 'historyStore', 'credentialStore'].includes(node.name?.text))).map(node => node.getText(tree)).join('\n');
 const compiled = ts.transpileModule(testSource, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS } }).outputText;
 const networkSource = await readFile(new URL('../../lib/html-editor/browser-agent-network.ts', import.meta.url), 'utf8');
 const networkExports = {};
@@ -16,7 +23,33 @@ async function until(check) { for (let i = 0; i < 100; i++) { if (check()) retur
 const rpc = (method, params = {}) => ({ method: 'POST', body: { method, params } });
 const isAbort = error => error?.name === 'AbortError';
 
+function browserLockManager() {
+  const queues = new Map();
+  return { request(name, { signal }, callback) {
+    if (signal.aborted) return Promise.reject(signal.reason);
+    const previous = queues.get(name) || Promise.resolve();
+    const held = deferred();
+    const tail = previous.catch(() => undefined).then(() => held.promise);
+    queues.set(name, tail);
+    void tail.then(() => { if (queues.get(name) === tail) queues.delete(name); });
+    let abort;
+    const canceled = new Promise((_resolve, reject) => {
+      abort = () => reject(signal.reason);
+      signal.addEventListener('abort', abort, { once: true });
+    });
+    return Promise.race([previous, canceled]).then(() => {
+      signal.throwIfAborted();
+      signal.removeEventListener('abort', abort);
+      return callback({ name, mode: 'exclusive' });
+    }).finally(() => { signal.removeEventListener('abort', abort); held.resolve(); });
+  } };
+}
+
 function fixture(t, settings = {}) {
+  if (!moduleQueuesByTest.has(t)) moduleQueuesByTest.set(t, createModuleQueues());
+  const queues = moduleQueuesByTest.get(t);
+  // Do not inherit Node's version-dependent navigator.locks implementation.
+  const navigator = settings.navigator || {};
   const processExit = deferred();
   const commands = [];
   const removed = [];
@@ -71,11 +104,12 @@ function fixture(t, settings = {}) {
     return setTimeout(callback, milliseconds);
   };
   const clear = timer => { if (timer?.callback) timer.cleared = true; else clearTimeout(timer); };
-  new Function('exports', 'container', 'historyStore', 'credentialStore', 'fetch', 'document', 'location', 'setTimeout', 'clearTimeout', 'require', compiled)(
+  new Function('exports', 'container', 'historyStore', 'credentialStore', 'fetch', 'document', 'location', 'setTimeout', 'clearTimeout', 'require', 'globalThis', 'navigator', ...moduleQueueNames, compiled)(
     exports, () => { bootCalls++; return settings.boot || Promise.resolve(wc); }, historyStore, credentialStore,
     settings.fetch || (async () => ({ ok: true, text: async () => 'runtime' })),
     { baseURI: 'https://studio.example.test/' }, { origin: 'https://studio.example.test' },
     schedule, clear, name => { assert.equal(name, './browser-agent-network'); return networkExports; },
+    { navigator }, navigator, ...moduleQueueNames.map(name => queues[name]),
   );
   const binding = exports.createBrowserAgentBinding({ projectId: 'project-1', credentialScope: settings.credentialScope, runtimeUrl: settings.runtimeUrl ?? '/runtime.mjs', isLicensed: () => licensed, isReadOnly: () => readOnly });
   t.after(() => binding.dispose());
@@ -194,15 +228,17 @@ test('an unreadable account store fails clearly instead of showing the user as l
   assert.equal(f.commands.some(command => command.suffix === '__init'), false);
 });
 
-test('different bindings lock their shared account and reread rotated credentials before the next refresh', async t => {
+for (const mode of ['document fallback', 'Web Locks']) {
+test(`different bindings lock their shared account and reread rotated credentials before the next refresh (${mode})`, async t => {
   const database = new Map([['shared-account', { type: 'oauth', access: 'ACCESS', refresh: 'OLD-REFRESH', expires: 1 }]]);
   const credentials = async (key, operation, value) => {
     if (operation === 'read') return database.get(key);
     if (value === null) database.delete(key); else database.set(key, value);
   };
-  const first = fixture(t, { credentials, credentialScope: 'shared-account' });
-  const second = fixture(t, { credentials, credentialScope: 'shared-account' });
-  const third = fixture(t, { credentials, credentialScope: 'shared-account' });
+  const navigator = mode === 'Web Locks' ? { locks: browserLockManager() } : {};
+  const first = fixture(t, { credentials, credentialScope: 'shared-account', navigator });
+  const second = fixture(t, { credentials, credentialScope: 'shared-account', navigator });
+  const third = fixture(t, { credentials, credentialScope: 'shared-account', navigator });
   await Promise.all([first, second, third].map(f => f.binding.createBackend({}).request('config')));
   const ack = (f, requestId) => f.commands.find(command => command.suffix === '__credentials/ack' && command.options.body.requestId === requestId)?.options.body;
   first.process.emit({ kind: 'credentials', action: 'acquire', requestId: 'lock-first' });
@@ -232,6 +268,7 @@ test('different bindings lock their shared account and reread rotated credential
   await until(() => ack(third, 'retry-third'));
   assert.equal(ack(third, 'retry-third').credentials.refresh, 'ROTATED-REFRESH');
 });
+}
 
 test('a canceled consumer does not stop its sibling or duplicate the project worker', async t => {
   const boot = deferred();

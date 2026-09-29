@@ -6,7 +6,7 @@ The repository now targets the WordPress plugin and shared editor core. Its repr
 
 The WordPress-only `npm run verify` gate passed on **2026-09-29**: TypeScript and PHP syntax checks, 155 shared Node tests, isolated WordPress capability/permission/publication tests, the Motion browser suite (including all 14 page transitions), and the installable plugin build.
 
-After removing the separate add-ons, TypeScript and the 94 performance-tool self-checks also passed. The publication test now creates its own runtime fixture, so it works in a clean checkout before compiled assets exist.
+After removing the separate add-ons, TypeScript and the 94 performance-tool self-checks also passed. The publication test now creates its own runtime fixture, so it works in a clean checkout before compiled assets exist. The shared Node suite subsequently passed all 156 tests after making the Agent lock fixture independent of Node’s built-in navigator; the 17 WebContainer cases passed both with and without the global navigator.
 
 The entries below describe the earlier preparation and are retained as historical context. The standalone application, browser/Figma plugins, and separate add-ons are outside the current repository scope.
 
